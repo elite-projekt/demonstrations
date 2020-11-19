@@ -1,0 +1,5 @@
+-Phishing Frenzy/Gophish nutzen? Zielt zwar (auch) auf größere Kampagnen, bietet aber auch für unsere Zwecke nützliche Funktionen (Webserver, getätigte Eingaben der Phishingopfer können/müssen aber nicht abgefangen werden)
+-Wie E-Mail-Accounts aufsetzen? Bei "normalem" Anbieter?
+-Nutzerführung in der Demo?
+-Javascript Fullscreen nur mit Nutzerbestätigung?
+-legitime Mails sind auch "gefaked", wie sieht die Interaktion mit z.B. Links aus diesen E-Mails aus?
