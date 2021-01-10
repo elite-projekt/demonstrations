@@ -1,0 +1,27 @@
+Content-Type: multipart/alternative; boundary="===============1827841406418888752=="
+MIME-Version: 1.0
+Subject: Test2
+From: 192.168.56.101
+To: test2@example.org
+Date: Fri, 01 Jan 2021 00:00:00 +0100
+
+--===============1827841406418888752==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Placeholder
+--===============1827841406418888752==
+Content-Type: text/html; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+<html>
+    <body>
+        <p>
+            <a href="http://www.example.org">Placeholder</a> 
+        </p>
+    </body>
+</html>
+
+--===============1827841406418888752==--
