@@ -62,7 +62,7 @@ def create_mail(subject="Placehholder_Subject",
 
 
 # delete all mails for a specified email account
-def delete_mailbox(local_imap_port,
+def delete_mailbox(local_imap_port=secure_server_imap_port,
                    local_email_server=default_email_server,
                    local_email_account=default_email_account,
                    local_email_account_password=default_email_account_password):
