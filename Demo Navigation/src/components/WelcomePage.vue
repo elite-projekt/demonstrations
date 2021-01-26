@@ -16,7 +16,11 @@
         
         <v-row v-if="!hidehelp">
             <v-col>
-                Help
+                <ul>
+                    <li>Klicken Sie auf "Start" oder drücken Sie die Windows-Taste</li>
+                    <li>Geben Sie zur Suche "Thunderbird" ein und klicken Sie auf den folgenden Eintrag</li>
+                    <img style ="display: block; margin-left: 0px; margin-right: auto;" :src="require('@/assets/help-thunderbird.png')">
+                </ul>
             </v-col>
         </v-row>
 
