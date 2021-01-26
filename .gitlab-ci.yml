@@ -1,0 +1,13 @@
+image:
+  docker:git
+
+stages:
+  - build
+
+push-navigation-image:
+  stage: build
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  script:
+    - sh ./ci/push-navigation-image.sh
