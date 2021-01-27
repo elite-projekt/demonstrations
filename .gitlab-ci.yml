@@ -1,0 +1,21 @@
+image:
+  docker:git
+
+stages:
+  - build
+
+push-demo-image:
+  stage: build
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  script:
+    - sh ./ci/push-phishing-image.sh
+
+push-navigation-image:
+  stage: build
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  script:
+    - sh ./ci/push-navigation-image.sh
