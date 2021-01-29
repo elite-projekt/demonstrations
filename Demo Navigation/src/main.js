@@ -5,6 +5,7 @@ import vuetify from '@/plugins/vuetify' // path to vuetify export
 import App from './App'
 import router from './router'
 import axios from 'axios'
+import i18n from './i18n'
 
 Vue.config.productionTip = false
 
@@ -16,5 +17,6 @@ new Vue({
   router,
   vuetify,
   components: { App },
+  i18n,
   template: '<App/>'
 }).$mount('#app')

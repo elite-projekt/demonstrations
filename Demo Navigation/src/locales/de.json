@@ -1,0 +1,25 @@
+{
+  "welcome_page": {
+    "toolbartitle": "Security Demo",
+    "appbartitle": "Einführung",
+    "introtext": "Sie sind angestellt in der XYZ AG und dort als Assistenz der Geschäftsführung eingestellt. Zur Zeit ist die Stimmung im Büro etwas angespannt. Nächste Woche findet ein Treffen mit wichtigen Geschäftspartnern statt und noch immer sind nicht alle Terminzusagen bei Ihnen eingegangen. Und das Geschenk, welches Sie im Namen der Abteilung für eine in Rente gehende Kollegin bestellt hatten,  sollte auch schon längst geliefert sein. So beginnen Sie also Ihren Arbeitstag und sehen als erstes nach Ihren E-Mails.",
+    "exercise": "Aufgabe: ",
+    "open_thunderbird": "Bitte Öffnen Sie das E-Mail-Programm \"Thunderbird\"",
+    "press_start": "Klicken Sie auf \"Start\" oder drücken Sie die Windows-Taste",
+    "thunderbird_search": "Geben Sie zur Suche \"Thunderbird\" ein und klicken Sie auf den folgenden Eintrag",
+    "done": "Erledigt",
+    "help": "Hilfe"
+  },
+  "task1":{
+    "toolbartitle": "Security Demo",
+    "appbartitle": "Aufgabe",
+    "introtext": "Sie sind angestellt in der XYZ AG und dort als Assistenz der Geschäftsführung eingestellt. \n              Zur Zeit ist die Stimmung im Büro etwas angespannt. Nächste Woche findet ein Treffen mit wichtigen \n              Geschäftspartnern statt und noch immer sind nicht alle Terminzusagen bei Ihnen eingegangen. Und das Geschenk, \n              welches Sie im Namen der Abteilung für eine in Rente gehende Kollegin bestellt hatten, \n              sollte auch schon längst geliefert sein. So beginnen Sie also Ihren Arbeitstag und sehen als erstes nach Ihren E-Mails.",
+    "exercise": "Aufgabe: ",
+    "edit_emails": "E-Mails bearbeiten",
+    "accept_appointment": "Terminzusagen annehmen und in den Kalender eintragen.",
+    "sent_present": "Wurde das Abschiedsgeschenk versandt?",
+    "important_emails": "Gibt es sonst noch wichtige E-Mails?",
+    "done": "Erledigt",
+    "help": "Hilfe"
+  }
+}

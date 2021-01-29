@@ -19,6 +19,11 @@
       <v-spacer></v-spacer>
       <h1 class="black--text">{{ appBarTitle }}</h1>
       <v-spacer></v-spacer>
+      <div class="locale-changer">
+        <select v-model="$i18n.locale">
+          <option v-for="(lang, i) in langs" :key="`Lang${i}`" :value="lang">{{ lang }}</option>
+        </select>
+      </div>
     </v-app-bar>
 
 
@@ -35,6 +40,7 @@ export default {
   name: 'App',
   data () {
     return {
+      langs: ['en', 'de'],
       toolbarTitle: ''
     }
   },
