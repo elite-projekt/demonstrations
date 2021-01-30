@@ -5,10 +5,13 @@ import ssl
 import email
 import os
 import re
+import random
+from datetime import date, datetime, timedelta
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
-default_email_server = "192.168.56.101"
+default_email_server = "192.168.178.115" #"192.168.56.101"
+
 default_email_account = "max.mustermann@mpseinternational.com"
 default_email_account_password = "123"
 
@@ -23,7 +26,7 @@ unsecure_server_imap_port = 144
 
 # email_client_config_location = r"C:\Users\Jan\AppData\Roaming\Thunderbird\Profiles\sldrcrlj.MPSE\prefs.js"
 email_client_config_location = os.getenv('APPDATA') + r"\Thunderbird\Profiles\sldrcrlj.MPSE\prefs.js"
-email_files_location = r""
+email_files_location = "emails\\"
 
 email_text_placeholder = """\
 Placeholder"""
@@ -51,8 +54,11 @@ def create_mail(subject="Placehholder_Subject",
     mail["Date"] = date
 
     # Turn these into plain/html MIMEText objects
-    part1 = MIMEText(text, "plain")
-    part2 = MIMEText(html, "html")
+    f = open("email_html.html", "r")
+    html_from_file = f.read()
+    f.close()
+    part1 = MIMEText(text, "plain", "utf-8")
+    part2 = MIMEText(html_from_file, "html", "utf-8")
 
     # Add HTML/plain-text parts to MIMEMultipart message
     # The email client will try to render the last part first
@@ -79,7 +85,6 @@ def delete_mailbox(local_imap_port=secure_server_imap_port,
 
 # Ports to be used: secure_server_smtp_port or unsecure_server_smtp_port
 def send_mail(sender, password, port, recipient, message, local_server=default_email_server):
-
     # Try to log in to server and send email
     server = smtplib.SMTP(local_server, port)
     try:
@@ -105,9 +110,21 @@ def send_multiple_mails_from_files(local_password, port, local_server=default_em
         local_sender = email_mime["From"]
         local_left_bracket = local_sender.find("<")
         local_right_bracket = local_sender.find(">")
-
         if -1 < local_left_bracket < local_right_bracket:
             local_sender = re.split('[<>]', local_sender)[1]
+
+        # Extract the "Sent" time from the email source
+        email_date = email_mime["Date"]
+        email_time = datetime.strptime(email_date, "%a, %d %b %Y %H:%M:%S +0100")
+
+        # Substract one day so the sent date is yesterday
+        date_object = date.today() - timedelta(days=1)
+
+        # Email date format "Fri, 01 Jan 2021 00:00:00 +0100"
+        email_date = date_object.strftime("%a, %d %b %Y " + email_time.strftime("%H:%M:%S") + " +0100")
+
+        email_mime.replace_header("Date", email_date)
+        email_text = email_mime.as_string()
 
         send_mail(local_sender, local_password, port, email_mime["To"], email_text, local_server)
         email_file.close()
@@ -154,13 +171,13 @@ def change_client_profile(use_secured_client=True):
 
 # change_client_profile(use_secured_client=True)
 
-# f = open("email.txt", "w")
-# a = create_mail(subject="Test2", sender=default_email_account, recipient="test2@example.org")
-# f.write(a.as_string()) # create_mail(subject="Test2", sender=sender_email, recipient="test2@example.org").as_string())
-# f.close()
+#f = open("email.txt", "w")
+#a = create_mail(subject="Test2", sender=default_email_account, recipient="test2@example.org")
+#f.write(a.as_string()) # create_mail(subject="Test2", sender=sender_email, recipient="test2@example.org").as_string())
+#f.close()
 
 
-# delete_mailbox(secure_server_imap_port)
+delete_mailbox()
 send_multiple_mails_from_files(default_email_account_password, secure_server_smtp_port)
 
 
