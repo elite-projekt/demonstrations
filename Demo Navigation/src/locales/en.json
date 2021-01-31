@@ -2,24 +2,24 @@
   "welcome_page": {
     "toolbartitle": "Security Demo",
     "appbartitle": "Introduction",
-    "introtext": "Sie sind angestellt in der XYZ AG und dort als Assistenz der Geschäftsführung eingestellt. Zur Zeit ist die Stimmung im Büro etwas angespannt. Nächste Woche findet ein Treffen mit wichtigen Geschäftspartnern statt und noch immer sind nicht alle Terminzusagen bei Ihnen eingegangen. Und das Geschenk, welches Sie im Namen der Abteilung für eine in Rente gehende Kollegin bestellt hatten,  sollte auch schon längst geliefert sein. So beginnen Sie also Ihren Arbeitstag und sehen als erstes nach Ihren E-Mails.",
+    "introtext": "You are employed at XYZ AG and assigned there as an assistant to the management. At the moment, the mood in the office is a bit tense. Next week there will be a meeting with important business partners and you still haven't received all the appointment confirmations. And the gift you ordered on behalf of the department for a retiring co-worler should also have been delivered by now. So this is how you start your workday and the first thing you do is check your e-mails.",
     "exercise": "Exercise: ",
-    "open_thunderbird": "Bitte Öffnen Sie das E-Mail-Programm \"Thunderbird\"",
-    "press_start": "Klicken Sie auf \"Start\" oder drücken Sie die Windows-Taste",
-    "thunderbird_search": "Geben Sie zur Suche \"Thunderbird\" ein und klicken Sie auf den folgenden Eintrag",
-    "done": "Erledigt",
-    "help": "Hilfe"
+    "open_thunderbird": "Please open the email application \"Thunderbird\"",
+    "press_start": "Click on the \"Start\" icon or press the Windows key",
+    "thunderbird_search": "Type in \"Thunderbird\" and click on the following search result",
+    "done": "Done",
+    "help": "Help"
   },
   "task1":{
     "toolbartitle": "Security Demo",
-    "appbartitle": "Aufgabe",
-    "introtext": "Sie sind angestellt in der XYZ AG und dort als Assistenz der Geschäftsführung eingestellt. \n              Zur Zeit ist die Stimmung im Büro etwas angespannt. Nächste Woche findet ein Treffen mit wichtigen \n              Geschäftspartnern statt und noch immer sind nicht alle Terminzusagen bei Ihnen eingegangen. Und das Geschenk, \n              welches Sie im Namen der Abteilung für eine in Rente gehende Kollegin bestellt hatten, \n              sollte auch schon längst geliefert sein. So beginnen Sie also Ihren Arbeitstag und sehen als erstes nach Ihren E-Mails.",
-    "exercise": "Aufgabe: ",
-    "edit_emails": "E-Mails bearbeiten",
-    "accept_appointment": "Terminzusagen annehmen und in den Kalender eintragen.",
-    "sent_present": "Wurde das Abschiedsgeschenk versandt?",
-    "important_emails": "Gibt es sonst noch wichtige E-Mails?",
-    "done": "Erledigt",
-    "help": "Hilfe"
+    "appbartitle": "Task",
+    "introtext": "You are employed at XYZ AG and assigned there as an assistant to the management. At the moment, the mood in the office is a bit tense. Next week there will be a meeting with important business partners and you still haven't received all the appointment confirmations. And the gift you ordered on behalf of the department for a retiring co-worler should also have been delivered by now. So this is how you start your workday and the first thing you do is check your e-mails.",
+    "exercise": "Exercise: ",
+    "edit_emails": "Go through your emails",
+    "accept_appointment": "Accept appointment commitments and enter them in the calendar.",
+    "sent_present": "Has the farewell gift been sent?",
+    "important_emails": "Are there other important emails?",
+    "done": "Done",
+    "help": "Help"
   }
 }
