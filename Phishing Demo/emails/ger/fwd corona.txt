@@ -1,0 +1,201 @@
+Subject: Fwd: Antrag Coronahilfe
+References: <20210113214557.045EDA0C54@mail.example.org>
+To: max.mustermann@mpseinternational.com
+From: Peter Meier <peter.meier@mpseinternationaI.com>
+Date: Wed, 13 Jan 2021 11:07:00 +0100
+MIME-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary="------------3EB796C3325128609A59E392"
+
+This is a multi-part message in MIME format.
+--------------3EB796C3325128609A59E392
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 8bit
+
+Hallo Max,
+
+hier bitte mal dr&uuml;bersehen und ggf. schon ausf&uuml;llen, danke!
+
+Beste Gr&uuml;&szlig;e
+Peter Meier, Gesch&auml;ftsf&uuml;hrung.
+
+
+-------- Forwarded Message --------
+Subject: 	Antrag Coronahilfe
+Date: 	Tue, 12 Jan 2021 08:30:17 +0100
+From: 	antragstelle@coronahilfengermany.de
+To: 	peter.meier@mpseinternational.com
+
+
+
+Anmeldung bei &uuml;berbr&uuml;ckungshilfe
+BMWi &uuml;berbr&uuml;ckungshilfe
+
+
+Logo BMWi <https://www.bmwi.de>Logo Coronahilfe 
+<https://www.ueberbrueckungshilfe-unternehmen.de/>
+
+Anmeldung f&uuml;r ihr Unternehmen
+
+Folgen Sie bitte diesem Link und melden Sie sich dort an.
+
+Bitte beachten Sie, dass die Nutzung dieses Antrags nur m&ouml;glich ist f&uuml;r 
+Angestellte des anzumeldenen Unternehmen.
+
+Hier k&ouml;nnen Sie ein neues Passwort festlegen 
+<https://antragslogin.ueberbrueckungshilfe-unternehmen.de/auth/realms/berufstraeger/login-actions/reset-credentials?client_id=validation-%&tab_id=nNKTnfxL2VE> 
+
+Bitte beachten Sie, dass die Anmeldung nur m&ouml;glich ist f&uuml;r Angestellte 
+des anzumeldenen Unternehmen.
+
+------------------------------------------------------------------------
+
+*&#169; 2020 www.bmwi.de <https://www.bmwi.de/Navigation/DE/Home/home.html>* 
+IMPRESSUM 
+<https://www.ueberbrueckungshilfe-unternehmen.de/UBH/Navigation/DE/Meta/Impressum/impressum.html> 
+|DATENSCHUTZ 
+<https://www.ueberbrueckungshilfe-unternehmen.de/UBH/Navigation/DE/Meta/Datenschutzerklaerung/datenschutzerklaerung.html> 
+
+
+
+--------------3EB796C3325128609A59E392
+Content-Type: text/html; charset=windows-1252
+Content-Transfer-Encoding: 8bit
+
+<html>
+  <head>
+
+    <meta http-equiv="content-type" content="text/html; charset=windows-1252">
+  </head>
+  <body style="background-color: #e5e8e9">
+    <p>Hallo Max,</p>
+    <p>hier bitte mal dr&uuml;bersehen und ggf. schon ausf&uuml;llen, danke!</p>
+    <p>Beste Gr&uuml;&szlig;e<br>
+      Peter Meier, Gesch&auml;ftsf&uuml;hrung.<br>
+    </p>
+    <br>
+    <div class="moz-forward-container">-------- Forwarded Message
+      --------
+      <table class="moz-email-headers-table" cellspacing="0"
+        cellpadding="0" border="0">
+        <tbody>
+          <tr>
+            <th valign="BASELINE" nowrap="nowrap" align="RIGHT">Subject:
+            </th>
+            <td>Antrag Coronahilfe</td>
+          </tr>
+          <tr>
+            <th valign="BASELINE" nowrap="nowrap" align="RIGHT">Date: </th>
+            <td>Tue, 12 Jan 2021 08:30:17 +0100</td>
+          </tr>
+          <tr>
+            <th valign="BASELINE" nowrap="nowrap" align="RIGHT">From: </th>
+            <td><a class="moz-txt-link-abbreviated" href="mailto:antragstelle@coronahilfengermany.de">antragstelle@coronahilfengermany.de</a></td>
+          </tr>
+          <tr>
+            <th valign="BASELINE" nowrap="nowrap" align="RIGHT">To: </th>
+            <td><a class="moz-txt-link-abbreviated" href="mailto:peter.meier@mpseinternationaI.com">peter.meier@mpseinternational.com</a></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <br>
+      <meta http-equiv="Content-Type" content="text/html;
+        charset=windows-1252">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <title>Anmeldung bei &uuml;berbr&uuml;ckungshilfe</title>
+      <link
+href="https://antragslogin.ueberbrueckungshilfe-unternehmen.de/auth/resources/aj7uj/login/UEBH-berufstraeger-1.0.12-SNAPSHOT/img/favicon.ico"
+        rel="icon">
+      <link
+href="https://antragslogin.ueberbrueckungshilfe-unternehmen.de/auth/resources/aj7uj/login/UEBH-berufstraeger-1.0.12-SNAPSHOT/node_modules/patternfly/dist/css/patternfly.css"
+        rel="stylesheet">
+      <link
+href="https://antragslogin.ueberbrueckungshilfe-unternehmen.de/auth/resources/aj7uj/login/UEBH-berufstraeger-1.0.12-SNAPSHOT/node_modules/patternfly/dist/css/patternfly-additions.css"
+        rel="stylesheet">
+      <link
+href="https://antragslogin.ueberbrueckungshilfe-unternehmen.de/auth/resources/aj7uj/login/UEBH-berufstraeger-1.0.12-SNAPSHOT/lib/zocial/zocial.css"
+        rel="stylesheet">
+      <link
+href="https://antragslogin.ueberbrueckungshilfe-unternehmen.de/auth/resources/aj7uj/login/UEBH-berufstraeger-1.0.12-SNAPSHOT/css/login.css"
+        rel="stylesheet">
+      <div class="login-pf-page">
+        <div class="login-pf-page-header" id="kc-header">
+          <div id="kc-header-wrapper">BMWi &uuml;berbr&uuml;ckungshilfe</div>
+        </div>
+        <div class="card-pf login-pf-accounts">
+          <header class="login-pf-header">
+            <h1 id="kc-page-title"> </h1>
+            <div><a href="https://www.bmwi.de" target="_blank"
+                moz-do-not-send="true"><img aling="center" alt="Logo
+                  BMWi"
+src="https://antragslogin.ueberbrueckungshilfe-unternehmen.de/auth/resources/aj7uj/login/UEBH-berufstraeger-1.0.12-SNAPSHOT/img/logo.png"
+                  moz-do-not-send="true" width="180" height="100"></a><a
+                href="https://www.ueberbrueckungshilfe-unternehmen.de/"
+                target="_blank" moz-do-not-send="true"><img
+                  aling="center" alt="Logo Coronahilfe"
+src="https://antragslogin.ueberbrueckungshilfe-unternehmen.de/auth/resources/aj7uj/login/UEBH-berufstraeger-1.0.12-SNAPSHOT/img/Logo_Coronahilfe.png"
+                  moz-do-not-send="true" width="180" height="60"></a>
+              <p> </p>
+            </div>
+            Anmeldung f&uuml;r ihr Unternehmen
+            <p> </p>
+            <p style="font-size:15px">Folgen Sie bitte diesem Link und
+              melden Sie sich dort an.</p>
+            <p style="font-size:15px">Bitte beachten Sie, dass die
+              Nutzung dieses Antrags nur m&ouml;glich ist f&uuml;r Angestellte des
+              anzumeldenen Unternehmen.</p>
+          </header>
+          <div id="kc-content">
+            <div id="kc-content-wrapper">
+              <div class="row" id="kc-form">
+                <div class="col-xs-12 col-sm-6 login-pf-social-section"
+                  id="kc-form-wrapper">
+                  <form
+                    action="https://coronahilfengermany.de/neuerAntrag"
+                    id="kc-form-login" method="GET"
+                    onsubmit="login.disabled = true; return true;">
+                    <div class="form-group login-pf-settings">
+                      <div><span><a
+href="https://antragslogin.ueberbrueckungshilfe-unternehmen.de/auth/realms/berufstraeger/login-actions/reset-credentials?client_id=validation-%&amp;tab_id=nNKTnfxL2VE"
+                            tabindex="5" moz-do-not-send="true">Hier
+                            k&ouml;nnen Sie ein neues Passwort festlegen</a></span>
+                      </div>
+                    </div>
+                    Bitte beachten Sie, dass die Anmeldung nur m&ouml;glich
+                    ist f&uuml;r Angestellte des anzumeldenen Unternehmen.
+                    <div class="form-group" id="kc-form-buttons"><input
+                        class="btn btn-primary input[type=submit] {
+                        btn-block btn-lg" id="kc-login" value="Anmeldung
+                        f&uuml;r pr&uuml;fende Dritte" tabindex="4" type="submit"></div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div class="login-pf-signup" id="kc-info">
+              <div id="kc-info-wrapper">
+              </div>
+              <p> </p>
+              <hr>
+              <footer>
+                <p style="text-align:left;"><b> <a
+                      href="https://www.bmwi.de/Navigation/DE/Home/home.html"
+                      style="color:#363636" target="_blank"
+                      moz-do-not-send="true">&#169; 2020 www.bmwi.de</a></b>
+                  <span style="float:right;"><a
+href="https://www.ueberbrueckungshilfe-unternehmen.de/UBH/Navigation/DE/Meta/Impressum/impressum.html"
+                      style="color:#363636" target="_blank"
+                      moz-do-not-send="true">IMPRESSUM</a> |<a
+href="https://www.ueberbrueckungshilfe-unternehmen.de/UBH/Navigation/DE/Meta/Datenschutzerklaerung/datenschutzerklaerung.html"
+                      style="color:#363636" target="_blank"
+                      moz-do-not-send="true">DATENSCHUTZ</a> </span></p>
+              </footer>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+--------------3EB796C3325128609A59E392--

@@ -1,9 +1,9 @@
 Content-Type: multipart/alternative; boundary="===============6153848391619581774=="
 MIME-Version: 1.0
-Subject: Test2
-From: "max" <max.mustermann@mpseinternational.com>
+Subject: Probleme mit Ihrer Bestellung
+From: "Amazon.de" <no-reply@lieferung-amazon.de>
 To: max.mustermann@mpseinternational.com
-Date: Fri, 01 Jan 2021 00:00:00 +0100
+Date: Fri, 01 Jan 2021 08:17:10 +0100
 
 --===============6153848391619581774==
 Content-Type: text/plain; charset=utf-8
@@ -15,26 +15,15 @@ Amazon.de
 
 Hallo,
 
-Ihr Paket mit OnePlus 8T Lunar Silver ... wird zugestellt.=20
+leider gab es beim Versand Ihrer letzten Bestellung ein Problem.
+
+Bitte melden Sie sich an, um zu einer Probleml=C3=B6sung zu kommen bzw. eine Erstattung zu veranlassen.
 
 
-Um die Sicherheit unserer Kunden und Zustellpartner zu gew=C3=A4hrleisten, =
-stellen wir jetzt Pakete vor Ihrer Haust=C3=BCr ab und nehmen einen sichere=
-n Abstand ein, bevor Sie die Sendung entgegennehmen.
+Problembehebung:
+https://www.lieferung-amazon.de/support
 
-Wenn Sie uns einen sicheren Ablageort mitteilen m=C3=B6chten, aktualisieren=
- Sie bitte die Lieferanweisungen auf unserer Seite Ihr Paket verfolgen:=20
-            https://www.amazon.de/ablageort
-
-
-
-Ihr Paket verfolgen:
-https://www.amazon.de/tracking
-
-Bestellung #305-0000000-00000
-
-    OnePlus 8T Lunar Silver | 6.55" 120Hz FHD+ Fluid Display | 8GB RAM + 12=
-8GB Speicher | Vierfach Kamera |
+Bestellung #028-7158945-1578641
 
 ---------------------------------------------------------------------------=
 -----------------------------------------------------------------
@@ -556,26 +545,15 @@ bkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; font-family: Arial=
                   <!--[if mso]>
     <table class=3D"msoInformationTable">
     <tr>
-        <td><span  >Ihr Paket mit OnePlus 8T Lunar Silver ... wird zugestel=
-lt.=20
+        <td><span  >leider gab es beim Versand Ihrer letzten Bestellung ein Problem.=20
 </span>
 </td>
     </tr>
     <tr>
-        <td><span  >Um die Sicherheit unserer Kunden und Zustellpartner zu =
-gew=C3=A4hrleisten, stellen wir jetzt Pakete vor Ihrer Haust=C3=BCr ab und =
-nehmen einen sicheren Abstand ein, bevor Sie die Sendung entgegennehmen.</s=
+        <td><span  >Bitte melden Sie sich an, um zu einer Probleml=C3=B6sung zu kommen bzw. eine Erstattung zu veranlassen.</s=
 pan>
 </td>
-    </tr>
-    <tr>
-        <td><span  >Wenn Sie uns einen sicheren Ablageort mitteilen m=C3=B6=
-chten, aktualisieren Sie bitte die Lieferanweisungen auf unserer Seite <a c=
-lass=3D"textWithUnderlinedLink" style=3D"" href=3D"https://www.amazon.de/gp=
-/r.html?C=tracking">Ihr Paket verfolgen</a>. </spa=
-n>
-</td>
-    </tr>
+
     </table>
     <![endif]-->=20
                   <!--[if !mso]><!-- -->=20
@@ -587,26 +565,12 @@ ign: left">=20
                     <tr>=20
                      <td style=3D"padding-bottom: 18px; border-collapse: co=
 llapse !important; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 10=
-0%; font-family: Arial, sans-serif"><span>Ihr Paket mit OnePlus 8T Lunar Si=
-lver ... wird zugestellt. </span> </td>=20
+0%; font-family: Arial, sans-serif"><span>leider gab es beim Versand Ihrer letzten Bestellung ein Problem. </span> </td>=20
                     </tr>=20
                     <tr>=20
                      <td style=3D"padding-bottom: 18px; border-collapse: co=
 llapse !important; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 10=
-0%; font-family: Arial, sans-serif"><span>Um die Sicherheit unserer Kunden =
-und Zustellpartner zu gew=C3=A4hrleisten, stellen wir jetzt Pakete vor Ihre=
-r Haust=C3=BCr ab und nehmen einen sicheren Abstand ein, bevor Sie die Send=
-ung entgegennehmen.</span> </td>=20
-                    </tr>=20
-                    <tr>=20
-                     <td style=3D"padding-bottom: 18px; border-collapse: co=
-llapse !important; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 10=
-0%; font-family: Arial, sans-serif"><span>Wenn Sie uns einen sicheren Ablag=
-eort mitteilen m=C3=B6chten, aktualisieren Sie bitte die Lieferanweisungen =
-auf unserer Seite <a class=3D"textWithUnderlinedLink" style=3D"color: rgb(0=
-, 46, 54); text-decoration: none; border-bottom: 2px solid rgb(0, 223, 252)=
-; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%" href=3D"https=
-://www.amazon.de/gp/r.html?C=trackingr">Ihr Paket verfolgen</a>. </span> </td>=20
+0%; font-family: Arial, sans-serif"><span>Bitte melden Sie sich an, um zu einer Probleml=C3=B6sung zu kommen bzw. eine Erstattung zu veranlassen.</span> </td>=20
                     </tr>=20
                    </tbody>
                   </table>=20
@@ -622,8 +586,8 @@ auf unserer Seite <a class=3D"textWithUnderlinedLink" style=3D"color: rgb(0=
 "trackPackageButtonTextForOutlook" width=3D"397" height=3D"45" bgcolor=3D"f=
 fa723">
                                 <a class=3D"trackPackageLinkForOutlook" hre=
-f=3D"https://www.amazon.de/gp/r.html?C=tracking">
-                                    Ihr Paket verfolgen
+f=3D"https://www.lieferung-amazon.de/support">
+                                    Probleml=C3=B6sung/Erstattung
                                 </a>
                             </td>
                         </tr>
@@ -646,7 +610,7 @@ mportant; border-collapse: collapse !important; -webkit-text-size-adjust: 1=
                     <tr>=20
                      <td style=3D"border-collapse: collapse !important; -we=
 bkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; font-family: Arial=
-, sans-serif"> <a href=3D"https://www.amazon.de/gp/r.html?C=3D" style=3D"color: rgb(0, 46, 54); text-de=
+, sans-serif"> <a href=3D"https://www.lieferung-amazon.de/support" style=3D"color: rgb(0, 46, 54); text-de=
 coration: none; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%"=
 >=20
                        <table class=3D"trackPackageButtonTable" style=3D"he=
@@ -660,8 +624,7 @@ rackPackageButtonText" width=3D"397" height=3D"45" bgcolor=3D"ffa723" style=
 =3D"line-height: 18px; color: rgb(17, 17, 17); font-size: 16px; text-decora=
 tion: none; vertical-align: middle; box-shadow: 0 2px 0 0 rgba(84,84,84,0.3=
 ); border-collapse: collapse !important; -webkit-text-size-adjust: 100%; -m=
-s-text-size-adjust: 100%; font-family: Arial, sans-serif"> Ihr Paket verfol=
-gen </td>=20
+s-text-size-adjust: 100%; font-family: Arial, sans-serif"> Probleml=C3=B6sung/Erstattung </td>=20
                          </tr>=20
                         </tbody>
                        </table> </a> </td>=20
@@ -674,78 +637,6 @@ mportant; border-collapse: collapse !important; -webkit-text-size-adjust: 1=
                    </tbody>
                   </table>=20
                   <!--<![endif]-->=20
-                  <table class=3D"orderDetailsTable" style=3D"font-size: 15=
-px; line-height: 20px; border-collapse: collapse !important; -webkit-text-s=
-ize-adjust: 100%; -ms-text-size-adjust: 100%; text-align: left">=20
-                   <tbody>
-                    <tr>=20
-                     <td class=3D"itemImage" style=3D"padding-bottom: 20px;=
- border-collapse: collapse !important; -webkit-text-size-adjust: 100%; -ms-=
-text-size-adjust: 100%; font-family: Arial, sans-serif"> <a class=3D"orderD=
-etailsTableLink" href=3D"https://www.amazon.de/gp/r.html?C=3D">=20
-                       <!--[if gte mso 9]>
-                    <img src=3D"https://images-na.ssl-images-amazon.com/ima=
-ges/I/4.jpg" alt=3D""
-                    title=3D"Produktbild" border=3D0 height=3D84 />
-                <![endif]-->=20
-                       <!--[if !gte mso 9]><!-- --> <img src=3D"https://ima=
-ges-na.ssl-images-amazon.com/images/I/4.jpg" =
-alt=3D"" title=3D"Produktbild" border=3D"0" style=3D"max-height: 84px; max-=
-width: 84px">=20
-                       <!--<![endif]--> </a> </td>=20
-                     <td class=3D"itemTitle" style=3D"padding-bottom: 20px;=
- padding-left: 26px; padding-right: 22px; border-collapse: collapse !import=
-ant; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; font-famil=
-y: Arial, sans-serif"> <a class=3D"orderDetailsTableLink" href=3D"https://w=
-ww.amazon.de/gp/r.html?C=3D" title=3D"OnePlus 8T Lunar Sil=
-ver | 6.55" 120hz=3D"" fhd+=3D"" fluid=3D"" display=3D"" |=3D"" 8gb=3D"" ra=
-m=3D"" +=3D"" 128gb=3D"" speicher=3D"" vierfach=3D"" kamera=3D"" 65w=3D"" w=
-arp=3D"" charge=3D"" duale=3D"" sim=3D"" 5g=3D"" 2=3D"" jahre=3D"" gar?=3D"=
-" target=3D"_blank" style=3D"text-decoration: none; color: rgb(0, 130, 150)=
-; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%"> OnePlus 8T L=
-unar Silver | 6.55&quot; 120Hz FHD+... </a> </td>=20
-                    </tr>=20
-                   </tbody>
-                  </table>=20
-                  <table class=3D"orderIdTable" style=3D"font-size: 15px; l=
-ine-height: 18px; color: rgb(135, 149, 150); margin-bottom: 18px; border-co=
-llapse: collapse !important; -webkit-text-size-adjust: 100%; -ms-text-size-=
-adjust: 100%; text-align: left">=20
-                   <tbody>
-                    <tr>=20
-                     <td style=3D"border-collapse: collapse !important; -we=
-bkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; font-family: Arial=
-, sans-serif"> <a class=3D"orderDetailsTableLink inline-block" href=3D"http=
-s://www.amazon.de/gp/r.html?C=3D" style=3D"text-decoration: none; color: rgb(135, 1=
-49, 150); -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%">Beste=
-llung #305-00000000-0007</a> </td>=20
-                    </tr>=20
-                   </tbody>
-                  </table>=20
-                  <table class=3D"separatorLine" border=3D"0" width=3D"100%=
-" cellpadding=3D"0" cellspacing=3D"0" style=3D"border-left: 0; border-right=
-: 0; border-top: 0; border-bottom: 0; margin-bottom: 18px; margin-top: 12px=
-; border-collapse: collapse !important; -webkit-text-size-adjust: 100%; -ms=
--text-size-adjust: 100%; text-align: left">=20
-                   <tbody>
-                    <tr>=20
-                     <td class=3D"separatorLeft" style=3D"width: 5px; font-=
-size: 1px; border-collapse: collapse !important; -webkit-text-size-adjust: =
-100%; -ms-text-size-adjust: 100%; font-family: Arial, sans-serif"> &nbsp; <=
-/td>=20
-                     <td class=3D"separatorMiddle" style=3D"width: 284px; m=
-in-width: 284px; background: none; border-top: 0px; border-right: 0px; bord=
-er-left: 0px; border-bottom: 1px solid rgb(135, 149, 150); height: 1px; mar=
-gin: 0px 0px 0px 0px; font-size: 1px; border-collapse: collapse !important;=
- -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; font-family: A=
-rial, sans-serif"> &nbsp; </td>=20
-                     <td class=3D"separatorRight" style=3D"width: 5px; font=
--size: 1px; border-collapse: collapse !important; -webkit-text-size-adjust:=
- 100%; -ms-text-size-adjust: 100%; font-family: Arial, sans-serif"> &nbsp; =
-</td>=20
-                    </tr>=20
-                   </tbody>
-                  </table>=20
                   <table class=3D"emailClosing" style=3D"font-size: 9px; li=
 ne-height: 15px; color: rgb(134, 134, 134); border-collapse: collapse !impo=
 rtant; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; text-ali=

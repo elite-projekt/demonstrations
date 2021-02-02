@@ -10,9 +10,11 @@ app._static_folder = ""
 
 @app.route('/neuerAntrag')
 def corona():
-    return send_file(r'html\corona.html')
-#   return app.send_static_file('antrag.html')
+    return send_file(r'html\ger\corona.html')
 
+@app.route('/register')
+def corona():
+    return send_file(r'html\eng\corona.html')
 
 # Bitcoin phishing site
 
