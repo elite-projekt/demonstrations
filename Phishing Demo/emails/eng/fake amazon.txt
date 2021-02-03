@@ -1,7 +1,7 @@
 Content-Type: multipart/alternative; boundary="===============6153848391619581774=="
 MIME-Version: 1.0
-Subject: Probleme mit Ihrer Bestellung
-From: "Amazon.de" <no-reply@lieferung-amazon.de>
+Subject: Issues with your Order
+From: "Amazon.com" <no-reply@shipment-support-amazon.com>
 To: max.mustermann@mpseinternational.com
 Date: Fri, 01 Jan 2021 08:17:10 +0100
 
@@ -9,28 +9,25 @@ Date: Fri, 01 Jan 2021 08:17:10 +0100
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
-Amazon.de
+Amazon.com
 ---------------------------------------------------------------------------=
 -----------------------------------------------------------------
 
-Hallo,
+Hello,
 
-leider gab es beim Versand Ihrer letzten Bestellung ein Problem.
+unfortunately there was an issue with the shipping of your last order.
 
-Bitte melden Sie sich an, um zu einer Probleml=C3=B6sung zu kommen bzw. eine Erstattung zu veranlassen.
+Please sign in to help us resolving the issue or to request a refund.
 
+https://www.shipment-support-amazon.com/support
 
-Problembehebung:
-https://www.lieferung-amazon.de/support
-
-Bestellung #028-7158945-1578641
+Order #028-7158945-1578641
 
 ---------------------------------------------------------------------------=
 -----------------------------------------------------------------
 
-Dies ist eine automatisch versendete E-Mail. Bitte antworten Sie nicht auf =
-diese Nachricht, da die E-Mail-Adresse nicht zum Empfang von E-Mails einger=
-ichtet ist.
+This is an automatically sent email. Please do not reply to =
+this message, as the email address is not set up to receive emails.
 --===============6153848391619581774==
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
@@ -538,19 +535,19 @@ ust: 100%; text-align: left">=20
                     <tr>=20
                      <td style=3D"border-collapse: collapse !important; -we=
 bkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; font-family: Arial=
-, sans-serif"><span>Hallo,</span> </td>=20
+, sans-serif"><span>Hello,</span> </td>=20
                     </tr>=20
                    </tbody>
                   </table>=20
                   <!--[if mso]>
     <table class=3D"msoInformationTable">
     <tr>
-        <td><span  >leider gab es beim Versand Ihrer letzten Bestellung ein Problem.=20
+        <td><span  >unfortunately there was an issue with the shipping of your last order.=20
 </span>
 </td>
     </tr>
     <tr>
-        <td><span  >Bitte melden Sie sich an, um zu einer Probleml=C3=B6sung zu kommen bzw. eine Erstattung zu veranlassen.</s=
+        <td><span  >Please sign in to help us resolving the issue or to request a refund.</s=
 pan>
 </td>
 
@@ -565,12 +562,12 @@ ign: left">=20
                     <tr>=20
                      <td style=3D"padding-bottom: 18px; border-collapse: co=
 llapse !important; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 10=
-0%; font-family: Arial, sans-serif"><span>leider gab es beim Versand Ihrer letzten Bestellung ein Problem. </span> </td>=20
+0%; font-family: Arial, sans-serif"><span>unfortunately there was an issue with the shipping of your last order. </span> </td>=20
                     </tr>=20
                     <tr>=20
                      <td style=3D"padding-bottom: 18px; border-collapse: co=
 llapse !important; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 10=
-0%; font-family: Arial, sans-serif"><span>Bitte melden Sie sich an, um zu einer Probleml=C3=B6sung zu kommen bzw. eine Erstattung zu veranlassen.</span> </td>=20
+0%; font-family: Arial, sans-serif"><span>Please sign in to help us resolving the issue or to request a refund.</span> </td>=20
                     </tr>=20
                    </tbody>
                   </table>=20
@@ -586,8 +583,8 @@ llapse !important; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 10=
 "trackPackageButtonTextForOutlook" width=3D"397" height=3D"45" bgcolor=3D"f=
 fa723">
                                 <a class=3D"trackPackageLinkForOutlook" hre=
-f=3D"https://www.lieferung-amazon.de/support">
-                                    Probleml=C3=B6sung/Erstattung
+f=3D"https://www.shipment-support-amazon.com/support">
+                                    Issue resolving/refund
                                 </a>
                             </td>
                         </tr>
@@ -610,7 +607,7 @@ mportant; border-collapse: collapse !important; -webkit-text-size-adjust: 1=
                     <tr>=20
                      <td style=3D"border-collapse: collapse !important; -we=
 bkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; font-family: Arial=
-, sans-serif"> <a href=3D"https://www.lieferung-amazon.de/support" style=3D"color: rgb(0, 46, 54); text-de=
+, sans-serif"> <a href=3D"https://www.shipment-support-amazon.com/support" style=3D"color: rgb(0, 46, 54); text-de=
 coration: none; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%"=
 >=20
                        <table class=3D"trackPackageButtonTable" style=3D"he=
@@ -624,7 +621,7 @@ rackPackageButtonText" width=3D"397" height=3D"45" bgcolor=3D"ffa723" style=
 =3D"line-height: 18px; color: rgb(17, 17, 17); font-size: 16px; text-decora=
 tion: none; vertical-align: middle; box-shadow: 0 2px 0 0 rgba(84,84,84,0.3=
 ); border-collapse: collapse !important; -webkit-text-size-adjust: 100%; -m=
-s-text-size-adjust: 100%; font-family: Arial, sans-serif"> Probleml=C3=B6sung/Erstattung </td>=20
+s-text-size-adjust: 100%; font-family: Arial, sans-serif"> Issue resolving/refund </td>=20
                          </tr>=20
                         </tbody>
                        </table> </a> </td>=20
@@ -646,9 +643,7 @@ gn: left">=20
                      <td style=3D"border-collapse: collapse !important; -we=
 bkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; font-family: Arial=
 , sans-serif"><span class=3D"emailClosing" style=3D"font-size: 9px; line-he=
-ight: 15px; color: rgb(134, 134, 134)">Dies ist eine automatisch versendete=
- E-Mail. Bitte antworten Sie nicht auf diese Nachricht, da die E-Mail-Adres=
-se nicht zum Empfang von E-Mails eingerichtet ist.</span> </td>=20
+ight: 15px; color: rgb(134, 134, 134)">This is an automatically sent email. Please do not reply to this message, as the email address is not set up to receive emails.</span> </td>=20
                     </tr>=20
                    </tbody>
                   </table> </td>=20
