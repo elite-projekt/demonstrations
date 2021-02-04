@@ -26,7 +26,7 @@ unsecure_server_imap_port = 144
 
 # email_client_config_location = r"C:\Users\Jan\AppData\Roaming\Thunderbird\Profiles\sldrcrlj.MPSE\prefs.js"
 email_client_config_location = os.getenv('APPDATA') + r"\Thunderbird\Profiles\sldrcrlj.MPSE\prefs.js"
-email_files_location = "emails\\"
+email_files_location = "emails\\eng\\"
 
 email_text_placeholder = """\
 Placeholder"""

