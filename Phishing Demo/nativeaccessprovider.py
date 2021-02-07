@@ -10,7 +10,8 @@ from datetime import date, datetime, timedelta
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
-default_email_server = "192.168.178.115" #"192.168.56.101"
+default_email_server = "141.100.70.56" #online vm server
+# default_email_server = "192.168.178.115" #local server
 
 default_email_account = "max.mustermann@mpseinternational.com"
 default_email_account_password = "123"
@@ -130,56 +131,95 @@ def send_multiple_mails_from_files(local_password, port, local_server=default_em
         email_file.close()
 
 
-def change_client_profile(use_secured_client=True):
+def change_client_profile(use_secured_client=True, change_ports=False):
+    """
+    Changes the client configuration between a more secure and a less secure configuration
+    :param use_secured_client: Which client configuration to use
+    :param change_ports: Do we want to change ports in the config?
+    :return:
+    """
     with open(email_client_config_location, "r") as f:
         f_lines = f.readlines()
-        i = 0
-        imap_port_set = False
-        smtp_port_set = False
 
+        # only touch port configuration if we really want to (multiple email servers with
+        # different ports are not in scope of the WS20/21
+        if change_ports:
+            i = 0
+            imap_port_set = False
+            smtp_port_set = False
+            while i < len(f_lines):
+                if "mail.server.server1.port" in f_lines[i] and use_secured_client:
+                    f_lines[i] = f_lines[i].replace(str(unsecure_server_imap_port), str(secure_server_imap_port))
+                    imap_port_set = True
+                elif "mail.server.server1.port" in f_lines[i] and  not use_secured_client:
+                    f_lines[i] = f_lines[i].replace(str(secure_server_imap_port), str(unsecure_server_imap_port))
+                    imap_port_set = True
+                elif "mail.smtpserver.smtp1.port" in f_lines[i] and use_secured_client:
+                    f_lines[i] = f_lines[i].replace(str(unsecure_server_smtp_port), str(secure_server_smtp_port))
+                    smtp_port_set = True
+                elif "mail.smtpserver.smtp1.port" in f_lines[i] and not use_secured_client:
+                    f_lines[i] = f_lines[i].replace(str(secure_server_smtp_port), str(unsecure_server_smtp_port))
+                    smtp_port_set = True
+                i += 1
+
+            if not imap_port_set:
+                if use_secured_client:
+                    f_lines.append("user_pref(\"mail.server.server1.port\", " + str(secure_server_imap_port) + ");\n")
+                elif not use_secured_client:
+                    f_lines.append("user_pref(\"mail.server.server1.port\", " + str(unsecure_server_imap_port) + ");\n")
+
+            if not smtp_port_set:
+                if use_secured_client:
+                    f_lines.append("user_pref(\"mail.server.server1.port\", " + str(secure_server_smtp_port) + ");\n")
+                elif not use_secured_client:
+                    f_lines.append("user_pref(\"mail.server.server1.port\", " + str(unsecure_server_smtp_port) + ");\n")
+
+        # user_pref("mail.phishing.detection.enabled", false);
+        # user_pref("mailnews.message_display.disable_remote_image", false);
+        i = 0
+        phishing_detection_set = False
+        remote_image_set = False
         while i < len(f_lines):
-            if "mail.server.server1.port" in f_lines[i] and use_secured_client:
-                f_lines[i] = f_lines[i].replace(str(unsecure_server_imap_port), str(secure_server_imap_port))
-                imap_port_set = True
-            elif "mail.server.server1.port" in f_lines[i] and  not use_secured_client:
-                f_lines[i] = f_lines[i].replace(str(secure_server_imap_port), str(unsecure_server_imap_port))
-                imap_port_set = True
-            elif "mail.smtpserver.smtp1.port" in f_lines[i] and use_secured_client:
-                f_lines[i] = f_lines[i].replace(str(unsecure_server_smtp_port), str(secure_server_smtp_port))
-                smtp_port_set = True
-            elif "mail.smtpserver.smtp1.port" in f_lines[i] and not use_secured_client:
-                f_lines[i] = f_lines[i].replace(str(secure_server_smtp_port), str(unsecure_server_smtp_port))
-                smtp_port_set = True
+            if "mail.phishing.detection.enabled" in f_lines[i] and use_secured_client:
+                f_lines[i] = f_lines[i].replace("false", "true")
+                phishing_detection_set = True
+            elif "mail.phishing.detection.enabled" in f_lines[i] and not use_secured_client:
+                f_lines[i] = f_lines[i].replace("true", "false")
+                phishing_detection_set = True
+            elif "mailnews.message_display.disable_remote_image" in f_lines[i] and use_secured_client:
+                f_lines[i] = f_lines[i].replace("false", "true")
+                remote_image_set = True
+            elif "mailnews.message_display.disable_remote_image" in f_lines[i] and not use_secured_client:
+                f_lines[i] = f_lines[i].replace("true", "false")
+                remote_image_set = True
             i += 1
 
-        if not imap_port_set:
+        if not phishing_detection_set:
             if use_secured_client:
-                f_lines.append("user_pref(\"mail.server.server1.port\", " + str(secure_server_imap_port) + r");")
+                f_lines.append("user_pref(\"mail.phishing.detection.enabled\", true);\n")
             elif not use_secured_client:
-                f_lines.append("user_pref(\"mail.server.server1.port\", " + str(unsecure_server_imap_port) + r");")
+                f_lines.append("user_pref(\"mail.phishing.detection.enabled\", false);\n")
 
-        if not smtp_port_set:
+        if not remote_image_set:
             if use_secured_client:
-                f_lines.append("user_pref(\"mail.server.server1.port\", " + str(secure_server_smtp_port) + r");")
+                f_lines.append("user_pref(\"mailnews.message_display.disable_remote_image\", true);\n")
             elif not use_secured_client:
-                f_lines.append("user_pref(\"mail.server.server1.port\", " + str(unsecure_server_smtp_port) + r");")
+                f_lines.append("user_pref(\"mailnews.message_display.disable_remote_image\", false);\n")
 
     with open(email_client_config_location, "w") as f:
         f.writelines(f_lines)
-    return
+    return "Set client configuration to secure" if use_secured_client else "Set client configuration to unsecure"
 
 
-# change_client_profile(use_secured_client=True)
+#print(change_client_profile(use_secured_client=True))
 
-#f = open("email.txt", "w")
-#a = create_mail(subject="Test2", sender=default_email_account, recipient="test2@example.org")
-#f.write(a.as_string()) # create_mail(subject="Test2", sender=sender_email, recipient="test2@example.org").as_string())
-#f.close()
-
+# f = open("email.txt", "w")
+# a = create_mail(subject="Test2", sender=default_email_account, recipient="test2@example.org")
+# f.write(a.as_string()) # create_mail(subject="Test2", sender=sender_email, recipient="test2@example.org").as_string())
+# f.close()
 
 delete_mailbox()
 send_multiple_mails_from_files(default_email_account_password, secure_server_smtp_port)
-
 
 # f = open("email.txt", "r")
 # mail_message = f.read()
