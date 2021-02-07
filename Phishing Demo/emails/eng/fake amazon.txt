@@ -468,7 +468,7 @@ ht:15px !important; }
  </head>=20
  <body style=3D"width: 100% !important; height: 100% !important; margin: 0;=
  padding: 0; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%"><i=
-mg width=3D"1" height=3D"1" src=3D"https://www.amazon.de/gp/r.html?C=3D1UPV">=20
+mg width=3D"1" height=3D"1" src=3D"https://www.amazon.com/gp/r.html?C=3D1UPV">=20
   <table id=3D"OutlookWrapper" style=3D"width: 100%; border-collapse: colla=
 pse !important; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;=
  text-align: left">
@@ -493,7 +493,7 @@ ize-adjust: 100%; -ms-text-size-adjust: 100%; text-align: left">=20
              <td class=3D"emailBodyTD" style=3D"padding-left: 17px; padding=
 -right: 18px; padding-top: 23px; padding-bottom: 21px; border-collapse: col=
 lapse !important; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100=
-%; font-family: Arial, sans-serif"> <a href=3D"https://www.amazon.de/gp/r.h" style=
+%; font-family: Arial, sans-serif"> <a href=3D"https://www.amazon.com/gp/r.h" style=
 =3D"-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%">=20
                <table class=3D"brandTable" style=3D"margin-bottom: 20px; wi=
 dth: 100%; min-width: 338px; border-collapse: collapse !important; -webkit-=
@@ -504,10 +504,10 @@ text-size-adjust: 100%; -ms-text-size-adjust: 100%; text-align: left">=20
 important; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; font=
 -family: Arial, sans-serif">=20
                    <!--[if gte mso 9]>
-                    <a href=3D"https://www.amazon.de/gp/r.html?C=3D1UP">
+                    <a href=3D"https://www.amazon.com/gp/r.html?C=3D1UP">
                     <![endif]--> <img src=3D"https://images-eu.ssl-images-a=
-mazon.com/images/G/01/abis-ui/merchants/amazon.de" alt=3D"Amazon.de" title=
-=3D"Amazon.de" class=3D"brandImage" border=3D"0" width=3D"130" style=3D"wid=
+mazon.com/images/G/01/abis-ui/merchants/amazon.com" alt=3D"Amazon.com" title=
+=3D"Amazon.com" class=3D"brandImage" border=3D"0" width=3D"130" style=3D"wid=
 th: 130px">=20
                    <!--[if gte mso 9]>
                     </a>
@@ -584,7 +584,7 @@ llapse !important; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 10=
 fa723">
                                 <a class=3D"trackPackageLinkForOutlook" hre=
 f=3D"https://www.shipment-support-amazon.com/support">
-                                    Issue resolving/refund
+                                    resolve issue/refund
                                 </a>
                             </td>
                         </tr>
@@ -621,7 +621,7 @@ rackPackageButtonText" width=3D"397" height=3D"45" bgcolor=3D"ffa723" style=
 =3D"line-height: 18px; color: rgb(17, 17, 17); font-size: 16px; text-decora=
 tion: none; vertical-align: middle; box-shadow: 0 2px 0 0 rgba(84,84,84,0.3=
 ); border-collapse: collapse !important; -webkit-text-size-adjust: 100%; -m=
-s-text-size-adjust: 100%; font-family: Arial, sans-serif"> Issue resolving/refund </td>=20
+s-text-size-adjust: 100%; font-family: Arial, sans-serif"> resolve issue/refund </td>=20
                          </tr>=20
                         </tbody>
                        </table> </a> </td>=20
@@ -1085,7 +1085,7 @@ ht:15px !important; }
     img   { display: block; }
 </style>
 <![endif]--> =20
- <img width=3D"1" height=3D"1" src=3D"https://www.amazon.de/gp/r.html?C=3D1"><=
+ <img width=3D"1" height=3D"1" src=3D"https://www.amazon.com/gp/r.html?C=3D1"><=
 /body>
 </html>=
 
