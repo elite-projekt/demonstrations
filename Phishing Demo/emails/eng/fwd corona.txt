@@ -64,10 +64,10 @@ Content-Transfer-Encoding: 8bit
     <meta http-equiv="content-type" content="text/html; charset=windows-1252">
   </head>
   <body style="background-color: #e5e8e9">
-    <p>Hello Max,</p>
-    <p>please look over this. If possible fill it out and proceed as far as you can.</p>
-    <p>Best Regards<br>
-      Peter Meier, executive office<br>
+    <p><font size="+1">Hello Max,</font></p>
+    <p><font size="+1">please look over this. If possible fill it out and proceed as far as you can.</font></p>
+    <p><font size="+1">Best Regards</font><br>
+      <font size="+1">Peter Meier, executive office</font><br>
     </p>
     <br>
     <div class="moz-forward-container">-------- Forwarded Message

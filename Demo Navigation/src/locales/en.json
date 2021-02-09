@@ -2,7 +2,7 @@
   "welcome_page": {
     "toolbartitle": "Security Demo",
     "appbartitle": "Introduction",
-    "introtext": "You are employed at XYZ AG and assigned there as an assistant to the management. At the moment, the mood in the office is a bit tense. Next week there will be a meeting with important business partners and you still haven't received all the appointment confirmations. And the gift you ordered on behalf of the department for a retiring co-worler should also have been delivered by now. So this is how you start your workday and the first thing you do is check your e-mails.",
+    "introtext": "You are employed at XYZ AG and assigned there as an assistant to the management. At the moment, the mood in the office is a bit tense. Next week there will be a meeting with important business partners and you still haven't received all the appointment confirmations. And the gift you ordered on behalf of the department for a retiring co-worker should also have been delivered by now. So this is how you start your workday and the first thing you do is check your e-mails.",
     "exercise": "Exercise: ",
     "open_thunderbird": "Please open the email application \"Thunderbird\"",
     "press_start": "Click on the \"Start\" icon or press the Windows key",
@@ -13,7 +13,7 @@
   "task1":{
     "toolbartitle": "Security Demo",
     "appbartitle": "Task",
-    "introtext": "You are employed at XYZ AG and assigned there as an assistant to the management. At the moment, the mood in the office is a bit tense. Next week there will be a meeting with important business partners and you still haven't received all the appointment confirmations. And the gift you ordered on behalf of the department for a retiring co-worler should also have been delivered by now. So this is how you start your workday and the first thing you do is check your e-mails.",
+    "introtext": "You are employed at XYZ AG and assigned there as an assistant to the management. At the moment, the mood in the office is a bit tense. Next week there will be a meeting with important business partners and you still haven't received all the appointment confirmations. And the gift you ordered on behalf of the department for a retiring co-worker should also have been delivered by now. So this is how you start your workday and the first thing you do is check your e-mails.",
     "exercise": "Exercise: ",
     "edit_emails": "Go through your emails",
     "accept_appointment": "Accept appointment commitments and enter them in the calendar.",
