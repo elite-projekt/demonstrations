@@ -21,6 +21,20 @@ def corona_eng():
     file_path = path.join(html_folder_path, 'eng/corona.html')
     return send_file(file_path)
 
+
+# "real" Amazon site
+
+@app.route('/gp/r.html')
+def real_amazon_eng():
+    file_path = path.join(html_folder_path, 'eng/realamazon.html')
+    return send_file(file_path)
+
+@app.route('/images/I/51uXLXaz3BL.jpg')
+def real_amazon_cup_image():
+    file_path = path.join(html_folder_path, 'eng/amazoncup.jpg')
+    return send_file(file_path)
+
+
 # Amazon phishing site
 
 @app.route('/support')
@@ -28,7 +42,8 @@ def amazon_eng():
     file_path = path.join(html_folder_path, 'eng/amazon.html')
     return send_file(file_path)
 
-# Bitcoin phishing site
+
+# Bitcoin phishing site (currently not included)
 
 @app.route('/bitcoin')
 def bitcoin():
@@ -40,6 +55,7 @@ def bitcoin():
 def bitcoin_image():
     file_path = path.join(html_folder_path, 'bitcoin.png')
     return send_file(file_path)
+
 
 
 if __name__ == "__main__":
