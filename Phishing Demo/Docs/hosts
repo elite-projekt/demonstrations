@@ -1,0 +1,19 @@
+127.0.0.1			coronahilfengermany.de
+127.0.0.1 			example.com
+127.0.0.1 			storage.example.com
+127.0.0.1			covidsupportgermany.de
+127.0.0.1			shipment-support-amazon.com
+127.0.0.1			amazon.com
+
+127.0.0.1			www.coronahilfengermany.de
+127.0.0.1 			www.example.com
+127.0.0.1 			www.storage.example.com
+127.0.0.1			www.covidsupportgermany.de
+127.0.0.1			www.shipment-support-amazon.com
+127.0.0.1			www.amazon.com
+# Added by Docker Desktop
+192.168.178.69 host.docker.internal
+192.168.178.69 gateway.docker.internal
+# To allow the same kube context to work on the host and the container:
+127.0.0.1 kubernetes.docker.internal
+# End of section
