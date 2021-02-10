@@ -34,6 +34,11 @@ def real_amazon_cup_image():
     file_path = path.join(html_folder_path, 'eng/amazoncup.jpg')
     return send_file(file_path)
 
+@app.route('/gp/delivery.png')
+def real_amazon_delivery_image():
+    file_path = path.join(html_folder_path, 'eng/delivery.png')
+    return send_file(file_path)
+
 
 # Amazon phishing site
 
