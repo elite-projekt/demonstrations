@@ -1,25 +1,35 @@
 {
   "welcome_page": {
-    "toolbartitle": "Security Demo",
+    "toolbartitle": "Phishing Demo",
     "appbartitle": "Introduction",
-    "introtext": "You are employed at XYZ AG and assigned there as an assistant to the management. At the moment, the mood in the office is a bit tense. Next week there will be a meeting with important business partners and you still haven't received all the appointment confirmations. And the gift you ordered on behalf of the department for a retiring co-worker should also have been delivered by now. So this is how you start your workday and the first thing you do is check your e-mails.",
+    "introtext": "Welcome to this demo.",
     "exercise": "Exercise: ",
-    "open_thunderbird": "Please open the email application \"Thunderbird\"",
-    "press_start": "Click on the \"Start\" icon or press the Windows key",
+    "open_thunderbird": "To begin please arrange this browser window to the right of your screen. Open the email application \"Thunderbird\" and arrange this window to the left side.",
+    "arrange_browser": "Drag this window to the right edge of the screen until it snaps and covers the right half of the screen",
+	"press_start": "Click on the \"Start\" icon or press the Windows key",
     "thunderbird_search": "Type in \"Thunderbird\" and click on the following search result",
+	"arrange_thunderbird": "Drag the Thunderbird window to the left edge of the screen until it snaps and covers the left half of the screen. The result should look like this:",
     "done": "Done",
     "help": "Help"
   },
   "task1":{
-    "toolbartitle": "Security Demo",
-    "appbartitle": "Task",
-    "introtext": "You are employed at XYZ AG and assigned there as an assistant to the management. At the moment, the mood in the office is a bit tense. Next week there will be a meeting with important business partners and you still haven't received all the appointment confirmations. And the gift you ordered on behalf of the department for a retiring co-worker should also have been delivered by now. So this is how you start your workday and the first thing you do is check your e-mails.",
+    "toolbartitle": "Phishing Demo",
+    "appbartitle": "Go through your e-mails",
+    "introtext": "You are Max and you are employed at the company \"MPSE international\". There you are assigned as an assistant to the management. At the moment, the mood in the office is a bit tense. The management is awaiting information on government assistance regarding the COVID-19 pandemic. In addition, a popular co-worker leaves the company and the department is planning a farewell party. You ordered a gift for him and you are expecting it to arrive soon. So, this is how you start your workday and the first thing you do is check your e-mails.",
     "exercise": "Exercise: ",
-    "edit_emails": "Go through your emails",
-    "accept_appointment": "Accept appointment commitments and enter them in the calendar.",
+    "edit_emails": "Go through your e-mails",
+    "accept_appointment": "Is there already a date for the party?",
     "sent_present": "Has the farewell gift been sent?",
     "important_emails": "Are there other important emails?",
     "done": "Done",
     "help": "Help"
+  },
+  "endpage":{
+    "toolbartitle": "Phishing Demo",
+    "appbartitle": "End of the Demo",
+    "introtext": "This concludes this demo. Remember that there are two different modes available on the ECS-Portal. If you want to learn more about the topic Phishing you can reach the prepared Teaching Material by clicking on the button below. To end the demo please close Thunderbird and then close this tab. After that you can start any other demo available on the ECS-portal.",
+    "done": "Done",
+    "help": "Help",
+	"link_to_teaching": "Open teaching material"
   }
 }

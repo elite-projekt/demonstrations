@@ -41,7 +41,8 @@ export default {
   data () {
     return {
       langs: ['en', 'de'],
-      toolbarTitle: ''
+      toolbarTitle: '',
+      appBarTitle: ''
     }
   },
   methods: {

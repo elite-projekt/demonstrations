@@ -24,11 +24,13 @@
         <v-row>
           <v-col>
             <v-btn
-              color="green" elevation="2" @click="$router.push({name: 'Task1', params: {}})"
+              color="green" elevation="2" @click="$router.push({name: 'Endpage', params: {}})"
             >{{ $t('task1.done') }}</v-btn>
-            <v-btn
+            <!--  Use this button to display help if necessary
+              <v-btn
               color="red" elevation="2" @click="hidehelp = false"
             >{{ $t('task1.help') }}</v-btn>
+            -->
           </v-col>
           <v-col>
 

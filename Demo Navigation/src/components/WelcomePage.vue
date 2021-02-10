@@ -13,9 +13,12 @@
         <v-row v-if="!hidehelp">
             <v-col>
                 <ul>
+                    <li>{{ $t('welcome_page.arrange_browser') }}</li>
                     <li>{{ $t('welcome_page.press_start') }}</li>
                     <li>{{ $t('welcome_page.thunderbird_search') }}</li>
                     <img style ="display: block; margin-left: 0px; margin-right: auto;" :src="require('@/assets/help-thunderbird.png')">
+                    <li>{{ $t('welcome_page.arrange_thunderbird') }}</li>
+                    <img style ="display: block; margin-left: 0px; margin-right: auto;" :src="require('@/assets/demo-arrangement.png')">
                 </ul>
             </v-col>
         </v-row>
