@@ -1,7 +1,6 @@
 FROM python:3.8-alpine3.11
 
-RUN apk add --no-cache docker \
-    && pip3 install --upgrade pip
+RUN pip3 install --upgrade pip
 
 ENV APP_DIR /phishing/app
 
