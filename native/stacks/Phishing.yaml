@@ -1,0 +1,11 @@
+version: '3.7'
+
+services:
+  phishing:
+    image: registry.code.fbi.h-da.de/esc-mpse20/demonstrations/phishing:master
+    ports:
+      - 443:443
+  navigation:
+    image: registry.code.fbi.h-da.de/esc-mpse20/demonstrations/navigation:master
+    ports:
+      - 80:80

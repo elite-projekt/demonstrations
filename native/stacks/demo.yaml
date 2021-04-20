@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  hello-world:
+    image: hello-world
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+          - node.id == ${NODEID}
+
