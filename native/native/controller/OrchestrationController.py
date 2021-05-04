@@ -23,11 +23,12 @@ no_mail_server_error = {'success': False,
 def start_demo_phishing():
     secure_mode = request.json['secureMode']
     try:
-        orchestration_service.docker_compose_start_file('Phishing.yaml')
+        orchestration_service.docker_compose_start_file('phishing/docker-compose.yml')
     except Exception as e:
         return make_response(jsonify(no_docker_error), 500)
 
     try:
+        phishing_service.check_mail_server_online()
         phishing_service.change_client_profile(secure_mode)
         phishing_service.delete_mailbox()
         phishing_service.send_mail_files()
@@ -38,5 +39,5 @@ def start_demo_phishing():
 
 @orchestration.route('/stop/demo/Phishing', methods=['POST', 'GET'])
 def stop_demo_phishing():
-    orchestration_service.docker_compose_stop_file('Phishing.yaml')
+    orchestration_service.docker_compose_stop_file('phishing/docker-compose.yml')
     return make_response(jsonify(stop_success), 200)
