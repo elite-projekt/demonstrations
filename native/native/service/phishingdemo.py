@@ -6,6 +6,9 @@ import email
 import os
 import re
 import random
+import socket
+import time
+from python_on_whales import docker
 from datetime import date, datetime, timedelta
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -18,7 +21,7 @@ email_files_location = path.join(path.dirname(path.dirname(t_path)), 'mails',)
 
 class PhishingDemo():
 
-    default_email_server = "141.100.70.56"  # online vm server
+    default_email_server = "localhost"  # online vm server
     default_email_account = "max.mustermann@mpseinternational.com"
     default_email_account_password = "123"
 
@@ -202,3 +205,16 @@ class PhishingDemo():
         with open(self.email_client_config_location, "w") as f:
             f.writelines(f_lines)
         return "Set client configuration to secure" if use_secured_client else "Set client configuration to unsecure"
+
+    # Check if Mail Server Status is running
+    def check_mail_server_online(self):
+        delay = 10
+        retries = 10
+        time.sleep(delay)
+        container = docker.container.inspect("phising_mailserver")
+
+        for i in range(retries):
+            if container.state.running:
+                break
+            else:
+                time.sleep(delay)

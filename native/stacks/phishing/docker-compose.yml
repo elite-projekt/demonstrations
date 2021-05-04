@@ -1,0 +1,37 @@
+version: '3.7'
+
+services:
+  phishing:
+    image: registry.code.fbi.h-da.de/esc-mpse20/demonstrations/phishing:master
+    ports:
+      - 443:443
+  navigation:
+    image: registry.code.fbi.h-da.de/esc-mpse20/demonstrations/navigation:master
+    ports:
+      - 80:80
+  mail:
+    image: tvial/docker-mailserver:latest
+    hostname: mail
+    domainname: domain.com
+    container_name: phising_mailserver
+    ports:
+      - "25:25"
+      - "143:143"
+      - "587:587"
+      - "993:993"
+    volumes:
+      - maildata:/var/mail
+      - mailstate:/var/mail-state
+      - maillogs:/var/log/mail
+      - ./mailserver/config/:/tmp/docker-mailserver/${SELINUX_LABEL}
+    env_file:
+      - ./mailserver/mailserver.env
+    cap_add:
+      - NET_ADMIN
+      - SYS_PTRACE
+    restart: always
+
+volumes:
+  maildata:
+  mailstate:
+  maillogs:
