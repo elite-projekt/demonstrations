@@ -17,9 +17,11 @@ services:
     ports:
       - "25:25"
       - "143:143"
+      - "465:465"
       - "587:587"
       - "993:993"
     volumes:
+      - ./mailserver/config/ssl:/tmp/ssl:ro
       - maildata:/var/mail
       - mailstate:/var/mail-state
       - maillogs:/var/log/mail
@@ -30,6 +32,10 @@ services:
       - NET_ADMIN
       - SYS_PTRACE
     restart: always
+    environment:
+      - SSL_TYPE=manual
+      - SSL_CERT_PATH=/tmp/ssl/mail.domain.com.crt
+      - SSL_KEY_PATH=/tmp/ssl/mail.domain.com.key
 
 volumes:
   maildata:
