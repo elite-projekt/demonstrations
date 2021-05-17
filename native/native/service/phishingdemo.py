@@ -25,7 +25,7 @@ class PhishingDemo():
     default_email_account = "max.mustermann@mpseinternational.com"
     default_email_account_password = "123"
 
-    secure_server_smtp_port = 25
+    secure_server_smtp_port = 465
     secure_server_imap_port = 143
     unsecure_server_smtp_port = 26
     unsecure_server_imap_port = 144
@@ -39,7 +39,7 @@ class PhishingDemo():
                        local_email_server=default_email_server,
                        local_email_account=default_email_account,
                        local_email_account_password=default_email_account_password):
-        box = imaplib.IMAP4(local_email_server, local_imap_port)
+        box = imaplib.IMAP4_SSL(local_email_server)
         box.login(local_email_account, local_email_account_password)
         box.select('Inbox')
         typ, data = box.search(None, 'ALL')
@@ -53,7 +53,7 @@ class PhishingDemo():
     def send_mail(self, sender, password, port, recipient, message, local_server):
         print(sender, password, port, recipient, local_server)
         # Try to log in to server and send email
-        server = smtplib.SMTP(local_server, port)
+        server = smtplib.SMTP_SSL(local_server, port)
         try:
             # server.auth_plain()
             server.login(sender, password)
