@@ -3,7 +3,7 @@ import imaplib
 import glob
 import ssl
 import email
-import os
+import os, subprocess
 import re
 import random
 import socket
@@ -184,6 +184,12 @@ class PhishingDemo():
                 elif "mailnews.message_display.disable_remote_image" in f_lines[i] and not use_secured_client:
                     f_lines[i] = f_lines[i].replace("true", "false")
                     remote_image_set = True
+                elif "mailnews.display.disallow_mime_handlers" in f_lines[i]:
+                    f_lines[i] = "user_pref(\"mailnews.display.disallow_mime_handlers\", 0);\n"
+                elif "mailnews.display.html_as" in f_lines[i]:
+                    f_lines[i] = "user_pref(\"mailnews.display.html_as\", 0);\n"
+                elif "mailnews.display.prefer_plaintext" in f_lines[i]:
+                    f_lines[i] = "user_pref(\"mailnews.display.prefer_plaintext\", false);\n"
                 i += 1
 
             if not phishing_detection_set:
@@ -218,3 +224,23 @@ class PhishingDemo():
                 break
             else:
                 time.sleep(delay)
+    
+    def stop_mail_application(self):
+        """Close mail application
+        """
+        print("[ i ] - Try closing running thunderbird process...")
+        try:
+            res = os.system("taskkill /im thunderbird.exe")
+            print("[ i ] - success!")
+        except Exception as e:
+            print("[ e ] - {}".format(e))
+    
+    def start_mail_application(self):
+        """Start mail application
+        """
+        print("[ i ] - Try starting thunderbird process...")
+        try:
+            res = subprocess.Popen(['C:\\Program Files\\Mozilla Thunderbird\\thunderbird.exe'])
+            print("[ i ] - success!")
+        except Exception as e:
+            print(e)

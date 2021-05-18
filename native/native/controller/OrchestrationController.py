@@ -32,6 +32,7 @@ def start_demo_phishing():
         phishing_service.change_client_profile(secure_mode)
         phishing_service.delete_mailbox()
         phishing_service.send_mail_files()
+        phishing_service.start_mail_application()
     except (ConnectionRefusedError, FileNotFoundError):
         return make_response(jsonify(no_mail_server_error), 500)
     return make_response(jsonify(start_success), 201)
@@ -40,4 +41,5 @@ def start_demo_phishing():
 @orchestration.route('/stop/demo/Phishing', methods=['POST', 'GET'])
 def stop_demo_phishing():
     orchestration_service.docker_compose_stop_file('phishing/docker-compose.yml')
+    phishing_service.stop_mail_application()
     return make_response(jsonify(stop_success), 200)
