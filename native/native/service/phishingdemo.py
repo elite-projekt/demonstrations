@@ -13,6 +13,7 @@ from datetime import date, datetime, timedelta
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from os import path
+from zipfile import ZipFile
 
 t_path = path.abspath(path.dirname(__file__))
 email_files_location = path.join(path.dirname(path.dirname(t_path)), 'mails',)
@@ -248,3 +249,27 @@ class PhishingDemo():
             print("[ i ] - success!")
         except Exception as e:
             print(e)
+
+    def thunderbird_init(self):
+        """Initializes thunderbird with a predefined profile with already set up config, if not already present
+        """
+        t_path = path.abspath(path.dirname(__file__))
+        stack_folder = path.join(path.dirname(path.dirname(t_path)), 'stacks',)
+
+        print('[ i ] - Thunderbird init ')
+        # check if profile already present
+        try:
+            if os.path.isdir(os.getenv('APPDATA') + r"\Thunderbird\Profiles\jzou4lhc.MPSE"):
+                print('[ i ] - nothing to do - exit ')
+                return
+
+            profile_location = os.getenv('APPDATA') + r"\Thunderbird"
+            profile_zip = stack_folder + r"\phishing\profile.zip"
+
+            # extract profile to location => overrides existing files
+            with ZipFile(profile_zip, 'r') as zipObj:
+                zipObj.extractall(profile_location)
+
+            print('[ i ] - Done')
+        except Exception as e:
+            print("[ e ] - Problem on creating thunderbird profile error stack follows:\n{}".format(e))
