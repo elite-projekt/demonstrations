@@ -28,10 +28,11 @@ def start_demo_phishing():
         return make_response(jsonify(no_docker_error), 500)
 
     try:
+        phishing_service.thunderbird_init()
         phishing_service.check_mail_server_online()
         phishing_service.change_client_profile(secure_mode)
         phishing_service.delete_mailbox()
-        phishing_service.send_mail_files()
+        phishing_service.send_mail_files(secure_mode)
         phishing_service.start_mail_application()
     except (ConnectionRefusedError, FileNotFoundError):
         return make_response(jsonify(no_mail_server_error), 500)
