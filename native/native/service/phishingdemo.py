@@ -12,7 +12,6 @@ from python_on_whales import docker
 from datetime import date, datetime, timedelta
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-from python_on_whales import docker
 from os import path
 
 t_path = path.abspath(path.dirname(__file__))
@@ -66,7 +65,7 @@ class PhishingDemo():
         server.close()
 
     # sends mails based on .txt files specified in the email_files_location-path
-    def send_mail_files(self,
+    def send_mail_files(self, use_secured_client=True,
                         local_password=default_email_account_password,
                         local_smtp_port=secure_server_smtp_port,
                         local_server=default_email_server):
@@ -75,6 +74,11 @@ class PhishingDemo():
             email_file = open(file, "r")
             email_text = email_file.read()
             email_mime = email.message_from_string(email_text)
+
+            # check if secure mode, if no do not process smime mails
+            if not use_secured_client:
+                if 'Content-Type: multipart/signed;' in email_text:
+                    continue
 
             # Extract the sender of the email
             # If the form '"name" <name@domain>' is used the raw address is extracted
