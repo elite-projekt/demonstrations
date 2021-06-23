@@ -14,3 +14,6 @@ class ProductionConfig(Config):
     ENV = "production"
     HOST = "0.0.0.0"
     PORT = 5000
+
+class EnvironmentConfig():
+    WORKINGDIR = "C:\\Users\\dummy\\Documents\\GIT\\demonstrations\\native\\native\\"

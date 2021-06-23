@@ -35,7 +35,10 @@ def start_demo_phishing():
         phishing_service.send_mail_files(secure_mode)
         phishing_service.start_mail_application()
     except (ConnectionRefusedError, FileNotFoundError):
+        logging.error(ConnectionRefusedError, FileNotFoundError)
         return make_response(jsonify(no_mail_server_error), 500)
+    except Exception as e:
+        logging.error(e)
     return make_response(jsonify(start_success), 201)
 
 

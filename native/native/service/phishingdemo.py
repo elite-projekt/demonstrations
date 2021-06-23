@@ -3,7 +3,7 @@ import imaplib
 import glob
 import ssl
 import email
-import os, subprocess
+import os, subprocess, logging, sys, json
 import re
 import random
 import socket
@@ -14,8 +14,9 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from os import path
 from zipfile import ZipFile
+from config.config import EnvironmentConfig
 
-t_path = path.abspath(path.dirname(__file__))
+t_path = EnvironmentConfig.WORKINGDIR
 email_files_location = path.join(path.dirname(path.dirname(t_path)), 'mails',)
 
 
@@ -58,11 +59,13 @@ class PhishingDemo():
             # server.auth_plain()
             server.login(sender, password)
             # server.auth_plain()
-            print("Sending mail from " + sender + " to " + recipient)
+            # print("Sending mail from " + sender + " to " + recipient)
+            logging.info("Sending mail from {} to {}".format(sender, recipient))
             server.sendmail(sender, recipient, message)
         except Exception as e:
             # Print any error messages to stdout
-            print("Could not send mail. Error: " + e)
+            # print("Could not send mail. Error: " + e)
+            logging.error(e)
         server.close()
 
     # sends mails based on .txt files specified in the email_files_location-path
@@ -71,7 +74,8 @@ class PhishingDemo():
                         local_smtp_port=secure_server_smtp_port,
                         local_server=default_email_server):
         for file in glob.glob(email_files_location + "/*.txt"):
-            print('sending mail file: ' + file)
+            # print('sending mail file: ' + file)
+            logging.info("Sending mail file: {}".format(file))
             email_file = open(file, "r")
             email_text = email_file.read()
             email_mime = email.message_from_string(email_text)
@@ -126,7 +130,8 @@ class PhishingDemo():
                     break
             if skip:
                 break
-        print("Use secured client: " + str(use_secured_client))
+        # print("Use secured client: " + str(use_secured_client))
+        logging.info("Use secure client: {}".format(use_secured_client))
         with open(self.email_client_config_location, "r") as f:
             f_lines = f.readlines()
 
@@ -222,45 +227,49 @@ class PhishingDemo():
         delay = 10
         retries = 10
         time.sleep(delay)
-        container = docker.container.inspect("phising_mailserver")
-
-        for i in range(retries):
-            if container.state.running:
-                break
-            else:
-                time.sleep(delay)
+        try:
+            container = docker.container.inspect("phising_mailserver")
+            print(container.state.running)
+            for i in range(retries):
+                logging.info('Checking if mailserver reachable try: {}'.format(i+1))
+                if container.state.running:
+                    break
+                else:
+                    time.sleep(delay)
+        except Exception as e:
+            logging.error(e)
     
     def stop_mail_application(self):
         """Close mail application
         """
-        print("[ i ] - Try closing running thunderbird process...")
+        logging.info('Try closing running thunderbird process...')
         try:
-            res = os.system("taskkill /im thunderbird.exe")
-            print("[ i ] - success!")
+            res = os.system("taskkill /f /im thunderbird.exe")
+            logging.info('Success')
         except Exception as e:
-            print("[ e ] - {}".format(e))
-    
+            logging.error(e)
+
     def start_mail_application(self):
         """Start mail application
         """
-        print("[ i ] - Try starting thunderbird process...")
+        logging.info('Try starting thunderbird process...')
         try:
             res = subprocess.Popen(['C:\\Program Files\\Mozilla Thunderbird\\thunderbird.exe'])
-            print("[ i ] - success!")
+            logging.info('Success')
         except Exception as e:
-            print(e)
+            logging.error(e)
 
     def thunderbird_init(self):
         """Initializes thunderbird with a predefined profile with already set up config, if not already present
         """
-        t_path = path.abspath(path.dirname(__file__))
+        t_path = EnvironmentConfig.WORKINGDIR
         stack_folder = path.join(path.dirname(path.dirname(t_path)), 'stacks',)
 
-        print('[ i ] - Thunderbird init ')
+        logging.info('Thunderbird init')
         # check if profile already present
         try:
             if os.path.isdir(os.getenv('APPDATA') + r"\Thunderbird\Profiles\jzou4lhc.MPSE"):
-                print('[ i ] - nothing to do - exit ')
+                logging.info('Nothing to do, exiting init')
                 return
 
             profile_location = os.getenv('APPDATA') + r"\Thunderbird"
@@ -270,6 +279,6 @@ class PhishingDemo():
             with ZipFile(profile_zip, 'r') as zipObj:
                 zipObj.extractall(profile_location)
 
-            print('[ i ] - Done')
+            logging.info('Init done')
         except Exception as e:
-            print("[ e ] - Problem on creating thunderbird profile error stack follows:\n{}".format(e))
+            logging.error(e)
