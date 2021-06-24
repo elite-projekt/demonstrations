@@ -22,6 +22,7 @@ build-python-service:
   image: cdrx/pyinstaller-windows
   script: 
     - ln -s /native /src
+    - tree /
     - cd /src
     - ls -la
     - cd /src/native
