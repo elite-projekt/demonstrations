@@ -1,6 +1,3 @@
-image:
-  docker:git
-
 stages:
   - build
 
@@ -19,3 +16,15 @@ push-navigation-image:
     entrypoint: [""]
   script:
     - sh ./ci/push-navigation-image.sh
+
+build-python-service:
+  stage: build
+  image: cdrx/pyinstaller-windows
+  script: 
+    - ln -s ./native /src
+    - cd /src
+    - ls -la
+    - sh /src/entrypoint-windows.sh
+  artifacts:
+    paths:
+      - dist/windows/*
