@@ -39,7 +39,7 @@ echo "$@"
 
 if [[ "$@" == "" ]]; then
     pyinstaller --clean -y --dist ./dist/windows --workpath /tmp *.spec
-    chown -R --reference=. ./dist/windows --onefile
+    chown -R --reference=. ./dist/windows --onefile --paths Z:\src
 else
     sh -c "$@"
 fi # [[ "$@" == "" ]]

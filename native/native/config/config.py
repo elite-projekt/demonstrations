@@ -16,4 +16,4 @@ class ProductionConfig(Config):
     PORT = 5000
 
 class EnvironmentConfig():
-    WORKINGDIR = "C:\\Users\\dummy\\Documents\\GIT\\demonstrations\\native\\native\\"
+    WORKINGDIR = "C:\\Program Files (x86)\\hda\\nativeapp\\"
