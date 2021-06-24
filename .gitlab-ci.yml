@@ -24,6 +24,9 @@ build-python-service:
     - ln -s /native /src
     - cd /src
     - ls -la
+    - cd /src/native
+    - ls -l
+    - tree /
     - sh /src/entrypoint-windows.sh
   artifacts:
     paths:
