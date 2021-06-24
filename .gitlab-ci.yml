@@ -21,7 +21,7 @@ build-python-service:
   stage: build
   image: cdrx/pyinstaller-windows
   script: 
-    - ln -s ./native /src
+    - ln -s /native /src
     - cd /src
     - ls -la
     - sh /src/entrypoint-windows.sh
