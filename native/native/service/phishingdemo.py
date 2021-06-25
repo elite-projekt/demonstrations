@@ -16,9 +16,7 @@ from os import path
 from zipfile import ZipFile
 from config.config import EnvironmentConfig
 
-t_path = EnvironmentConfig.WORKINGDIR
-email_files_location = path.join(path.dirname(path.dirname(t_path)), 'mails',)
-
+email_files_location = EnvironmentConfig.DOCKERSTACKDIR + 'phishing\\mails\\'
 
 class PhishingDemo():
 
@@ -59,12 +57,9 @@ class PhishingDemo():
             # server.auth_plain()
             server.login(sender, password)
             # server.auth_plain()
-            # print("Sending mail from " + sender + " to " + recipient)
             logging.info("Sending mail from {} to {}".format(sender, recipient))
             server.sendmail(sender, recipient, message)
         except Exception as e:
-            # Print any error messages to stdout
-            # print("Could not send mail. Error: " + e)
             logging.error(e)
         server.close()
 
@@ -73,6 +68,7 @@ class PhishingDemo():
                         local_password=default_email_account_password,
                         local_smtp_port=secure_server_smtp_port,
                         local_server=default_email_server):
+        logging.info('Checking for mails in: {}'.format(email_files_location))
         for file in glob.glob(email_files_location + "/*.txt"):
             # print('sending mail file: ' + file)
             logging.info("Sending mail file: {}".format(file))
@@ -130,9 +126,10 @@ class PhishingDemo():
                     break
             if skip:
                 break
-        # print("Use secured client: " + str(use_secured_client))
+
         logging.info("Use secure client: {}".format(use_secured_client))
         with open(self.email_client_config_location, "r") as f:
+            logging.info('Loading email client configuration')
             f_lines = f.readlines()
 
             # only touch port configuration if we really want to (multiple email servers with
@@ -224,6 +221,8 @@ class PhishingDemo():
 
     # Check if Mail Server Status is running
     def check_mail_server_online(self):
+        """Checks if the mailserver docker container is up
+        """
         delay = 10
         retries = 10
         time.sleep(delay)
@@ -233,6 +232,7 @@ class PhishingDemo():
             for i in range(retries):
                 logging.info('Checking if mailserver reachable try: {}'.format(i+1))
                 if container.state.running:
+                    time.sleep(5)   # workaround for slow HW
                     break
                 else:
                     time.sleep(delay)
@@ -262,9 +262,6 @@ class PhishingDemo():
     def thunderbird_init(self):
         """Initializes thunderbird with a predefined profile with already set up config, if not already present
         """
-        t_path = EnvironmentConfig.WORKINGDIR
-        stack_folder = path.join(path.dirname(path.dirname(t_path)), 'stacks',)
-
         logging.info('Thunderbird init')
         # check if profile already present
         try:
@@ -273,7 +270,7 @@ class PhishingDemo():
                 return
 
             profile_location = os.getenv('APPDATA') + r"\Thunderbird"
-            profile_zip = stack_folder + r"\phishing\profile.zip"
+            profile_zip = EnvironmentConfig.PROFILEDIR + "profile.zip"
 
             # extract profile to location => overrides existing files
             with ZipFile(profile_zip, 'r') as zipObj:

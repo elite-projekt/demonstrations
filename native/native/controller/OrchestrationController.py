@@ -3,6 +3,7 @@ from flask.helpers import make_response
 from flask.json import jsonify
 from service.OrchestrationService import OrchestrationService
 from service.phishingdemo import PhishingDemo
+import logging
 
 from time import sleep
 
@@ -13,6 +14,7 @@ phishing_service = PhishingDemo()
 
 start_success = {'success': True, 'message': 'Successfully started the Demo.'}
 stop_success = {'success': True, 'message': 'Stopped all remaining Demos.'}
+stop_failed = {'success': False, 'message': 'Failed to stop containers.'}
 no_docker_error = {'success': False,
                    'message': 'The workstation can not start the application!', 'code': 1}
 no_mail_server_error = {'success': False,
@@ -23,8 +25,10 @@ no_mail_server_error = {'success': False,
 def start_demo_phishing():
     secure_mode = request.json['secureMode']
     try:
+        logging.info('Starting phishing demo stack')
         orchestration_service.docker_compose_start_file('phishing/docker-compose.yml')
     except Exception as e:
+        logging.error(e)
         return make_response(jsonify(no_docker_error), 500)
 
     try:
@@ -44,6 +48,11 @@ def start_demo_phishing():
 
 @orchestration.route('/stop/demo/Phishing', methods=['POST', 'GET'])
 def stop_demo_phishing():
-    orchestration_service.docker_compose_stop_file('phishing/docker-compose.yml')
-    phishing_service.stop_mail_application()
-    return make_response(jsonify(stop_success), 200)
+    logging.info('Stopping phishing demo stack')
+    try:
+        orchestration_service.docker_compose_stop_file('phishing/docker-compose.yml')
+        phishing_service.stop_mail_application()
+        return make_response(jsonify(stop_success), 200)
+    except Exception as e:
+        logging.error(e)
+        return make_response(jsonify(stop_failed), 500)
