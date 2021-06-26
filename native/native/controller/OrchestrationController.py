@@ -49,7 +49,10 @@ def stop_demo_phishing():
 def start_demo_password():
     secure_mode = request.json['secureMode']
     try:
-        orchestration_service.docker_compose_start_file('password/docker-compose.yml')
+        if secure_mode:
+            orchestration_service.docker_compose_start_file('password/secure/docker-compose.yml')
+        else:
+            orchestration_service.docker_compose_start_file('password/unsecure/docker-compose.yml')
     except Exception as e:
         return make_response(jsonify(no_docker_error), 500)
     return make_response(jsonify(start_success), 201)
@@ -57,5 +60,6 @@ def start_demo_password():
 
 @orchestration.route('/stop/demo/Password', methods=['POST', 'GET'])
 def stop_demo_password():
-    orchestration_service.docker_compose_stop_file('password/docker-compose.yml')
+    orchestration_service.docker_compose_stop_file('password/secure/docker-compose.yml')
+    orchestration_service.docker_compose_stop_file('password/unsecure/docker-compose.yml')
     return make_response(jsonify(stop_success), 200)
