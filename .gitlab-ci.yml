@@ -23,7 +23,7 @@ build-python-service:
   script: 
     - cd ./native
     - ls -l
-    - sh /native/entrypoint-windows.sh
+    - sh ./entrypoint-windows.sh
   artifacts:
     paths:
       - dist/windows/*
