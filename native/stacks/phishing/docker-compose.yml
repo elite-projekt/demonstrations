@@ -3,10 +3,12 @@ version: '3.7'
 services:
   phishing:
     image: registry.code.fbi.h-da.de/esc-mpse20/demonstrations/phishing:master
+    container_name: phising_webserver
     ports:
       - 443:443
   navigation:
     image: registry.code.fbi.h-da.de/esc-mpse20/demonstrations/navigation:master
+    container_name: phising_navigation
     ports:
       - 80:80
   mail:
