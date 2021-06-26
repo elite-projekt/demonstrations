@@ -21,9 +21,8 @@ build-python-service:
   stage: build
   image: registry.code.fbi.h-da.de/esc-mpse20/container-templates/python-windows-service-builder:python-service-buzilder
   script: 
-    - cd /native
+    - cd ./native
     - ls -l
-    - tree /
     - sh /native/entrypoint-windows.sh
   artifacts:
     paths:
