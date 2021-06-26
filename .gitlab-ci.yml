@@ -19,16 +19,12 @@ push-navigation-image:
 
 build-python-service:
   stage: build
-  image: cdrx/pyinstaller-windows
+  image: registry.code.fbi.h-da.de/esc-mpse20/container-templates/python-windows-service-builder:python-service-buzilder
   script: 
-    - ln -s /native /src
-    - tree /
-    - cd /src
-    - ls -la
-    - cd /src/native
+    - cd /native
     - ls -l
     - tree /
-    - sh /src/entrypoint-windows.sh
+    - sh /native/entrypoint-windows.sh
   artifacts:
     paths:
       - dist/windows/*
