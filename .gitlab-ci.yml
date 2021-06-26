@@ -4,7 +4,7 @@ image:
 stages:
   - build
 
-push-demo-image:
+push-phishing-image:
   stage: build
   image:
     name: gcr.io/kaniko-project/executor:debug
@@ -19,3 +19,11 @@ push-navigation-image:
     entrypoint: [""]
   script:
     - sh ./ci/push-navigation-image.sh
+
+push-password-image:
+  stage: build
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  script:
+    - sh ./ci/push-password-image.sh
