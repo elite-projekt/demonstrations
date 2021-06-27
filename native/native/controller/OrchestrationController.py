@@ -3,6 +3,7 @@ from flask.helpers import make_response
 from flask.json import jsonify
 from service.OrchestrationService import OrchestrationService
 from service.phishingdemo import PhishingDemo
+from flask import abort
 
 from time import sleep
 
@@ -39,13 +40,13 @@ def start_demo_phishing():
     return make_response(jsonify(start_success), 201)
 
 
-@orchestration.route('/stop/demo/Phishing', methods=['POST', 'GET'])
+@orchestration.route('/stop/demo/phishing', methods=['POST', 'GET'])
 def stop_demo_phishing():
     orchestration_service.docker_compose_stop_file('phishing/docker-compose.yml')
     phishing_service.stop_mail_application()
     return make_response(jsonify(stop_success), 200)
 
-@orchestration.route('/start/demo/Password', methods=['POST', 'GET'])
+@orchestration.route('/start/demo/password', methods=['POST', 'GET'])
 def start_demo_password():
     secure_mode = request.json['secureMode']
     try:
@@ -55,7 +56,44 @@ def start_demo_password():
     return make_response(jsonify(start_success), 201)
 
 
-@orchestration.route('/stop/demo/Password', methods=['POST', 'GET'])
+@orchestration.route('/stop/demo/password', methods=['POST', 'GET'])
 def stop_demo_password():
     orchestration_service.docker_compose_stop_file('password/docker-compose.yml')
     return make_response(jsonify(stop_success), 200)
+
+@orchestration.route('/status/demo/phishing', methods=['GET'])
+def status_demo_phising():
+    result = orchestration_service.get_status_docker_compose_file('phishing/docker-compose.yml')
+
+    if len(result) > 0:
+        return make_response(jsonify(result), 200)
+    else:
+        abort(500)
+
+@orchestration.route('/status/demo/phishing/sum', methods=['GET'])
+def status_demo_phising_sum():
+    result = orchestration_service.get_sum_status_docker_compose_file('phishing/docker-compose.yml')
+
+    if len(result) > 0:
+        return make_response(jsonify(result), 200)
+    else:
+        abort(500)
+
+@orchestration.route('/status/demo/password', methods=['GET'])
+def status_demo_password():
+    result = orchestration_service.get_status_docker_compose_file('password/docker-compose.yml')
+
+    if len(result) > 0:
+        return make_response(jsonify(result), 200)
+    else:
+        abort(500)
+
+@orchestration.route('/status/demo/password/sum', methods=['GET'])
+def status_demo_password_sum():
+    result = orchestration_service.get_sum_status_docker_compose_file('password/docker-compose.yml')
+
+    if len(result) > 0:
+        return make_response(jsonify(result), 200)
+    else:
+        abort(500)
+    
