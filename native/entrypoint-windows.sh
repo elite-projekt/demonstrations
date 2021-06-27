@@ -6,7 +6,7 @@ set -e
 # Allow the workdir to be set using an env var.
 # Useful for CI pipiles which use docker for their build steps
 # and don't allow that much flexibility to mount volumes
-WORKDIR=${SRCDIR:-/native}
+WORKDIR=/builds/esc-mpse20/demonstrations/native
 
 cd $WORKDIR
 
