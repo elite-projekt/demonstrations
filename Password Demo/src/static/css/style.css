@@ -175,7 +175,6 @@ h2 {
   font-family: 'icomoon';
   content: '\e5ca';
   position: absolute;
-  display: none;
   font-size: 16px;
   -webkit-transition: .3s all ease;
   -o-transition: .3s all ease;
@@ -209,7 +208,7 @@ h2 {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  display: none;
+  visibility: hidden;
 }
 .indicator span{
   position: relative;
@@ -253,4 +252,10 @@ h2 {
 }
 .text.strong{
   color: #23ad5c;
+}
+.icon-check{
+	color: green;
+}
+.icon-remove{
+	color:red;
 }

@@ -33,7 +33,7 @@
             <div class="col-md-8">
               <div class="mb-4">
               <h3>Sign Up</h3>
-              <p class="mb-4">Lorem ipsum dolor sit amet elit. Sapiente sit aut eos consectetur adipisicing.</p>
+              <p class="mb-4">This is the Sign Up page for our Webdienste.</p>
             </div>
             <form method="post">
               <div class="form-group first">
@@ -45,17 +45,10 @@
                 
                 <label for="password">Password</label>
                 <div class="input-group">
-                <input type="password" class="form-control" id="password" name="password">
-                <span toggle="#password" class="input-group-addon toggle-password"><i class="icon-eye"></i></span>
+                <input type="password" class="form-control password" id="password" name="password">
+                <i toggle="#password" class="icon-eye toggle-password input-group-addon"></i>
                 </div>
                 
-              </div>
-              <div class="form-group last mb-4">
-                <label for="confirm_password">Re-type Password</label>
-                <div class="input-group">
-                <input type="password" class="form-control" name="confirm_password" id="confirm_password">
-                <span toggle="#confirm_password" class="input-group-addon toggle-password"><i class="icon-eye"></i></span>
-                </div>
               </div>
               <div class="indicator">
                 <span class="weak"></span>
@@ -63,7 +56,26 @@
                 <span class="strong"></span>
              </div>
              <div class="text"></div>
-              <input type="submit" value="Register" class="btn btn-block btn-primary">
+              <input type="submit" value="Register" class="btn btn-block btn-primary register-button" disabled>
+
+              <div class="card text-dark bg-light mb-3 mt-3"  >
+                <div class="card-header" id="pwd-requirements">Password should have <div class="icon-chevron-down float-right" id="pwd-card-icon"></div> </div>
+                <div class="card-body collapse " id="pwd-req-body">
+                  <div class="small-letter card-text icon-remove"> at least 1 small letter.</div>
+                  <div class="capital-letter card-text icon-remove"> at least 1 capital letter.</div>
+                  <div class="number-char card-text icon-remove"> at least 1 number.</div>
+                  <div class="special-char card-text icon-remove"> at least 1 special char.</div>
+                  <div class="lenght-check card-text icon-remove"> at least have a length of 10 chars.</div>
+                </div>
+              </div>
+  
+              <div class="card text-dark bg-light mb-3" >
+                <div class="card-header" id="tipp">Tipp <div class="icon-chevron-down float-right" id="tipp-card-icon"></div></div>
+                <div class="card-body collapse" id="tipp-body">
+                  <p class="password-info">It is best to use a passphrase like for example: The sun always rises at 12. </p>
+                </div>
+              </div>
+
             </form>
             </div>
           </div>
@@ -78,11 +90,8 @@
     <script src="{{url_for('static', filename='signup-form-08/js/popper.min.js')}}"></script>
     <script src="{{url_for('static', filename='signup-form-08/js/bootstrap.min.js')}}"></script>
     <script src="{{url_for('static', filename='signup-form-08/js/main.js')}}"></script>
-    <script type="text/javascript" src="{{url_for('static', filename='js/mustache.js')}}">
+    <script data-main="indicator" src="{{url_for('static', filename='js/require.js')}}">
     </script>
-    <script data-main="demo" src="{{url_for('static', filename='js/require.js')}}">
-    </script>
-    <script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="demo" src="{{url_for('static', filename='js/demo.js')}}"></script>
-    <script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="zxcvbn" src="{{url_for('static', filename='js/zxcvbn.js')}}"></script>
+    <script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="indicator" src="{{url_for('static', filename='js/indicator.js')}}"></script>
   </body>
 </html>

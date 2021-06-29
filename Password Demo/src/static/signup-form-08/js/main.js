@@ -12,7 +12,7 @@ $(function() {
 	});
 	$(".toggle-password").click(function() {
 
-		$(this).toggleClass("fa-eye fa-eye-slash");
+		$(this).toggleClass("icon-eye icon-eye-slash");
 		var input = $($(this).attr("toggle"));
 		if (input.attr("type") == "password") {
 		  input.attr("type", "text");
@@ -21,4 +21,14 @@ $(function() {
 		}
 	  });
 
+	$('#pwd-requirements').on('click',function(){
+		$('#pwd-card-icon').toggleClass("icon-chevron-down icon-chevron-up");
+		var card_text = $('#pwd-req-body');
+		card_text.toggleClass("collapse collapse.show");
+	})
+	$('#tipp').on('click',function(){
+		$('#tipp-card-icon').toggleClass("icon-chevron-down icon-chevron-up");
+		var card_text = $('#tipp-body');
+		card_text.toggleClass("collapse collapse.show");
+	})
 });
