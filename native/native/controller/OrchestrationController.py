@@ -61,10 +61,6 @@ def start_demo_password():
 
 @orchestration.route('/stop/demo/password', methods=['POST', 'GET'])
 def stop_demo_password():
-<<<<<<< HEAD
-
-=======
->>>>>>> b370141fe731c0e305abf13b7cdaf35e2846eb3b
     orchestration_service.docker_compose_stop_file('password/secure/docker-compose.yml')
     orchestration_service.docker_compose_stop_file('password/unsecure/docker-compose.yml')
     return make_response(jsonify(stop_success), 200)
