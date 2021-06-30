@@ -50,7 +50,10 @@ def stop_demo_phishing():
 def start_demo_password():
     secure_mode = request.json['secureMode']
     try:
-        orchestration_service.docker_compose_start_file('password/docker-compose.yml')
+        if secure_mode:
+            orchestration_service.docker_compose_start_file('password/secure/docker-compose.yml')
+        else:
+            orchestration_service.docker_compose_start_file('password/unsecure/docker-compose.yml')
     except Exception as e:
         return make_response(jsonify(no_docker_error), 500)
     return make_response(jsonify(start_success), 201)
@@ -58,8 +61,14 @@ def start_demo_password():
 
 @orchestration.route('/stop/demo/password', methods=['POST', 'GET'])
 def stop_demo_password():
-    orchestration_service.docker_compose_stop_file('password/docker-compose.yml')
+<<<<<<< HEAD
+
+=======
+>>>>>>> b370141fe731c0e305abf13b7cdaf35e2846eb3b
+    orchestration_service.docker_compose_stop_file('password/secure/docker-compose.yml')
+    orchestration_service.docker_compose_stop_file('password/unsecure/docker-compose.yml')
     return make_response(jsonify(stop_success), 200)
+
 
 @orchestration.route('/status/demo/phishing', methods=['GET'])
 def status_demo_phising():
@@ -81,7 +90,7 @@ def status_demo_phising_sum():
 
 @orchestration.route('/status/demo/password', methods=['GET'])
 def status_demo_password():
-    result = orchestration_service.get_status_docker_compose_file('password/docker-compose.yml')
+    result = orchestration_service.get_status_docker_compose_file('password/secure/docker-compose.yml')
 
     if len(result) > 0:
         return make_response(jsonify(result), 200)
@@ -90,10 +99,13 @@ def status_demo_password():
 
 @orchestration.route('/status/demo/password/sum', methods=['GET'])
 def status_demo_password_sum():
-    result = orchestration_service.get_sum_status_docker_compose_file('password/docker-compose.yml')
+    result = orchestration_service.get_sum_status_docker_compose_file('password/secure/docker-compose.yml')
 
     if len(result) > 0:
         return make_response(jsonify(result), 200)
     else:
         abort(500)
-    
+<<<<<<< HEAD
+=======
+
+>>>>>>> b370141fe731c0e305abf13b7cdaf35e2846eb3b
