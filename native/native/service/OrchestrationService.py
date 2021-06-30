@@ -26,7 +26,7 @@ class OrchestrationService():
             logging.error(e)
 
     def get_status_docker_compose_file(self, filename: str):
-        file_path = path.join(stack_folder, filename)
+        file_path = path.join(EnvironmentConfig.DOCKERSTACKDIR, filename)
         container_name_list = []
         result = {}
         try:
