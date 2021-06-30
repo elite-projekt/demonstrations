@@ -1,5 +1,9 @@
 from os import path
 import subprocess
+import yaml
+from python_on_whales import docker
+
+from datetime import datetime
 
 t_path = path.abspath(path.dirname(__file__))
 stack_folder = path.join(path.dirname(path.dirname(t_path)), 'stacks',)
@@ -16,3 +20,52 @@ class OrchestrationService():
         file_path = path.join(stack_folder, filename)
         subprocess.run(['docker-compose', '-f', file_path,
                         'down'], check=True, capture_output=True)
+
+    def get_status_docker_compose_file(self, filename: str):
+        file_path = path.join(stack_folder, filename)
+        container_name_list = []
+        result = {}
+        try:
+            # Get Container Names from Compose File
+            with open(file_path, 'r') as file:
+                compose_file = yaml.load(file, Loader=yaml.FullLoader)
+
+                for k, v in compose_file["services"].items():
+                    if "container_name" in compose_file["services"][k]:
+                        container_name_list.append(compose_file["services"][k]["container_name"])
+               
+
+                # The call is made here because it takes a very long time and otherwise the call duration would only add up in the method call.
+                running_container_list = docker.container.list(all).copy()
+                
+                for container_name in container_name_list:
+                    state = self.get_state_specific_container(container_name, running_container_list)
+                    result[container_name] = state
+
+        except EnvironmentError: # parent of IOError, OSError *and* WindowsError where available
+            return result
+      
+        return result
+
+    def get_sum_status_docker_compose_file(self, filename: str):
+        container_states = self.get_status_docker_compose_file(filename)
+        result = {}
+        if len(container_states) == 0:
+            return result
+        else: 
+            result = {}
+
+            if len(container_states) == sum(value == 'running' for value in container_states.values()):
+                result['state'] = 'running'
+            else:
+                result['state'] = 'offline'
+        return result
+
+    def get_state_specific_container(self, containername: str, running_container_list):
+        result = 'not found'
+        
+        for running_container in running_container_list:
+            if running_container.name == containername:
+                result = running_container.state.status
+        
+        return result
