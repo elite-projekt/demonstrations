@@ -1,4 +1,4 @@
-requirejs(['static/js/zxcvbn.js'], function(zxcvbn){
+requirejs(['static/signup-form/js/zxcvbn.js'], function(zxcvbn){
 $(function(){
     $(".password").on('input',function(){
         const small_letter = document.querySelector(".small-letter");
