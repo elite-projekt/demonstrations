@@ -117,7 +117,7 @@ def login_um():
             resp = make_response(redirect('/end'))
             return resp
         else:
-            return render_template('um6_login.html', flash="Wrong credentials!")
+            return render_template('um6_login.html', flash="Wrong credentials!",classes="fade show display")
     else:
         return render_template('um6_login.html')
 
@@ -177,7 +177,7 @@ def registration_webdienste_sm():
         user_name = request.form['name']
         user_password = request.form['password']
         if user_password == users.get("sm_kd").password:
-            return render_template('sm6_registration_webdienste.html', flash="you cannot use the same password as for the Kontodienste ")
+            return render_template('sm6_registration_webdienste.html', flash="you cannot use the same password as for the Kontodienste ",classes="fade show display")
         resp = make_response(redirect('/initial_2fa_webdienste'))
         user = create_user(user_name , user_password, "sm_wd")
         qr_code = create_qr(user_name + "_qr_webdienste", user.otp)
@@ -216,7 +216,7 @@ def login():
             resp = make_response(redirect('/login_2fa'))
             return resp
         else:
-            return render_template('sm9_login.html', flash="Wrong credentials!")
+            return render_template('sm9_login.html', flash="Wrong credentials!",classes="fade show display")
     else:
         return render_template('sm9_login.html')
 
