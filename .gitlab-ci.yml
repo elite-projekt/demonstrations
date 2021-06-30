@@ -1,7 +1,7 @@
 stages:
   - build
 
-push-demo-image:
+push-phishing-image:
   stage: build
   image:
     name: gcr.io/kaniko-project/executor:debug
@@ -29,3 +29,11 @@ build-python-service:
   artifacts:
     paths:
       - ./dist/windows/*
+
+push-password-image:
+  stage: build
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  script:
+    - sh ./ci/push-password-image.sh

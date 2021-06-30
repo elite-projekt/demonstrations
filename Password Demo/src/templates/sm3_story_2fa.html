@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+        <!-- Required meta tags -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+    
+        <link rel="stylesheet" href="{{url_for('static', filename='fonts/icomoon/style.css')}}">
+
+        <link rel="stylesheet" href="{{url_for('static', filename='css/owl.carousel.min.css')}}">
+    
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
+        
+        <!-- Style -->
+        <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+    <title>Title</title>
+</head>
+<body>
+    <div class="content">
+        <div class=container>
+<p>Sie haben erfolgreich den ersten Schritt zu ihrer Kontoregistrierung abgeschlossen.<img style="float: right;" src="{{url_for('static', filename='logo.PNG')}}" class="img-fluid" /></p>
+<p>Als N&auml;chstes m&uuml;ssen sie ihre 2-Faktor-Authentifzierung einrichten.</p>
+<p>Starten sie daf&uuml;r die App 2FA Authenticator auf ihrem Smartphone und folgen sie der unten stehenden Anleitung.</p>
+<ol>
+<li>&Ouml;ffnen sie ihre 2 FA Authenticator App auf ihrem Smartphone</li>
+<li>Die App zeigt eine &Uuml;bersicht &uuml;ber alle Sicherheitstoken die sie registriert haben. Verwenden sie die App zum ersten Mal, sehen sie eine leere Liste wie in Abbildung 1.</li>
+<li>Klicken sie nun auf das Plus Zeichen in der rechten oberen Ecke ihres Bildschirms und anschlie&szlig;en auf &bdquo;Scan QR Code&ldquo; wie in Abbildung 2 zu sehen</li>
+<li>Die App verlangt Zugriff auf ihre Kamera. Best&auml;tigen sie diese Berechtigung. Nun &ouml;ffnet die App ihre Kamera und sie k&ouml;nnen der QR Code auf der n&auml;chsten Seite abscannen.</li>
+<li>Wurde der QR Code wie in Abbildung 3 erkannt, wird ihr Sicherheitstoken hinzugef&uuml;gt. Klicken sie nun auf &bdquo;Close&ldquo; um das Hinzuf&uuml;gen abzuschlie&szlig;en.</li>
+<li>Jeder Token ist 60 Sekunden g&uuml;ltig. Anschlie&szlig;end wird ein neuer Token erzeugt. Geben Sie den aktuell angezeigten Sicherheitstoken als Validierung einmal ein und best&auml;tigen Sie diesen.</li>
+</ol>
+</div>
+    <div class="container">
+        <div class="row justify-content-center">
+                    <div class="col-sm-3">   
+                        <img  src="{{url_for('static', filename='abbildung1.PNG')}}" alt="Abbildung1" class="img-fluid float-left"  />
+                    </div>
+                    <div class="col-md-3">
+                        <img  src="{{url_for('static', filename='abbildung2.PNG')}}" alt="Abbildung2" class="img-fluid" />
+                    </div>
+                    <div class="col-md-3">
+                        <img  src="{{url_for('static', filename='abbildung3.PNG')}}" alt="Abbildung3" class="img-fluid float-right" />
+                    </div>
+        </div>
+    <a href="initial_2fa_kontodienste"><button class="btn btn-block btn-primary">Next</button></a>
+    </div>
+</div>
+
+</body>
+</html>
