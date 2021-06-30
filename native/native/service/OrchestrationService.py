@@ -8,10 +8,6 @@ import yaml
 
 from datetime import datetime
 
-#t_path = EnvironmentConfig.WORKINGDIR
-#stack_folder = path.join(path.dirname(path.dirname(t_path)), 'stacks',)
-
-
 class OrchestrationService():
     def docker_compose_start_file(self, filename: str):
         try:
@@ -24,7 +20,6 @@ class OrchestrationService():
     def docker_compose_stop_file(self, filename: str):
         try:
             file_path = path.join(EnvironmentConfig.DOCKERSTACKDIR, filename)
-            # subprocess.run(['docker-compose', '-f', '"' + file_path + '"', 'down'], check=True, capture_output=True)
             docker = DockerClient(compose_files=[file_path])
             docker.compose.down()
         except Exception as e:
