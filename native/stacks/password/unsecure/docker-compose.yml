@@ -5,5 +5,5 @@ services:
     image: registry.code.fbi.h-da.de/esc-mpse20/demonstrations/password:master
     container_name: password_webserver
     ports:
-      - 5002:5000
+      - 5001:5000
 
