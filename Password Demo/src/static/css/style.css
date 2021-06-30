@@ -259,3 +259,9 @@ h2 {
 .icon-remove{
 	color:red;
 }
+.dont-display{
+  display:none
+}
+.display{
+  display:block !important;
+}

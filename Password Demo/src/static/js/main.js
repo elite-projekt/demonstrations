@@ -31,4 +31,11 @@ $(function() {
 		var card_text = $('#tipp-body');
 		card_text.toggleClass("collapse collapse.show");
 	})
+	$(".close").click(function() {
+
+		$('#toast').removeClass("display");
+		$('#toast').removeClass("fade");
+		$('#toast').removeClass("show");
+
+	  });
 });

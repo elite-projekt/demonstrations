@@ -55,8 +55,19 @@
                 <span class="medium"></span>
                 <span class="strong"></span>
              </div>
-             <div class="text"></div>
+             <div role="alert" aria-live="assertive" aria-atomic="true" class="toast {{classes}} dont-display" data-autohide="false" id=toast>
+              <div class="toast-header">
+                <strong class="mr-auto">MPSE</strong>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="toast-body">
+                Reuseing passwords is unsave. please use a other password that you never used before.
+              </div>
+            </div>
               <input type="submit" value="Register" class="btn btn-block btn-primary register-button" disabled>
+
 
               <div class="card text-dark bg-light mb-3 mt-3"  >
                 <div class="card-header" id="pwd-requirements">Password should have <div class="icon-chevron-down float-right" id="pwd-card-icon"></div> </div>
@@ -79,7 +90,7 @@
             </form>
             </div>
           </div>
-          
+
         </div>
         
       </div>
@@ -90,7 +101,7 @@
     <script src="{{url_for('static', filename='signup-form-08/js/popper.min.js')}}"></script>
     <script src="{{url_for('static', filename='signup-form-08/js/bootstrap.min.js')}}"></script>
     <script src="{{url_for('static', filename='signup-form-08/js/main.js')}}"></script>
-    <script data-main="indicator" src="{{url_for('static', filename='js/require.js')}}">
+    <script data-main="{{url_for('static', filename='js/indicator.js')}}" src="{{url_for('static', filename='js/require.js')}}">
     </script>
     <script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="indicator" src="{{url_for('static', filename='js/indicator.js')}}"></script>
   </body>
