@@ -105,7 +105,3 @@ def status_demo_password_sum():
         return make_response(jsonify(result), 200)
     else:
         abort(500)
-<<<<<<< HEAD
-=======
-
->>>>>>> b370141fe731c0e305abf13b7cdaf35e2846eb3b
