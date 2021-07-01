@@ -28,7 +28,7 @@ build-python-service:
     - bash ./entrypoint-windows.sh
   artifacts:
     paths:
-      - ./dist/windows/*
+      - /*
 
 push-password-image:
   stage: build
