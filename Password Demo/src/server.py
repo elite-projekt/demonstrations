@@ -102,7 +102,7 @@ def registration_webdienste_um():
         user = create_user(user_name , user_password, "um_wd")
         return resp
     else:
-        return render_template('um4_registration_webdienste.html')
+        return render_template('um4_registration_webdienste.html', username=users.get("sm_kd").username)
 
 @app1.route('/story_login')
 def story_login_um():
@@ -184,7 +184,7 @@ def registration_webdienste_sm():
         qr_code.save(static_folder_path +"/" + "qrcode2.jpg")
         return resp
     else:
-        return render_template('sm6_registration_webdienste.html')
+        return render_template('sm6_registration_webdienste.html', username=users.get("sm_kd").username)
 
 
 @app2.route('/initial_2fa_webdienste', methods = ['POST', 'GET'])

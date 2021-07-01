@@ -39,4 +39,24 @@ $(function() {
 		$('#toast').removeClass("show");
 
 	  });
+
+	  $("#pw-info").click(function() {
+
+		window.open("http://www.google.de","_blank");
+
+	  });
+
+	if($('#name').val()){
+		$('#name_field').addClass('field--not-empty');
+	}
+	else{
+		$('#name_field').removeClass('field--not-empty');
+	}
+	if($('#password').val()){
+		$('#password_field').addClass('field--not-empty');
+	}
+	else{
+		$('#password_field').removeClass('field--not-empty');
+	}
+
 });
