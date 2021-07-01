@@ -1,7 +1,6 @@
 $(function() {
 	'use strict';
 
-	
   $('.form-control').on('input', function() {
 	  var $field = $(this).closest('.form-group');
 	  if (this.value) {
@@ -10,6 +9,7 @@ $(function() {
 	    $field.removeClass('field--not-empty');
 	  }
 	});
+
 	$(".toggle-password").click(function() {
 
 		$(this).toggleClass("icon-eye icon-eye-slash");
@@ -20,7 +20,7 @@ $(function() {
 		  input.attr("type", "password");
 		}
 	  });
-
+	
 	$('#pwd-requirements').on('click',function(){
 		$('#pwd-card-icon').toggleClass("icon-chevron-down icon-chevron-up");
 		var card_text = $('#pwd-req-body');
@@ -31,7 +31,6 @@ $(function() {
 		var card_text = $('#tipp-body');
 		card_text.toggleClass("collapse collapse.show");
 	})
-
 	$(".close").click(function() {
 
 		$('#toast').removeClass("display");
@@ -39,7 +38,7 @@ $(function() {
 		$('#toast').removeClass("show");
 
 	  });
-
+	 
 	  $("#pw-info").click(function() {
 
 		window.open("http://www.google.de","_blank");
@@ -58,5 +57,4 @@ $(function() {
 	else{
 		$('#password_field').removeClass('field--not-empty');
 	}
-
 });

@@ -6,5 +6,4 @@ services:
     container_name: password_webserver
     ports:
       - 5001:5001
-      - 5002:5000
 

@@ -20,7 +20,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5000/orchestration/start/demo/Phishing",
+					"raw": "http://localhost:5000/orchestration/start/demo/phishing",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -51,7 +51,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5000/orchestration/start/demo/Phishing",
+					"raw": "http://localhost:5000/orchestration/start/demo/phishing",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -82,7 +82,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5000/orchestration/stop/demo/Phishing",
+					"raw": "http://localhost:5000/orchestration/stop/demo/phishing",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -104,7 +104,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:5000/orchestration/status/demo/Phishing",
+					"raw": "http://localhost:5000/orchestration/status/demo/phishing",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -126,7 +126,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:5000/orchestration/status/demo/Phishing/sum",
+					"raw": "http://localhost:5000/orchestration/status/demo/phishing/sum",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -158,7 +158,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5000/orchestration/start/demo/Password",
+					"raw": "http://localhost:5000/orchestration/start/demo/password",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -189,7 +189,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5000/orchestration/start/demo/Password",
+					"raw": "http://localhost:5000/orchestration/start/demo/password",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -220,7 +220,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5000/orchestration/stop/demo/Password",
+					"raw": "http://localhost:5000/orchestration/stop/demo/password",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -242,7 +242,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:5000/orchestration/status/demo/Password",
+					"raw": "http://localhost:5000/orchestration/status/demo/password",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -264,7 +264,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:5000/orchestration/status/demo/Password/sum",
+					"raw": "http://localhost:5000/orchestration/status/demo/password/sum",
 					"protocol": "http",
 					"host": [
 						"localhost"

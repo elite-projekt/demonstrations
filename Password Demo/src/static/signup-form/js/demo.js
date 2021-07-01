@@ -71,22 +71,6 @@
             results: [r]
           };
           rendered = Mustache.render(results_tmpl, results);
-          //console.log(results.results[0].score);
-         /* if(results.results[0].score == 0 || results.results[0].score == 1){
-            $('#password_field').removeClass('strong_password');
-            $('#password_field').removeClass('medium_password');
-            $('#password_field').addClass('weak_password');
-          }
-          if(results.results[0].score == 2 || results.results[0].score == 3){ 
-            $('#password_field').removeClass('weak_password');
-            $('#password_field').removeClass('strong_password');
-            $('#password_field').addClass('medium_password');
-          }
-          if(results.results[0].score == 4){
-            $('#password_field').removeClass('weak_password');
-            $('#password_field').removeClass('medium_password');
-            $('#password_field').addClass('strong_password');
-          }*/
           return $('#search-results').html(rendered);
         }
       };
