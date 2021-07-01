@@ -20,7 +20,7 @@ no_mail_server_error = {'success': False,
                         'message': 'The mailserver is not reachable!', 'code': 2}
 
 
-@orchestration.route('/start/demo/Phishing', methods=['POST', 'GET'])
+@orchestration.route('/start/demo/phishing', methods=['POST', 'GET'])
 def start_demo_phishing():
     secure_mode = request.json['secureMode']
     try:
