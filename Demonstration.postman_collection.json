@@ -30,7 +30,7 @@
 						"orchestration",
 						"start",
 						"demo",
-						"Phishing"
+						"phishing"
 					]
 				}
 			},
@@ -61,7 +61,7 @@
 						"orchestration",
 						"start",
 						"demo",
-						"Phishing"
+						"phishing"
 					]
 				}
 			},
@@ -92,7 +92,7 @@
 						"orchestration",
 						"stop",
 						"demo",
-						"Phishing"
+						"phishing"
 					]
 				}
 			},
@@ -114,7 +114,7 @@
 						"orchestration",
 						"status",
 						"demo",
-						"Phishing"
+						"phishing"
 					]
 				}
 			},
@@ -136,7 +136,7 @@
 						"orchestration",
 						"status",
 						"demo",
-						"Phishing",
+						"phishing",
 						"sum"
 					]
 				}
@@ -168,7 +168,7 @@
 						"orchestration",
 						"start",
 						"demo",
-						"Password"
+						"password"
 					]
 				}
 			},
@@ -199,7 +199,7 @@
 						"orchestration",
 						"start",
 						"demo",
-						"Password"
+						"password"
 					]
 				}
 			},
@@ -230,7 +230,7 @@
 						"orchestration",
 						"stop",
 						"demo",
-						"Password"
+						"password"
 					]
 				}
 			},
@@ -252,7 +252,7 @@
 						"orchestration",
 						"status",
 						"demo",
-						"Password"
+						"password"
 					]
 				}
 			},
@@ -274,7 +274,7 @@
 						"orchestration",
 						"status",
 						"demo",
-						"Password",
+						"password",
 						"sum"
 					]
 				}
