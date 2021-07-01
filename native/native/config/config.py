@@ -14,3 +14,8 @@ class ProductionConfig(Config):
     ENV = "production"
     HOST = "0.0.0.0"
     PORT = 5000
+
+class EnvironmentConfig():
+    WORKINGDIR = "C:\\Program Files (x86)\\hda\\nativeapp\\"
+    DOCKERSTACKDIR = "C:\\Program Files (x86)\\hda\\nativeapp\\stacks\\"
+    PROFILEDIR = "C:\\Program Files (x86)\\hda\\nativeapp\\profiles\\"
