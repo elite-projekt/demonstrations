@@ -226,6 +226,7 @@ class PhishingDemo():
 
         for i in range(retries):
             if container.state.running:
+                time.sleep(5)
                 break
             else:
                 time.sleep(delay)
