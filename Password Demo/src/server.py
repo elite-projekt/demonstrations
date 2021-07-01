@@ -102,7 +102,7 @@ def registration_webdienste_um():
         user = create_user(user_name , user_password, "um_wd")
         return resp
     else:
-        return render_template('um4_registration_webdienste.html', username=users.get("sm_kd").username)
+        return render_template('um4_registration_webdienste.html', username=users.get("um_kd").username)
 
 @app1.route('/story_login')
 def story_login_um():
