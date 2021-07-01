@@ -5,10 +5,10 @@ block_cipher = None
 
 
 a = Analysis(['app.py'],
-             pathex=['C:\\src\\native'],
+             pathex=['C:\\src\\native\\native'],
              binaries=[],
              datas=[],
-             hiddenimports=[],
+             hiddenimports=["PyYAML", "config"],
              hookspath=[],
              runtime_hooks=[],
              excludes=[],
