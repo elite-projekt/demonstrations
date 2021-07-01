@@ -16,8 +16,10 @@ $(function() {
 		var input = $($(this).attr("toggle"));
 		if (input.attr("type") == "password") {
 		  input.attr("type", "text");
+		  $(this).attr("title","click the eye for hiding the password.");
 		} else {
 		  input.attr("type", "password");
+		  $(this).attr("title","click the eye for showing the password.");
 		}
 	  });
 
@@ -45,6 +47,13 @@ $(function() {
 		window.open("http://www.google.de","_blank");
 
 	  });
+
+	  $("#phrase-info").click(function() {
+
+		window.open("http://www.google.de","_blank");
+
+	  });
+
 
 	if($('#name').val()){
 		$('#name_field').addClass('field--not-empty');
