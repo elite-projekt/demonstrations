@@ -17,7 +17,7 @@ fi # [ -f requirements.txt ]
 echo "$@"
 
 if [[ "$@" == "" ]]; then
-    pyinstaller --clean -y --dist ./dist/windows --workpath /tmp *.spec 
+    pyinstaller --clean -y --dist ./dist/windows --workpath /builds/esc-mpse20/demonstrations/native/native/ *.spec 
     chown -R --reference=. ./dist/windows
 else
     sh -c "$@"
