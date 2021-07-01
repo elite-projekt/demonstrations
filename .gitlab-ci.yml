@@ -28,7 +28,7 @@ build-python-service:
     - bash ./entrypoint-windows.sh
   artifacts:
     paths:
-      - /*
+      - /builds/esc-mpse20/demonstrations/native/native/dist/windows/*
 
 push-password-image:
   stage: build
