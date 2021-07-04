@@ -21,6 +21,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_02B1022A2EE1454D9696118D6112E7E6"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_1463706DFA4940248AB38115F1B2C2FB"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -40,12 +46,6 @@
         "Entry"
         {
         "MsmKey" = "8:_24F5B94E7E3E4EA38436759B51172A07"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_25EEE44D24CC4A5E94A73B994CFD30F4"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -280,6 +280,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_02B1022A2EE1454D9696118D6112E7E6"
+            {
+            "SourcePath" = "8:..\\..\\..\\..\\..\\..\\Downloads\\artifacts\\native\\native\\dist\\windows\\app.exe"
+            "TargetName" = "8:app.exe"
+            "Tag" = "8:"
+            "Folder" = "8:_AE244D9436344781BC1B22B9B9D64D91"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1463706DFA4940248AB38115F1B2C2FB"
             {
             "SourcePath" = "8:..\\..\\..\\..\\tmp\\secure\\docker-compose.yml"
@@ -346,26 +366,6 @@
             "TargetName" = "8:mailserver.env"
             "Tag" = "8:"
             "Folder" = "8:_095D7A4EA2BE45EF98A3742894C05F7A"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_25EEE44D24CC4A5E94A73B994CFD30F4"
-            {
-            "SourcePath" = "8:..\\..\\native\\dist\\app.exe"
-            "TargetName" = "8:app.exe"
-            "Tag" = "8:"
-            "Folder" = "8:_AE244D9436344781BC1B22B9B9D64D91"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -868,15 +868,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:nativeapp"
-        "ProductCode" = "8:{85CA7254-BF20-4A38-9FD8-5F4D8E4C80A9}"
-        "PackageCode" = "8:{34D2A815-D2E9-4F3B-ADC3-9FFEBBC78E96}"
+        "ProductCode" = "8:{F8F1A921-397C-42E3-AF2C-BE9AEDA17298}"
+        "PackageCode" = "8:{ADED1A61-8663-499B-9E9B-9BE4B2FCEF5A}"
         "UpgradeCode" = "8:{F520D502-8792-4A29-91CD-F41DF46C6B7C}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.1.0"
+        "ProductVersion" = "8:1.1.1"
         "Manufacturer" = "8:hda"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -989,7 +989,7 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_30948C9C1536421086897B5D4180171C"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_7B0E4DE6BBE24EEAB037D0AC4EEE4863"
             {
             "Name" = "8:Shortcut to app.exe"
             "Arguments" = "8:"
@@ -997,13 +997,13 @@
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_25EEE44D24CC4A5E94A73B994CFD30F4"
-            "Folder" = "8:_2A1BB7F9913C40C097B461C8B7E72644"
+            "Target" = "8:_02B1022A2EE1454D9696118D6112E7E6"
+            "Folder" = "8:_29967C7B9C1D49D5939C81CBA82FC658"
             "WorkingFolder" = "8:_AE244D9436344781BC1B22B9B9D64D91"
             "Icon" = "8:"
             "Feature" = "8:"
             }
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_4225E29237C641A9AFB043393E2329A0"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_8D7D60EF58B745D3A605E2676C288A05"
             {
             "Name" = "8:Shortcut to app.exe"
             "Arguments" = "8:"
@@ -1011,8 +1011,8 @@
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_25EEE44D24CC4A5E94A73B994CFD30F4"
-            "Folder" = "8:_29967C7B9C1D49D5939C81CBA82FC658"
+            "Target" = "8:_02B1022A2EE1454D9696118D6112E7E6"
+            "Folder" = "8:_2A1BB7F9913C40C097B461C8B7E72644"
             "WorkingFolder" = "8:_AE244D9436344781BC1B22B9B9D64D91"
             "Icon" = "8:"
             "Feature" = "8:"
@@ -1418,7 +1418,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_ABE3542C5A7C47F0ABE110A9BF4F6C4D"
             {
-            "SourcePath" = "8:..\\ClientInstaller\\obj\\Debug\\ClientInstaller.dll"
+            "SourcePath" = "8:..\\ClientInstaller\\obj\\Release\\ClientInstaller.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_AE244D9436344781BC1B22B9B9D64D91"
