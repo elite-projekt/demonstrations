@@ -31,6 +31,11 @@ namespace ClientInstaller
             SetDefenderException("uninstall");
         }
 
+        protected override void OnAfterInstall(IDictionary savedState)
+        {
+            base.OnAfterInstall(savedState);
+        }
+
         private void SetDirectorySecurity()
         {
             string targetdir = Path.GetDirectoryName(Context.Parameters["targetdir"]);
@@ -65,34 +70,43 @@ namespace ClientInstaller
 
             // Host file entries
             string localRedirects = "127.0.0.1\tshipment-support-amazon.com covidsupportgermany.de coronahilfengermany.de mpseinternational.com mail.domain.com #MPSE";
-            Log("Changing content of hosts file");
-            string[] linesHostFile = File.ReadAllLines(hostFile);
+            Log("Try changing content of hosts file");
 
-            // check if local redirects are present
-            Boolean bSettingsSet = false;
-            foreach (string line in linesHostFile)
+            try
             {
-                // replace existing localhost redirects
-                if (line.Contains("#MPSE") && (line != localRedirects))
+                string[] linesHostFile = File.ReadAllLines(hostFile);
+
+                // check if local redirects are present
+                Boolean bSettingsSet = false;
+                foreach (string line in linesHostFile)
                 {
-                    Log("Updating 127.0.0.1 entry");
-                    Console.WriteLine("updateing");
-                    line.Replace(line, localRedirects);
-                    bSettingsSet = true;
+                    // replace existing localhost redirects
+                    if (line.Contains("#MPSE") && (line != localRedirects))
+                    {
+                        Log("Updating 127.0.0.1 entry");
+                        Console.WriteLine("updateing");
+                        line.Replace(line, localRedirects);
+                        bSettingsSet = true;
+                    }
+                }
+
+                File.WriteAllLines(hostFile, linesHostFile);
+
+                // if settings not found append to end
+                if (!bSettingsSet)
+                {
+                    Log("Write redirects to end of hosts-file");
+                    Console.WriteLine("asd");
+                    StreamWriter sw = File.AppendText(hostFile);
+                    sw.WriteLine(localRedirects);
+                    sw.Close();
                 }
             }
-
-            File.WriteAllLines(hostFile, linesHostFile);
-
-            // if settings not found append to end
-            if (!bSettingsSet)
+            catch (Exception e)
             {
-                Log("Write redirects to end of hosts-file");
-                Console.WriteLine("asd");
-                StreamWriter sw = File.AppendText(hostFile);
-                sw.WriteLine(localRedirects);
-                sw.Close();
-            }            
+                Log("Could not write hosts-file");
+            }
+                        
         }
 
         private void SetDefenderException(string sMode)
