@@ -1132,15 +1132,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:nativeapp"
-        "ProductCode" = "8:{F8F1A921-397C-42E3-AF2C-BE9AEDA17298}"
-        "PackageCode" = "8:{30ECBAFB-953C-4B84-BFD7-ADDEA479FDE6}"
+        "ProductCode" = "8:{921E8BC4-B555-4A3B-84C7-8243345416A8}"
+        "PackageCode" = "8:{AD96E493-1DA1-4324-AF4C-D2923D71A67A}"
         "UpgradeCode" = "8:{F520D502-8792-4A29-91CD-F41DF46C6B7C}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.1.1"
+        "ProductVersion" = "8:1.1.2"
         "Manufacturer" = "8:hda"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -1682,7 +1682,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_ABE3542C5A7C47F0ABE110A9BF4F6C4D"
             {
-            "SourcePath" = "8:..\\ClientInstaller\\obj\\Debug\\ClientInstaller.dll"
+            "SourcePath" = "8:..\\ClientInstaller\\obj\\Release\\ClientInstaller.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_AE244D9436344781BC1B22B9B9D64D91"

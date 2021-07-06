@@ -32,11 +32,6 @@ namespace ClientInstaller
             SetDefenderException("uninstall");
         }
 
-        protected override void OnAfterInstall(IDictionary savedState)
-        {
-            base.OnAfterInstall(savedState);
-        }
-
         private void SetDirectorySecurity()
         {
             string targetdir = Path.GetDirectoryName(Context.Parameters["targetdir"]);
@@ -70,7 +65,7 @@ namespace ClientInstaller
             string hostFile = "c:\\windows\\system32\\drivers\\etc\\hosts";
 
             // Host file entries
-            string localRedirects = "127.0.0.1\tshipment-support-amazon.com covidsupportgermany.de coronahilfengermany.de mpseinternational.com mail.domain.com #MPSE";
+            string localRedirects = "127.0.0.1\twww.shipment-support-amazon.com covidsupportgermany.de coronahilfengermany.de mpseinternational.com mail.domain.com #MPSE";
             Log("Try changing content of hosts file");
 
             try
@@ -82,10 +77,10 @@ namespace ClientInstaller
                 foreach (string line in linesHostFile)
                 {
                     // replace existing localhost redirects
-                    if (line.Contains("#MPSE") && (line != localRedirects))
+                    if (line.Contains("#MPSE"))
                     {
                         Log("Updating 127.0.0.1 entry");
-                        Console.WriteLine("updateing");
+                        Console.WriteLine("updating");
                         line.Replace(line, localRedirects);
                         bSettingsSet = true;
                     }
