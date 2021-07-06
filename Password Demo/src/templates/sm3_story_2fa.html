@@ -48,13 +48,14 @@
                     </div>
         </div>
         <p> If you need more information about this topic, have a look at the related
-<a title="teaching content" href="http://ecs.fbi.h-da.de:8082/courses/password/units/two-factor-authentication/parts" target="_blank">
+<a title="teaching content" id="2FA-info" style="text-decoration:underline; color: #888">
     teaching content
 </a>.</p>
 <p>When you are ready, click "Next" to start the two factor authentication process.</p>
     <a href="initial_2fa_kontodienste"><button class="btn btn-block btn-primary">Next</button></a>
     </div>
 </div>
-
+<script src="{{url_for('static', filename='signup-form/js/jquery-3.3.1.min.js')}}"></script>
+<script src="{{url_for('static', filename='link-router/router.js')}}"></script>
 </body>
 </html>

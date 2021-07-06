@@ -35,7 +35,7 @@
 <p>The first thing you need to do is register with MPSE Account Services. For this, think of a secure username/password combination and don't use the password with any other service.</p>
 <p>&nbsp;</p>
 <p> If you need more information about this topic, have a look at the related
-<a title="teaching content" href="http://ecs.fbi.h-da.de:8082/courses/password/units/save-passwords/parts" target="_blank">
+<a title="teaching content" id="pw-unit" style="text-decoration:underline; color: #888">
     teaching content
 </a>.</p>
 <p>When you are ready, click "Next" to start the registration process.</p>
@@ -56,11 +56,11 @@
     <img src="{{url_for('static', filename='2fa.png')}}" class="img-fluid"/>
 
 <p style="text-align: left;">
-    <a title="2FA in Appstore" href="https://apps.apple.com/de/app/2fa-authenticator-2fas/id1217793794" target="_blank">2FA App for iOS devices
+    <a title="2FA in Appstore" id="2FA-for-iOS" style="text-decoration:underline; color: #888">2FA App for iOS devices
     </a>
 </p>
 <p>
-    <a title="2FA in Playstore" href="https://play.google.com/store/apps/details?id=com.twofasapp&amp;hl=de&amp;gl=US" target="_blank">
+    <a title="2FA in Playstore" id="2FA-for-Android" style="text-decoration:underline; color: #888">
         2FA App for Android devices
     </a>
 </p>
@@ -71,7 +71,8 @@
 </div>
 </div>
 </div>
-
+<script src="{{url_for('static', filename='signup-form/js/jquery-3.3.1.min.js')}}"></script>
+<script src="{{url_for('static', filename='link-router/router.js')}}"></script>
 </body>
 
 </html>

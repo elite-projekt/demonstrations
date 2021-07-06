@@ -42,19 +42,6 @@ $(function() {
 
 	  });
 
-	  $("#pw-info").click(function() {
-
-		window.open("http://ecs.fbi.h-da.de:8082/courses/password/units/save-passwords/parts","_blank");
-
-	  });
-
-	  $("#phrase-info").click(function() {
-
-		window.open("http://ecs.fbi.h-da.de:8082/courses/password/units/algorithms-for-secure-password-construction/parts","_blank");
-
-	  });
-
-
 	if($('#name').val()){
 		$('#name_field').addClass('field--not-empty');
 	}
