@@ -5,6 +5,7 @@ using System.IO;
 using System.Management.Automation; // PowerShellStandard
 using System.Security.AccessControl;
 using System.Security.Principal;
+using System.Windows.Forms;
 
 namespace ClientInstaller
 {
@@ -104,7 +105,8 @@ namespace ClientInstaller
             }
             catch (Exception e)
             {
-                Log("Could not write hosts-file");
+                Log("Could not write hosts-file: " + e);
+                System.Windows.Forms.MessageBox.Show("Can't write hostfile, add the following entries manually:\n" + localRedirects);
             }
                         
         }
