@@ -1,6 +1,6 @@
 To: max.mustermann@mpseinternational.com
 From: Nina Hardt <nina.hardt@mpseinternational.com>
-Subject: Dev Account credentials
+Subject: Shipping status
 Message-ID: <57e63185-fb0f-4a11-6d71-6a3f619c40a8@mpseinternational.com>
 Date: Fri, 01 Jan 2021 08:17:10 +0100
 MIME-Version: 1.0
@@ -14,9 +14,9 @@ Content-Transfer-Encoding: quoted-printable
 
 Hi Max,
 
-Can you please send me the password for the development account again?
+Could you please check the support, it seems like there are problems with the order of the present...
 
-It is urgent!
+Please, it is urgent!! https://www.shipment-support-amazon.com/support
 
 br
 
