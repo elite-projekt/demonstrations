@@ -28,7 +28,7 @@
               <div class="row justify-content-center">
                 <div class="col-md-8">
                   <div class="mb-4">
-                  <h3>Initial 2FA Webdienste</h3>
+                  <h3>Initial two factor authentication for Account Services</h3>
                   <p class="mb-4"></p>
                 </div>
                 <form method="post">
@@ -38,13 +38,13 @@
                     
                     
                     <div class="form-group last mb-4">
-                        <label for="validation">Validation</label>
+                        <label for="validation">Verify</label>
                         <div class="input-group">
                         <input class="form-control" name="validation" id="validation">
                         </div>
                       </div>
                     
-                  <input type="submit" value="validate" class="btn btn-block btn-primary">
+                  <input type="submit" value="Verify" class="btn btn-block btn-primary">
                 </form>
                 
                 </div>
@@ -59,6 +59,7 @@
       <script src="{{url_for('static', filename='signup-form/js/popper.min.js')}}"></script>
       <script src="{{url_for('static', filename='signup-form/js/bootstrap.min.js')}}"></script>
       <script src="{{url_for('static', filename='signup-form/js/main.js')}}"></script>
+      <script src="{{url_for('static', filename='link-router/router.js')}}"></script>
 </body>
 </html>
 

@@ -6,6 +6,7 @@ $(function(){
         const special_char = document.querySelector(".special-char");
         const pw_length = document.querySelector(".lenght-check");
         const number_char = document.querySelector(".number-char");
+        const guessable = document.querySelector(".guessable");
         const indicator = document.querySelector(".indicator");
         const input = document.querySelector(".password");
         const weak = document.querySelector(".weak");
@@ -90,6 +91,14 @@ $(function(){
           else{
             pw_length.classList.remove("icon-check");
             pw_length.classList.add("icon-remove");
+          }
+          if(result.score == 4){
+            guessable.classList.remove("icon-remove");
+            guessable.classList.add("icon-check");
+          }
+          else{
+            guessable.classList.remove("icon-check");
+            guessable.classList.add("icon-remove");
           }
         
       });

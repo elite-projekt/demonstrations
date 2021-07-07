@@ -16,8 +16,10 @@ $(function() {
 		var input = $($(this).attr("toggle"));
 		if (input.attr("type") == "password") {
 		  input.attr("type", "text");
+		  $(this).attr("title","click the eye for hiding the password.");
 		} else {
 		  input.attr("type", "password");
+		  $(this).attr("title","click the eye for showing the password.");
 		}
 	  });
 	
@@ -38,4 +40,18 @@ $(function() {
 		$('#toast').removeClass("show");
 
 	  });
+	 
+
+	if($('#name').val()){
+		$('#name_field').addClass('field--not-empty');
+	}
+	else{
+		$('#name_field').removeClass('field--not-empty');
+	}
+	if($('#password').val()){
+		$('#password_field').addClass('field--not-empty');
+	}
+	else{
+		$('#password_field').removeClass('field--not-empty');
+	}
 });

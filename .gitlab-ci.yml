@@ -1,6 +1,3 @@
-image:
-  docker:git
-
 stages:
   - build
 
@@ -19,6 +16,19 @@ push-navigation-image:
     entrypoint: [""]
   script:
     - sh ./ci/push-navigation-image.sh
+
+build-python-service:
+  stage: build
+  image: registry.code.fbi.h-da.de/esc-mpse20/container-templates/python-windows-service-builder:python-service-buzilder
+  script: 
+    - ls -la
+    - pwd
+    - cd ./native
+    - ls -l
+    - bash ./entrypoint-windows.sh
+  artifacts:
+    paths:
+      - /builds/esc-mpse20/demonstrations/native/native/dist/windows/*
 
 push-password-image:
   stage: build

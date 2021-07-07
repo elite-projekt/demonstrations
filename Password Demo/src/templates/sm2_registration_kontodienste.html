@@ -33,13 +33,13 @@
             <div class="col-md-8">
               <div class="mb-4">
               <h3>Sign Up</h3>
-              <p class="mb-4">This is the Sign Up page for our Kontodienste.</p>
+              <p class="mb-4">This is the sign up page for our Account Services</p>
             </div>
             <form method="post">
 
-              <div class="form-group first">
+              <div class="form-group first" id="name_field">
                 <label for="name">Username</label>
-                <input type="text" class="form-control" id="name" name="name">
+                <input type="text" class="form-control" id="name" name="name" >
 
               </div>
               <div class="form-group" id="password_field">
@@ -47,7 +47,7 @@
                 <label for="password">Password</label>
                 <div class="input-group">
                 <input type="password" class="form-control password" id="password" name="password">
-                <i toggle="#password" class="icon-eye toggle-password input-group-addon"></i>
+                <i toggle="#password" class="icon-eye toggle-password input-group-addon" data-toggle="tooltip"  data-placement="right" title="click the eye for showing the password."></i>
                 </div>
                 
               </div>
@@ -61,20 +61,21 @@
             
 
             <div class="card text-dark bg-light mb-3 mt-3"  >
-              <div class="card-header" id="pwd-requirements">Password should have <div class="icon-chevron-down float-right" id="pwd-card-icon"></div> </div>
+              <div class="card-header" id="pwd-requirements">Password requirements <div class="icon-chevron-down float-right" id="pwd-card-icon"></div> </div>
               <div class="card-body collapse " id="pwd-req-body">
                 <div class="small-letter card-text icon-remove"> at least 1 small letter.</div>
                 <div class="capital-letter card-text icon-remove"> at least 1 capital letter.</div>
                 <div class="number-char card-text icon-remove"> at least 1 number.</div>
                 <div class="special-char card-text icon-remove"> at least 1 special char.</div>
                 <div class="lenght-check card-text icon-remove"> at least have a length of 10 chars.</div>
+                <div class="guessable card-text icon-remove"> not easy to guess.<i id="pw-info"class="icon-info_outline" data-toggle="tooltip"  data-placement="right" title="For example there shoudn't be a repeating pattern. For more information click on the icon." ></i></div>
               </div>
             </div>
 
             <div class="card text-dark bg-light mb-3" >
-              <div class="card-header" id="tipp">Tipp <div class="icon-chevron-down float-right" id="tipp-card-icon"></div></div>
+              <div class="card-header" id="tipp">Tip <div class="icon-chevron-down float-right" id="tipp-card-icon"></div></div>
               <div class="card-body collapse" id="tipp-body">
-                <p class="password-info">It is best to use a passphrase like for example: The sun always rises at 12. </p>
+                <p class="password-info">It is best to use a phrase as a password for example: <i><strong>The sun always rises at 12!<strong></i><br><i id="phrase-info"class="icon-info_outline" data-toggle="tooltip" data-placement="right" title="For more information about generateing a secure and memoriable passwords click on the icon." ></i> </p>
               </div>
             </div>
             </div>
@@ -90,6 +91,7 @@
     <script src="{{url_for('static', filename='signup-form/js/popper.min.js')}}"></script>
     <script src="{{url_for('static', filename='signup-form/js/bootstrap.min.js')}}"></script>
     <script src="{{url_for('static', filename='signup-form/js/main.js')}}"></script>
+    <script src="{{url_for('static', filename='link-router/router.js')}}"></script>
     <script data-main="{{url_for('static', filename='signup-form/js/indicator.js')}}" src="{{url_for('static', filename='signup-form/js/require.js')}}">
     </script>
     <script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="indicator" src="{{url_for('static', filename='signup-form/js/indicator.js')}}"></script>

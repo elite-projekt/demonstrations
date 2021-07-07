@@ -1,0 +1,10 @@
+Flask
+Flask-Cors
+Jinja2
+pypiwin32
+python-on-whales
+requests
+urllib3
+Werkzeug
+pyinstaller>=4.3
+PyYAML

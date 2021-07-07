@@ -28,12 +28,12 @@
           <div class="row justify-content-center">
             <div class="col-md-8">
               <div class="mb-4">
-              <h3>Login Kontodienste</h3>
-              <p class="mb-4">This is the Login page for our Kontodienste.</p>
+              <h3>Login Account Services</h3>
+              <p class="mb-4">This is the Login page for our Account Services.</p>
             </div>
             <form method="post">
 
-              <div class="form-group first">
+              <div class="form-group first" id="name_field">
                 <label for="name">Username</label>
                 <input type="text" class="form-control" id="name" name="name">
 
@@ -43,7 +43,7 @@
                 <label for="password">Password</label>
                 <div class="input-group">
                 <input type="password" class="form-control" id="password" name="pwd">
-                <i toggle="#password" class="icon-eye toggle-password input-group-addon"></i>
+                <i toggle="#password" class="icon-eye toggle-password input-group-addon" data-toggle="tooltip"  data-placement="right" title="click the eye for showing the password." id="pw-eye"></i>
                 </div>
                 
               </div>

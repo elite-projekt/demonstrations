@@ -1,28 +1,32 @@
 from os import path
 import subprocess
-import yaml
+import logging
 from python_on_whales import docker
+from python_on_whales import DockerClient
+from config.config import EnvironmentConfig
+import yaml
 
 from datetime import datetime
 
-t_path = path.abspath(path.dirname(__file__))
-stack_folder = path.join(path.dirname(path.dirname(t_path)), 'stacks',)
-
-
 class OrchestrationService():
-
     def docker_compose_start_file(self, filename: str):
-        file_path = path.join(stack_folder, filename)
-        subprocess.run(['docker-compose', '-f', file_path, 'up',
-                        '-d'], check=True, capture_output=True)
+        try:
+            file_path = path.join(EnvironmentConfig.DOCKERSTACKDIR, filename)
+            docker = DockerClient(compose_files=[file_path])
+            docker.compose.up(detach=True)
+        except Exception as e:
+            logging.error(e)
 
     def docker_compose_stop_file(self, filename: str):
-        file_path = path.join(stack_folder, filename)
-        subprocess.run(['docker-compose', '-f', file_path,
-                        'down'], check=True, capture_output=True)
+        try:
+            file_path = path.join(EnvironmentConfig.DOCKERSTACKDIR, filename)
+            docker = DockerClient(compose_files=[file_path])
+            docker.compose.down()
+        except Exception as e:
+            logging.error(e)
 
     def get_status_docker_compose_file(self, filename: str):
-        file_path = path.join(stack_folder, filename)
+        file_path = path.join(EnvironmentConfig.DOCKERSTACKDIR, filename)
         container_name_list = []
         result = {}
         try:
