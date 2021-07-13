@@ -2,13 +2,13 @@ $(function() {
 	'use strict';
     $("#pw-info").click(function() {
 
-        window.open("http://portal.ecs.fbi.h-da.de/courses/password/units/save-passwords/parts","_blank");
+        window.open("http://portal.ecs.fbi.h-da.de/courses/password/units/save-passwords/parts#2","_blank");
 
     });
 
     $("#phrase-info").click(function() {
 
-        window.open("http://portal.ecs.fbi.h-da.de/courses/password/units/algorithms-for-secure-password-construction/parts","_blank");
+        window.open("http://portal.ecs.fbi.h-da.de/courses/password/units/algorithms-for-secure-password-construction/parts#1","_blank");
 
     });
 
