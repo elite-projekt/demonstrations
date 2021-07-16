@@ -50,7 +50,6 @@ class PhishingDemo():
 
     # Ports to be used: secure_server_smtp_port or unsecure_server_smtp_port
     def send_mail(self, sender, password, port, recipient, message, local_server):
-        print(sender, password, port, recipient, local_server)
         # Try to log in to server and send email
         server = smtplib.SMTP_SSL(local_server, port)
         try:
@@ -228,7 +227,6 @@ class PhishingDemo():
         time.sleep(delay)
         try:
             container = docker.container.inspect("phising_mailserver")
-            print(container.state.running)
             for i in range(retries):
                 logging.info('Checking if mailserver reachable try: {}'.format(i+1))
                 if container.state.running:
@@ -244,7 +242,7 @@ class PhishingDemo():
         """
         logging.info('Try closing running thunderbird process...')
         try:
-            res = os.system("taskkill /f /im thunderbird.exe")
+            subprocess.Popen(['taskkill', '/f', '/im', 'thunderbird.exe'], stdout=subprocess.PIPE)
             logging.info('Success')
         except Exception as e:
             logging.error(e)

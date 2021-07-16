@@ -2,7 +2,7 @@ from flask import Flask
 from flask_cors import CORS
 from config.config import DevelopmentConfig, ProductionConfig
 from controller.OrchestrationController import orchestration
-import sys
+import os, sys
 import logging
 import argparse
 
