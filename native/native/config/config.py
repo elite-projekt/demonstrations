@@ -17,5 +17,5 @@ class ProductionConfig(Config):
 
 class EnvironmentConfig():
     WORKINGDIR = "C:\\Program Files (x86)\\hda\\nativeapp\\"
-    DOCKERSTACKDIR = "C:\\Program Files (x86)\\hda\\nativeapp\\stacks\\"
-    PROFILEDIR = "C:\\Program Files (x86)\\hda\\nativeapp\\profiles\\"
+    DOCKERSTACKDIR = WORKINGDIR + "stacks\\"
+    PROFILEDIR = WORKINGDIR + "profiles\\"

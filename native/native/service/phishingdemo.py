@@ -16,7 +16,6 @@ from os import path
 from zipfile import ZipFile
 from config.config import EnvironmentConfig
 
-email_files_location = EnvironmentConfig.DOCKERSTACKDIR + 'phishing\\mails\\'
 
 class PhishingDemo():
 
@@ -67,8 +66,8 @@ class PhishingDemo():
                         local_password=default_email_account_password,
                         local_smtp_port=secure_server_smtp_port,
                         local_server=default_email_server):
-        logging.info('Checking for mails in: {}'.format(email_files_location))
-        for file in glob.glob(email_files_location + "/*.txt"):
+        logging.info('Checking for mails in: {}'.format(EnvironmentConfig.DOCKERSTACKDIR + 'phishing\\mails\\'))
+        for file in glob.glob(EnvironmentConfig.DOCKERSTACKDIR + 'phishing\\mails\\' + "/*.txt"):
             # print('sending mail file: ' + file)
             logging.info("Sending mail file: {}".format(file))
             email_file = open(file, "r")

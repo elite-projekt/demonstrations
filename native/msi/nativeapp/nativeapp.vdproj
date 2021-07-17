@@ -21,12 +21,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_02B1022A2EE1454D9696118D6112E7E6"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_1463706DFA4940248AB38115F1B2C2FB"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -81,6 +75,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_623E6EEDDC804C58BA9B0F5DA4733241"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_6C3B1AF0CFFF44AC995D8F1DE8F21F66"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -100,6 +100,12 @@
         "Entry"
         {
         "MsmKey" = "8:_853F7041EBE740288288245A279C2869"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_8D02C54AF5C243CD9D52D91835C248F4"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -364,26 +370,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_02B1022A2EE1454D9696118D6112E7E6"
-            {
-            "SourcePath" = "8:..\\..\\..\\..\\..\\..\\Downloads\\artifacts\\native\\native\\dist\\windows\\app.exe"
-            "TargetName" = "8:app.exe"
-            "Tag" = "8:"
-            "Folder" = "8:_AE244D9436344781BC1B22B9B9D64D91"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1463706DFA4940248AB38115F1B2C2FB"
             {
             "SourcePath" = "8:..\\..\\..\\..\\tmp\\secure\\docker-compose.yml"
@@ -575,6 +561,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_623E6EEDDC804C58BA9B0F5DA4733241"
+            {
+            "SourcePath" = "8:..\\..\\native\\dist\\app.exe"
+            "TargetName" = "8:app.exe"
+            "Tag" = "8:"
+            "Folder" = "8:_AE244D9436344781BC1B22B9B9D64D91"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6C3B1AF0CFFF44AC995D8F1DE8F21F66"
             {
             "SourcePath" = "8:..\\..\\stacks\\phishing\\docker-compose.yml"
@@ -639,6 +645,26 @@
             {
             "SourcePath" = "8:..\\service.log"
             "TargetName" = "8:service.log"
+            "Tag" = "8:"
+            "Folder" = "8:_AE244D9436344781BC1B22B9B9D64D91"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8D02C54AF5C243CD9D52D91835C248F4"
+            {
+            "SourcePath" = "8:..\\infos.rtf"
+            "TargetName" = "8:infos.rtf"
             "Tag" = "8:"
             "Folder" = "8:_AE244D9436344781BC1B22B9B9D64D91"
             "Condition" = "8:"
@@ -1158,15 +1184,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:nativeapp"
-        "ProductCode" = "8:{921E8BC4-B555-4A3B-84C7-8243345416A8}"
-        "PackageCode" = "8:{AD96E493-1DA1-4324-AF4C-D2923D71A67A}"
+        "ProductCode" = "8:{8E32AA56-87C5-42BB-BAA2-A2C8597A56C3}"
+        "PackageCode" = "8:{29255DDC-82F5-4E05-9B03-DFBAF21716C8}"
         "UpgradeCode" = "8:{F520D502-8792-4A29-91CD-F41DF46C6B7C}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.1.2"
+        "ProductVersion" = "8:1.1.3"
         "Manufacturer" = "8:hda"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -1279,29 +1305,29 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_7B0E4DE6BBE24EEAB037D0AC4EEE4863"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_2CFF6B6D65F544C494F16764C481AD02"
             {
-            "Name" = "8:Shortcut to app.exe"
+            "Name" = "8:MPSE_app"
             "Arguments" = "8:"
             "Description" = "8:"
-            "ShowCmd" = "3:1"
+            "ShowCmd" = "3:7"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_02B1022A2EE1454D9696118D6112E7E6"
+            "Target" = "8:_623E6EEDDC804C58BA9B0F5DA4733241"
             "Folder" = "8:_29967C7B9C1D49D5939C81CBA82FC658"
             "WorkingFolder" = "8:_AE244D9436344781BC1B22B9B9D64D91"
             "Icon" = "8:"
             "Feature" = "8:"
             }
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_8D7D60EF58B745D3A605E2676C288A05"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_9179997E98BD4A8997B892570D783042"
             {
-            "Name" = "8:Shortcut to app.exe"
+            "Name" = "8:MPSE_app"
             "Arguments" = "8:"
             "Description" = "8:"
-            "ShowCmd" = "3:1"
+            "ShowCmd" = "3:7"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_02B1022A2EE1454D9696118D6112E7E6"
+            "Target" = "8:_623E6EEDDC804C58BA9B0F5DA4733241"
             "Folder" = "8:_2A1BB7F9913C40C097B461C8B7E72644"
             "WorkingFolder" = "8:_AE244D9436344781BC1B22B9B9D64D91"
             "Icon" = "8:"
@@ -1319,7 +1345,7 @@
                 {
                     "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_A229F2B7087B4C0AB3063BAC9E76284E"
                     {
-                    "Sequence" = "3:100"
+                    "Sequence" = "3:110"
                     "DisplayName" = "8:Fertig"
                     "UseDynamicProperties" = "11:TRUE"
                     "IsDependency" = "11:FALSE"
@@ -1352,6 +1378,53 @@
                             }
                         }
                     }
+                    "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_ECE87D0A21A6401D881A3711DF14F9D7"
+                    {
+                    "Sequence" = "3:100"
+                    "DisplayName" = "8:Infodatei"
+                    "UseDynamicProperties" = "11:TRUE"
+                    "IsDependency" = "11:FALSE"
+                    "SourcePath" = "8:<VsdDialogDir>\\VsdReadmeDlg.wid"
+                        "Properties"
+                        {
+                            "BannerBitmap"
+                            {
+                            "Name" = "8:BannerBitmap"
+                            "DisplayName" = "8:#1001"
+                            "Description" = "8:#1101"
+                            "Type" = "3:8"
+                            "ContextData" = "8:Bitmap"
+                            "Attributes" = "3:4"
+                            "Setting" = "3:1"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                            "ReadmeText"
+                            {
+                            "Name" = "8:ReadmeText"
+                            "DisplayName" = "8:#1010"
+                            "Description" = "8:#1110"
+                            "Type" = "3:6"
+                            "ContextData" = "8:"
+                            "Attributes" = "3:0"
+                            "Setting" = "3:2"
+                            "Value" = "8:_8D02C54AF5C243CD9D52D91835C248F4"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                            "Sunken"
+                            {
+                            "Name" = "8:Sunken"
+                            "DisplayName" = "8:#1007"
+                            "Description" = "8:#1107"
+                            "Type" = "3:5"
+                            "ContextData" = "8:4;True=4;False=0"
+                            "Attributes" = "3:0"
+                            "Setting" = "3:0"
+                            "Value" = "3:4"
+                            "DefaultValue" = "3:4"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                        }
+                    }
                 }
             }
             "{DF760B10-853B-4699-99F2-AFF7185B4A62}:_99FD9C3877B44282847097AC0818163E"
@@ -1363,7 +1436,7 @@
                 {
                     "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_E027385503034F14B2A41C5A7CD2E539"
                     {
-                    "Sequence" = "3:100"
+                    "Sequence" = "3:120"
                     "DisplayName" = "8:Fertig"
                     "UseDynamicProperties" = "11:TRUE"
                     "IsDependency" = "11:FALSE"

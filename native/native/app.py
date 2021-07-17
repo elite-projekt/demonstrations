@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_cors import CORS
-from config.config import DevelopmentConfig, ProductionConfig
+from config.config import DevelopmentConfig, ProductionConfig, EnvironmentConfig
 from controller.OrchestrationController import orchestration
 import os, sys
 import logging
@@ -13,11 +13,11 @@ app.register_blueprint(orchestration)
 
 if __name__ == "__main__":
     # set working directory
-    app.WORKINGDIR = os.getenv('ProgramFiles(x86)') + r'\hda\nativeapp'
+    EnvironmentConfig.WORKINGDIR = os.getenv('ProgramFiles(x86)') + r'\hda\nativeapp'
 
     # argument parser
     parser = argparse.ArgumentParser()
-    parser.add_argument('-p', '--path', help='Basepath of project relative from here files will be accessed. Default is "C:\Program Files (x86)\hda\nativeapp".')
+    parser.add_argument('-p', '--path', help='Basepath of project relative from here files will be accessed. Default is "C:\Program Files (x86)\hda\nativeapp". If passed path - structure is fixed on current repo relative placement of files!!\n\nno trailing slashes')
     parser.add_argument('-d', '--dev', help='Starts flask in dev-mode')
     args = parser.parse_args()
 
@@ -27,10 +27,12 @@ if __name__ == "__main__":
     else:
         app.config.from_object(ProductionConfig)
     if args.path is not None:
-        app.WORKINGDIR = args.path
+        EnvironmentConfig.WORKINGDIR = args.path
+        EnvironmentConfig.DOCKERSTACKDIR = args.path + '\\..\\stacks\\'
+        EnvironmentConfig.PROFILEDIR = args.path + '\\profiles\\'
 
     # initiate logging
-    logging.basicConfig(filename=app.WORKINGDIR + '\\service.log', datefmt='%y-%m-%d %H:%M:%S', format='%(asctime)s %(levelname)-8s - [%(module)s:%(funcName)s] : %(message)s', level=logging.DEBUG)
+    logging.basicConfig(filename=EnvironmentConfig.WORKINGDIR + '\\service.log', datefmt='%y-%m-%d %H:%M:%S', format='%(asctime)s %(levelname)-8s - [%(module)s:%(funcName)s] : %(message)s', level=logging.DEBUG)
     logging.info('Starting service: native app')
 
     app.run(host=app.config["HOST"], debug=app.config["DEBUG"], port=app.config["PORT"])
