@@ -2,7 +2,7 @@ $(function() {
 	'use strict';
     $("#pw-info").click(function() {
 
-        window.open("http://portal.ecs.fbi.h-da.de/courses/password/units/save-passwords/parts#2","_blank");
+        window.open("http://portal.ecs.fbi.h-da.de/courses/password/units/safe-passwords/parts#2","_blank");
 
     });
 
