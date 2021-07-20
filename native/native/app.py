@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_cors import CORS
-from config.config import DevelopmentConfig, ProductionConfig, EnvironmentConfig
+from config.config import DevelopmentConfig, ProductionConfig, EnvironmentConfig, ApplicationInformation
 from controller.OrchestrationController import orchestration
 import os, sys
 import logging
@@ -35,4 +35,11 @@ if __name__ == "__main__":
     logging.basicConfig(filename=EnvironmentConfig.WORKINGDIR + '\\service.log', datefmt='%y-%m-%d %H:%M:%S', format='%(asctime)s %(levelname)-8s - [%(module)s:%(funcName)s] : %(message)s', level=logging.DEBUG)
     logging.info('Starting service: native app')
 
+    # display application information
+    logging.info('\n\nVERSION: {}\nBUILDDATE: {}'.format(ApplicationInformation.VERSION, ApplicationInformation.BUILDDATE))
+
+    # print for display in console window
+    print('\n>> {} <<\n{:15s} {}\n{:15s} {}\n'.format(ApplicationInformation.DESCRIPTION, 'VERSION:', ApplicationInformation.VERSION, 'BUILDDATE:', ApplicationInformation.BUILDDATE))
+
+    # start flask
     app.run(host=app.config["HOST"], debug=app.config["DEBUG"], port=app.config["PORT"])
