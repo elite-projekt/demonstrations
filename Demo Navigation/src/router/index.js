@@ -10,7 +10,7 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/',
+      path: '/story_intro',
       name: 'WelcomePage',
       component: WelcomePage
     }, {
