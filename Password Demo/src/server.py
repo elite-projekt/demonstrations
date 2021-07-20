@@ -141,7 +141,7 @@ def registration_kontodienste_sm():
         user_password = request.form['password']
         resp = make_response(redirect('/story_2fa'))
         user = create_user(user_name,user_password, "sm_kd")
-        qr_code = create_qr(user_name + "_qr_kontodienste", user.otp)
+        qr_code = create_qr(user_name + "_qr_account_services", user.otp)
         qr_code.save(static_folder_path +"/" + "qrcode1.jpg")
         return resp
     else:
@@ -180,7 +180,7 @@ def registration_webdienste_sm():
             return render_template('sm6_registration_webdienste.html', flash="you cannot use the same password as for the Kontodienste ",classes="fade show display")
         resp = make_response(redirect('/initial_2fa_webdienste'))
         user = create_user(user_name , user_password, "sm_wd")
-        qr_code = create_qr(user_name + "_qr_webdienste", user.otp)
+        qr_code = create_qr(user_name + "_qr_web_services", user.otp)
         qr_code.save(static_folder_path +"/" + "qrcode2.jpg")
         return resp
     else:
