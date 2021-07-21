@@ -8,10 +8,9 @@ import Endpage from '../components/Endpage'
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
   routes: [
     {
-      path: '/story_intro',
+      path: '/',
       name: 'WelcomePage',
       component: WelcomePage
     }, {
@@ -22,6 +21,10 @@ export default new Router({
       path: '/Endpage',
       name: 'Endpage',
       component: Endpage
+    }, {
+      path: '/pathMatch(.*)',
+      name: 'catchall',
+      component: WelcomePage
     }
   ]
 })
