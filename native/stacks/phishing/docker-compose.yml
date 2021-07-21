@@ -10,7 +10,7 @@ services:
     image: registry.code.fbi.h-da.de/esc-mpse20/demonstrations/navigation:master
     container_name: phising_navigation
     ports:
-      - 80:80
+      - 5001:80
   mail:
     image: tvial/docker-mailserver:latest
     hostname: mail
