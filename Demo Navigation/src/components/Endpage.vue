@@ -7,7 +7,7 @@
             <p>{{ $t('endpage.introtext') }}
             </p>
             <v-btn
-                  :href="this.teachingIp" target="_blank">
+                  :href="this.teachingIp + '/courses/phishing/units'" target="_blank">
                   {{ $t('endpage.link_to_teaching')}}
                 </v-btn>
           </v-col>
