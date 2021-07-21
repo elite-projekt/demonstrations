@@ -7,7 +7,8 @@ COPY . .
 RUN npm run build
 
 # production stage
-FROM nginx:stable as production-stage
-COPY --from=build-stage /app/dist /usr/share/nginx/html
+FROM node:lts as production-stage
+RUN npm install serve -g
+COPY --from=build-stage /app/dist /var/www/html
 EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["serve", "-s", "/var/www/html", "-p", "80"]
