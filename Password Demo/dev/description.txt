@@ -1,4 +1,0 @@
-Für die Devumgebung verwenden sie bitte Docker-Compose File in dem Ordner Password Demo. 
-einfach docker-compose up in dem Ordner Password Demo ausführen und schon startet der Container.
-Um die Änderungen die sie in der src Datei sehen zu können beenden sie einfach den Dockercontainer
-mit STRG+C und starten ihn neu. Da Volumes verwendet werden, werden die Änderungen direkt in den Container übernommen.
