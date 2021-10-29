@@ -27,7 +27,7 @@ services:
       - maildata:/var/mail
       - mailstate:/var/mail-state
       - maillogs:/var/log/mail
-      - ./mailserver/config/:/tmp/docker-mailserver/${SELINUX_LABEL}
+      - ./mailserver/config/:/tmp/docker-mailserver/
     env_file:
       - ./mailserver/mailserver.env
     cap_add:
