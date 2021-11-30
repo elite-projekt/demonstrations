@@ -27,6 +27,7 @@ build-python-service:
     - echo "> docker pull $BASE_URL/$GROUP_NAME/demonstrations/phishing:master\par" >> infos.rtf
     - echo "> docker pull $BASE_URL/$GROUP_NAME/demonstrations/password:master\par" >> infos.rtf
     - echo "}" >> infos.rtf
+    - cd ../..
   script: 
     - ls -la
     - pwd
