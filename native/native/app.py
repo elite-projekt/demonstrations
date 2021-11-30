@@ -30,6 +30,7 @@ if __name__ == "__main__":
         EnvironmentConfig.WORKINGDIR = args.path
         EnvironmentConfig.DOCKERSTACKDIR = args.path + '\\..\\stacks\\'
         EnvironmentConfig.PROFILEDIR = args.path + '\\profiles\\'
+        EnvironmentConfig.ENVDIR = args.path + '\\..\\..\\'
 
     # initiate logging
     logging.basicConfig(filename=EnvironmentConfig.WORKINGDIR + '\\service.log', datefmt='%y-%m-%d %H:%M:%S', format='%(asctime)s %(levelname)-8s - [%(module)s:%(funcName)s] : %(message)s', level=logging.DEBUG)

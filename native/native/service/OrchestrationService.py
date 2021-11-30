@@ -12,7 +12,8 @@ class OrchestrationService():
     def docker_compose_start_file(self, filename: str):
         try:
             file_path = path.join(EnvironmentConfig.DOCKERSTACKDIR, filename)
-            docker = DockerClient(compose_files=[file_path])
+            env_path = path.join(EnvironmentConfig.ENVDIR, ".env")
+            docker = DockerClient(compose_files=[file_path],compose_env_file=env_path)
             docker.compose.up(detach=True)
         except Exception as e:
             logging.error(e)
