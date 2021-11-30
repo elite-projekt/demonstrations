@@ -22,11 +22,10 @@ build-python-service:
   image: $BASE_URL/$GROUP_NAME/container-templates/python-windows-service-builder:python-service-buzilder
   before_script:
     - cd ./native/msi
-    - ls -l
-    - echo \" \pard\sl240\slmult1\f1\fs18 > docker login $BASE_URL\par\" >> infos.rtf
-    - echo \" ">" docker pull $BASE_URL/$GROUP_NAME/demonstrations/navigation:master"\"par\" >> infos.rtf
-    - echo \" ">" docker pull $BASE_URL/$GROUP_NAME/demonstrations/phishing:master"\"par\" >> infos.rtf
-    - echo \" ">" docker pull $BASE_URL/$GROUP_NAME/demonstrations/password:master"\"par\" >> infos.rtf
+    - echo "\pard\sl240\slmult1\f1\fs18 > docker login $BASE_URL\par\" >> infos.rtf
+    - echo "> docker pull $BASE_URL/$GROUP_NAME/demonstrations/navigation:master\par" >> infos.rtf
+    - echo "> docker pull $BASE_URL/$GROUP_NAME/demonstrations/phishing:master\par" >> infos.rtf
+    - echo "> docker pull $BASE_URL/$GROUP_NAME/demonstrations/password:master\par" >> infos.rtf
     - echo "}" >> infos.rtf
   script: 
     - ls -la
