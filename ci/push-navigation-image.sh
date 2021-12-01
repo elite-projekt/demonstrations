@@ -9,4 +9,4 @@ cd teachingMaterialFront
 image_name="$CI_REGISTRY_IMAGE/navigation:$CI_COMMIT_BRANCH"
 echo "pushing to $image_name"
 
-/kaniko/executor --context "$CI_PROJECT_DIR/Demo Navigation/" --dockerfile "$CI_PROJECT_DIR/Demo Navigation/Dockerfile" --destination "$image_name"
+/kaniko/executor --context "$CI_PROJECT_DIR/demo_navigation/" --dockerfile "$CI_PROJECT_DIR/demo_navigation/Dockerfile" --destination "$image_name"

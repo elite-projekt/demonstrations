@@ -6,7 +6,7 @@ This component is a flask web API. It hosts fake phishing sites which the user e
 
 #### Under Windows
 ```bash
-cd 'Phishing Demo'
+cd 'phishing_demo'
 python -m venv venv
 .\venv\Scripts\activate
 pip install -r requirements.txt
@@ -18,7 +18,7 @@ python -m app
 
 #### Under Linux
 ```bash
-cd 'Phishing Demo'
+cd 'phishing_demo'
 python -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
