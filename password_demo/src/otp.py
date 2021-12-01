@@ -1,7 +1,5 @@
 import qrcode
-import pyotp
-from PIL import Image
-from config import *
+
 
 class Otp:
     def __init__(self):
