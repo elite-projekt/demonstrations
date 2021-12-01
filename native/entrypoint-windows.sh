@@ -7,7 +7,7 @@ set -e
 # Useful for CI pipiles which use docker for their build steps
 # and don't allow that much flexibility to mount volumes
 WORKDIR=/builds/$1/demonstrations/native/native/
-
+shift
 cd $WORKDIR
 
 if [ -f requirements.txt ]; then
