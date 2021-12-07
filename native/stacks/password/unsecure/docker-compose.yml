@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
   password:
-    image: ${BASE_URL}/${GROUP_NAME}/demonstrations/${PASSWORD_REPO}
+    image: ${REGISTRY_URL}/${GROUP_NAME}/demonstrations/${PASSWORD_REPO}
     container_name: password_webserver
     ports:
       - 5001:5000
