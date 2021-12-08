@@ -2,8 +2,8 @@ import logging
 
 import flask
 
-from native.native.service import OrchestrationService
-from native.native.service import phishingdemo
+from native.src.service import OrchestrationService
+from native.src.service import phishingdemo
 
 orchestration = flask.Blueprint("orchestration", __name__,
                                 url_prefix="/orchestration/")

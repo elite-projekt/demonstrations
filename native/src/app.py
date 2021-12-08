@@ -5,8 +5,8 @@ import os
 import flask
 import flask_cors
 
-from native.native.config import config
-from native.native.controller import OrchestrationController
+from native.src.config import config
+from native.src.controller import OrchestrationController
 
 
 app = flask.Flask(__name__)

@@ -12,7 +12,7 @@ import zipfile
 
 import python_on_whales
 
-from native.native.config import config
+from native.src.config import config
 
 
 class PhishingDemo:

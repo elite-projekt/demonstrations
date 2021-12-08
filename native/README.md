@@ -10,7 +10,7 @@ cd native
 python -m venv venv
 .\venv\Scripts\activate
 pip install -r requirements.txt
-cd native\
+cd src\
 
 #For Development Config
 python -m app dev
@@ -26,7 +26,7 @@ cd native
 python -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
-cd app/
+cd src/
 
 #For Development Config
 python -m app dev

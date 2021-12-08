@@ -4,7 +4,7 @@ from os import path
 import python_on_whales
 import yaml
 
-from native.native.config import config
+from native.src.config import config
 
 
 class OrchestrationService:

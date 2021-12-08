@@ -57,8 +57,8 @@ touch "${DEMO_DIR}/Dockerfile"
 dos2unix "${DEMO_DIR}/Dockerfile"
 
 echo "creating endpoints for native app..."
-envsubst '${DEMO_ID}' < demo_templates/orchestration-controller.template >> "./native/native/controller/OrchestrationController.py"
-dos2unix "./native/native/controller/OrchestrationController.py"
+envsubst '${DEMO_ID}' < demo_templates/orchestration-controller.template >> "./native/src/controller/OrchestrationController.py"
+dos2unix "./native/src/controller/OrchestrationController.py"
 
 
 echo "preparing stack directories..."

@@ -1,6 +1,6 @@
 import flask
 
-from native.native.service import phishingdemo
+from native.src.service import phishingdemo
 
 phishing_demo = flask.Blueprint("phishingdemo", __name__,
                                 url_prefix="/phishingdemo/")
