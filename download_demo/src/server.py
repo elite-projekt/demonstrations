@@ -12,6 +12,7 @@ app = flask.Flask(__name__)
 
 """-------------------UTILS-------------------"""
 
+
 def run_flask_app():
     """
     Creates Flask server.
@@ -20,25 +21,32 @@ def run_flask_app():
     print("- Start Server")
     app.run(host=HOST, port=5000, threaded=True)
 
+
 """-------------------ROUTES-------------------"""
+
 
 @app.route("/", methods=["GET"])
 def get_index():
     return flask.render_template("index.html")
 
+
 @app.route("/version", methods=["GET"])
 def get_version():
     return flask.render_template("version.html")
+
 
 @app.route("/script_status", methods=["POST"])
 def post_scipt_status():
     return flask.render_template("index.html")
 
+
 @app.route("/end")
 def end():
     return flask.render_template("index.html")
 
+
 """-------------------END ROUTES-------------------"""
+
 
 if __name__ == "__main__":
     threading.Thread(target=run_flask_app).start()
