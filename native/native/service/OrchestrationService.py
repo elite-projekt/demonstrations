@@ -10,15 +10,10 @@ from native.native.config import config
 class OrchestrationService:
     def docker_compose_start_file(self, filename: str):
         try:
-<<<<<<< native/native/service/OrchestrationService.py
-            file_path = path.join(config.EnvironmentConfig.DOCKERSTACKDIR, filename)
-            env_path = path.join(config.EnvironmentConfig.ENVDIR, ".env")
-            docker = python_on_whales.DockerClient(compose_files=[file_path],compose_env_file=env_path)
-=======
             file_path = path.join(config.EnvironmentConfig.DOCKERSTACKDIR,
                                   filename)
-            docker = python_on_whales.DockerClient(compose_files=[file_path])
->>>>>>> native/native/service/OrchestrationService.py
+            env_path = path.join(config.EnvironmentConfig.ENVDIR, ".env")
+            docker = python_on_whales.DockerClient(compose_files=[file_path],compose_env_file=env_path)
             docker.compose.up(detach=True)
         except Exception as e:
             logging.error(e)

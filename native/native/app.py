@@ -38,16 +38,10 @@ if __name__ == "__main__":
     else:
         app.config.from_object(config.ProductionConfig)
     if args.path is not None:
-<<<<<<< native/native/app.py
         config.EnvironmentConfig.WORKINGDIR = args.path
         config.EnvironmentConfig.DOCKERSTACKDIR = args.path + '\\..\\stacks\\'
         config.EnvironmentConfig.PROFILEDIR = args.path + '\\profiles\\'
         config.EnvironmentConfig.ENVDIR = args.path + '\\..\\..\\'
-=======
-        config.EnvironmentConfig.WORKINGDIR = args.path
-        config.EnvironmentConfig.DOCKERSTACKDIR = args.path + "\\..\\stacks\\"
-        config.EnvironmentConfig.PROFILEDIR = args.path + "\\profiles\\"
->>>>>>> native/native/app.py
 
     # initiate logging
     logging.basicConfig(
