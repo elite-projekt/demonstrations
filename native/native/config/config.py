@@ -10,18 +10,21 @@ class DevelopmentConfig(Config):
     HOST = "localhost"
     PORT = 5000
 
+
 class ProductionConfig(Config):
     ENV = "production"
     HOST = "0.0.0.0"
     PORT = 5000
 
-class EnvironmentConfig():
+
+class EnvironmentConfig:
     WORKINGDIR = "C:\\Program Files (x86)\\hda\\nativeapp\\"
     DOCKERSTACKDIR = WORKINGDIR + "stacks\\"
     PROFILEDIR = WORKINGDIR + "profiles\\"
     ENVDIR = WORKINGDIR
 
-class ApplicationInformation():
+
+class ApplicationInformation:
     DESCRIPTION = "HDA MPSE Project native app client"
     VERSION = "1.3"
     BUILDDATE = "July 2021"

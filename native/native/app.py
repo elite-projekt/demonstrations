@@ -1,46 +1,83 @@
-from flask import Flask
-from flask_cors import CORS
-from config.config import DevelopmentConfig, ProductionConfig, EnvironmentConfig, ApplicationInformation
-from controller.OrchestrationController import orchestration
-import os, sys
-import logging
 import argparse
+import logging
+import os
 
-app = Flask(__name__)
-CORS(app)
+import flask
+import flask_cors
 
-app.register_blueprint(orchestration)
+from native.native.config import config
+from native.native.controller import OrchestrationController
+
+
+app = flask.Flask(__name__)
+flask_cors.CORS(app)
+
+app.register_blueprint(OrchestrationController.orchestration)
 
 if __name__ == "__main__":
     # set working directory
-    EnvironmentConfig.WORKINGDIR = os.getenv('ProgramFiles(x86)') + r'\hda\nativeapp'
+    config.EnvironmentConfig.WORKINGDIR = os.getenv(
+        "ProgramFiles(x86)") + r"\hda\nativeapp"
 
     # argument parser
     parser = argparse.ArgumentParser()
-    parser.add_argument('-p', '--path', help='Basepath of project relative from here files will be accessed. Default is "C:\Program Files (x86)\hda\nativeapp". If passed path - structure is fixed on current repo relative placement of files!!\n\nno trailing slashes')
-    parser.add_argument('-d', '--dev', help='Starts flask in dev-mode')
+    parser.add_argument(
+        "-p",
+        "--path",
+        help='Basepath of project relative from here files will be accessed. '
+             'Default is "C:\\Program Files (x86)\\hda\\nativeapp". If passed '
+             'path - structure is fixed on current repo relative placement of '
+             'files!!\n\nno trailing slashes',
+    )
+    parser.add_argument("-d", "--dev", help="Starts flask in dev-mode")
     args = parser.parse_args()
 
     # Only for debugging while developing
     if args.dev is not None:
-        app.config.from_object(DevelopmentConfig)
+        app.config.from_object(config.DevelopmentConfig)
     else:
-        app.config.from_object(ProductionConfig)
+        app.config.from_object(config.ProductionConfig)
     if args.path is not None:
-        EnvironmentConfig.WORKINGDIR = args.path
-        EnvironmentConfig.DOCKERSTACKDIR = args.path + '\\..\\stacks\\'
-        EnvironmentConfig.PROFILEDIR = args.path + '\\profiles\\'
-        EnvironmentConfig.ENVDIR = args.path + '\\..\\..\\'
+<<<<<<< native/native/app.py
+        config.EnvironmentConfig.WORKINGDIR = args.path
+        config.EnvironmentConfig.DOCKERSTACKDIR = args.path + '\\..\\stacks\\'
+        config.EnvironmentConfig.PROFILEDIR = args.path + '\\profiles\\'
+        config.EnvironmentConfig.ENVDIR = args.path + '\\..\\..\\'
+=======
+        config.EnvironmentConfig.WORKINGDIR = args.path
+        config.EnvironmentConfig.DOCKERSTACKDIR = args.path + "\\..\\stacks\\"
+        config.EnvironmentConfig.PROFILEDIR = args.path + "\\profiles\\"
+>>>>>>> native/native/app.py
 
     # initiate logging
-    logging.basicConfig(filename=EnvironmentConfig.WORKINGDIR + '\\service.log', datefmt='%y-%m-%d %H:%M:%S', format='%(asctime)s %(levelname)-8s - [%(module)s:%(funcName)s] : %(message)s', level=logging.DEBUG)
-    logging.info('Starting service: native app')
+    logging.basicConfig(
+        filename=config.EnvironmentConfig.WORKINGDIR + "\\service.log",
+        datefmt="%y-%m-%d %H:%M:%S",
+        format="%(asctime)s %(levelname)-8s - [%(module)s:%(funcName)s] : "
+               "%(message)s",
+        level=logging.DEBUG,
+    )
+    logging.info("Starting service: native app")
 
     # display application information
-    logging.info('\n\nVERSION: {}\nBUILDDATE: {}'.format(ApplicationInformation.VERSION, ApplicationInformation.BUILDDATE))
+    logging.info(
+        "\n\nVERSION: {}\nBUILDDATE: {}".format(
+            config.ApplicationInformation.VERSION,
+            config.ApplicationInformation.BUILDDATE
+        )
+    )
 
     # print for display in console window
-    print('\n>> {} <<\n{:15s} {}\n{:15s} {}\n'.format(ApplicationInformation.DESCRIPTION, 'VERSION:', ApplicationInformation.VERSION, 'BUILDDATE:', ApplicationInformation.BUILDDATE))
+    print(
+        "\n>> {} <<\n{:15s} {}\n{:15s} {}\n".format(
+            config.ApplicationInformation.DESCRIPTION,
+            "VERSION:",
+            config.ApplicationInformation.VERSION,
+            "BUILDDATE:",
+            config.ApplicationInformation.BUILDDATE,
+        )
+    )
 
     # start flask
-    app.run(host=app.config["HOST"], debug=app.config["DEBUG"], port=app.config["PORT"])
+    app.run(host=app.config["HOST"], debug=app.config["DEBUG"],
+            port=app.config["PORT"])
