@@ -26,20 +26,28 @@ push-navigation-image:
     name: gcr.io/kaniko-project/executor:debug
     entrypoint: [""]
   script:
+    - sed -i "s|replacedByCi|$TEACHING_URL|" "demo_navigation/config/prod.env.js"
     - sh ./ci/push-navigation-image.sh
 
 build-python-service:
   stage: build
-  image: registry.code.fbi.h-da.de/esc-mpse20/container-templates/python-windows-service-builder:python-service-buzilder
+  image: $REGISTRY_URL/$GROUP_NAME/container-templates/python-windows-service-builder:python-service-buzilder
   script: 
+    - cd ./native/msi
+    - echo "" >> infos.rtf
+    - echo "\pard\sl240\slmult1\f1\fs18 > docker login $REGISTRY_URL\par" >> infos.rtf
+    - echo "> docker pull $REGISTRY_URL/$GROUP_NAME/demonstrations/navigation:master\par" >> infos.rtf
+    - echo "> docker pull $REGISTRY_URL/$GROUP_NAME/demonstrations/phishing:master\par" >> infos.rtf
+    - echo "> docker pull $REGISTRY_URL/$GROUP_NAME/demonstrations/password:master\par" >> infos.rtf
+    - echo "}" >> infos.rtf
+    - cd ..
     - ls -la
     - pwd
-    - cd ./native
-    - ls -l
-    - bash ./entrypoint-windows.sh
+    - bash ./entrypoint-windows.sh $GROUP_NAME
   artifacts:
     paths:
-      - /builds/esc-mpse20/demonstrations/native/native/dist/windows/*
+      - /builds/$GROUP_NAME/demonstrations/native/native/dist/windows/*
+      - /builds/$GROUP_NAME/demonstrations/native/msi/infos.rtf
 
 push-password-image:
   stage: build

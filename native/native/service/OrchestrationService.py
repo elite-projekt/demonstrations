@@ -12,7 +12,8 @@ class OrchestrationService:
         try:
             file_path = path.join(config.EnvironmentConfig.DOCKERSTACKDIR,
                                   filename)
-            docker = python_on_whales.DockerClient(compose_files=[file_path])
+            env_path = path.join(config.EnvironmentConfig.ENVDIR, ".env")
+            docker = python_on_whales.DockerClient(compose_files=[file_path],compose_env_file=env_path)
             docker.compose.up(detach=True)
         except Exception as e:
             logging.error(e)

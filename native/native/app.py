@@ -39,8 +39,9 @@ if __name__ == "__main__":
         app.config.from_object(config.ProductionConfig)
     if args.path is not None:
         config.EnvironmentConfig.WORKINGDIR = args.path
-        config.EnvironmentConfig.DOCKERSTACKDIR = args.path + "\\..\\stacks\\"
-        config.EnvironmentConfig.PROFILEDIR = args.path + "\\profiles\\"
+        config.EnvironmentConfig.DOCKERSTACKDIR = args.path + '\\..\\stacks\\'
+        config.EnvironmentConfig.PROFILEDIR = args.path + '\\profiles\\'
+        config.EnvironmentConfig.ENVDIR = args.path + '\\..\\..\\'
 
     # initiate logging
     logging.basicConfig(
