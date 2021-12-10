@@ -26,8 +26,7 @@ push-navigation-image:
     name: gcr.io/kaniko-project/executor:debug
     entrypoint: [""]
   script:
-    - sed -i "s|replacedByCi|$TEACHING_URL|" "Demo Navigation/config/prod.env.js"
-    - cat "Demo Navigation/config/prod.env.js"
+    - sed -i "s|replacedByCi|$TEACHING_URL|" "demo_navigation/config/prod.env.js"
     - sh ./ci/push-navigation-image.sh
 
 build-python-service:
