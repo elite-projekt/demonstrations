@@ -7,9 +7,21 @@ lint-python-code:
   image:
     name: python:3.9-slim
   before_script:
+    - /usr/local/bin/python -m pip install --upgrade pip
     - python -m pip install flake8
   script:
     - flake8 .
+  allow_failure: true
+
+sast-python-code:
+  stage: linting
+  image:
+    name: python:3.9-slim
+  before_script:
+    - /usr/local/bin/python -m pip install --upgrade pip
+    - python -m pip install bandit
+  script:
+    - bandit -r .
   allow_failure: true
 
 push-phishing-image:
