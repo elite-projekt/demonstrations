@@ -5,7 +5,7 @@ import flask
 import pyotp
 import qrcode
 
-HOST = "0.0.0.0"
+HOST = "0.0.0.0" # nosec No Issue in a Docker Container
 random_id = pyotp.random_hex()
 d_path = os.path.abspath(os.path.dirname(__file__))
 html_folder_path = os.path.join(d_path, "template")

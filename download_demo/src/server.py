@@ -3,7 +3,7 @@ import threading
 
 import flask
 
-HOST = "0.0.0.0" # nosec
+HOST = "0.0.0.0" # nosec No Issue in a docker Container
 d_path = os.path.abspath(os.path.dirname(__file__))
 html_folder_path = os.path.join(d_path, "template")
 static_folder_path = os.path.join(d_path, "static")

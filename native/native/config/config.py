@@ -13,7 +13,7 @@ class DevelopmentConfig(Config):
 
 class ProductionConfig(Config):
     ENV = "production"
-    HOST = "0.0.0.0" # nosec
+    HOST = "0.0.0.0" # nosec No Issue in a docker Container
     PORT = 5000
 
 
