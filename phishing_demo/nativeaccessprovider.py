@@ -10,7 +10,7 @@ default_email_server = "141.100.70.56"  # online vm server
 # default_email_server = "192.168.178.115" #local server
 
 default_email_account = "max.mustermann@mpseinternational.com"
-default_email_account_password = "123"
+default_email_account_password = "123" # nosec
 
 secure_server_smtp_port = 25
 secure_server_imap_port = 143

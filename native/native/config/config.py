@@ -13,7 +13,7 @@ class DevelopmentConfig(Config):
 
 class ProductionConfig(Config):
     ENV = "production"
-    HOST = "0.0.0.0"
+    HOST = "0.0.0.0" # nosec
     PORT = 5000
 
 
