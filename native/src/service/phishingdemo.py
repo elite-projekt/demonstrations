@@ -18,7 +18,9 @@ from native.src.config import config
 class PhishingDemo:
     default_email_server = "localhost"  # online vm server
     default_email_account = "max.mustermann@mpseinternational.com"
-    default_email_account_password = "123" # nosec This Password is only used for the local Mail Server and is needed for the communication with this Server
+    default_email_account_password = "123"  # nosec This Password is only used
+    # for the local Mail Server and is needed for the communication with
+    # this Server
 
     secure_server_smtp_port = 465
     secure_server_imap_port = 143
