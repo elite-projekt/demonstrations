@@ -143,14 +143,14 @@ build:python-service:
       --exit-code 0 
       --cache-dir .trivycache/ 
       --no-progress 
-      --input SUB_PROJECT_NAME.tar
+      --input $SUB_PROJECT_NAME.tar
     # Fail if High Findings
     - trivy 
       --exit-code 1 
       --cache-dir .trivycache/ 
       --severity HIGH 
       --no-progress 
-      --input SUB_PROJECT_NAME.tar
+      --input $SUB_PROJECT_NAME.tar
   cache:
     paths:
       - .trivycache/
