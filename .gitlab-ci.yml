@@ -1,11 +1,11 @@
 stages:
-  - linting
+  - lint
   - build
   - scan
   - push
 
 lint:python-code:
-  stage: linting
+  stage: lint
   image:
     name: python:3.10-slim
   before_script:
@@ -41,7 +41,7 @@ lint:navigation-dockerfile:
     SUB_PROJECT_FOLDER: demo_navigation
 
 sast:python-code:
-  stage: linting
+  stage: lint
   image:
     name: python:3.9-slim
   before_script:
