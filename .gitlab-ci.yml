@@ -86,6 +86,7 @@ build-phishing-image:
     paths:
     - phishing_image.tar
     when: on_success
+  needs: []
 
 scan-phishing-image:
   stage: scan
