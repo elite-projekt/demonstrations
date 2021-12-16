@@ -29,6 +29,8 @@ sast-python-code:
 # Build template
 .build:image: &build-image
   stage: build
+  image:
+    name: gcr.io/kaniko-project/executor:debug
   script:
     - echo "starting karniko docker build for $SUB_PROJECT_NAME Image"
     - mkdir -p /kaniko/.docker
