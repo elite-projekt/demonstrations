@@ -40,7 +40,7 @@ sast:python-code:
 .build:image: &build-image
   stage: build
   image:
-    name: gcr.io/kaniko-project/executor
+    name: gcr.io/kaniko-project/executor:debug
   script:
     - echo "starting karniko docker build for $SUB_PROJECT_NAME Image"
     - image_name="$CI_REGISTRY_IMAGE/$SUB_PROJECT_NAME:$CI_COMMIT_BRANCH"
