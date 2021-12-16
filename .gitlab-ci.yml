@@ -11,7 +11,6 @@ prepare:navigation:
     name: debian:stable-slim
   script:
     - sed -i "s|replacedByCi|$TEACHING_URL|" "demo_navigation/config/prod.env.js"
-    - sh ./ci/push-navigation-image.sh
 
 lint:python-code:
   stage: linting
@@ -74,6 +73,8 @@ build:navigation:
   variables:
     SUB_PROJECT_NAME: navigation
     SUB_PROJECT_FOLDER: demo_navigation
+  before_script:
+    - cat "demo_navigation/config/prod.env.js"
   needs:
     - lint:python-code
     - prepare:navigation
