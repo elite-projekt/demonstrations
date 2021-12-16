@@ -7,6 +7,8 @@ stages:
 
 prepare:navigation:
   stage: prepare
+  image: 
+    name: debian:stable-slim
   script:
     - sed -i "s|replacedByCi|$TEACHING_URL|" "demo_navigation/config/prod.env.js"
     - sh ./ci/push-navigation-image.sh
