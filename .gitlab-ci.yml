@@ -97,7 +97,6 @@ build:python-service:
       - /builds/$GROUP_NAME/demonstrations/native/msi/infos.rtf
   needs: 
     - lint:python-code
-    - prepare:navigation
 
 # Scan template
 .scan:image: &scan-image
