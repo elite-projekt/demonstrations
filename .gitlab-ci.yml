@@ -56,19 +56,19 @@ sast:python-code:
   needs:
     - lint:python-code
 
-build:phishing:
+build:phishing-image:
   <<: *build-image
   variables:
     SUB_PROJECT_NAME: phishing
     SUB_PROJECT_FOLDER: phishing_demo
 
-build:password:
+build:password-image:
   <<: *build-image
   variables:
     SUB_PROJECT_NAME: password
     SUB_PROJECT_FOLDER: password_demo
 
-build:navigation:
+build:navigation-image:
   <<: *build-image
   variables:
     SUB_PROJECT_NAME: navigation
@@ -122,7 +122,7 @@ build:python-service:
       --exit-code 0 
       --cache-dir .trivycache/ 
       --no-progress 
-      --input phishing_image.tar
+      --input SUB_PROJECT_NAME.tar
   cache:
     paths:
       - .trivycache/
@@ -138,7 +138,7 @@ scan:phishing-image:
     SUB_PROJECT_NAME: phishing
     SUB_PROJECT_FOLDER: phishing_demo
   needs:
-  - build:phishing
+  - build:phishing-image
 
 scan:password-image:
   <<: *scan-image
@@ -146,7 +146,7 @@ scan:password-image:
     SUB_PROJECT_NAME: password
     SUB_PROJECT_FOLDER: password_demo
   needs:
-  - build:password
+  - build:password-image
 
 scan:navigation-image:
   <<: *scan-image
@@ -154,10 +154,11 @@ scan:navigation-image:
     SUB_PROJECT_NAME: navigation
     SUB_PROJECT_FOLDER: demo_navigation
   needs:
-  - build:navigation
+  - build:navigation-image
   
-  
-push:phishing-image:
+
+# Push template
+.push:image: &push-image
   stage: push
   image:
     name: gcr.io/go-containerregistry/crane:debug
@@ -165,6 +166,28 @@ push:phishing-image:
   script:
   - crane auth login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
   - crane push phishing_image.tar $CI_REGISTRY_IMAGE/phishing:$CI_COMMIT_BRANCH
+
+push:phishing-image:
+  <<: *push-image
+  variables:
+    SUB_PROJECT_NAME: phishing
+    SUB_PROJECT_FOLDER: phishing_demo
   needs:
-  - scan:phishing-image
+  - build:phishing-image
+
+push:password-image:
+  <<: *push-image
+  variables:
+    SUB_PROJECT_NAME: password
+    SUB_PROJECT_FOLDER: password_demo
+  needs:
+  - build:password-image
+
+push:navigation-image:
+  <<: *push-image
+  variables:
+    SUB_PROJECT_NAME: navigation
+    SUB_PROJECT_FOLDER: demo_navigation
+  needs:
+  - build:navigation-image
 
