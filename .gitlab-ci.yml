@@ -16,7 +16,7 @@ lint:python-code:
   allow_failure: true
   needs: []
 
-# Hadloint template
+# Hadolint template
 .lint:dockerfile: &lint-dockerfile
   stage: lint
   image:
@@ -126,7 +126,6 @@ build:python-service:
   stage: scan
   image:
     name: aquasec/trivy:latest
-  allow_failure: true
   script:
     # Build report
     - trivy 
@@ -143,6 +142,13 @@ build:python-service:
       --cache-dir .trivycache/ 
       --no-progress 
       --input SUB_PROJECT_NAME.tar
+    # Fail if High Findings
+    - trivy 
+      --exit-code 1 
+      --cache-dir .trivycache/ 
+      --severity HIGH 
+      --no-progress 
+      --input SUB_PROJECT_NAME.tar
   cache:
     paths:
       - .trivycache/
@@ -151,6 +157,7 @@ build:python-service:
       container_scanning: gl-container-scanning-report.json
     paths:
       - $SUB_PROJECT_NAME.tar
+  allow_failure: true
 
 scan:phishing-image:
   <<: *scan-image
