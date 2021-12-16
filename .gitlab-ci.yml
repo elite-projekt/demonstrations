@@ -137,12 +137,14 @@ build:python-service:
       --format template 
       --template "@/contrib/gitlab.tpl" 
       -o gl-container-scanning-report.json 
+      --ignore-unfixed 
       --input $SUB_PROJECT_NAME.tar
     # Print report
     - trivy 
       --exit-code 0 
       --cache-dir .trivycache/ 
       --no-progress 
+      --ignore-unfixed 
       --input $SUB_PROJECT_NAME.tar
     # Fail if High Findings
     - trivy 
@@ -150,6 +152,7 @@ build:python-service:
       --cache-dir .trivycache/ 
       --severity HIGH 
       --no-progress 
+      --ignore-unfixed 
       --input $SUB_PROJECT_NAME.tar
   cache:
     paths:
