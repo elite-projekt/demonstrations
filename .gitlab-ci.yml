@@ -22,6 +22,7 @@ lint:python-code:
   image:
     name: registry.gitlab.com/pipeline-components/hadolint:latest
   script:
+    - echo "Start hadolint for $CI_PROJECT_DIR/$SUB_PROJECT_FOLDER/Dockerfile"
     - hadolint "$CI_PROJECT_DIR/$SUB_PROJECT_FOLDER/Dockerfile" 
   needs: []
 
@@ -127,6 +128,7 @@ build:python-service:
   image:
     name: aquasec/trivy:latest
   script:
+    - echo "Start trivy Container Scan for SUB_PROJECT_NAME.tar"
     # Build report
     - trivy 
       --exit-code 0 
@@ -190,6 +192,7 @@ scan:navigation-image:
     name: gcr.io/go-containerregistry/crane:debug
     entrypoint: [""]
   script:
+  - echo "Push Container SUB_PROJECT_NAME.tar"
   - crane auth login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
   - crane push $SUB_PROJECT_NAME.tar $CI_REGISTRY_IMAGE/$SUB_PROJECT_NAME:$CI_COMMIT_BRANCH
 
