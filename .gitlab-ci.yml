@@ -133,5 +133,5 @@ push-phishing-image:
   - crane auth login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
   - crane push phishing_image.tar $CI_REGISTRY_IMAGE/phishing:$CI_COMMIT_BRANCH
   needs:
-  - build-phishing-image:
+  - build-phishing-image
 
