@@ -32,8 +32,8 @@ sast-python-code:
   script:
     - echo "starting karniko docker build for $SUB_PROJECT_NAME Image"
     - mkdir -p /kaniko/.docker
-    - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
     - image_name="$CI_REGISTRY_IMAGE/$SUB_PROJECT_NAME:$CI_COMMIT_BRANCH"
+    - echo "debug File $CI_PROJECT_DIR/$SUB_PROJECT_FOLDER/Dockerfile Context $CI_PROJECT_DIR/$SUB_PROJECT_FOLDER/ dest $image_name tar $SUB_PROJECT_NAME.tar"
     - /kaniko/executor 
       --build-arg REGISTRY_URL=$REGISTRY_URL 
       --build-arg GROUP_NAME=$GROUP_NAME 
@@ -41,7 +41,7 @@ sast-python-code:
       --dockerfile "$CI_PROJECT_DIR/$SUB_PROJECT_FOLDER/Dockerfile" 
       --destination "$image_name"
       --no-push
-      --tarPath $SUB_PROJECT_NAME.tar
+      --tarPath "$SUB_PROJECT_NAME.tar"
   artifacts:
     paths:
     - $SUB_PROJECT_NAME.tar
