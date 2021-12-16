@@ -130,7 +130,7 @@ build:python-service:
     paths:
       - $SUB_PROJECT_NAME.tar
 
-scan:phishing:
+scan:phishing-image:
   <<: *scan-image
   variables:
     SUB_PROJECT_NAME: phishing
@@ -138,7 +138,7 @@ scan:phishing:
   needs:
   - build:phishing
 
-scan:password:
+scan:password-image:
   <<: *scan-image
   variables:
     SUB_PROJECT_NAME: password
@@ -146,7 +146,7 @@ scan:password:
   needs:
   - build:password
 
-scan:navigation:
+scan:navigation-image:
   <<: *scan-image
   variables:
     SUB_PROJECT_NAME: navigation
@@ -155,7 +155,7 @@ scan:navigation:
   - build:navigation
   
   
-push-phishing-image:
+push:phishing-image:
   stage: push
   image:
     name: gcr.io/go-containerregistry/crane:debug
@@ -164,5 +164,5 @@ push-phishing-image:
   - crane auth login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
   - crane push phishing_image.tar $CI_REGISTRY_IMAGE/phishing:$CI_COMMIT_BRANCH
   needs:
-  - scan-phishing-image
+  - scan:phishing-image
 
