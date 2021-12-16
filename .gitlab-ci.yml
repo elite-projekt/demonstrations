@@ -1,21 +1,13 @@
 stages:
-  - prepare
   - linting
   - build
   - scan
   - push
 
-prepare:navigation:
-  stage: prepare
-  image: 
-    name: debian:stable-slim
-  script:
-    - sed -i "s|replacedByCi|$TEACHING_URL|" "demo_navigation/config/prod.env.js"
-
 lint:python-code:
   stage: linting
   image:
-    name: python:3.9-slim
+    name: python:3.10-slim
   before_script:
     - /usr/local/bin/python -m pip install --upgrade pip
     - python -m pip install flake8
@@ -24,24 +16,29 @@ lint:python-code:
   allow_failure: true
   needs: []
 
-# Hadolint must be called multiple times, otherwise no further Dockerfiles will be checked after the first error.
-hadolint-phishing:
-  stage: linting
-  image: registry.gitlab.com/pipeline-components/hadolint:latest
+# Hadloint template
+.lint:dockerfile: &lint-dockerfile
+  stage: lint
+  image:
+    name: registry.gitlab.com/pipeline-components/hadolint:latest
   script:
-    - hadolint ./phishing_demo/Dockerfile
+    - hadolint "$CI_PROJECT_DIR/$SUB_PROJECT_FOLDER/Dockerfile" 
+  needs: []
 
-hadolint-password:
-  stage: linting
-  image: registry.gitlab.com/pipeline-components/hadolint:latest
-  script:
-    - hadolint ./password_demo/Dockerfile
+lint:phishing-dockerfile:
+  <<: *lint-dockerfile
+  variables:
+    SUB_PROJECT_FOLDER: phishing_demo
 
-hadolint-navigation:
-  stage: linting
-  image: registry.gitlab.com/pipeline-components/hadolint:latest
-  script:
-    - hadolint ./demo_navigation/Dockerfile
+lint:password-dockerfile:
+  <<: *lint-dockerfile
+  variables:
+    SUB_PROJECT_FOLDER: password_demo
+
+lint:navigation-dockerfile:
+  <<: *lint-dockerfile
+  variables:
+    SUB_PROJECT_FOLDER: demo_navigation
 
 sast:python-code:
   stage: linting
@@ -81,12 +78,16 @@ build:phishing-image:
   variables:
     SUB_PROJECT_NAME: phishing
     SUB_PROJECT_FOLDER: phishing_demo
+  needs:
+    - lint:phishing-dockerfile
 
 build:password-image:
   <<: *build-image
   variables:
     SUB_PROJECT_NAME: password
     SUB_PROJECT_FOLDER: password_demo
+  needs:
+    - lint:password-dockerfile
 
 build:navigation-image:
   <<: *build-image
@@ -94,10 +95,9 @@ build:navigation-image:
     SUB_PROJECT_NAME: navigation
     SUB_PROJECT_FOLDER: demo_navigation
   before_script:
-    - cat "demo_navigation/config/prod.env.js"
+    - sed -i "s|replacedByCi|$TEACHING_URL|" "demo_navigation/config/prod.env.js"
   needs:
-    - lint:python-code
-    - prepare:navigation
+    - lint:navigation-dockerfile
 
 build:python-service:
   stage: build
@@ -176,7 +176,6 @@ scan:navigation-image:
   needs:
   - build:navigation-image
   
-
 # Push template
 .push:image: &push-image
   stage: push
@@ -185,13 +184,12 @@ scan:navigation-image:
     entrypoint: [""]
   script:
   - crane auth login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-  - crane push phishing_image.tar $CI_REGISTRY_IMAGE/phishing:$CI_COMMIT_BRANCH
+  - crane push $SUB_PROJECT_NAME.tar $CI_REGISTRY_IMAGE/$SUB_PROJECT_NAME:$CI_COMMIT_BRANCH
 
 push:phishing-image:
   <<: *push-image
   variables:
     SUB_PROJECT_NAME: phishing
-    SUB_PROJECT_FOLDER: phishing_demo
   needs:
   - build:phishing-image
 
@@ -199,7 +197,6 @@ push:password-image:
   <<: *push-image
   variables:
     SUB_PROJECT_NAME: password
-    SUB_PROJECT_FOLDER: password_demo
   needs:
   - build:password-image
 
@@ -207,7 +204,6 @@ push:navigation-image:
   <<: *push-image
   variables:
     SUB_PROJECT_NAME: navigation
-    SUB_PROJECT_FOLDER: demo_navigation
   needs:
   - build:navigation-image
 
