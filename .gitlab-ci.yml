@@ -48,6 +48,7 @@ sast:python-code:
       --context "$CI_PROJECT_DIR/$SUB_PROJECT_FOLDER/" 
       --dockerfile "$CI_PROJECT_DIR/$SUB_PROJECT_FOLDER/Dockerfile" 
       --no-push
+      --destination "$image_name"
       --tarPath "$SUB_PROJECT_NAME.tar"
   artifacts:
     paths:
