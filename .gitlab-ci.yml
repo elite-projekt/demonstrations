@@ -122,7 +122,8 @@ scan-phishing-image:
   artifacts:
     reports:
       container_scanning: gl-container-scanning-report.json
-  dependencies: []
+  needs:
+  - build-phishing-image
   
 push-phishing-image:
   stage: push
@@ -133,5 +134,5 @@ push-phishing-image:
   - crane auth login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
   - crane push phishing_image.tar $CI_REGISTRY_IMAGE/phishing:$CI_COMMIT_BRANCH
   needs:
-  - build-phishing-image
+  - scan-phishing-image
 
