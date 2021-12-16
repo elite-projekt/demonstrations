@@ -100,7 +100,7 @@ scan-phishing-image:
       --cache-dir .trivycache/ 
       --no-progress 
       --format template 
-      --template "@contrib/gitlab.tpl" 
+      --template "@/contrib/gitlab.tpl" 
       -o gl-container-scanning-report.json 
       --input phishing_image.tar
     # Print report
