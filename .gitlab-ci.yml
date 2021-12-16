@@ -24,6 +24,25 @@ lint:python-code:
   allow_failure: true
   needs: []
 
+# Hadolint must be called multiple times, otherwise no further Dockerfiles will be checked after the first error.
+hadolint-phishing:
+  stage: linting
+  image: registry.gitlab.com/pipeline-components/hadolint:latest
+  script:
+    - hadolint ./phishing_demo/Dockerfile
+
+hadolint-password:
+  stage: linting
+  image: registry.gitlab.com/pipeline-components/hadolint:latest
+  script:
+    - hadolint ./password_demo/Dockerfile
+
+hadolint-navigation:
+  stage: linting
+  image: registry.gitlab.com/pipeline-components/hadolint:latest
+  script:
+    - hadolint ./demo_navigation/Dockerfile
+
 sast:python-code:
   stage: linting
   image:
