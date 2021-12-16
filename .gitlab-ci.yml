@@ -35,6 +35,7 @@ sast-python-code:
     - image_name="$CI_REGISTRY_IMAGE/$SUB_PROJECT_NAME:$CI_COMMIT_BRANCH"
     - echo "debug File $CI_PROJECT_DIR/$SUB_PROJECT_FOLDER/Dockerfile Context $CI_PROJECT_DIR/$SUB_PROJECT_FOLDER/ dest $image_name tar $SUB_PROJECT_NAME.tar"
     - /kaniko/executor 
+      --verbosity=debug
       --build-arg REGISTRY_URL=$REGISTRY_URL 
       --build-arg GROUP_NAME=$GROUP_NAME 
       --context "$CI_PROJECT_DIR/$SUB_PROJECT_FOLDER/" 
