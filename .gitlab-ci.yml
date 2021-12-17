@@ -67,6 +67,9 @@ sast:python-code:
       --no-push
       --destination "$image_name"
       --tarPath "$SUB_PROJECT_NAME.tar"
+  before_script:
+    - mkdir -p /kaniko/.docker
+    - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
   artifacts:
     paths:
     - $SUB_PROJECT_NAME.tar
