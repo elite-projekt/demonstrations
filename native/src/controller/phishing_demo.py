@@ -1,10 +1,11 @@
 import flask
 
-from native.src.service import phishingdemo
+from native.src.service import phishing_demo
+
+phishing_demo_service = phishing_demo.PhishingDemo()
 
 phishing_demo = flask.Blueprint("phishingdemo", __name__,
                                 url_prefix="/phishingdemo/")
-phishing_demo_service = phishingdemo.PhishingDemo()
 
 
 @phishing_demo.route("/deletemailbox", methods=["POST", "GET"])

@@ -2,13 +2,13 @@ import logging
 
 import flask
 
-from native.src.service import OrchestrationService
-from native.src.service import phishingdemo
+from native.src.service import orchestration_service
+from native.src.service import phishing_demo
 
 orchestration = flask.Blueprint("orchestration", __name__,
                                 url_prefix="/orchestration/")
-orchestration_service = OrchestrationService.OrchestrationService()
-phishing_service = phishingdemo.PhishingDemo()
+orchestration_service = orchestration_service.OrchestrationService()
+phishing_service = phishing_demo.PhishingDemo()
 
 start_success = {"success": True, "message": "Successfully started the Demo."}
 stop_success = {"success": True, "message": "Stopped all remaining Demos."}

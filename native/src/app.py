@@ -6,13 +6,13 @@ import flask
 import flask_cors
 
 from native.src.config import config
-from native.src.controller import OrchestrationController
+from native.src.controller import orchestration_controller
 
 
 app = flask.Flask(__name__)
 flask_cors.CORS(app)
 
-app.register_blueprint(OrchestrationController.orchestration)
+app.register_blueprint(orchestration_controller.orchestration)
 
 if __name__ == "__main__":
     # set working directory
