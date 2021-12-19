@@ -1,0 +1,7 @@
+# No impact in our settings
+
+# libgcrypt20 
+CVE-2021-33560
+
+# libgmp10
+CVE-2021-43618 

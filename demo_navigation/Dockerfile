@@ -1,5 +1,5 @@
 # build stage
-FROM node:lts as build-stage
+FROM node:lts-bullseye-slim as build-stage
 WORKDIR /app
 COPY package*.json ./
 RUN npm install
@@ -7,7 +7,10 @@ COPY . .
 RUN npm run build
 
 # production stage
-FROM node:lts as production-stage
+FROM node:lts-bullseye-slim as production-stage
+
+# No Version Pining necessary
+# hadolint ignore=DL3016
 RUN npm install serve -g
 COPY --from=build-stage /app/dist /var/www/html
 EXPOSE 80
