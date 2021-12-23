@@ -57,27 +57,28 @@ touch "${DEMO_DIR}/Dockerfile"
 dos2unix "${DEMO_DIR}/Dockerfile"
 
 echo "creating endpoints for native app..."
-envsubst '${DEMO_ID}' < demo_templates/orchestration-controller.template >> "./native/src/controller/orchestration_controller.py"
+envsubst '${DEMO_ID}' < templates/orchestration-controller.template >> "./native/src/controller/orchestration_controller.py"
 dos2unix "./native/src/controller/orchestration_controller.py"
 
 
 echo "preparing stack directories..."
 export DEMO_MODE=secure
 mkdir -p "${STACKS_DIR}/secure"
-envsubst '${DEMO_ID},${DEMO_DIR},${DEMO_MODE}' < demo_templates/stackfile.template > "${STACKS_DIR}/secure/docker-compose.yml"
+envsubst '${DEMO_ID},${DEMO_DIR},${DEMO_MODE}' < templates/stackfile.template > "${STACKS_DIR}/secure/docker-compose.yml"
 dos2unix "${STACKS_DIR}/secure/docker-compose.yml"
 export DEMO_MODE=unsecure
 mkdir -p "${STACKS_DIR}/unsecure"
-envsubst '${DEMO_ID},${DEMO_DIR},${DEMO_MODE}' < demo_templates/stackfile.template > "${STACKS_DIR}/unsecure/docker-compose.yml"
+envsubst '${DEMO_ID},${DEMO_DIR},${DEMO_MODE}' < templates/stackfile.template > "${STACKS_DIR}/unsecure/docker-compose.yml"
 dos2unix "${STACKS_DIR}/unsecure/docker-compose.yml"
 
-echo "creating CI script..."
-envsubst '${DEMO_ID}' < demo_templates/ci-script.template > "ci/push-${DEMO_ID}-image.sh"
-dos2unix "ci/push-${DEMO_ID}-image.sh"
+# TODO need an update with new .gitlab-ci.yml file
+#echo "creating CI script..."
+#envsubst '${DEMO_ID}' < templates/ci-script.template > "ci/push-${DEMO_ID}-image.sh"
+#dos2unix "ci/push-${DEMO_ID}-image.sh"
 
-echo "adding CI script to gitlab-ci.yml"
-envsubst '${DEMO_ID}' < demo_templates/ci-yaml.template >> "./.gitlab-ci.yml"
-dos2unix "./.gitlab-ci.yml"
+#echo "adding CI script to gitlab-ci.yml"
+#envsubst '${DEMO_ID}' < templates/ci-yaml.template >> "./.gitlab-ci.yml"
+#dos2unix "./.gitlab-ci.yml"
 
 
 exit 0
