@@ -39,7 +39,7 @@ fi
 
 # Set variables
 export DEMO_ID
-export DEMO_DIR=${DEMO_ID}'_demo'
+export DEMO_DIR=${DEMO_ID}
 export STACKS_DIR='native/stacks/'${DEMO_ID}
 
 
@@ -50,7 +50,7 @@ if test -d "$DEMO_DIR"; then
 fi
 
 
-# Create files and directories based on the template files in demo_templates
+# Create files and directories based on the template files in templates
 echo "preparing demo directory..."
 mkdir "${DEMO_DIR}"
 touch "${DEMO_DIR}/Dockerfile"

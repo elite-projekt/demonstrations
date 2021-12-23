@@ -29,17 +29,17 @@ lint:python-code:
 lint:phishing-dockerfile:
   <<: *lint-dockerfile
   variables:
-    SUB_PROJECT_FOLDER: phishing_demo
+    SUB_PROJECT_FOLDER: phishing
 
 lint:password-dockerfile:
   <<: *lint-dockerfile
   variables:
-    SUB_PROJECT_FOLDER: password_demo
+    SUB_PROJECT_FOLDER: password
 
 lint:navigation-dockerfile:
   <<: *lint-dockerfile
   variables:
-    SUB_PROJECT_FOLDER: demo_navigation
+    SUB_PROJECT_FOLDER: navigation
 
 sast:python-code:
   stage: lint
@@ -61,9 +61,9 @@ sast:python-code:
   script:
     - echo "starting karniko docker build for $SUB_PROJECT_NAME Image"
     - image_name="$CI_REGISTRY_IMAGE/$SUB_PROJECT_NAME:$CI_COMMIT_BRANCH"
-    - /kaniko/executor 
-      --context "$CI_PROJECT_DIR/$SUB_PROJECT_FOLDER/" 
-      --dockerfile "$CI_PROJECT_DIR/$SUB_PROJECT_FOLDER/Dockerfile" 
+    - /kaniko/executor
+      --context "$CI_PROJECT_DIR/$SUB_PROJECT_FOLDER/"
+      --dockerfile "$CI_PROJECT_DIR/$SUB_PROJECT_FOLDER/Dockerfile"
       --no-push
       --destination "$image_name"
       --tarPath "$SUB_PROJECT_NAME.tar"
@@ -81,7 +81,7 @@ build:phishing-image:
   <<: *build-image
   variables:
     SUB_PROJECT_NAME: phishing
-    SUB_PROJECT_FOLDER: phishing_demo
+    SUB_PROJECT_FOLDER: phishing
   needs:
     - lint:phishing-dockerfile
 
@@ -89,7 +89,7 @@ build:password-image:
   <<: *build-image
   variables:
     SUB_PROJECT_NAME: password
-    SUB_PROJECT_FOLDER: password_demo
+    SUB_PROJECT_FOLDER: password
   needs:
     - lint:password-dockerfile
 
@@ -97,16 +97,16 @@ build:navigation-image:
   <<: *build-image
   variables:
     SUB_PROJECT_NAME: navigation
-    SUB_PROJECT_FOLDER: demo_navigation
+    SUB_PROJECT_FOLDER: navigation
   before_script:
-    - sed -i "s|replacedByCi|$TEACHING_URL|" "demo_navigation/config/prod.env.js"
+    - sed -i "s|replacedByCi|$TEACHING_URL|" "navigation/config/prod.env.js"
   needs:
     - lint:navigation-dockerfile
 
 build:python-service:
   stage: build
   image: $REGISTRY_URL/$GROUP_NAME/container-templates/python-windows-service-builder:python-service-buzilder
-  script: 
+  script:
     - cd ./native/msi
     - echo "" >> infos.rtf
     - echo "\pard\sl240\slmult1\f1\fs18 > docker login $REGISTRY_URL\par" >> infos.rtf
@@ -122,7 +122,7 @@ build:python-service:
     paths:
       - /builds/$GROUP_NAME/demonstrations/native/native/dist/windows/*
       - /builds/$GROUP_NAME/demonstrations/native/msi/infos.rtf
-  needs: 
+  needs:
     - lint:python-code
 
 # Scan template
@@ -133,29 +133,29 @@ build:python-service:
   script:
     - echo "Start trivy Container Scan for SUB_PROJECT_NAME.tar"
     # Build report
-    - trivy 
-      --exit-code 0 
-      --cache-dir .trivycache/ 
-      --no-progress 
-      --format template 
-      --template "@/contrib/gitlab.tpl" 
-      -o gl-container-scanning-report.json 
-      --ignore-unfixed 
+    - trivy
+      --exit-code 0
+      --cache-dir .trivycache/
+      --no-progress
+      --format template
+      --template "@/contrib/gitlab.tpl"
+      -o gl-container-scanning-report.json
+      --ignore-unfixed
       --input $SUB_PROJECT_NAME.tar
     # Print report
-    - trivy 
-      --exit-code 0 
-      --cache-dir .trivycache/ 
-      --no-progress 
-      --ignore-unfixed 
+    - trivy
+      --exit-code 0
+      --cache-dir .trivycache/
+      --no-progress
+      --ignore-unfixed
       --input $SUB_PROJECT_NAME.tar
     # Fail if High Findings
-    - trivy 
-      --exit-code 1 
-      --cache-dir .trivycache/ 
-      --severity HIGH 
-      --no-progress 
-      --ignore-unfixed 
+    - trivy
+      --exit-code 1
+      --cache-dir .trivycache/
+      --severity HIGH
+      --no-progress
+      --ignore-unfixed
       --input $SUB_PROJECT_NAME.tar
   cache:
     paths:
@@ -171,7 +171,7 @@ scan:phishing-image:
   <<: *scan-image
   variables:
     SUB_PROJECT_NAME: phishing
-    SUB_PROJECT_FOLDER: phishing_demo
+    SUB_PROJECT_FOLDER: phishing
   needs:
   - build:phishing-image
 
@@ -179,7 +179,7 @@ scan:password-image:
   <<: *scan-image
   variables:
     SUB_PROJECT_NAME: password
-    SUB_PROJECT_FOLDER: password_demo
+    SUB_PROJECT_FOLDER: password
   needs:
   - build:password-image
 
@@ -187,7 +187,7 @@ scan:navigation-image:
   <<: *scan-image
   variables:
     SUB_PROJECT_NAME: navigation
-    SUB_PROJECT_FOLDER: demo_navigation
+    SUB_PROJECT_FOLDER: navigation
   needs:
   - build:navigation-image
   
