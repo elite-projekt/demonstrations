@@ -29,17 +29,17 @@ lint:python-code:
 lint:phishing-dockerfile:
   <<: *lint-dockerfile
   variables:
-    SUB_PROJECT_FOLDER: phishing
+    SUB_PROJECT_FOLDER: demos/phishing
 
 lint:password-dockerfile:
   <<: *lint-dockerfile
   variables:
-    SUB_PROJECT_FOLDER: password
+    SUB_PROJECT_FOLDER: demos/password
 
 lint:navigation-dockerfile:
   <<: *lint-dockerfile
   variables:
-    SUB_PROJECT_FOLDER: navigation
+    SUB_PROJECT_FOLDER: demos/navigation
 
 sast:python-code:
   stage: lint
@@ -81,7 +81,7 @@ build:phishing-image:
   <<: *build-image
   variables:
     SUB_PROJECT_NAME: phishing
-    SUB_PROJECT_FOLDER: phishing
+    SUB_PROJECT_FOLDER: demos/phishing
   needs:
     - lint:phishing-dockerfile
 
@@ -89,7 +89,7 @@ build:password-image:
   <<: *build-image
   variables:
     SUB_PROJECT_NAME: password
-    SUB_PROJECT_FOLDER: password
+    SUB_PROJECT_FOLDER: demos/password
   needs:
     - lint:password-dockerfile
 
@@ -97,9 +97,9 @@ build:navigation-image:
   <<: *build-image
   variables:
     SUB_PROJECT_NAME: navigation
-    SUB_PROJECT_FOLDER: navigation
+    SUB_PROJECT_FOLDER: demos/navigation
   before_script:
-    - sed -i "s|replacedByCi|$TEACHING_URL|" "navigation/config/prod.env.js"
+    - sed -i "s|replacedByCi|$TEACHING_URL|" "demos/navigation/config/prod.env.js"
   needs:
     - lint:navigation-dockerfile
 
@@ -171,7 +171,7 @@ scan:phishing-image:
   <<: *scan-image
   variables:
     SUB_PROJECT_NAME: phishing
-    SUB_PROJECT_FOLDER: phishing
+    SUB_PROJECT_FOLDER: demos/phishing
   needs:
   - build:phishing-image
 
@@ -179,7 +179,7 @@ scan:password-image:
   <<: *scan-image
   variables:
     SUB_PROJECT_NAME: password
-    SUB_PROJECT_FOLDER: password
+    SUB_PROJECT_FOLDER: demos/password
   needs:
   - build:password-image
 
@@ -187,7 +187,7 @@ scan:navigation-image:
   <<: *scan-image
   variables:
     SUB_PROJECT_NAME: navigation
-    SUB_PROJECT_FOLDER: navigation
+    SUB_PROJECT_FOLDER: demos/navigation
   needs:
   - build:navigation-image
   

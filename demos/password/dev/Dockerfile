@@ -13,6 +13,6 @@ RUN apk update \
     && apk add jpeg-dev zlib-dev libjpeg\
     && pip install Pillow
 
-COPY ./requirements.txt /password
+COPY requirements.txt /password
 RUN pip3 install -r /password/requirements.txt
 
