@@ -1,0 +1,29 @@
+LINTING_SNIPPET="lint:${DEMO_ID}-dockerfile:
+  <<: *lint-dockerfile
+  variables:
+    SUB_PROJECT_FOLDER: ${DEMO_DIR}
+"
+BUILD_SNIPPET="build:${DEMO_ID}-image:
+  <<: *build-image
+  variables:
+    SUB_PROJECT_NAME: ${DEMO_ID}
+    SUB_PROJECT_FOLDER: ${DEMO_DIR}
+  needs:
+    - lint:${DEMO_ID}-dockerfile
+"
+BUILD_PYTHON_SNIPPET="    - echo \"> docker pull \$REGISTRY_URL/\$GROUP_NAME/demonstrations/${DEMO_ID}:master\par\" >> infos.rtf"
+SCAN_SNIPPET="scan:${DEMO_ID}-image:
+  <<: *scan-image
+  variables:
+    SUB_PROJECT_NAME: ${DEMO_ID}
+    SUB_PROJECT_FOLDER: ${DEMO_DIR}
+  needs:
+  - build:${DEMO_ID}-image
+"
+PUSH_SNIPPED="push:${DEMO_ID}-image:
+  <<: *push-image
+  variables:
+    SUB_PROJECT_NAME: ${DEMO_ID}
+  needs:
+  - build:${DEMO_ID}-image
+"
