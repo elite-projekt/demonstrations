@@ -39,8 +39,9 @@ fi
 
 # Set variables
 export DEMO_ID
-export DEMO_DIR='demos/'${DEMO_ID}
-export STACKS_DIR='native/stacks/'${DEMO_ID}
+export DEMO_DIR='demos/'${DEMO_ID}'/'
+export STACKS_DIR='native/stacks/'${DEMO_ID}'/'
+export ORCHESTRATION_CONTROLLER_PATH="./native/src/controller/orchestration_controller.py"
 
 
 # Check if demo exists
@@ -50,33 +51,34 @@ if test -d "$DEMO_DIR"; then
 fi
 
 
-# Create files and directories based on the template files in demo_templates
+# Create files and directories based on the template files in templates
 echo "preparing demo directory..."
 mkdir "${DEMO_DIR}"
-touch "${DEMO_DIR}/Dockerfile"
-dos2unix "${DEMO_DIR}/Dockerfile"
+touch "${DEMO_DIR}Dockerfile"
+dos2unix "${DEMO_DIR}Dockerfile"
 
 echo "creating endpoints for native app..."
-envsubst '${DEMO_ID}' < demo_templates/orchestration-controller.template >> "./native/native/controller/OrchestrationController.py"
-dos2unix "./native/native/controller/OrchestrationController.py"
+envsubst '${DEMO_ID}' < templates/orchestration-controller.template >> "${ORCHESTRATION_CONTROLLER_PATH}"
+dos2unix "${ORCHESTRATION_CONTROLLER_PATH}"
 
 
 echo "preparing stack directories..."
 export DEMO_MODE=secure
-mkdir -p "${STACKS_DIR}/secure"
-envsubst '${DEMO_ID},${DEMO_DIR},${DEMO_MODE}' < demo_templates/stackfile.template > "${STACKS_DIR}/secure/docker-compose.yml"
-dos2unix "${STACKS_DIR}/secure/docker-compose.yml"
+mkdir -p "${STACKS_DIR}secure"
+envsubst '${DEMO_ID},${DEMO_DIR},${DEMO_MODE}' < templates/stackfile.template > "${STACKS_DIR}secure/docker-compose.yml"
+dos2unix "${STACKS_DIR}secure/docker-compose.yml"
 export DEMO_MODE=unsecure
-mkdir -p "${STACKS_DIR}/unsecure"
-envsubst '${DEMO_ID},${DEMO_DIR},${DEMO_MODE}' < demo_templates/stackfile.template > "${STACKS_DIR}/unsecure/docker-compose.yml"
-dos2unix "${STACKS_DIR}/unsecure/docker-compose.yml"
+mkdir -p "${STACKS_DIR}unsecure"
+envsubst '${DEMO_ID},${DEMO_DIR},${DEMO_MODE}' < templates/stackfile.template > "${STACKS_DIR}unsecure/docker-compose.yml"
+dos2unix "${STACKS_DIR}unsecure/docker-compose.yml"
 
-echo "creating CI script..."
-envsubst '${DEMO_ID}' < demo_templates/ci-script.template > "ci/push-${DEMO_ID}-image.sh"
-dos2unix "ci/push-${DEMO_ID}-image.sh"
-
-echo "adding CI script to gitlab-ci.yml"
-envsubst '${DEMO_ID}' < demo_templates/ci-yaml.template >> "./.gitlab-ci.yml"
+echo "adding demo to gitlab-ci.yml"
+source  ./templates/ci-script.template
+sed -i '/lint:demo:begin/r'<(echo "$LINTING_SNIPPET") .gitlab-ci.yml
+sed -i '/build:demo:begin/r'<(echo "$BUILD_SNIPPET") .gitlab-ci.yml
+sed -i '/build:python:begin/r'<(echo "$BUILD_PYTHON_SNIPPET") .gitlab-ci.yml
+sed -i '/scan:demo:begin/r'<(echo "$SCAN_SNIPPET") .gitlab-ci.yml
+sed -i '/push:demo:begin/r'<(echo "$PUSH_SNIPPED") .gitlab-ci.yml
 dos2unix "./.gitlab-ci.yml"
 
 

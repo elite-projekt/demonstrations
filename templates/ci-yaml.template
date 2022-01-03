@@ -1,8 +1,0 @@
-
-push-${DEMO_ID}-image:
-  stage: build
-  image:
-    name: gcr.io/kaniko-project/executor:debug
-    entrypoint: [""]
-  script:
-    - sh ./ci/push-${DEMO_ID}-image.sh

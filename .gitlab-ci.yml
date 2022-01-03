@@ -26,6 +26,7 @@ lint:python-code:
     - hadolint "$CI_PROJECT_DIR/$SUB_PROJECT_FOLDER/Dockerfile" 
   needs: []
 
+#lint:demo:begin - DO NOT CHANGE THIS LINE. required by 'init_new_demo.sh' script
 lint:phishing-dockerfile:
   <<: *lint-dockerfile
   variables:
@@ -77,6 +78,7 @@ sast:python-code:
   needs:
     - lint:python-code
 
+#build:demo:begin - DO NOT CHANGE THIS LINE. required by 'init_new_demo.sh' script
 build:phishing-image:
   <<: *build-image
   variables:
@@ -110,6 +112,7 @@ build:python-service:
     - cd ./native/msi
     - echo "" >> infos.rtf
     - echo "\pard\sl240\slmult1\f1\fs18 > docker login $REGISTRY_URL\par" >> infos.rtf
+    #build:python:begin - DO NOT CHANGE THIS LINE. required by 'init_new_demo.sh' script
     - echo "> docker pull $REGISTRY_URL/$GROUP_NAME/demonstrations/navigation:master\par" >> infos.rtf
     - echo "> docker pull $REGISTRY_URL/$GROUP_NAME/demonstrations/phishing:master\par" >> infos.rtf
     - echo "> docker pull $REGISTRY_URL/$GROUP_NAME/demonstrations/password:master\par" >> infos.rtf
@@ -167,6 +170,7 @@ build:python-service:
       - $SUB_PROJECT_NAME.tar
   allow_failure: true
 
+#scan:demo:begin - DO NOT CHANGE THIS LINE. required by 'init_new_demo.sh' script
 scan:phishing-image:
   <<: *scan-image
   variables:
@@ -202,6 +206,7 @@ scan:navigation-image:
   - crane auth login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
   - crane push $SUB_PROJECT_NAME.tar $CI_REGISTRY_IMAGE/$SUB_PROJECT_NAME:$CI_COMMIT_BRANCH
 
+#push:demo:begin - DO NOT CHANGE THIS LINE. required by 'init_new_demo.sh' script
 push:phishing-image:
   <<: *push-image
   variables:
