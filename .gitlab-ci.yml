@@ -123,7 +123,7 @@ build:python-service:
     - bash ./entrypoint-windows.sh $GROUP_NAME
   artifacts:
     paths:
-      - /builds/$GROUP_NAME/demonstrations/native/native/dist/windows/*
+      - /builds/$GROUP_NAME/demonstrations/native/src/dist/windows/*
       - /builds/$GROUP_NAME/demonstrations/native/msi/infos.rtf
   needs:
     - lint:python-code
