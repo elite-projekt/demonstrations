@@ -5,10 +5,10 @@ block_cipher = None
 
 
 a = Analysis(['app.py'],
-             pathex=['C:\\src\\native\\src', '/builds/esc-mpse20/demonstrations/native/src', '/builds/esc-mpse20/demonstrations/native'],
+             pathex=['C:\\src\\native\\src', '/builds/esc-mpse20/demonstrations/native/src', '/builds/esc-mpse20/demonstrations/native', '/builds/esc-mpse20/demonstrations'],
              binaries=[],
              datas=[],
-             hiddenimports=['config', 'PyYAML', 'native'],
+             hiddenimports=['config', 'PyYAML'],
              hookspath=[],
              runtime_hooks=[],
              excludes=[],
