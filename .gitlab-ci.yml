@@ -107,7 +107,7 @@ build:navigation-image:
 
 build:python-service:
   stage: build
-  image: $REGISTRY_URL/$GROUP_NAME/container-templates/python-windows-service-builder:python-service-buzilder
+  image: $REGISTRY_URL/$GROUP_NAME/container-templates/python-windows-service-builder:master
   script:
     - cd ./native/msi
     - echo "" >> infos.rtf
@@ -134,7 +134,7 @@ build:python-service:
   image:
     name: aquasec/trivy:latest
   script:
-    - echo "Start trivy Container Scan for SUB_PROJECT_NAME.tar"
+    - echo "Start trivy Container Scan for $SUB_PROJECT_NAME.tar"
     # Build report
     - trivy
       --exit-code 0
