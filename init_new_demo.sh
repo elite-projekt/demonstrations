@@ -41,7 +41,8 @@ fi
 export DEMO_ID
 export DEMO_DIR='demos/'${DEMO_ID}'/'
 export STACKS_DIR='native/stacks/'${DEMO_ID}'/'
-export ORCHESTRATION_CONTROLLER_PATH="./native/src/controller/orchestration_controller.py"
+export DEMO_CONTROLLER_PATH=${DEMO_DIR}"/native/"
+export DEMO_CONTROLLER=${DEMO_CONTROLLER_PATH}${DEMO_ID}"_controller.py"
 
 
 # Check if demo exists
@@ -51,15 +52,28 @@ if test -d "$DEMO_DIR"; then
 fi
 
 
-# Create files and directories based on the template files in templates
+# Create files and directories based on the template files in templates and
+# convert the new directories to python packages
 echo "preparing demo directory..."
 mkdir "${DEMO_DIR}"
 touch "${DEMO_DIR}Dockerfile"
 dos2unix "${DEMO_DIR}Dockerfile"
 
+touch "${DEMO_DIR}__init__.py"
+dos2unix "${DEMO_DIR}__init__.py"
+
+mkdir -p "${DEMO_DIR}src"
+touch "${DEMO_DIR}src/__init__.py"
+dos2unix "${DEMO_DIR}src/__init__.py"
+
+mkdir -p ${DEMO_CONTROLLER_PATH}
+touch "${DEMO_CONTROLLER_PATH}__init__.py"
+dos2unix "${DEMO_CONTROLLER_PATH}__init__.py"
+
+
 echo "creating endpoints for native app..."
-envsubst '${DEMO_ID}' < templates/orchestration-controller.template >> "${ORCHESTRATION_CONTROLLER_PATH}"
-dos2unix "${ORCHESTRATION_CONTROLLER_PATH}"
+envsubst '${DEMO_ID}' < templates/orchestration-controller.template >> "${DEMO_CONTROLLER}"
+dos2unix "${DEMO_CONTROLLER}"
 
 
 echo "preparing stack directories..."
