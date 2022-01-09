@@ -326,9 +326,8 @@ class PhishingDemo:
         """Close mail application"""
         logging.info("Try closing running thunderbird process...")
         try:
-            subprocess.Popen(
-                ["taskkill", "/f", "/im", "thunderbird.exe"],
-                stdout=subprocess.PIPE
+            subprocess.check_output(
+                ["taskkill", "/f", "/im", "thunderbird.exe"]
             )
             logging.info("Success")
         except Exception as e:
@@ -338,7 +337,7 @@ class PhishingDemo:
         """Start mail application"""
         logging.info("Try starting thunderbird process...")
         try:
-            subprocess.Popen(
+            subprocess.check_output(
                 ["C:\\Program Files\\Mozilla Thunderbird\\thunderbird.exe"]
             )
             logging.info("Success")
