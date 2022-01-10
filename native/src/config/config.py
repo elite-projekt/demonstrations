@@ -26,5 +26,5 @@ class EnvironmentConfig:
 
 class ApplicationInformation:
     DESCRIPTION = "HDA MPSE Project native app client"
-    VERSION = "1.3"
-    BUILDDATE = "July 2021"
+    VERSION = "1.4"
+    BUILDDATE = "January 2022"
