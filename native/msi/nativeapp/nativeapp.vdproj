@@ -21,13 +21,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_1463706DFA4940248AB38115F1B2C2FB"
-        "OwnerKey" = "8:_UNDEFINED"
+        "MsmKey" = "8:_0F4584191614126A47D59B441B39D768"
+        "OwnerKey" = "8:_ABE3542C5A7C47F0ABE110A9BF4F6C4D"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_1B4CBD1912F849A1AC06C9159CC6EB03"
+        "MsmKey" = "8:_10E72039C2174DF89508A55B1451C6BC"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -39,14 +39,14 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_237F273C5414F663D44D43690C867676"
-        "OwnerKey" = "8:_A7E1F8B7C3DCADA8A522F1C7CE08D368"
+        "MsmKey" = "8:_1FC5AB8CE29740CF8BDC3BDE5954124F"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_24F5B94E7E3E4EA38436759B51172A07"
-        "OwnerKey" = "8:_UNDEFINED"
+        "MsmKey" = "8:_237F273C5414F663D44D43690C867676"
+        "OwnerKey" = "8:_A7E1F8B7C3DCADA8A522F1C7CE08D368"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -69,13 +69,25 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_37254142304744BE8E0EFA9C052D1B0F"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_504C3901E0A5408FA7952770A5B37F79"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_6C3B1AF0CFFF44AC995D8F1DE8F21F66"
+        "MsmKey" = "8:_58F687065B2F48A7ACB5EC853AE345AC"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_72FB12566D09460989E15900C1573EB1"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -87,26 +99,8 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_846A71C4EC8A41DCA97E0AC4729E52FF"
+        "MsmKey" = "8:_8415028DF0CB4C4496EDDF4705100C20"
         "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_853F7041EBE740288288245A279C2869"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_8D02C54AF5C243CD9D52D91835C248F4"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_8E6630B5978005C67F683C9AE0B567EA"
-        "OwnerKey" = "8:_ABE3542C5A7C47F0ABE110A9BF4F6C4D"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -136,7 +130,7 @@
         "Entry"
         {
         "MsmKey" = "8:_A7E1F8B7C3DCADA8A522F1C7CE08D368"
-        "OwnerKey" = "8:_8E6630B5978005C67F683C9AE0B567EA"
+        "OwnerKey" = "8:_0F4584191614126A47D59B441B39D768"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -177,13 +171,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_CCF4AAB7C4A9428E8A98F2180399F583"
+        "MsmKey" = "8:_CBDADA5D39534C77B367E85911755E53"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_CFFF6372C395494397CAB21D2A6CB48E"
+        "MsmKey" = "8:_CCF4AAB7C4A9428E8A98F2180399F583"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -197,6 +191,12 @@
         {
         "MsmKey" = "8:_EC98F15365FD4D3F45547A2772EC8CB6"
         "OwnerKey" = "8:_A7E1F8B7C3DCADA8A522F1C7CE08D368"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_F427D2009D88486CAB08BC6F321E72BE"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -370,12 +370,23 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1463706DFA4940248AB38115F1B2C2FB"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_0F4584191614126A47D59B441B39D768"
             {
-            "SourcePath" = "8:..\\..\\..\\..\\tmp\\secure\\docker-compose.yml"
-            "TargetName" = "8:docker-compose.yml"
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:System.Management.Automation, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_0F4584191614126A47D59B441B39D768"
+                    {
+                    "Name" = "8:System.Management.Automation.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:System.Management.Automation.dll"
+            "TargetName" = "8:"
             "Tag" = "8:"
-            "Folder" = "8:_BF65F97FE89E4E4689BC3A0AC6335F9A"
+            "Folder" = "8:_AE244D9436344781BC1B22B9B9D64D91"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -387,15 +398,15 @@
             "PackageAs" = "3:1"
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1B4CBD1912F849A1AC06C9159CC6EB03"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_10E72039C2174DF89508A55B1451C6BC"
             {
-            "SourcePath" = "8:..\\..\\..\\..\\tmp\\unsecure\\docker-compose.yml"
-            "TargetName" = "8:docker-compose.yml"
+            "SourcePath" = "8:..\\..\\infos.rtf"
+            "TargetName" = "8:infos.rtf"
             "Tag" = "8:"
-            "Folder" = "8:_103EF2562701423C9447D31E38B241A3"
+            "Folder" = "8:_AE244D9436344781BC1B22B9B9D64D91"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -416,6 +427,26 @@
             "TargetName" = "8:fwd corona.txt"
             "Tag" = "8:"
             "Folder" = "8:_8C5D206CB9484875A71DBA7B3D691D39"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1FC5AB8CE29740CF8BDC3BDE5954124F"
+            {
+            "SourcePath" = "8:..\\..\\stacks\\phishing\\docker-compose.yml"
+            "TargetName" = "8:docker-compose.yml"
+            "Tag" = "8:"
+            "Folder" = "8:_DD73A1FDD96F4E11807A5318D793ACD0"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -459,26 +490,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_24F5B94E7E3E4EA38436759B51172A07"
-            {
-            "SourcePath" = "8:..\\..\\stacks\\phishing\\mailserver\\mailserver.env"
-            "TargetName" = "8:mailserver.env"
-            "Tag" = "8:"
-            "Folder" = "8:_095D7A4EA2BE45EF98A3742894C05F7A"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_285BF60917984872ABDD7A1CDB63222A"
@@ -541,6 +552,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_37254142304744BE8E0EFA9C052D1B0F"
+            {
+            "SourcePath" = "8:..\\..\\app.exe"
+            "TargetName" = "8:app.exe"
+            "Tag" = "8:"
+            "Folder" = "8:_AE244D9436344781BC1B22B9B9D64D91"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_504C3901E0A5408FA7952770A5B37F79"
             {
             "SourcePath" = "8:..\\..\\stacks\\phishing\\mailserver\\config\\opendkim\\SigningTable"
@@ -561,12 +592,32 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6C3B1AF0CFFF44AC995D8F1DE8F21F66"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_58F687065B2F48A7ACB5EC853AE345AC"
             {
-            "SourcePath" = "8:..\\..\\stacks\\phishing\\docker-compose.yml"
+            "SourcePath" = "8:..\\..\\stacks\\password\\secure\\docker-compose.yml"
             "TargetName" = "8:docker-compose.yml"
             "Tag" = "8:"
-            "Folder" = "8:_DD73A1FDD96F4E11807A5318D793ACD0"
+            "Folder" = "8:_BF65F97FE89E4E4689BC3A0AC6335F9A"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_72FB12566D09460989E15900C1573EB1"
+            {
+            "SourcePath" = "8:..\\..\\stacks\\password\\unsecure\\docker-compose.yml"
+            "TargetName" = "8:docker-compose.yml"
+            "Tag" = "8:"
+            "Folder" = "8:_103EF2562701423C9447D31E38B241A3"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -601,12 +652,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_846A71C4EC8A41DCA97E0AC4729E52FF"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8415028DF0CB4C4496EDDF4705100C20"
             {
-            "SourcePath" = "8:..\\..\\stacks\\phishing\\profile.zip"
-            "TargetName" = "8:profile.zip"
+            "SourcePath" = "8:..\\..\\stacks\\phishing\\mailserver\\mailserver.env"
+            "TargetName" = "8:mailserver.env"
             "Tag" = "8:"
-            "Folder" = "8:_78BAEC1D3F41401BA573CE8E052CE303"
+            "Folder" = "8:_095D7A4EA2BE45EF98A3742894C05F7A"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -619,77 +670,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_853F7041EBE740288288245A279C2869"
-            {
-            "SourcePath" = "8:..\\service.log"
-            "TargetName" = "8:service.log"
-            "Tag" = "8:"
-            "Folder" = "8:_AE244D9436344781BC1B22B9B9D64D91"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8D02C54AF5C243CD9D52D91835C248F4"
-            {
-            "SourcePath" = "8:..\\infos.rtf"
-            "TargetName" = "8:infos.rtf"
-            "Tag" = "8:"
-            "Folder" = "8:_AE244D9436344781BC1B22B9B9D64D91"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_8E6630B5978005C67F683C9AE0B567EA"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:System.Management.Automation, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_8E6630B5978005C67F683C9AE0B567EA"
-                    {
-                    "Name" = "8:System.Management.Automation.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:System.Management.Automation.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_AE244D9436344781BC1B22B9B9D64D91"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_946ECE79F4530E59F5C1EB6975FBD7E3"
@@ -885,12 +865,12 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CCF4AAB7C4A9428E8A98F2180399F583"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CBDADA5D39534C77B367E85911755E53"
             {
-            "SourcePath" = "8:..\\..\\mails\\reminder gift.txt"
-            "TargetName" = "8:reminder gift.txt"
+            "SourcePath" = "8:..\\..\\src\\profiles\\profile.zip"
+            "TargetName" = "8:profile.zip"
             "Tag" = "8:"
-            "Folder" = "8:_8C5D206CB9484875A71DBA7B3D691D39"
+            "Folder" = "8:_78BAEC1D3F41401BA573CE8E052CE303"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -905,12 +885,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CFFF6372C395494397CAB21D2A6CB48E"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CCF4AAB7C4A9428E8A98F2180399F583"
             {
-            "SourcePath" = "8:C:\\Program Files (x86)\\hda\\nativeapp\\artifacts(2)\\native\\native\\dist\\windows\\app.exe"
-            "TargetName" = "8:app.exe"
+            "SourcePath" = "8:..\\..\\mails\\reminder gift.txt"
+            "TargetName" = "8:reminder gift.txt"
             "Tag" = "8:"
-            "Folder" = "8:_AE244D9436344781BC1B22B9B9D64D91"
+            "Folder" = "8:_8C5D206CB9484875A71DBA7B3D691D39"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -974,6 +954,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F427D2009D88486CAB08BC6F321E72BE"
+            {
+            "SourcePath" = "8:..\\..\\..\\.env"
+            "TargetName" = "8:.env"
+            "Tag" = "8:"
+            "Folder" = "8:_AE244D9436344781BC1B22B9B9D64D91"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F6642458C34349B6AFD349D1BDC4B872"
@@ -1184,15 +1184,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:nativeapp"
-        "ProductCode" = "8:{A14AE2DF-860C-4255-A7B5-9891988A9BC0}"
-        "PackageCode" = "8:{69AA6595-F16F-4886-BC4C-D01E2E4F89CE}"
+        "ProductCode" = "8:{5A4A79F6-65A3-44C0-84F3-96F28CDD511F}"
+        "PackageCode" = "8:{5C318126-17E0-4FF6-A3B7-997C304EBB02}"
         "UpgradeCode" = "8:{F520D502-8792-4A29-91CD-F41DF46C6B7C}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.3"
+        "ProductVersion" = "8:1.4"
         "Manufacturer" = "8:hda"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -1313,7 +1313,7 @@
             "ShowCmd" = "3:7"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_CFFF6372C395494397CAB21D2A6CB48E"
+            "Target" = "8:_37254142304744BE8E0EFA9C052D1B0F"
             "Folder" = "8:_29967C7B9C1D49D5939C81CBA82FC658"
             "WorkingFolder" = "8:_AE244D9436344781BC1B22B9B9D64D91"
             "Icon" = "8:"
@@ -1327,7 +1327,7 @@
             "ShowCmd" = "3:7"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_CFFF6372C395494397CAB21D2A6CB48E"
+            "Target" = "8:_37254142304744BE8E0EFA9C052D1B0F"
             "Folder" = "8:_2A1BB7F9913C40C097B461C8B7E72644"
             "WorkingFolder" = "8:_AE244D9436344781BC1B22B9B9D64D91"
             "Icon" = "8:"
@@ -1346,7 +1346,7 @@
                     "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_A229F2B7087B4C0AB3063BAC9E76284E"
                     {
                     "Sequence" = "3:110"
-                    "DisplayName" = "8:Fertig"
+                    "DisplayName" = "8:Finished"
                     "UseDynamicProperties" = "11:TRUE"
                     "IsDependency" = "11:FALSE"
                     "SourcePath" = "8:<VsdDialogDir>\\VsdFinishedDlg.wid"
@@ -1381,7 +1381,7 @@
                     "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_ECE87D0A21A6401D881A3711DF14F9D7"
                     {
                     "Sequence" = "3:100"
-                    "DisplayName" = "8:Infodatei"
+                    "DisplayName" = "8:Read Me"
                     "UseDynamicProperties" = "11:TRUE"
                     "IsDependency" = "11:FALSE"
                     "SourcePath" = "8:<VsdDialogDir>\\VsdReadmeDlg.wid"
@@ -1407,7 +1407,7 @@
                             "ContextData" = "8:"
                             "Attributes" = "3:0"
                             "Setting" = "3:2"
-                            "Value" = "8:_8D02C54AF5C243CD9D52D91835C248F4"
+                            "Value" = "8:_10E72039C2174DF89508A55B1451C6BC"
                             "UsePlugInResources" = "11:TRUE"
                             }
                             "Sunken"
@@ -1437,7 +1437,7 @@
                     "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_E027385503034F14B2A41C5A7CD2E539"
                     {
                     "Sequence" = "3:120"
-                    "DisplayName" = "8:Fertig"
+                    "DisplayName" = "8:Finished"
                     "UseDynamicProperties" = "11:TRUE"
                     "IsDependency" = "11:FALSE"
                     "SourcePath" = "8:<VsdDialogDir>\\VsdAdminFinishedDlg.wid"
@@ -1468,7 +1468,7 @@
                     "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_50BEC3A38045456A96DA10BA756F40E9"
                     {
                     "Sequence" = "3:100"
-                    "DisplayName" = "8:Status"
+                    "DisplayName" = "8:Progress"
                     "UseDynamicProperties" = "11:TRUE"
                     "IsDependency" = "11:FALSE"
                     "SourcePath" = "8:<VsdDialogDir>\\VsdProgressDlg.wid"
@@ -1512,7 +1512,7 @@
                     "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_047DCFDB58B944D39310ED2E865E7628"
                     {
                     "Sequence" = "3:100"
-                    "DisplayName" = "8:Willkommen"
+                    "DisplayName" = "8:Welcome"
                     "UseDynamicProperties" = "11:TRUE"
                     "IsDependency" = "11:FALSE"
                     "SourcePath" = "8:<VsdDialogDir>\\VsdWelcomeDlg.wid"
@@ -1560,7 +1560,7 @@
                     "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_D7958382553B409DB2D81E2C5A4B810B"
                     {
                     "Sequence" = "3:200"
-                    "DisplayName" = "8:Installationsordner"
+                    "DisplayName" = "8:Installation Folder"
                     "UseDynamicProperties" = "11:TRUE"
                     "IsDependency" = "11:FALSE"
                     "SourcePath" = "8:<VsdDialogDir>\\VsdFolderDlg.wid"
@@ -1595,7 +1595,7 @@
                     "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_EFFEE1C7F47F41E38D47A5D7486AC1E9"
                     {
                     "Sequence" = "3:300"
-                    "DisplayName" = "8:Installation bestätigen"
+                    "DisplayName" = "8:Confirm Installation"
                     "UseDynamicProperties" = "11:TRUE"
                     "IsDependency" = "11:FALSE"
                     "SourcePath" = "8:<VsdDialogDir>\\VsdConfirmDlg.wid"
@@ -1638,7 +1638,7 @@
                     "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_28861D5D86B547EA8B7C1F7222CC5E8C"
                     {
                     "Sequence" = "3:200"
-                    "DisplayName" = "8:Installationsordner"
+                    "DisplayName" = "8:Installation Folder"
                     "UseDynamicProperties" = "11:TRUE"
                     "IsDependency" = "11:FALSE"
                     "SourcePath" = "8:<VsdDialogDir>\\VsdAdminFolderDlg.wid"
@@ -1660,7 +1660,7 @@
                     "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_88E47BBC397D4D87AB3BC5C63EC6316E"
                     {
                     "Sequence" = "3:300"
-                    "DisplayName" = "8:Installation bestätigen"
+                    "DisplayName" = "8:Confirm Installation"
                     "UseDynamicProperties" = "11:TRUE"
                     "IsDependency" = "11:FALSE"
                     "SourcePath" = "8:<VsdDialogDir>\\VsdAdminConfirmDlg.wid"
@@ -1682,7 +1682,7 @@
                     "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_BBF2E51EBF964878BACD95F9B8B9AA24"
                     {
                     "Sequence" = "3:100"
-                    "DisplayName" = "8:Willkommen"
+                    "DisplayName" = "8:Welcome"
                     "UseDynamicProperties" = "11:TRUE"
                     "IsDependency" = "11:FALSE"
                     "SourcePath" = "8:<VsdDialogDir>\\VsdAdminWelcomeDlg.wid"
@@ -1739,7 +1739,7 @@
                     "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_7B6F816B570C40B6B6294A85EC9C0854"
                     {
                     "Sequence" = "3:100"
-                    "DisplayName" = "8:Status"
+                    "DisplayName" = "8:Progress"
                     "UseDynamicProperties" = "11:TRUE"
                     "IsDependency" = "11:FALSE"
                     "SourcePath" = "8:<VsdDialogDir>\\VsdAdminProgressDlg.wid"
