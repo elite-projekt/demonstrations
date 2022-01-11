@@ -27,6 +27,11 @@ lint:python-code:
   needs: []
 
 #lint:demo:begin - DO NOT CHANGE THIS LINE. required by 'init_new_demo.sh' script
+lint:download-dockerfile:
+  <<: *lint-dockerfile
+  variables:
+    SUB_PROJECT_FOLDER: demos/download/
+
 lint:phishing-dockerfile:
   <<: *lint-dockerfile
   variables:
@@ -79,6 +84,14 @@ sast:python-code:
     - lint:python-code
 
 #build:demo:begin - DO NOT CHANGE THIS LINE. required by 'init_new_demo.sh' script
+build:download-image:
+  <<: *build-image
+  variables:
+    SUB_PROJECT_NAME: download
+    SUB_PROJECT_FOLDER: demos/download/
+  needs:
+    - lint:download-dockerfile
+
 build:phishing-image:
   <<: *build-image
   variables:
@@ -113,6 +126,7 @@ build:python-service:
     - echo "" >> infos.rtf
     - echo "\pard\sl240\slmult1\f1\fs18 > docker login $REGISTRY_URL\par" >> infos.rtf
     #build:python:begin - DO NOT CHANGE THIS LINE. required by 'init_new_demo.sh' script
+    - echo "> docker pull $REGISTRY_URL/$GROUP_NAME/demonstrations/download:master\par" >> infos.rtf
     - echo "> docker pull $REGISTRY_URL/$GROUP_NAME/demonstrations/navigation:master\par" >> infos.rtf
     - echo "> docker pull $REGISTRY_URL/$GROUP_NAME/demonstrations/phishing:master\par" >> infos.rtf
     - echo "> docker pull $REGISTRY_URL/$GROUP_NAME/demonstrations/password:master\par" >> infos.rtf
@@ -171,6 +185,14 @@ build:python-service:
   allow_failure: true
 
 #scan:demo:begin - DO NOT CHANGE THIS LINE. required by 'init_new_demo.sh' script
+scan:download-image:
+  <<: *scan-image
+  variables:
+    SUB_PROJECT_NAME: download
+    SUB_PROJECT_FOLDER: demos/download/
+  needs:
+  - build:download-image
+
 scan:phishing-image:
   <<: *scan-image
   variables:
@@ -207,6 +229,13 @@ scan:navigation-image:
   - crane push $SUB_PROJECT_NAME.tar $CI_REGISTRY_IMAGE/$SUB_PROJECT_NAME:$CI_COMMIT_BRANCH
 
 #push:demo:begin - DO NOT CHANGE THIS LINE. required by 'init_new_demo.sh' script
+push:download-image:
+  <<: *push-image
+  variables:
+    SUB_PROJECT_NAME: download
+  needs:
+  - build:download-image
+
 push:phishing-image:
   <<: *push-image
   variables:
