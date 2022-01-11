@@ -154,6 +154,10 @@ If(!(Test-Path -path $rootPath)) {
     Write-Host "Created a shortcut on the desktop"
     Write-Host "====================================="
 
+    Copy-Item $shortcutPath -Destination "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup"
+    Write-Host "====================================="
+    Write-Host "Created an autostart entry"
+    Write-Host "====================================="
 
                
 } Else {
@@ -178,5 +182,10 @@ If(!(Test-Path -path $rootPath)) {
     Remove-Item -Path $shortcutPath
     Write-Host "====================================="
     Write-Host "Removed shortcut on desktop"
+    Write-Host "====================================="
+
+    Remove-Item -Path "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup\nativeapp.lnk"
+    Write-Host "====================================="
+    Write-Host "Removed the autostart entry"
     Write-Host "====================================="
 }
