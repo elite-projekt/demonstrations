@@ -13,7 +13,6 @@ lint:python-code:
     - python -m pip install flake8
   script:
     - flake8 .
-  allow_failure: true
   needs: []
 
 # Hadolint template
