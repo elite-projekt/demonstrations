@@ -149,6 +149,7 @@ If(!(Test-Path -path $rootPath)) {
     $WshShell = New-Object -comObject WScript.Shell
     $Shortcut = $WshShell.CreateShortcut($shortcutPath)
     $Shortcut.TargetPath = "$directoryPath\app.exe"
+    $Shortcut.WindowStyle = 7
     $Shortcut.Save()
     Write-Host "====================================="
     Write-Host "Created a shortcut on the desktop"
