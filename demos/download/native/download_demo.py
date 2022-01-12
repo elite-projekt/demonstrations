@@ -1,7 +1,8 @@
 import os
 
 
-class download_demo:
+class DownloadDemo:
+    @staticmethod
     def create_fake_malware():
         print("creating fake malware...")
 

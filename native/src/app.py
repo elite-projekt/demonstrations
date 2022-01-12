@@ -5,13 +5,15 @@ import os
 import flask
 import flask_cors
 
-from native.src.config import config
-from demos.phishing.native import phishing_controller
+from demos.download.native import download_controller
 from demos.password.native import password_controller
+from demos.phishing.native import phishing_controller
+from native.src.config import config
 
 app = flask.Flask(__name__)
 flask_cors.CORS(app)
 
+app.register_blueprint(download_controller.orchestration)
 app.register_blueprint(phishing_controller.orchestration)
 app.register_blueprint(password_controller.orchestration)
 
