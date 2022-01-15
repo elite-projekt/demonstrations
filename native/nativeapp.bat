@@ -1,3 +1,4 @@
+Rem This program shoudl be started first. It starts the powershell script with admin rights
 @echo off
 
 set scriptFileName=%~n0

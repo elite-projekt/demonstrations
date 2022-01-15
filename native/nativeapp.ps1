@@ -5,6 +5,7 @@ Write-Host " |\ |  _. _|_ o     _   /\  ._  ._     |  ._   _ _|_  _. | |  _  ._ 
 Write-Host " | \| (_|  |_ | \/ (/_ /--\ |_) |_)   _|_ | | _>  |_ (_| | | (/_ |  ";
 Write-Host "                            |   |                                   ";
 
+# Get working directory. Should be /demonstrations/native
 $workingDirectory = Get-Location
 
 <#
@@ -32,16 +33,16 @@ function Set-PsEnv {
     [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'Low')]
     param($localEnvFile = "$workingDirectory\..\.env")
 
-    #return if no env file
+    # return if no env file
     if (!( Test-Path $localEnvFile)) {
         Throw "could not open $localEnvFile"
     }
 
-    #read the local env file
+    # read the local env file
     $content = Get-Content $localEnvFile -ErrorAction Stop
     Write-Verbose "Parsed .env file"
 
-    #load the content to environment
+    # load the content to environment
     foreach ($line in $content) {
         if ($line.StartsWith("#")) { continue };
         if ($line.Trim()) {
@@ -73,10 +74,10 @@ If(!(Test-Path -path $rootPath)) {
     }
     # Setting directory security
     $colRights = [System.Security.AccessControl.FileSystemRights]"Modify" 
-    $InheritanceFlag = [System.Security.AccessControl.InheritanceFlags]"ContainerInherit, ObjectInherit" 
-    $PropagationFlag = [System.Security.AccessControl.PropagationFlags]::None 
+    $inheritanceFlag = [System.Security.AccessControl.InheritanceFlags]"ContainerInherit, ObjectInherit" 
+    $propagationFlag = [System.Security.AccessControl.PropagationFlags]::None 
     $objType =[System.Security.AccessControl.AccessControlType]::Allow
-    $objACE = New-Object System.Security.AccessControl.FileSystemAccessRule($objUser, $colRights, $InheritanceFlag, $PropagationFlag, $objType)
+    $objACE = New-Object System.Security.AccessControl.FileSystemAccessRule($objUser, $colRights, $inheritanceFlag, $propagationFlag, $objType)
     $objACL = Get-Acl -Path $rootPath
     $objACL.AddAccessRule($objACE)
     Set-ACL $rootPath $objACL
@@ -129,14 +130,14 @@ If(!(Test-Path -path $rootPath)) {
 
     Set-PsEnv
 
-    #Information
+    # Information
     Write-Host "====================================="
     Write-Host -ForegroundColor Red "Information"
     Write-Host -ForegroundColor Green "To cover all dependencies please do the following:"
-    Write-Host -ForegroundColor Green " • Have Docker for windows with the Linux subsystem installed"
-    Write-Host -ForegroundColor Green " • Install the Thunderbird mail client on the system"
-    Write-Host -ForegroundColor Green " • Import the 'rootCA.crt' certificate (provided via the program folder) into the browser of your choice - [trust identifying websites]"
-    Write-Host -ForegroundColor Green " • pull the latest images for the demos`n"
+    Write-Host -ForegroundColor Green " - Have Docker for windows with the Linux subsystem installed"
+    Write-Host -ForegroundColor Green " - Install the Thunderbird mail client on the system"
+    Write-Host -ForegroundColor Green " - Import the 'rootCA.crt' certificate (provided via the program folder) into the browser of your choice - [trust identifying websites]"
+    Write-Host -ForegroundColor Green " - pull the latest images for the demos`n"
     Write-Host -ForegroundColor Green "Docker images for the demos:"
     Write-Host "docker login $Env:REGISTRY_URL"
     Write-Host "docker pull $Env:REGISTRY_URL/$Env:GROUP_NAME/demonstrations/$Env:NAVIGATION_REPO"
@@ -144,8 +145,7 @@ If(!(Test-Path -path $rootPath)) {
     Write-Host "docker pull $Env:REGISTRY_URL/$Env:GROUP_NAME/demonstrations/$Env:PASSWORD_REPO"
     Write-Host "====================================="
 
-    #Create Shortcut
-    $SourceFileLocation = "$directoryPath\app.exe"
+    # Create Shortcut
     $WshShell = New-Object -comObject WScript.Shell
     $Shortcut = $WshShell.CreateShortcut($shortcutPath)
     $Shortcut.TargetPath = "$directoryPath\app.exe"
@@ -155,6 +155,7 @@ If(!(Test-Path -path $rootPath)) {
     Write-Host "Created a shortcut on the desktop"
     Write-Host "====================================="
 
+    # Create autostart entry
     Copy-Item $shortcutPath -Destination "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup"
     Write-Host "====================================="
     Write-Host "Created an autostart entry"
@@ -162,7 +163,7 @@ If(!(Test-Path -path $rootPath)) {
 
                
 } Else {
-    #Remove folder
+    # Remove folder
     Write-Host "====================================="
     Write-Host "The given folder path $directoryPath already exists"
     Write-Host "====================================="
@@ -173,18 +174,20 @@ If(!(Test-Path -path $rootPath)) {
     Write-Host "====================================="
     Write-Host "Removed the folder with all files: " $rootPath
     Write-Host "====================================="
-    # Set Windows Defender Exception
+    
+    # Remove Windows Defender Exception
     Remove-MpPreference -ExclusionPath $rootPath
     Write-Host "====================================="
     Write-Host "Removed the exclusion from Windows Defender"
     Write-Host "====================================="
 
-
+    # Remove shortcut on desktop
     Remove-Item -Path $shortcutPath
     Write-Host "====================================="
     Write-Host "Removed shortcut on desktop"
     Write-Host "====================================="
 
+    # Remove autostart
     Remove-Item -Path "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup\nativeapp.lnk"
     Write-Host "====================================="
     Write-Host "Removed the autostart entry"
