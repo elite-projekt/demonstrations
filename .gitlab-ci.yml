@@ -13,7 +13,6 @@ lint:python-code:
     - python -m pip install flake8
   script:
     - flake8 .
-  allow_failure: true
   needs: []
 
 # Hadolint template
@@ -27,6 +26,11 @@ lint:python-code:
   needs: []
 
 #lint:demo:begin - DO NOT CHANGE THIS LINE. required by 'init_new_demo.sh' script
+lint:download-dockerfile:
+  <<: *lint-dockerfile
+  variables:
+    SUB_PROJECT_FOLDER: demos/download/
+
 lint:phishing-dockerfile:
   <<: *lint-dockerfile
   variables:
@@ -79,6 +83,14 @@ sast:python-code:
     - lint:python-code
 
 #build:demo:begin - DO NOT CHANGE THIS LINE. required by 'init_new_demo.sh' script
+build:download-image:
+  <<: *build-image
+  variables:
+    SUB_PROJECT_NAME: download
+    SUB_PROJECT_FOLDER: demos/download/
+  needs:
+    - lint:download-dockerfile
+
 build:phishing-image:
   <<: *build-image
   variables:
@@ -107,7 +119,7 @@ build:navigation-image:
 
 build:python-service:
   stage: build
-  image: $REGISTRY_URL/$GROUP_NAME/container-templates/python-windows-service-builder:python-service-buzilder
+  image: $REGISTRY_URL/$GROUP_NAME/container-templates/python-windows-service-builder:master
   script:
     - cd ./native/
     #build:python:begin - DO NOT CHANGE THIS LINE. required by 'init_new_demo.sh' script
@@ -124,7 +136,7 @@ build:python-service:
   image:
     name: aquasec/trivy:latest
   script:
-    - echo "Start trivy Container Scan for SUB_PROJECT_NAME.tar"
+    - echo "Start trivy Container Scan for $SUB_PROJECT_NAME.tar"
     # Build report
     - trivy
       --exit-code 0
@@ -161,6 +173,14 @@ build:python-service:
   allow_failure: true
 
 #scan:demo:begin - DO NOT CHANGE THIS LINE. required by 'init_new_demo.sh' script
+scan:download-image:
+  <<: *scan-image
+  variables:
+    SUB_PROJECT_NAME: download
+    SUB_PROJECT_FOLDER: demos/download/
+  needs:
+  - build:download-image
+
 scan:phishing-image:
   <<: *scan-image
   variables:
@@ -197,6 +217,13 @@ scan:navigation-image:
   - crane push $SUB_PROJECT_NAME.tar $CI_REGISTRY_IMAGE/$SUB_PROJECT_NAME:$CI_COMMIT_BRANCH
 
 #push:demo:begin - DO NOT CHANGE THIS LINE. required by 'init_new_demo.sh' script
+push:download-image:
+  <<: *push-image
+  variables:
+    SUB_PROJECT_NAME: download
+  needs:
+  - build:download-image
+
 push:phishing-image:
   <<: *push-image
   variables:
