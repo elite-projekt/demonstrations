@@ -121,23 +121,12 @@ build:python-service:
   stage: build
   image: $REGISTRY_URL/$GROUP_NAME/container-templates/python-windows-service-builder:master
   script:
-    - cd ./native/msi
-    - echo "" >> infos.rtf
-    - echo "\pard\sl240\slmult1\f1\fs18 > docker login $REGISTRY_URL\par" >> infos.rtf
+    - cd ./native/
     #build:python:begin - DO NOT CHANGE THIS LINE. required by 'init_new_demo.sh' script
-    - echo "> docker pull $REGISTRY_URL/$GROUP_NAME/demonstrations/download:master\par" >> infos.rtf
-    - echo "> docker pull $REGISTRY_URL/$GROUP_NAME/demonstrations/navigation:master\par" >> infos.rtf
-    - echo "> docker pull $REGISTRY_URL/$GROUP_NAME/demonstrations/phishing:master\par" >> infos.rtf
-    - echo "> docker pull $REGISTRY_URL/$GROUP_NAME/demonstrations/password:master\par" >> infos.rtf
-    - echo "}" >> infos.rtf
-    - cd ..
-    - ls -la
-    - pwd
     - bash ./entrypoint-windows.sh $GROUP_NAME
   artifacts:
     paths:
       - /builds/$GROUP_NAME/demonstrations/native/src/dist/windows/*
-      - /builds/$GROUP_NAME/demonstrations/native/msi/infos.rtf
   needs:
     - lint:python-code
 
