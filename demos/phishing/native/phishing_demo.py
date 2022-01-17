@@ -5,6 +5,7 @@ import imaplib
 import logging
 import os
 import re
+import shutil
 import smtplib
 import subprocess
 import time
@@ -326,9 +327,8 @@ class PhishingDemo:
         """Close mail application"""
         logging.info("Try closing running thunderbird process...")
         try:
-            subprocess.Popen(
-                ["taskkill", "/f", "/im", "thunderbird.exe"],
-                stdout=subprocess.PIPE
+            subprocess.check_output(
+                ["taskkill", "/f", "/im", "thunderbird.exe"]
             )
             logging.info("Success")
         except Exception as e:
@@ -339,7 +339,8 @@ class PhishingDemo:
         logging.info("Try starting thunderbird process...")
         try:
             subprocess.Popen(
-                ["C:\\Program Files\\Mozilla Thunderbird\\thunderbird.exe"]
+                ["C:\\Program Files\\Mozilla Thunderbird\\thunderbird.exe",
+                 "-P", "MPSE"]
             )
             logging.info("Success")
         except Exception as e:
@@ -358,12 +359,23 @@ class PhishingDemo:
                 logging.info("Nothing to do, exiting init")
                 return
 
-            profile_location = os.getenv("APPDATA") + r"\Thunderbird"
-            profile_zip = config.EnvironmentConfig.PROFILEDIR + "profile.zip"
-
-            # extract profile to location => overrides existing files
+            # extract profile to location
+            profile_zip = os.path.join(config.EnvironmentConfig.PROFILEDIR,
+                                       "profile.zip")
             with zipfile.ZipFile(profile_zip, "r") as zipObj:
-                zipObj.extractall(profile_location)
+                zipObj.extractall(config.EnvironmentConfig.PROFILEDIR)
+
+            profile_location = os.getenv("APPDATA") + f"{os.path.sep}" \
+                                                      f"Thunderbird" \
+                                                      f"{os.path.sep}" \
+                                                      f"Profiles" \
+                                                      f"{os.path.sep}" \
+                                                      f"jzou4lhc.MPSE"
+
+            extracted_profile \
+                = os.path.join(config.EnvironmentConfig.PROFILEDIR,
+                               f"Profiles{os.path.sep}jzou4lhc.MPSE")
+            shutil.copytree(extracted_profile, profile_location)
 
             logging.info("Init done")
         except Exception as e:

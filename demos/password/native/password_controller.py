@@ -2,23 +2,22 @@ import flask
 
 from native.src.controller import orchestration_controller
 
-orchestration = flask.Blueprint("${DEMO_ID}", __name__,
+orchestration = flask.Blueprint("password", __name__,
                                 url_prefix="/orchestration/")
 
 
-# ${DEMO_ID} demonstration
-@orchestration.route("/start/demo/${DEMO_ID}", methods=["POST", "GET"])
-def start_demo_${DEMO_ID}():
+@orchestration.route("/start/demo/password", methods=["POST", "GET"])
+def start_demo_password():
     secure_mode = flask.request.json["secureMode"]
     try:
         if secure_mode:
             orchestration_controller.orchestration_service \
                 .docker_compose_start_file(
-                    "${DEMO_ID}/secure/docker-compose.yml")
+                    "password/secure/docker-compose.yml")
         else:
             orchestration_controller.orchestration_service \
                 .docker_compose_start_file(
-                    "${DEMO_ID}/unsecure/docker-compose.yml")
+                    "password/unsecure/docker-compose.yml")
     except Exception:
         return flask.helpers.make_response(
             flask.json.jsonify(orchestration_controller.no_docker_error), 500)
@@ -26,21 +25,22 @@ def start_demo_${DEMO_ID}():
         flask.json.jsonify(orchestration_controller.start_success), 201)
 
 
-@orchestration.route("/stop/demo/${DEMO_ID}", methods=["POST", "GET"])
-def stop_demo_${DEMO_ID}():
+@orchestration.route("/stop/demo/password", methods=["POST", "GET"])
+def stop_demo_password():
     orchestration_controller.orchestration_service.docker_compose_stop_file(
-        "${DEMO_ID}/secure/docker-compose.yml")
+        "password/secure/docker-compose.yml")
     orchestration_controller.orchestration_service.docker_compose_stop_file(
-        "${DEMO_ID}/unsecure/docker-compose.yml")
+        "password/unsecure/docker-compose.yml"
+    )
     return flask.helpers.make_response(
         flask.json.jsonify(orchestration_controller.stop_success), 200)
 
 
-@orchestration.route("/status/demo/${DEMO_ID}", methods=["GET"])
-def status_demo_${DEMO_ID}():
+@orchestration.route("/status/demo/password", methods=["GET"])
+def status_demo_password():
     result = orchestration_controller.orchestration_service \
         .get_status_docker_compose_file(
-            "${DEMO_ID}/secure/docker-compose.yml")
+            "password/secure/docker-compose.yml")
 
     if len(result) > 0:
         return flask.helpers.make_response(flask.json.jsonify(result), 200)
@@ -48,12 +48,12 @@ def status_demo_${DEMO_ID}():
         flask.abort(500)
 
 
-@orchestration.route("/status/demo/${DEMO_ID}/sum", methods=["GET"])
-def status_demo_${DEMO_ID}_sum():
+@orchestration.route("/status/demo/password/sum", methods=["GET"])
+def status_demo_password_sum():
     result \
         = orchestration_controller.orchestration_service \
         .get_sum_status_docker_compose_file(
-            "${DEMO_ID}/secure/docker-compose.yml")
+            "password/secure/docker-compose.yml")
 
     if len(result) > 0:
         return flask.helpers.make_response(flask.json.jsonify(result), 200)

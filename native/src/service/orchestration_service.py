@@ -36,7 +36,7 @@ class OrchestrationService:
         try:
             # Get Container Names from Compose File
             with open(file_path, "r") as file:
-                compose_file = yaml.load(file, Loader=yaml.FullLoader)
+                compose_file = yaml.safe_load(file)
 
                 for k, v in compose_file["services"].items():
                     if "container_name" in compose_file["services"][k]:
