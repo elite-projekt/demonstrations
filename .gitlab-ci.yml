@@ -41,10 +41,6 @@ lint:password-dockerfile:
   variables:
     SUB_PROJECT_FOLDER: demos/password
 
-lint:navigation-dockerfile:
-  <<: *lint-dockerfile
-  variables:
-    SUB_PROJECT_FOLDER: demos/navigation
 
 sast:python-code:
   stage: lint
@@ -106,16 +102,6 @@ build:password-image:
     SUB_PROJECT_FOLDER: demos/password
   needs:
     - lint:password-dockerfile
-
-build:navigation-image:
-  <<: *build-image
-  variables:
-    SUB_PROJECT_NAME: navigation
-    SUB_PROJECT_FOLDER: demos/navigation
-  before_script:
-    - sed -i "s|replacedByCi|$TEACHING_URL|" "demos/navigation/config/prod.env.js"
-  needs:
-    - lint:navigation-dockerfile
 
 build:python-service:
   stage: build
@@ -196,14 +182,6 @@ scan:password-image:
     SUB_PROJECT_FOLDER: demos/password
   needs:
   - build:password-image
-
-scan:navigation-image:
-  <<: *scan-image
-  variables:
-    SUB_PROJECT_NAME: navigation
-    SUB_PROJECT_FOLDER: demos/navigation
-  needs:
-  - build:navigation-image
   
 # Push template
 .push:image: &push-image
@@ -237,11 +215,3 @@ push:password-image:
     SUB_PROJECT_NAME: password
   needs:
   - build:password-image
-
-push:navigation-image:
-  <<: *push-image
-  variables:
-    SUB_PROJECT_NAME: navigation
-  needs:
-  - build:navigation-image
-
