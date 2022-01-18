@@ -140,7 +140,6 @@ If(!(Test-Path -path $rootPath)) {
     Write-Host -ForegroundColor Green " - pull the latest images for the demos`n"
     Write-Host -ForegroundColor Green "Docker images for the demos:"
     Write-Host "docker login $Env:REGISTRY_URL"
-    Write-Host "docker pull $Env:REGISTRY_URL/$Env:GROUP_NAME/demonstrations/$Env:NAVIGATION_REPO"
     Write-Host "docker pull $Env:REGISTRY_URL/$Env:GROUP_NAME/demonstrations/$Env:PHISHING_REPO"
     Write-Host "docker pull $Env:REGISTRY_URL/$Env:GROUP_NAME/demonstrations/$Env:PASSWORD_REPO"
     Write-Host "====================================="

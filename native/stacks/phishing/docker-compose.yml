@@ -6,11 +6,6 @@ services:
     container_name: phising_webserver
     ports:
       - 443:443
-  navigation:
-    image: ${REGISTRY_URL}/${GROUP_NAME}/demonstrations/${NAVIGATION_REPO}
-    container_name: phising_navigation
-    ports:
-      - 5001:80
   mail:
     image: tvial/docker-mailserver:latest
     hostname: mail
