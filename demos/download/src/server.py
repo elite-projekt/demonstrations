@@ -19,7 +19,7 @@ def run_flask_app():
     :return:
     """
     print("- Start Server")
-    app.run(host=HOST, port=5000, threaded=True)
+    app.run(host=HOST, port=5001, threaded=True)
 
 
 """-------------------ROUTES-------------------"""
@@ -27,7 +27,7 @@ def run_flask_app():
 
 @app.route("/", methods=["GET"])
 def get_index():
-    return flask.render_template("index.html")
+    return flask.render_template("template.html")
 
 
 @app.route("/version", methods=["GET"])
