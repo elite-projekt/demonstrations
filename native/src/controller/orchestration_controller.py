@@ -24,3 +24,7 @@ no_mail_server_error = {
     "message": "The mailserver is not reachable!",
     "code": 2,
 }
+fake_malware_success = {
+    "success": True,
+    "message": "Malware was created successfully!"
+}

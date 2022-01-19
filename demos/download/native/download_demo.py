@@ -38,14 +38,14 @@ class DownloadDemo:
         f += "echo Angriffen schuetzen koennen. Schliessen Sie dieses Fenster"
         f += "und\n"
         f += "echo kehren Sie zu ihrem Browser zurueck.\n"
-        f += "echo: "
+        f += "echo: \n"
         f += "pause\n"
         f += "exit"
 
         file.write(f)
         file.close()
 
-        os.system("start /wait cmd.exe @cmd /k \"" + filename + "\"")
+        subprocess.Popen(["powershell", filename], creationflags=subprocess.CREATE_NEW_CONSOLE)
 
     @staticmethod
     def firefox_init():
