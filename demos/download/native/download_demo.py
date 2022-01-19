@@ -131,13 +131,13 @@ class DownloadDemo:
                 subprocess.Popen(
                     ["C:\\Program Files\\Mozilla Firefox\\firefox.exe",
                      "-P", "MPSE_download_safe",
-                     "-url", "http://localhost:5001"]
+                     "-url", "http://localhost:5001/template.html"]
                 )
             if not safe:
                 subprocess.Popen(
                     ["C:\\Program Files\\Mozilla Firefox\\firefox.exe",
                      "-P", "MPSE_download_unsafe",
-                     "-url", "http://localhost:5001"]
+                     "-url", "http://localhost:5001/template.html"]
                 )
 
             logging.info("Success")
