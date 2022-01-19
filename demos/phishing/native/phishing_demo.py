@@ -7,7 +7,9 @@ import os
 import re
 import shutil
 import smtplib
-import subprocess
+# We need this module and the severity is low. See also:
+# https://bandit.readthedocs.io/en/latest/blacklists/blacklist_imports.html#b404-import-subprocess
+import subprocess  # nosec
 import time
 import zipfile
 
@@ -327,8 +329,12 @@ class PhishingDemo:
         """Close mail application"""
         logging.info("Try closing running thunderbird process...")
         try:
-            subprocess.check_output(
-                ["taskkill", "/f", "/im", "thunderbird.exe"]
+            # False positive. See also:
+            # https://github.com/PyCQA/bandit/issues/333#issuecomment-404103697
+            subprocess.Popen(  # nosec
+                ["C:\\Windows\\System32\\taskkill.exe", "/f", "/im",
+                 "thunderbird.exe"],
+                stdout=subprocess.PIPE, shell=False
             )
             logging.info("Success")
         except Exception as e:
@@ -338,9 +344,11 @@ class PhishingDemo:
         """Start mail application"""
         logging.info("Try starting thunderbird process...")
         try:
-            subprocess.Popen(
+            # False positive. See also:
+            # https://github.com/PyCQA/bandit/issues/333#issuecomment-404103697
+            subprocess.Popen(  # nosec
                 ["C:\\Program Files\\Mozilla Thunderbird\\thunderbird.exe",
-                 "-P", "MPSE"]
+                 "-P", "MPSE"], shell=False
             )
             logging.info("Success")
         except Exception as e:
