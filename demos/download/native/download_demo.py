@@ -45,7 +45,10 @@ class DownloadDemo:
         file.write(f)
         file.close()
 
-        subprocess.Popen(["powershell", filename], creationflags=subprocess.CREATE_NEW_CONSOLE)
+        subprocess.Popen(
+            ["powershell", filename],
+            creationflags=subprocess.CREATE_NEW_CONSOLE
+        )
 
     @staticmethod
     def firefox_init():
