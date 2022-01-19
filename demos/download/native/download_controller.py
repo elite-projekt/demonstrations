@@ -12,16 +12,21 @@ orchestration = flask.Blueprint("download", __name__,
 def start_demo_download():
     secure_mode = flask.request.json["secureMode"]
     try:
+        print("start demo")
+        download_demo.DownloadDemo.firefox_init()
+        print("init success")
         if secure_mode:
             orchestration_controller.orchestration_service \
                 .docker_compose_start_file(
                  "download/secure/docker-compose.yml"
                 )
+            download_demo.DownloadDemo.start_web_browser(True)
         else:
             orchestration_controller.orchestration_service \
                 .docker_compose_start_file(
                  "download/unsecure/docker-compose.yml"
                 )
+            download_demo.DownloadDemo.start_web_browser(False)
     except Exception:
         return flask.helpers.make_response(
             flask.json.jsonify(orchestration_controller.no_docker_error),
