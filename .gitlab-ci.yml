@@ -273,5 +273,5 @@ release:
     - echo "running release_job"
     - |
       release-cli create --name "Release $CI_COMMIT_TAG" --tag-name $CI_COMMIT_TAG \
-        --assets-link "{\"name\":\"${ZIP}\",\"url\":\"${PACKAGE_REGISTRY_URL}/${ZIP}\"}" \
+        --assets-link "{\"name\":\"${ZIP}\",\"url\":\"${PACKAGE_REGISTRY_URL}/${ZIP}\"}"
 
