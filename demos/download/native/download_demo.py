@@ -2,7 +2,9 @@ import os
 import logging
 import zipfile
 import shutil
-import subprocess
+# We need this module and the severity is low. See also:
+# https://bandit.readthedocs.io/en/latest/blacklists/blacklist_imports.html#b404-import-subprocess
+import subprocess  # nosec
 
 from native.src.config import config
 
@@ -45,9 +47,12 @@ class DownloadDemo:
         file.write(f)
         file.close()
 
-        subprocess.Popen(
+        # False positive. See also:
+        # https://github.com/PyCQA/bandit/issues/333#issuecomment-404103697
+        subprocess.Popen(  # nosec
             ["powershell", filename],
-            creationflags=subprocess.CREATE_NEW_CONSOLE
+            creationflags=subprocess.CREATE_NEW_CONSOLE,
+            shell=False
         )
 
     @staticmethod
@@ -131,16 +136,22 @@ class DownloadDemo:
         logging.info("Try starting firefox process...")
         try:
             if safe:
-                subprocess.Popen(
+                # False positive. See also:
+                # https://github.com/PyCQA/bandit/issues/333#issuecomment-404103697
+                subprocess.Popen(  # nosec
                     ["C:\\Program Files\\Mozilla Firefox\\firefox.exe",
                      "-P", "MPSE_download_safe",
-                     "-url", "http://localhost:5001/template.html"]
+                     "-url", "http://localhost:5001/template.html"],
+                    shell=False
                 )
             if not safe:
-                subprocess.Popen(
+                # False positive. See also:
+                # https://github.com/PyCQA/bandit/issues/333#issuecomment-404103697
+                subprocess.Popen(  # nosec
                     ["C:\\Program Files\\Mozilla Firefox\\firefox.exe",
                      "-P", "MPSE_download_unsafe",
-                     "-url", "http://localhost:5001/template.html"]
+                     "-url", "http://localhost:5001/template.html"],
+                    shell=False
                 )
 
             logging.info("Success")
