@@ -7,6 +7,11 @@ Write-Host "                            |   |                                   
 
 # Get working directory. Should be /demonstrations/native
 $workingDirectory = Get-Location
+# Check if working directory is src folder or release folder
+$isReleaseDirectory = $false
+if(Test-Path .env) {
+    $isReleaseDirectory = $true   
+}
 
 <#
 .Synopsis
@@ -31,7 +36,7 @@ based on https://github.com/rajivharris/Set-PsEnv
 #Copied from https://gist.github.com/grenzi/82e6cb8215cc47879fdf3a8a4768ec09
 function Set-PsEnv {
     [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'Low')]
-    param($localEnvFile = "$workingDirectory\..\.env")
+    param($localEnvFile = ".env")
 
     # return if no env file
     if (!( Test-Path $localEnvFile)) {
@@ -91,11 +96,20 @@ If(!(Test-Path -path $rootPath)) {
     Write-Host "====================================="
 
     # Copy data
-    Copy-Item "$workingDirectory\..\.env" -Destination $directoryPath
-    Copy-Item "$workingDirectory\stacks\" -Destination "$directoryPath\stacks" -Recurse -Force
-    Copy-Item "$workingDirectory\..\demoCA\rootCA.crt" -Destination "$directoryPath\stacks"
-    Copy-Item "$workingDirectory\src\profiles" -Destination "$directoryPath" -Recurse
-    Copy-Item "$workingDirectory\src\dist\windows\app.exe" -Destination "$directoryPath" 
+    if($isReleaseDirectory) {
+        Copy-Item ".env" -Destination $directoryPath
+        Copy-Item "stacks\" -Destination "$directoryPath\stacks" -Recurse -Force
+        Copy-Item "rootCA.crt" -Destination "$directoryPath\stacks"
+        Copy-Item "profiles" -Destination "$directoryPath" -Recurse
+        Copy-Item "app.exe" -Destination "$directoryPath" 
+    } else {
+        Copy-Item "$workingDirectory\..\.env" -Destination $directoryPath
+        Copy-Item "$workingDirectory\stacks\" -Destination "$directoryPath\stacks" -Recurse -Force
+        Copy-Item "$workingDirectory\..\demoCA\rootCA.crt" -Destination "$directoryPath\stacks"
+        Copy-Item "$workingDirectory\src\profiles" -Destination "$directoryPath" -Recurse
+        Copy-Item "$workingDirectory\src\dist\windows\app.exe" -Destination "$directoryPath" 
+    }
+
     Write-Host "====================================="
     Write-Host "Copied files to the created folder"
     Write-Host "====================================="
@@ -128,7 +142,11 @@ If(!(Test-Path -path $rootPath)) {
     Write-Host "Added Exclusion in Windows Defender for native app"
     Write-Host "====================================="
 
-    Set-PsEnv
+    if($isReleaseDirectory) {
+        Set-PsEnv
+    } else {
+        Set-PsEnv "$workingDirectory\..\.env"
+    }
 
     # Information
     Write-Host "====================================="
