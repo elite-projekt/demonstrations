@@ -50,7 +50,8 @@ class DownloadDemo:
         # False positive. See also:
         # https://github.com/PyCQA/bandit/issues/333#issuecomment-404103697
         subprocess.Popen(  # nosec
-            ["powershell", filename],
+            ["C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+             filename],
             creationflags=subprocess.CREATE_NEW_CONSOLE,
             shell=False
         )

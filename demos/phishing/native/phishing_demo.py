@@ -1,3 +1,4 @@
+import configparser
 import datetime
 import email
 import glob
@@ -384,6 +385,36 @@ class PhishingDemo:
                 = os.path.join(config.EnvironmentConfig.PROFILEDIR,
                                f"Profiles{os.path.sep}jzou4lhc.MPSE")
             shutil.copytree(extracted_profile, profile_location)
+
+            profile_ini_location = os.getenv("APPDATA") + f"{os.path.sep}" \
+                                                          f"Thunderbird" \
+                                                          f"{os.path.sep}" \
+                                                          f"profiles.ini"
+
+            config_parser = configparser.ConfigParser()
+
+            # Needs to do it this, else the key values of config are converted
+            # complete to lowercase characters
+            config_parser.optionxform = str
+
+            config_parser.read(profile_ini_location)
+
+            max_profile_number = -1
+            for key in config_parser.sections():
+                if key.startswith("Profile"):
+                    current_profile_number \
+                        = int("".join(filter(str.isdigit, key)))
+                    if max_profile_number < current_profile_number:
+                        max_profile_number = current_profile_number
+
+            config_parser[f"Profile{max_profile_number + 1}"] = {
+                'Name': 'MPSE',
+                'IsRelative': 1,
+                'Path': 'Profiles/jzou4lhc.MPSE'
+            }
+
+            with open(profile_ini_location, 'w') as config_file:
+                config_parser.write(config_file, space_around_delimiters=False)
 
             logging.info("Init done")
         except Exception as e:
