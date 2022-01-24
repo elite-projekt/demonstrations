@@ -1,5 +1,6 @@
 import os
 import threading
+import requests
 
 import flask
 from flask import send_from_directory
@@ -27,7 +28,7 @@ def run_flask_app():
 
 @app.route("/", methods=["GET"])
 def get_index():
-    return flask.render_template("template.html")
+    return send_from_directory("static", "template.html")
 
 
 @app.route("/<path:path>", methods=["GET"])
@@ -37,17 +38,21 @@ def static_dir(path):
 
 @app.route("/version", methods=["GET"])
 def get_version():
-    return flask.render_template("version.html")
+    return send_from_directory("static", "version.html")
 
 
-@app.route("/script_status", methods=["POST"])
+@app.route("/unsecure", methods=["POST"])
 def post_scipt_status():
-    return flask.render_template("index.html")
+    r = requests.post(
+        'http://host.docker.internal:5000/' +
+        'orchestration/download/create_fake_malware'
+    )
+    return "native app response: HTTP " + str(r.status_code)
 
 
 @app.route("/end")
 def end():
-    return flask.render_template("index.html")
+    return send_from_directory("static", "template.html")
 
 
 """-------------------END ROUTES-------------------"""
@@ -55,4 +60,4 @@ def end():
 
 if __name__ == "__main__":
     threading.Thread(target=run_flask_app).start()
-    # webbrowser.open('http://127.0.0.1:5000/')
+    # webbrowser.open('http://127.0.0.1:5001/')

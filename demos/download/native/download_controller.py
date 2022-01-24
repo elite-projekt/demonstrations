@@ -1,4 +1,5 @@
 import flask
+import time
 
 from native.src.controller import orchestration_controller
 from demos.download.native import download_demo
@@ -20,12 +21,16 @@ def start_demo_download():
                 .docker_compose_start_file(
                  "download/secure/docker-compose.yml"
                 )
+            # sleep until container app is ready
+            time.sleep(5)
             download_demo.DownloadDemo.start_web_browser(True)
         else:
             orchestration_controller.orchestration_service \
                 .docker_compose_start_file(
                  "download/unsecure/docker-compose.yml"
                 )
+            # sleep until container app is ready
+            time.sleep(5)
             download_demo.DownloadDemo.start_web_browser(False)
     except Exception:
         return flask.helpers.make_response(

@@ -16,7 +16,7 @@ WORKDIR ${APP_DIR}
 #    && pip install Pillow
 
 # open port
-EXPOSE 5002
+EXPOSE 5001
 
 COPY . /download
 COPY requirements.txt /download/requirements.txt
