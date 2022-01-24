@@ -42,7 +42,7 @@ def get_version():
 
 
 @app.route("/unsecure", methods=["POST"])
-def post_scipt_status():
+def unsecure():
     r = requests.post(
         'http://host.docker.internal:5000/' +
         'orchestration/download/create_fake_malware'
