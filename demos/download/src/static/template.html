@@ -3,18 +3,15 @@
 <head>
 <script>
 function unsecure() {
-var xhr = new XMLHttpRequest();
-xhr.withCredentials = true;
+var requestOptions = {
+  method: 'POST',
+  redirect: 'follow'
+};
 
-xhr.addEventListener("readystatechange", function() {
-  if(this.readyState === 4) {
-    console.log(this.responseText);
-  }
-});
-
-xhr.open("POST", "localhost:5001/unsecure");
-
-xhr.send();
+fetch("localhost:5001/unsecure", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
 }
 </script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -151,23 +148,23 @@ width:100%;
 	  <a href="s (1).html">
         <img class="productlist" src="image 3.png" alt="shop1" />
         <span class="caption"><h3>Syltherine</h3></span>
-        <span class="caption;" style="font-size:12px;color:darkgrey;font-style">Standart office printer</span>
-		<span class="caption">€700 <font color="lightgrey"><s>€1000</s></font></span>
+        <span class="caption" style="font-size:12px;color:darkgrey">Standart office printer</span>
+		<span class="caption">€700 <s style="color:lightgrey">€1000</s></span>
 		</a>
 	 </li>
       <li class="container">
 	  <a href="s (2).html">
         <img class="productlist" src="image 4.png" alt="shop1" />
         <span class="caption"><h3>Lolito</h3></span>
-        <span class="caption;" style="font-size:12px;color:darkgrey;font-style">Luxury printer</span>
-		<span class="caption">€2500 <font color="lightgrey"><s>€5000</s></font></span>
+        <span class="caption" style="font-size:12px;color:darkgrey">Luxury printer</span>
+		<span class="caption">€2500 <s style="color:lightgrey">€5000</s></span>
 		</a>
 	 </li>
 	       <li class="container">
 	  <a href="s (3).html">
         <img class="productlist" src="Images.png" alt="shop1" />
         <span class="caption"><h3>Respira</h3></span>
-        <span class="caption;" style="font-size:12px;color:darkgrey;font-style">Minimalist printer</span>
+        <span class="caption" style="font-size:12px;color:darkgrey">Minimalist printer</span>
 		<span class="caption">€900</span>
 		</a>
 	 </li>
@@ -175,7 +172,7 @@ width:100%;
 	  <a href="s (4).html" onclick="unsecure();" class="ad_1">
         <img class="ad_1" style="max-width:100%;" src="Images-1.png" alt="ad, tack, banner, sponsor, Ad, banners" />
 		<span class="caption"><h3>Printo</h3></span>
-		<span class="caption;" style="font-size:12px;color:darkgrey;font-style">Modern printer</span>
+		<span class="caption" style="font-size:12px;color:darkgrey">Modern printer</span>
 		<span class="caption">€800</span>
 		</a>
 	 </li>
@@ -183,7 +180,7 @@ width:100%;
 	  <a href="s (5).html">
         <img class="productlist" src="Images-2.png" alt="shop1" />
         <span class="caption"><h3>Grifo</h3></span>
-        <span class="caption;" style="font-size:12px;color:darkgrey;font-style">Heavy duty printer</span>
+        <span class="caption" style="font-size:12px;color:darkgrey">Heavy duty printer</span>
 		<span class="caption">€2000</span>
 		</a>
 	 </li>
@@ -191,7 +188,7 @@ width:100%;
 	  <a href="s (6).html">
         <img class="productlist" src="Images-3.png" alt="shop1" />
         <span class="caption"><h3>Muggo</h3></span>
-        <span class="caption;" style="font-size:12px;color:darkgrey;font-style">Big printer</span>
+        <span class="caption" style="font-size:12px;color:darkgrey">Big printer</span>
 		<span class="caption">€1800 </span>
 		</a>
 	 </li>
@@ -199,15 +196,15 @@ width:100%;
 	  <a href="s (7).html">
         <img class="productlist" src="Images-4.png" alt="shop1" />
         <span class="caption"><h3>Pingky</h3></span>
-        <span class="caption;" style="font-size:12px;color:darkgrey;font-style">Good printer</span>
-		<span class="caption">€1400 <font color="lightgrey"><s>€2800</s></font></span>
+        <span class="caption" style="font-size:12px;color:darkgrey">Good printer</span>
+		<span class="caption">€1400 <s style="color:lightgrey">€2800</s></span>
 		</a>
 	 </li>
 	       <li class="container">
 	  <a href="s (8).html" onclick="unsecure();" class="ad_1">
         <img class="ad_1" style="max-width:100%" src="Images-5.png" alt="ad, tack, banner, sponsor, Ad, banners" />
 		<span class="caption"><h3>Potty</h3></span>
-		<span class="caption;" style="font-size:12px;color:darkgrey;font-style">Hightec printer</span>
+		<span class="caption" style="font-size:12px;color:darkgrey">Hightec printer</span>
 		<span class="caption">€3000</span>
 		</a>
 	 </li>
