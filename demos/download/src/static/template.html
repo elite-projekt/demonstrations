@@ -8,7 +8,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("localhost:5001/unsecure", requestOptions)
+fetch("http://localhost:5001/unsecure", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
