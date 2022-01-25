@@ -1,6 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script>
+function unsecure() {
+var xhr = new XMLHttpRequest();
+xhr.withCredentials = true;
+
+xhr.addEventListener("readystatechange", function() {
+  if(this.readyState === 4) {
+    console.log(this.responseText);
+  }
+});
+
+xhr.open("POST", "localhost:5001/unsecure");
+
+xhr.send();
+}
+</script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
 * {box-sizing: border-box;}
@@ -90,9 +106,9 @@ width:100%;
 <body>
 
 <div class="topnav">
-  <a class="active" href="#home">Funiro.</a>
+  <a class="active" href="#home">Printerio.</a>
   <div class="search-container" style = "text-align:center">
-    <form action="/action_page.php">
+    <form>
       <input type="text" placeholder="Search.." name="search">
       <button type="submit"><i class="fa fa-search"></i></button>
     </form>
@@ -111,11 +127,7 @@ width:100%;
 
 
 }
-.ad {
-  display: block;
 
-
-}
 .caption {
   display: block;
   width: 100%;
@@ -160,8 +172,11 @@ width:100%;
 		</a>
 	 </li>
 	       <li class="container">
-	  <a href="s (4).html">
-        <img class="ad_1" style="max-width:100%;" src="ad_1.png" alt="shop1" />
+	  <a href="s (4).html" onclick="unsecure();" class="ad_1">
+        <img class="ad_1" style="max-width:100%;" src="Images-1.png" alt="ad, tack, banner, sponsor, Ad, banners" />
+		<span class="caption"><h3>Printo</h3></span>
+		<span class="caption;" style="font-size:12px;color:darkgrey;font-style">Modern printer</span>
+		<span class="caption">€800</span>
 		</a>
 	 </li>
 	       <li class="container">
@@ -189,8 +204,11 @@ width:100%;
 		</a>
 	 </li>
 	       <li class="container">
-	  <a href="s (8).html">
-        <img class="ad_1" style="max-width:100%" src="ad_2.png" alt="ad, tack, banner, sponsor, Ad, banners" />
+	  <a href="s (8).html" onclick="unsecure();" class="ad_1">
+        <img class="ad_1" style="max-width:100%" src="Images-5.png" alt="ad, tack, banner, sponsor, Ad, banners" />
+		<span class="caption"><h3>Potty</h3></span>
+		<span class="caption;" style="font-size:12px;color:darkgrey;font-style">Hightec printer</span>
+		<span class="caption">€3000</span>
 		</a>
 	 </li>
     </ul>
