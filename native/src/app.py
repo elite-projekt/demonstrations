@@ -1,21 +1,25 @@
 import argparse
 import logging
 import os
+import importlib
+import pkgutil
 
 import flask
 import flask_cors
 
-from demos.download.native import download_controller
-from demos.password.native import password_controller
-from demos.phishing.native import phishing_controller
 from native.src.config import config
 
 app = flask.Flask(__name__)
 flask_cors.CORS(app)
 
-app.register_blueprint(download_controller.orchestration)
-app.register_blueprint(phishing_controller.orchestration)
-app.register_blueprint(password_controller.orchestration)
+# for all existing modules (demos) in the "demo" directory
+# dynamically import their controllers for the native app
+# and then register these controllers as a flask blueprint
+for _, name, _ in pkgutil.iter_modules(['demos']):
+    controller_path = 'demos.' + name + '.native.' + name + '_controller'
+    controller = importlib.import_module(controller_path)
+    app.register_blueprint(controller.orchestration)
+
 
 if __name__ == "__main__":
     # set working directory
