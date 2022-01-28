@@ -1,6 +1,7 @@
 import os
 import logging
 import zipfile
+import requests
 import shutil
 # We need this module and the severity is low. See also:
 # https://bandit.readthedocs.io/en/latest/blacklists/blacklist_imports.html#b404-import-subprocess
@@ -158,3 +159,16 @@ class DownloadDemo:
             logging.info("Success")
         except Exception as e:
             logging.error(e)
+
+    @staticmethod
+    def probe_container_status():
+        try:
+            r = requests.get(
+                'http://localhost:5001/template.html'
+            )
+            if r.status_code == 200:
+                return True
+            else:
+                return False
+        except Exception:
+            return
