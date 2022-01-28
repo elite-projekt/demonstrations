@@ -1,4 +1,5 @@
 import os
+import configparser
 import logging
 import zipfile
 import requests
@@ -93,6 +94,41 @@ class DownloadDemo:
                                    "1y2st08z.MPSE_download_unsafe")
                 shutil.copytree(extracted_profile, profile_location)
 
+                profile_ini_location \
+                    = os.getenv("APPDATA") + f"{os.path.sep}" \
+                                             f"Mozilla" \
+                                             f"{os.path.sep}" \
+                                             f"Firefox" \
+                                             f"{os.path.sep}" \
+                                             f"profiles.ini"
+
+                config_parser = configparser.ConfigParser()
+
+                # Needs to do it this, else the key values of config
+                # are converted complete to lowercase characters
+                config_parser.optionxform = str
+
+                config_parser.read(profile_ini_location)
+
+                max_profile_number = -1
+                for key in config_parser.sections():
+                    if key.startswith("Profile"):
+                        current_profile_number \
+                            = int("".join(filter(str.isdigit, key)))
+                        if max_profile_number < current_profile_number:
+                            max_profile_number = current_profile_number
+
+                config_parser[f"Profile{max_profile_number + 1}"] = {
+                    'Name': 'MPSE',
+                    'IsRelative': 1,
+                    'Path': 'Profiles/1y2st08z.MPSE_download_unsafe'
+                }
+
+                with open(profile_ini_location, 'w') as config_file:
+                    config_parser.write(
+                        config_file, space_around_delimiters=False
+                    )
+
                 print("unsafe init done...")
 
             else:
@@ -123,6 +159,41 @@ class DownloadDemo:
                     = os.path.join(config.EnvironmentConfig.PROFILEDIR,
                                    "fkstz94l.MPSE_download_safe")
                 shutil.copytree(extracted_profile, profile_location)
+
+                profile_ini_location \
+                    = os.getenv("APPDATA") + f"{os.path.sep}" \
+                                             f"Mozilla" \
+                                             f"{os.path.sep}" \
+                                             f"Firefox" \
+                                             f"{os.path.sep}" \
+                                             f"profiles.ini"
+
+                config_parser = configparser.ConfigParser()
+
+                # Needs to do it this, else the key values of config
+                # are converted complete to lowercase characters
+                config_parser.optionxform = str
+
+                config_parser.read(profile_ini_location)
+
+                max_profile_number = -1
+                for key in config_parser.sections():
+                    if key.startswith("Profile"):
+                        current_profile_number \
+                            = int("".join(filter(str.isdigit, key)))
+                        if max_profile_number < current_profile_number:
+                            max_profile_number = current_profile_number
+
+                config_parser[f"Profile{max_profile_number + 1}"] = {
+                    'Name': 'MPSE',
+                    'IsRelative': 1,
+                    'Path': 'Profiles/fkstz94l.MPSE_download_safe'
+                }
+
+                with open(profile_ini_location, 'w') as config_file:
+                    config_parser.write(
+                        config_file, space_around_delimiters=False
+                    )
 
             else:
                 logging.info("Nothing to do, safe profile exiting init")

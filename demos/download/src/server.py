@@ -36,23 +36,24 @@ def static_dir(path):
     return send_from_directory("static", path)
 
 
-@app.route("/version", methods=["GET"])
-def get_version():
-    return send_from_directory("static", "version.html")
-
-
 @app.route("/unsecure", methods=["POST"])
-def unsecure():
-    r = requests.post(
-        'http://host.docker.internal:5000/' +
-        'orchestration/download/create_fake_malware'
-    )
-    return "native app response: HTTP " + str(r.status_code)
-
-
-@app.route("/end")
-def end():
-    return send_from_directory("static", "template.html")
+def post_scipt_status():
+    try:
+        r = requests.post(
+            'http://host.docker.internal:5000/' +
+            'orchestration/download/create_fake_malware'
+        )
+        success = {
+            "success": True,
+            "message": "native app response: HTTP " + str(r.status_code)
+        }
+        return success
+    except Exception:
+        fail = {
+            "success": False,
+            "message": "Failed to reach native app API"
+        }
+        return fail
 
 
 """-------------------END ROUTES-------------------"""
