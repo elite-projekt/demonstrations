@@ -1,7 +1,6 @@
 import configparser
 import datetime
 import email
-import glob
 import imaplib
 import logging
 import os
@@ -68,7 +67,7 @@ class PhishingDemo:
             logging.error(e)
         server.close()
 
-    # sends mails based on .txt files specified in the
+    # sends mails based on *.txt files specified in the
     # email_files_location-path
     def send_mail_files(
             self,
@@ -77,19 +76,22 @@ class PhishingDemo:
             local_smtp_port=secure_server_smtp_port,
             local_server=default_email_server,
     ):
+        from importlib.resources import files
+        import demos.phishing.native.emails.eng as eng_mails
+
+        email_filenames_eng = [
+            "doodle.txt", "fake amazon.txt", "fwd corona.txt",
+            "nina_signed.txt", "real amazon.txt", "reminder gift.txt"
+        ]
+
         logging.info(
-            "Checking for mails in: {}".format(
-                config.EnvironmentConfig.DOCKERSTACKDIR + "phishing\\mails\\"
-            )
+            "Checking for mails in: {}".format(email_filenames_eng)
         )
-        for file in glob.glob(
-                config.EnvironmentConfig.DOCKERSTACKDIR + "phishing\\mails\\"
-                + "/*.txt"
-        ):
+
+        for email_filename in email_filenames_eng:
+            email_text = files(eng_mails).joinpath(email_filename).read_text()
             # print('sending mail file: ' + file)
-            logging.info("Sending mail file: {}".format(file))
-            email_file = open(file, "r")
-            email_text = email_file.read()
+            logging.info("Sending mail file: {}".format(email_filename))
             email_mime = email.message_from_string(email_text)
 
             # check if secure mode, if no do not process smime mails
@@ -134,7 +136,6 @@ class PhishingDemo:
                 email_text,
                 local_server,
             )
-            email_file.close()
 
     def change_client_profile(self, use_secured_client=True,
                               change_ports=False):
