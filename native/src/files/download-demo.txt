@@ -5,10 +5,15 @@
 #############################################################################
 
 Dem Angreifer in diesem Übungsszenario ist es gelungen, ein Programm mit 
-vermeintlicher Schadsoftware auf Ihren Desktop herunterzuladen und auszuführen. 
-Sowohl das Programm als auch diese Textdatei wurden ohne Ihr Wissen oder zutun
-heruntergeladen. Wäre dies kein Übungsezenario sondern ein Angriff mit echter
-Schadsoftware, wäre Ihr PC nun mit Malware infiziert.
+vermeintlicher Schadsoftware auf den Desktop Ihres PCs herunterzuladen und 
+auszuführen. Sowohl das Programm als auch diese Textdatei wurden ohne Ihr 
+Wissen oder zutun heruntergeladen. Suchen Sie beide Dateien auf Ihrem Desktop
+und vergewissern Sie sich ggf. mit Hilfe des Erstelldatums (dieses können Sie
+sich mit Rechtsklick->Eigenschaften anzeigen lassen) davon, dass beide Dateien
+soeben erst erstellt wurden. 
+
+Wäre dies kein Übungsezenario sondern ein Angriff mit echter Schadsoftware,
+wäre Ihr PC nun mit Malware infiziert.
 
 Wie konnten die Dateien heruntergeladen werden?
 	Auf der Suche nach einem neuen Drucker für Ihr Unternehmen besuchten Sie 

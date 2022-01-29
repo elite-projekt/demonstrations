@@ -34,15 +34,12 @@ class DownloadDemo:
         # copy info file
         shutil.copy(filename_info_src, filename_info_dest)
 
-        # subprocess.Popen(  # nosec
-        #     ["C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
-        #      filename],
-        #     creationflags=subprocess.CREATE_NEW_CONSOLE,
-        #     shell=False
-        # )
+        args = ["start", "cmd", "/C", filename_malware]
 
-        # execute fake malware
-        os.system("start cmd /C " + filename_malware)
+        # open download-demo.txt
+        subprocess.Popen(
+            args, shell=True
+        )
 
     @staticmethod
     def firefox_init():
