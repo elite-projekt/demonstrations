@@ -92,7 +92,7 @@ def status_demo_download_sum():
 
 @orchestration.route("/download/create_fake_malware", methods=["POST"])
 def create_fake_malware():
-    try: 
+    try:
         download_demo.DownloadDemo.create_fake_malware()
         return flask.helpers.make_response(
             flask.json.jsonify(fake_malware_success), 200)
