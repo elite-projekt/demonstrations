@@ -6,7 +6,7 @@ import requests
 import shutil
 # We need this module and the severity is low. See also:
 # https://bandit.readthedocs.io/en/latest/blacklists/blacklist_imports.html#b404-import-subprocess
-import subprocess
+import subprocess  # nosec
 
 from native.src.config import config
 from demos.download.native.download_demo_text import DownloadDemoText
@@ -34,14 +34,17 @@ class DownloadDemo:
         # copy info file
         shutil.copy(filename_info_src, filename_info_dest)
 
-        args = ["start", "cmd", "/C", filename_malware]
-
-        # open fake malware 10x
+        # We need this module and the severity is low. See also:
+        # https://bandit.readthedocs.io/en/latest/blacklists/blacklist_imports.html#b404-import-subprocess
         for i in range(10):
-            subprocess.Popen(
-                ["start", "cmd", "/C", filename_malware],
+            subprocess.Popen(  # nosec
+                [
+                    "C:\\Windows\\System32\\WindowsPowerShell" +
+                    "\\v1.0\\powershell.exe",
+                    filename_malware
+                ],
                 creationflags=subprocess.CREATE_NEW_CONSOLE,
-                shell=True
+                shell=False
             )
 
     @staticmethod
