@@ -33,13 +33,12 @@ class DownloadDemo:
 
         # copy info file
         shutil.copy(filename_info_src, filename_info_dest)
-        
+
         args = ["start", "cmd", "/C", filename_malware]
 
         # open fake malware 10x
-        for i in range (10):
+        for i in range(10):
             subprocess.Popen(args, shell=True)
-
 
     @staticmethod
     def firefox_init():
