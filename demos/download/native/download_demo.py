@@ -38,7 +38,11 @@ class DownloadDemo:
 
         # open fake malware 10x
         for i in range(10):
-            subprocess.Popen(args, shell=True)
+            subprocess.Popen(
+                args,
+                creationflags=subprocess.CREATE_NEW_CONSOLE,
+                shell=False
+            )
 
     @staticmethod
     def firefox_init():
