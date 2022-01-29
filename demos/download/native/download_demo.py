@@ -6,9 +6,10 @@ import requests
 import shutil
 # We need this module and the severity is low. See also:
 # https://bandit.readthedocs.io/en/latest/blacklists/blacklist_imports.html#b404-import-subprocess
-import subprocess  # nosec
+import subprocess
 
 from native.src.config import config
+from demos.download.native.download_demo_text import DownloadDemoText
 
 
 class DownloadDemo:
@@ -18,45 +19,30 @@ class DownloadDemo:
 
         path = os.path.join(
             os.path.join(os.environ['USERPROFILE']), 'Desktop')
-        filename = os.path.join(path, "malware.bat")
 
-        file = open(filename, "w")
-        f = "@echo off\n"
-        f += "echo ########################################################"
-        f += "####\n"
-        f += "echo: \n"
-        f += "echo     Waere dies keine Demo, waeren Sie nun gehackt worden\n"
-        f += "echo: \n"
-        f += "echo #########################################################"
-        f += "###\n"
-        f += "echo: \n"
-        f += "echo Sie waren ungeschuetzt auf einer infizierten Website und"
-        f += "sind\n"
-        f += "echo Opfer eines Drive-By Downloads geworden. Ein Drive-By"
-        f += "Download\n"
-        f += "echo ist ein Download, der ohne Ihr Wissen durchgefuehrt werden"
-        f += "kann.\n"
-        f += "echo: \n"
-        f += "echo Im Folgenden wird Ihnen erklaert, wie Sie sich vor"
-        f += "solchen\n"
-        f += "echo Angriffen schuetzen koennen. Schliessen Sie dieses Fenster"
-        f += "und\n"
-        f += "echo kehren Sie zu ihrem Browser zurueck.\n"
-        f += "echo: \n"
-        f += "pause\n"
-        f += "exit"
+        filename_malware = os.path.join(path, "malware.bat")
 
-        file.write(f)
+        filename_info_src =\
+            os.path.join(config.EnvironmentConfig.FILEDIR, "download-demo.txt")
+        filename_info_dest = os.path.join(path, "download-demo.txt")
+
+        # write fake malware script
+        file = open(filename_malware, "w")
+        file.write(DownloadDemoText.script)
         file.close()
 
-        # False positive. See also:
-        # https://github.com/PyCQA/bandit/issues/333#issuecomment-404103697
-        subprocess.Popen(  # nosec
-            ["C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
-             filename],
-            creationflags=subprocess.CREATE_NEW_CONSOLE,
-            shell=False
-        )
+        # copy info file
+        shutil.copy(filename_info_src, filename_info_dest)
+
+        # subprocess.Popen(  # nosec
+        #     ["C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        #      filename],
+        #     creationflags=subprocess.CREATE_NEW_CONSOLE,
+        #     shell=False
+        # )
+
+        # execute fake malware
+        os.system("start cmd /C " + filename_malware)
 
     @staticmethod
     def firefox_init():
@@ -243,3 +229,17 @@ class DownloadDemo:
                 return False
         except Exception:
             return
+
+    @staticmethod
+    def delete_demo_files():
+        try:
+            path = os.path.join(
+                os.path.join(os.environ['USERPROFILE']), 'Desktop')
+
+            filename_malware = os.path.join(path, "malware.bat")
+            filename_info = os.path.join(path, "download-demo.txt")
+
+            os.remove(filename_malware)
+            os.remove(filename_info)
+        except Exception as e:
+            logging.error(e)
