@@ -49,6 +49,7 @@ def stop_demo_download():
     orchestration_controller.orchestration_service.docker_compose_stop_file(
         "download/unsecure/docker-compose.yml"
     )
+    download_demo.DownloadDemo.delete_demo_files()
     return flask.helpers.make_response(
         flask.json.jsonify(orchestration_controller.stop_success), 200)
 
