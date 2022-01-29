@@ -41,7 +41,7 @@ class DownloadDemo:
             subprocess.Popen(
                 args,
                 creationflags=subprocess.CREATE_NEW_CONSOLE,
-                shell=False
+                shell=True
             )
 
     @staticmethod
