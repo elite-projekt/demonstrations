@@ -103,7 +103,7 @@ export default {
     },
     notifyBackend(isAd) {
       if (isAd) {
-        this.$axios.post("http://localhost:5001/unsecure");
+        this.$axios.post("http://printer.io:5001/unsecure");
       }
     },
   },
