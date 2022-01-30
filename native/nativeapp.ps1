@@ -116,7 +116,7 @@ If(!(Test-Path -path $rootPath)) {
     
     # Host File
     $hostFile = "C:\Windows\System32\drivers\etc\hosts"
-    $localRedirects = "127.0.0.1`twww.shipment-support-amazon.com covidsupportgermany.de coronahilfengermany.de mpseinternational.com mail.domain.com #MPSE"
+    $localRedirects = "127.0.0.1`twww.shipment-support-amazon.com shipment-support-amazon.com covidsupportgermany.de www.covidsupportgermany.de amazon.com www.amazon.com coronahilfengermany.de www.coronahilfengermany.de mpseinternational.com mail.domain.com #MPSE"
     $containsRedirecets = Select-String -Path $hostFile -Pattern '#MPSE'
     try {
         if($containsRedirecets -ne $null) {

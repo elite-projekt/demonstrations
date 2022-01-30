@@ -16,9 +16,11 @@ import zipfile
 import python_on_whales
 
 from native.src.config import config
+from importlib_resources import files
 
 
 class PhishingDemo:
+    default_email_profile = "jzou4lhc.MPSE"  # name of custom profile
     default_email_server = "localhost"  # online vm server
     default_email_account = "max.mustermann@mpseinternational.com"
     default_email_account_password = "123"  # nosec This Password is only used
@@ -30,8 +32,8 @@ class PhishingDemo:
     unsecure_server_smtp_port = 26
     unsecure_server_imap_port = 144
 
-    email_client_config_location = os.getenv(
-        "APPDATA") + r"\Thunderbird\Profiles"
+    email_client_config_location = os.getenv("APPDATA") + \
+        r"\Thunderbird\Profiles\{}\prefs.js".format(default_email_profile)
 
     # deletes all mail in a mail box
     def delete_mailbox(
@@ -76,7 +78,6 @@ class PhishingDemo:
             local_smtp_port=secure_server_smtp_port,
             local_server=default_email_server,
     ):
-        from importlib.resources import files
         import demos.phishing.native.emails.eng as eng_mails
 
         email_filenames_eng = [
@@ -146,16 +147,6 @@ class PhishingDemo:
         :param change_ports: Do we want to change ports in the config?
         :return:
         """
-        skip = False
-        for root, dirs, files in os.walk(self.email_client_config_location):
-            for name in files:
-                if name == "prefs.js":
-                    self.email_client_config_location = str(root) \
-                                                        + "\\prefs.js"
-                    skip = True
-                    break
-            if skip:
-                break
 
         logging.info("Use secure client: {}".format(use_secured_client))
         with open(self.email_client_config_location, "r") as f:
@@ -363,8 +354,8 @@ class PhishingDemo:
         # check if profile already present
         try:
             if os.path.isdir(
-                    os.getenv(
-                        "APPDATA") + r"\Thunderbird\Profiles\jzou4lhc.MPSE"
+                    os.getenv("APPDATA") + r"\Thunderbird\Profiles\{}".format(
+                        self.default_email_profile)
             ):
                 logging.info("Nothing to do, exiting init")
                 return
@@ -375,16 +366,15 @@ class PhishingDemo:
             with zipfile.ZipFile(profile_zip, "r") as zipObj:
                 zipObj.extractall(config.EnvironmentConfig.PROFILEDIR)
 
-            profile_location = os.getenv("APPDATA") + f"{os.path.sep}" \
-                                                      f"Thunderbird" \
-                                                      f"{os.path.sep}" \
-                                                      f"Profiles" \
-                                                      f"{os.path.sep}" \
-                                                      f"jzou4lhc.MPSE"
+            profile_location = os.getenv("APPDATA") + \
+                f"{os.path.sep}Thunderbird" \
+                f"{os.path.sep}Profiles" \
+                f"{os.path.sep}{self.default_email_profile}"
 
             extracted_profile \
-                = os.path.join(config.EnvironmentConfig.PROFILEDIR,
-                               f"Profiles{os.path.sep}jzou4lhc.MPSE")
+                = os.path.join(
+                    config.EnvironmentConfig.PROFILEDIR,
+                    f"Profiles{os.path.sep}{self.default_email_profile}")
             shutil.copytree(extracted_profile, profile_location)
 
             profile_ini_location = os.getenv("APPDATA") + f"{os.path.sep}" \
@@ -411,7 +401,7 @@ class PhishingDemo:
             config_parser[f"Profile{max_profile_number + 1}"] = {
                 'Name': 'MPSE',
                 'IsRelative': 1,
-                'Path': 'Profiles/jzou4lhc.MPSE'
+                'Path': 'Profiles/' + self.default_email_profile
             }
 
             with open(profile_ini_location, 'w') as config_file:
