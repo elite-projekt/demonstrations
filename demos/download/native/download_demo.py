@@ -240,9 +240,7 @@ class DownloadDemo:
                 os.path.join(os.environ['USERPROFILE']), 'Desktop')
 
             filename_malware = os.path.join(path, "malware.bat")
-            filename_info = os.path.join(path, "download-demo.txt")
 
             os.remove(filename_malware)
-            os.remove(filename_info)
         except Exception as e:
             logging.error(e)
