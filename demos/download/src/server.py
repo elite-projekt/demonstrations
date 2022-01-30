@@ -28,7 +28,7 @@ def run_flask_app():
 
 @app.route("/", methods=["GET"])
 def get_index():
-    return send_from_directory("static", "template.html")
+    return send_from_directory("static", "index.html")
 
 
 @app.route("/<path:path>", methods=["GET"])

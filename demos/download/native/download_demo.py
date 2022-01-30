@@ -203,7 +203,7 @@ class DownloadDemo:
                 subprocess.Popen(  # nosec
                     ["C:\\Program Files\\Mozilla Firefox\\firefox.exe",
                      "-P", "MPSE_download_safe",
-                     "-url", "http://printer.io:5001/template.html"],
+                     "-url", "http://printer.io:5001/intex.html"],
                     shell=False
                 )
             if not safe:
@@ -212,7 +212,7 @@ class DownloadDemo:
                 subprocess.Popen(  # nosec
                     ["C:\\Program Files\\Mozilla Firefox\\firefox.exe",
                      "-P", "MPSE_download_unsafe",
-                     "-url", "http://printer.io:5001/template.html"],
+                     "-url", "http://printer.io:5001/index.html"],
                     shell=False
                 )
 
@@ -224,7 +224,7 @@ class DownloadDemo:
     def probe_container_status():
         try:
             r = requests.get(
-                'http://printer.io:5001/template.html'
+                'http://printer.io:5001/index.html'
             )
             if r.status_code == 200:
                 return True
