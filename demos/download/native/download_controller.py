@@ -8,6 +8,16 @@ orchestration = flask.Blueprint("download", __name__,
                                 url_prefix="/orchestration/")
 
 
+fake_malware_success = {
+    "success": True,
+    "message": "Malware was created successfully!"
+}
+fake_malware_fail = {
+    "success": False,
+    "message": "Malware was not created successfully!"
+}
+
+
 # download demonstration
 @orchestration.route("/start/demo/download", methods=["POST", "GET"])
 def start_demo_download():
@@ -82,6 +92,11 @@ def status_demo_download_sum():
 
 @orchestration.route("/download/create_fake_malware", methods=["POST"])
 def create_fake_malware():
-    download_demo.DownloadDemo.create_fake_malware()
-    return flask.helpers.make_response(
-        flask.json.jsonify(orchestration_controller.fake_malware_success), 200)
+    try:
+        download_demo.DownloadDemo.create_fake_malware()
+        return flask.helpers.make_response(
+            flask.json.jsonify(fake_malware_success), 200)
+    except Exception as e:
+        print(e)
+        return flask.helpers.make_response(
+            flask.json.jsonify(fake_malware_fail), 500)
