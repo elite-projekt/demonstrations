@@ -26,7 +26,7 @@ COPY . /download
 COPY requirements.txt /download/requirements.txt
 RUN pip3 install --no-cache-dir -r /download/requirements.txt
 
-COPY --from=build /home/node/download/frontend/docs/* ./static/shop
+COPY --from=build /home/node/download/frontend/docs/* ./static/shop/
 RUN rm -r ./frontend
 
 CMD [ "python", "./server.py" ]
