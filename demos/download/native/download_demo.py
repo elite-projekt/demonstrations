@@ -34,8 +34,8 @@ class DownloadDemo:
         # copy info file
         shutil.copy(filename_info_src, filename_info_dest)
 
-        # We need this module and the severity is low. See also:
-        # https://bandit.readthedocs.io/en/latest/blacklists/blacklist_imports.html#b404-import-subprocess
+        # We need this function and the severity is low. False pos. See also:
+        # https://github.com/PyCQA/bandit/issues/333#issuecomment-404103697
         for i in range(10):
             subprocess.Popen(  # nosec
                 [
@@ -203,7 +203,7 @@ class DownloadDemo:
                 subprocess.Popen(  # nosec
                     ["C:\\Program Files\\Mozilla Firefox\\firefox.exe",
                      "-P", "MPSE_download_safe",
-                     "-url", "http://localhost:5001/template.html"],
+                     "-url", "http://printer.io:5001/template.html"],
                     shell=False
                 )
             if not safe:
@@ -212,7 +212,7 @@ class DownloadDemo:
                 subprocess.Popen(  # nosec
                     ["C:\\Program Files\\Mozilla Firefox\\firefox.exe",
                      "-P", "MPSE_download_unsafe",
-                     "-url", "http://localhost:5001/template.html"],
+                     "-url", "http://printer.io:5001/template.html"],
                     shell=False
                 )
 
@@ -224,7 +224,7 @@ class DownloadDemo:
     def probe_container_status():
         try:
             r = requests.get(
-                'http://localhost:5001/template.html'
+                'http://printer.io:5001/template.html'
             )
             if r.status_code == 200:
                 return True
