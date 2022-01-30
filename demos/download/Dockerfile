@@ -17,6 +17,7 @@ RUN pip3 install --upgrade --no-cache-dir pip
 ENV APP_DIR /download/src
 RUN mkdir -p ${APP_DIR}
 WORKDIR ${APP_DIR}
+RUN mkdir -p ./static/shop
 
 # open port
 EXPOSE 5001
@@ -25,7 +26,6 @@ COPY . /download
 COPY requirements.txt /download/requirements.txt
 RUN pip3 install --no-cache-dir -r /download/requirements.txt
 
-RUN mkdir -p ./static/shop
 COPY --from=build /home/node/download/frontend/docs/* ./static/shop
 RUN rm -r ./frontend
 
