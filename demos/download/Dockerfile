@@ -1,3 +1,13 @@
+FROM node:lts-stretch AS build
+
+ENV APP_DIR /home/node/download/frontend
+RUN mkdir -p ${APP_DIR}
+WORKDIR ${APP_DIR}
+
+COPY ./src/frontend/src .
+
+RUN npm install && npm run build
+
 FROM python:3.10-alpine
 
 # No Version Pining necessary
@@ -5,15 +15,8 @@ FROM python:3.10-alpine
 RUN pip3 install --upgrade --no-cache-dir pip
 
 ENV APP_DIR /download/src
-
-# app dir
 RUN mkdir -p ${APP_DIR}
 WORKDIR ${APP_DIR}
-
-#RUN apk update \
-#    && apk add --virtual build-deps gcc python3-dev musl-dev \
-#    && apk add jpeg-dev zlib-dev libjpeg\
-#    && pip install Pillow
 
 # open port
 EXPOSE 5001
@@ -21,5 +24,10 @@ EXPOSE 5001
 COPY . /download
 COPY requirements.txt /download/requirements.txt
 RUN pip3 install --no-cache-dir -r /download/requirements.txt
+
+RUN mkdir -p ./static/shop
+COPY --from=build /home/node/download/frontend/docs/* ./static/shop
+RUN rm -r ./frontend
+
 CMD [ "python", "./server.py" ]
 
