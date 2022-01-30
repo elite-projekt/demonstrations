@@ -1,0 +1,90 @@
+{
+  "products": {
+    "syltherine": {
+      "description": "The Canon imageCLASS MF232w 3-in-1 laser printer offers high print quality, extensive features and reliability. Ideal for any small office or home office environment. Print, scan and copy functions so that you can carry out the necessary tasks with you One device can do it Print at speeds of up to 24 pages per minute and get your first print out in 6 seconds or less."
+    },
+    "lolito": {
+      "description": "As work environments radically change, people need versatile devices that prioritize ease of use and improved productivity.<ul> <li>Ideal for small to medium sized businesses and those working from home need</li> <li>Easy installation with Smart Start Installer</li> <li>Reliable and Trustworthy</li> <li>Mobile ready: Apple AirPrint, Mopria, Wi-Fi Direct</li>\t <li>Comprehensive security features</li></ul>"
+    },
+    "respira": {
+      "description": "The Olivetti d-Color MF3023 - d-Color MF3024 A4 color multifunction systems, which deliver up to 30 pages per minute, have been specially developed to meet the needs of medium-sized workgroups.<ul> <li>Up to 30 A4 pages per minute, black & white and colour</li> <li>1,200 X 1,200 DPI print resolution</li> <li>7” color touchscreen</li> <li>Searchable PDF (with Scan Extension Kit)</li> </ul>"
+    },
+    "printo": {
+      "description": "This excellent branded product is permanently available from us at a lower price. It has all modern functions, such as MultiScan or a touch display. Of course, these are available in the best quality, so that you are optimally supported in everyday office life. "
+    },
+
+    "grifo": {
+      "description": "Brother MFC-L2730DW Compact 2.7 Inch monochrome laser all-in-one printer with color touchscreen<ul> <li>Print more, wait less, get more done. Fast print speeds from up to 36 pages per minute(1) means more efficiency, so you can print more, wait less and have more time to focus on your business.</li> <li>Multiple printing options meet a variety of needs The generous, adjustable 250-sheet capacity paper tray easily handles letter- and legal-size paper and helps increase efficiency with less paper to load.The manual feeder enables professional-quality printing on a variety of papers and formats, including cardstock, envelopes and more.</li> <li>Streamline your document workflows The 2.7 Inch color touchscreen gives you easy access to the Brother Cloud Apps, a free one Suite of innovative, cloud-based applications designed specifically for your document creation needs, including Scan-to-Office, which converts a hard-copy document into an editable text file - Word, Excel or PowerPoint.</li></ul>"
+    },
+    "muggo": {
+      "description": "Expand your possibilities with affordable A3 color printing<ul> <li>Upsize color printing capabilities with media sizes up to A3 for impressive marketing collateral and more.</li> <li>Impress with solid text and consistent color - and get the color output you want with Pantone® matching.</li> <li>Print, copy, scan and fax directly from the MFP using the large touchscreen</li> <li>HP ePrint - print now from your smartphone or tablet from virtually anywhere.</li></ul>"
+    },
+    "pingky": {
+      "description": "The HP LaserJet M476dn printer is a network-capable multifunction device. It prints and copies in color at a speed of 21 pages per minute. <ul> <li>Colour printing</li> <li>Mobile printing</li> <li>Copy, print, scan and fax</li> <li>Print speed: 21 pages per minute</li></ul>"
+    },
+    "potty": {
+      "description": "This excellent branded printer is permanently available with us at a cheaper price. It has all the modern features, such as MultiScan or a touch display.These are of course in the best quality, so you are optimally supported in everyday office life."
+    }
+  },
+  "categories": {
+    "default": "3-in-1 Laser Printer",
+    "luxury": "Wi-Fi Direct",
+    "minimalist": "Best Seller",
+    "modern": "Modern printer",
+    "heavyDuty": "New model",
+    "big": "DIN A3 printer",
+    "good": "Mobile printing",
+    "highTech": "high-tech printer"
+  },
+  "footer": {
+    "highQuality": {
+      "title": "High Quality",
+      "description": "crafted from top materials"
+    },
+    "warranty": {
+      "title": "Warranty Protection",
+      "description": "Over 2 years"
+    },
+    "shipping": {
+      "title": "Free Shipping",
+      "description": "Order over 150€"
+    },
+    "support": {
+      "title": "24/7 Support",
+      "description": "Dedicated Support"
+    }
+  },
+  "buttons": {
+    "buy": "Buy now"
+  },
+  "modal": {
+    "backToHome": "Back to home",
+    "close": "Close",
+    "wrongProduct": {
+      "title": "Error",
+      "text": "Oh no! You have selected the wrong printer. This one does not has MultiScan as as specification."
+    },
+    "correctProduct": {
+      "title": "Congratulation",
+      "text": "You have selected one of the correct printers. You haven’t been infected by a DriveBy Download."
+    },
+    "driveByError": {
+      "title": "Warning",
+      "text": "When you navigated to this page, you got infected with a Driveby download. Of course, this is only a demo."
+    }
+  },
+  "hero": {
+    "title": "Printer Shop Nr.1",
+    "text": "Best Printers with unbetable prices"
+  },
+  "props": {
+    "multiScan": "Multiscan"
+  },
+  "text": {
+    "specs": "Specifications",
+    "advertisement": "Ad",
+    "newProduct": "New",
+    "yes": "Yes",
+    "no": "No"
+  }
+}
