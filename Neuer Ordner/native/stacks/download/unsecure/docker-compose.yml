@@ -1,0 +1,13 @@
+version: "3.9"
+services:
+  download:
+    # for prod
+    #image:  ${REGISTRY_URL}/${GROUP_NAME}/demonstrations/download:master
+    # for local build (dev/debug/test purposes)
+    build:
+      context: ../../../../demos/download/
+    container_name: download-unsecure
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    ports:
+      - 5001:5001

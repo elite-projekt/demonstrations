@@ -1,0 +1,285 @@
+{
+	"info": {
+		"_postman_id": "6e392b20-647c-4698-b095-b5a84d5ccc4f",
+		"name": "Demonstration",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Start Phishing Demo - Secure Mode",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"secureMode\":true}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/orchestration/start/demo/phishing",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"orchestration",
+						"start",
+						"demo",
+						"phishing"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Start Phishing Demo - Unsecure Mode",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"secureMode\":false}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/orchestration/start/demo/phishing",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"orchestration",
+						"start",
+						"demo",
+						"phishing"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Stop Phishing Demo",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/orchestration/stop/demo/phishing",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"orchestration",
+						"stop",
+						"demo",
+						"phishing"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Status Phising Demo",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/orchestration/status/demo/phishing",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"orchestration",
+						"status",
+						"demo",
+						"phishing"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Status Phising Demo Sum",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/orchestration/status/demo/phishing/sum",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"orchestration",
+						"status",
+						"demo",
+						"phishing",
+						"sum"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Start Password Demo - Secure Mode",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"secureMode\":true}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/orchestration/start/demo/password",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"orchestration",
+						"start",
+						"demo",
+						"password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Start Password Demo - Unsecure Mode",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"secureMode\":false}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/orchestration/start/demo/password",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"orchestration",
+						"start",
+						"demo",
+						"password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Stop Password Demo",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/orchestration/stop/demo/password",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"orchestration",
+						"stop",
+						"demo",
+						"password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Status Password Demo",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/orchestration/status/demo/password",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"orchestration",
+						"status",
+						"demo",
+						"password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Status Password Demo Sum",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/orchestration/status/demo/password/sum",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"orchestration",
+						"status",
+						"demo",
+						"password",
+						"sum"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

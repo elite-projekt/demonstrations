@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+    
+        <link rel="stylesheet" href="{{url_for('static', filename='signup-form/fonts/icomoon/style.css')}}">
+    
+        <link rel="stylesheet" href="{{url_for('static', filename='signup-form/css/owl.carousel.min.css')}}">
+    
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="{{url_for('static', filename='signup-form/css/bootstrap.min.css')}}">
+        
+        <!-- Style -->
+        <link rel="stylesheet" href="{{url_for('static', filename='signup-form/css/style.css')}}">
+    
+        <title>Sign Up #7</title>
+      </head>
+      <body>
+      
+    
+      
+      <div class="content">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6">
+              <img src="{{url_for('static', filename='signup-form/images/undraw_remotely_2j6y.svg')}}" alt="Image" class="img-fluid">
+            </div>
+            <div class="col-md-6 contents">
+              <div class="row justify-content-center">
+                <div class="col-md-8">
+                  <div class="mb-4">
+                  <h3>Sign Up</h3>
+                  <p class="mb-4">This is the sign up page for our Account Services.</p>
+                </div>
+                <form method="post">
+    
+                  <div class="form-group first" id="name_field">
+                    <label for="name">Username</label>
+                    <input type="text" class="form-control" id="name" name="name">
+    
+                  </div>
+                  <div class="form-group" id="password_field">
+                    
+                    <label for="password">Password</label>
+                    <div class="input-group">
+                    <input type="password" class="form-control" id="password" name="pwd">
+                    <i toggle="#password" class="icon-eye toggle-password input-group-addon" data-toggle="tooltip"  data-placement="right" title="click the eye for showing the password." id="pw-eye"></i>
+                    </div>
+                    
+                  </div>
+                  <input type="submit" value="Register" class="btn btn-block btn-primary mt-3">
+                </form>
+                
+                </div>
+              </div>
+              
+            </div>
+            
+          </div>
+        </div>
+      </div>
+        <script src="{{url_for('static', filename='signup-form/js/jquery-3.3.1.min.js')}}"></script>
+        <script src="{{url_for('static', filename='signup-form/js/popper.min.js')}}"></script>
+        <script src="{{url_for('static', filename='signup-form/js/bootstrap.min.js')}}"></script>
+        <script src="{{url_for('static', filename='signup-form/js/main.js')}}"></script>
+      </body>
+    </html>
+</body>
+</html>
