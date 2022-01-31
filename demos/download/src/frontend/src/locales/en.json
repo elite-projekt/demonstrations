@@ -12,7 +12,6 @@
     "printo": {
       "description": "This excellent branded product is permanently available from us at a lower price. It has all modern functions, such as MultiScan or a touch display. Of course, these are available in the best quality, so that you are optimally supported in everyday office life. "
     },
-
     "grifo": {
       "description": "Brother MFC-L2730DW Compact 2.7 Inch monochrome laser all-in-one printer with color touchscreen<ul> <li>Print more, wait less, get more done. Fast print speeds from up to 36 pages per minute(1) means more efficiency, so you can print more, wait less and have more time to focus on your business.</li> <li>Multiple printing options meet a variety of needs The generous, adjustable 250-sheet capacity paper tray easily handles letter- and legal-size paper and helps increase efficiency with less paper to load.The manual feeder enables professional-quality printing on a variety of papers and formats, including cardstock, envelopes and more.</li> <li>Streamline your document workflows The 2.7 Inch color touchscreen gives you easy access to the Brother Cloud Apps, a free one Suite of innovative, cloud-based applications designed specifically for your document creation needs, including Scan-to-Office, which converts a hard-copy document into an editable text file - Word, Excel or PowerPoint.</li></ul>"
     },
@@ -27,7 +26,7 @@
     }
   },
   "categories": {
-    "default": "3-in-1 Laser Printer",
+    "standard": "3-in-1 Laser Printer",
     "luxury": "Wi-Fi Direct",
     "minimalist": "Best Seller",
     "modern": "Modern printer",

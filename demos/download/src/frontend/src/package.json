@@ -5,7 +5,8 @@
   "author": "ECS",
   "scripts": {
     "dev": "nuxt",
-    "build": "nuxt generate"
+    "build": "nuxt generate",
+    "start": "nuxt start"
   },
   "repository": {
     "type": "git",

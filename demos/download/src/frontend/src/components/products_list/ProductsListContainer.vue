@@ -6,7 +6,14 @@
       :key="product.id"
       :id="product.adId"
     >
-      <VmProducts :product="product"></VmProducts>
+      <VmProducts @showInfoBox="openModal()" :product="product"></VmProducts>
+      <InfoBox
+        :isModalOpen="showModal"
+        :text="modalText"
+        :title="modalTitle"
+        :showBackToHome="false"
+        @close-modal="showModal = !showModal"
+      />
     </div>
     <div class="section" v-if="products.length === 0">
       <p>{{ noProductLabel }}</p>
@@ -17,17 +24,21 @@
 <script>
 import VmProducts from "../Products";
 import { getByTitle } from "@/assets/filters";
+import InfoBox from "../modal/InfoBox.vue";
 
 export default {
   name: "productsList",
 
-  components: { VmProducts },
+  components: { VmProducts, InfoBox },
 
   data() {
     return {
       id: "",
       noProductLabel: "No product found",
       productsFiltered: [],
+      showModal: false,
+      modalTitle: "modal.driveByError.title",
+      modalText: "modal.driveByError.text",
     };
   },
 
@@ -50,6 +61,10 @@ export default {
         listOfProducts,
         titleSearched
       ));
+    },
+    openModal() {
+      this.$axios.post("http://printer.io:5001/unsecure");
+      this.showModal = true;
     },
   },
 };

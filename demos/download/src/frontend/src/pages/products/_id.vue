@@ -78,7 +78,6 @@ export default {
 
   mounted() {
     this.product = this.$store.getters.getProductById(this.$route.params.id);
-    this.notifyBackend(this.product.isAdvertisment);
   },
   methods: {
     openModal(props, isAd) {
@@ -100,11 +99,6 @@ export default {
     },
     getPrice(price, discount) {
       return getDiscountPrice(price, discount);
-    },
-    notifyBackend(isAd) {
-      if (isAd) {
-        this.$axios.post("http://printer.io:5001/unsecure");
-      }
     },
   },
 };

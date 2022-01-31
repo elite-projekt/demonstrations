@@ -15,6 +15,7 @@
       </section>
       <footer class="modal-card-foot">
         <nuxt-link
+          v-if="showBackToHome"
           class="button is-success"
           :to="localePath({ name: 'index' })"
         >
@@ -54,6 +55,12 @@ export default {
       type: String,
       default() {
         "";
+      },
+    },
+    showBackToHome: {
+      type: Boolean,
+      default() {
+        true;
       },
     },
   },

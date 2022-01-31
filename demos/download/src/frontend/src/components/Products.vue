@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div @click="emitter">
     <div class="card-image">
       <figure class="image">
         <img :src="product.image" alt="Placeholder image" />
@@ -30,14 +30,19 @@
       </div>
     </div>
     <nuxt-link
+      :event="product.isAdvertisment ? '' : 'click'"
       class="details"
       :to="
-        localePath({
-          name: 'products-id',
-          params: {
-            id: product.id,
-          },
-        })
+        localePath(
+          product.isAdvertisment
+            ? '/partners/' + product.title
+            : {
+                name: 'products-id',
+                params: {
+                  id: product.id,
+                },
+              }
+        )
       "
     >
     </nuxt-link>
@@ -47,6 +52,7 @@
 <script>
 import { getDiscountPrice } from "@/assets/methods";
 import labelContainer from "./product_label/labelContainer.vue";
+
 export default {
   components: { labelContainer },
   name: "products",
@@ -54,6 +60,11 @@ export default {
   methods: {
     getPrice(price, discount) {
       return getDiscountPrice(price, discount);
+    },
+    emitter() {
+      if (this.product.isAdvertisment) {
+        this.$emit("showInfoBox");
+      }
     },
   },
 };

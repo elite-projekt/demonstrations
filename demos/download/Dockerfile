@@ -10,24 +10,17 @@ RUN npm install && npm run build
 
 FROM python:3.10-alpine
 
-# No Version Pining necessary
-# hadolint ignore=DL3013
-RUN pip3 install --upgrade --no-cache-dir pip
-
 ENV APP_DIR /download/src
-RUN mkdir -p ${APP_DIR}
+RUN mkdir -p ${APP_DIR} && mkdir -p ${APP_DIR}/static/shop
 WORKDIR ${APP_DIR}
-RUN mkdir -p ./static/shop
 
 # open port
 EXPOSE 5001
 
-COPY . /download
+COPY ./src/server.py /download/src/
 COPY requirements.txt /download/requirements.txt
 RUN pip3 install --no-cache-dir -r /download/requirements.txt
 
-COPY --from=build /home/node/download/frontend/docs/* ./static/shop/
-RUN rm -r ./frontend
+COPY --from=build /home/node/download/frontend/docs/ ${APP_DIR}/static/shop/
 
 CMD [ "python", "./server.py" ]
-
