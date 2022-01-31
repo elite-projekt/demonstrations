@@ -22,17 +22,10 @@ class DownloadDemo:
 
         filename_malware = os.path.join(path, "malware.bat")
 
-        filename_info_src =\
-            os.path.join(config.EnvironmentConfig.FILEDIR, "download-demo.txt")
-        filename_info_dest = os.path.join(path, "download-demo.txt")
-
         # write fake malware script
         file = open(filename_malware, "w")
         file.write(DownloadDemoText.script)
         file.close()
-
-        # copy info file
-        shutil.copy(filename_info_src, filename_info_dest)
 
         # We need this function and the severity is low. False pos. See also:
         # https://github.com/PyCQA/bandit/issues/333#issuecomment-404103697

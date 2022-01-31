@@ -21,7 +21,6 @@ class EnvironmentConfig:
     WORKINGDIR = "C:\\Program Files (x86)\\hda\\nativeapp\\"
     DOCKERSTACKDIR = WORKINGDIR + "stacks\\"
     PROFILEDIR = WORKINGDIR + "profiles\\"
-    FILEDIR = WORKINGDIR + "files\\"
     ENVDIR = WORKINGDIR
 
 
