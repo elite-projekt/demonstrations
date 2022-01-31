@@ -52,14 +52,11 @@ class DownloadDemo:
                     r"\Mozilla\Firefox\Profiles" +
                     r"\1y2st08z.MPSE_download_unsafe"
             ):
-                print("start unzip...")
                 # extract profile to location
                 profile_zip = os.path.join(config.EnvironmentConfig.PROFILEDIR,
                                            "1y2st08z.MPSE_download_unsafe.zip")
                 with zipfile.ZipFile(profile_zip, "r") as zipObj:
                     zipObj.extractall(config.EnvironmentConfig.PROFILEDIR)
-
-                print("get location...")
 
                 profile_location \
                     = os.getenv("APPDATA") + f"{os.path.sep}" \
@@ -101,7 +98,7 @@ class DownloadDemo:
                             max_profile_number = current_profile_number
 
                 config_parser[f"Profile{max_profile_number + 1}"] = {
-                    'Name': 'MPSE',
+                    'Name': 'MPSE_download_unsafe',
                     'IsRelative': 1,
                     'Path': 'Profiles/1y2st08z.MPSE_download_unsafe'
                 }
@@ -110,9 +107,6 @@ class DownloadDemo:
                     config_parser.write(
                         config_file, space_around_delimiters=False
                     )
-
-                print("unsafe init done...")
-
             else:
                 logging.info("Nothing to do, unsafe profile exiting init")
 
@@ -167,7 +161,7 @@ class DownloadDemo:
                             max_profile_number = current_profile_number
 
                 config_parser[f"Profile{max_profile_number + 1}"] = {
-                    'Name': 'MPSE',
+                    'Name': 'MPSE_download_safe',
                     'IsRelative': 1,
                     'Path': 'Profiles/fkstz94l.MPSE_download_safe'
                 }
@@ -182,8 +176,8 @@ class DownloadDemo:
 
             logging.info("Init done")
         except Exception as e:
-            print(e)
-            logging.error(e)
+            print(str(e))
+            logging.error(str(e))
 
     @staticmethod
     def start_web_browser(safe):
@@ -196,7 +190,7 @@ class DownloadDemo:
                 subprocess.Popen(  # nosec
                     ["C:\\Program Files\\Mozilla Firefox\\firefox.exe",
                      "-P", "MPSE_download_safe",
-                     "-url", "http://printer.io:5001"],
+                     "-url", "http://printer.io:5001/"],
                     shell=False
                 )
             if not safe:
@@ -205,7 +199,7 @@ class DownloadDemo:
                 subprocess.Popen(  # nosec
                     ["C:\\Program Files\\Mozilla Firefox\\firefox.exe",
                      "-P", "MPSE_download_unsafe",
-                     "-url", "http://printer.io:5001"],
+                     "-url", "http://printer.io:5001/"],
                     shell=False
                 )
 
