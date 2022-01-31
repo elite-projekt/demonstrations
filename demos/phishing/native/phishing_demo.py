@@ -372,7 +372,7 @@ class PhishingDemo:
             profile_zip = os.path.join(config.EnvironmentConfig.PROFILEDIR,
                                        "profile.zip")
             with zipfile.ZipFile(profile_zip, "r") as zipObj:
-                zipObj.extractall(config.EnvironmentConfig.PROFILEDIR)
+                zipObj.extractall(os.getenv("TEMP"))
 
             profile_location = os.getenv("APPDATA") + f"{os.path.sep}" \
                                                       f"Thunderbird" \
@@ -382,7 +382,7 @@ class PhishingDemo:
                                                       f"jzou4lhc.MPSE"
 
             extracted_profile \
-                = os.path.join(config.EnvironmentConfig.PROFILEDIR,
+                = os.path.join(os.getenv("TEMP"),
                                f"Profiles{os.path.sep}jzou4lhc.MPSE")
             shutil.copytree(extracted_profile, profile_location)
 
