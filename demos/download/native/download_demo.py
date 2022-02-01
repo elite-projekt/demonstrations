@@ -56,7 +56,6 @@ class DownloadDemo:
                 profile_zip = os.path.join(config.EnvironmentConfig.PROFILEDIR,
                                            "1y2st08z.MPSE_download_unsafe.zip")
                 with zipfile.ZipFile(profile_zip, "r") as zipObj:
-                    # zipObj.extractall(config.EnvironmentConfig.PROFILEDIR)
                     zipObj.extractall(os.getenv("TEMP"))
 
                 profile_location \
@@ -120,7 +119,6 @@ class DownloadDemo:
                 profile_zip = os.path.join(config.EnvironmentConfig.PROFILEDIR,
                                            "fkstz94l.MPSE_download_safe.zip")
                 with zipfile.ZipFile(profile_zip, "r") as zipObj:
-                    # zipObj.extractall(config.EnvironmentConfig.PROFILEDIR)
                     zipObj.extractall(os.getenv("TEMP"))
 
                 profile_location \
