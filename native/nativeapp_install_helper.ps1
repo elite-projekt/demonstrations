@@ -255,34 +255,64 @@ If(!(Test-Path -path $rootPath)) {
         if ($Answer -eq "y" -or $Answer -eq "yes") {
             WriteOutput "Trying to uninstall" "DarkGray"
 
-            # Kill process if exists
-            WriteOutput "Trying to kill the nativeapp process" "DarkGray"
-            Get-Process | Where-Object { $_.Name -eq "app" } | Select-Object -First 1 | Stop-Process -ErrorAction Stop
-            WriteOutput "Killed the process if exists" "Green"
+            try {
+                # Kill process if exists
+                WriteOutput "Trying to kill the nativeapp process" "DarkGray"
+                Get-Process | Where-Object { $_.Name -eq "app" } | Select-Object -First 1 | Stop-Process -ErrorAction Stop
+                WriteOutput "Killed the process if exists" "Green"
+            }
+            catch {
+                WriteOutput "Something went wrong while killing the native app process" "Red"
+                Write-Warning $Error[0]
+            }
 
-            # Remove folder
-            WriteOutput "Trying to remove the folder: $rootPath" "DarkGray"
-            Remove-Item -Path $rootPath -Recurse -Force -ErrorAction Stop
-            WriteOutput "Removed the folder with all files: $rootPath" "Green"
+            try {
+                # Remove folder
+                WriteOutput "Trying to remove the folder: $rootPath" "DarkGray"
+                Remove-Item -Path $rootPath -Recurse -Force -ErrorAction Stop
+                WriteOutput "Removed the folder with all files: $rootPath" "Green"
+            }
+            catch {
+                WriteOutput "Something went wrong while removing the folder: $rootPath" "Red"
+                Write-Warning $Error[0]
+            }
             
-            # Remove Windows Defender Exception
-            WriteOutput "Trying to remove the exclusion from Windows Defender" "DarkGray"
-            Remove-MpPreference -ExclusionPath $rootPath -ErrorAction Stop
-            WriteOutput "Removed the exclusion from Windows Defender" "Green" 
+            try {
+                # Remove Windows Defender Exception
+                WriteOutput "Trying to remove the exclusion from Windows Defender" "DarkGray"
+                Remove-MpPreference -ExclusionPath $rootPath -ErrorAction Stop
+                WriteOutput "Removed the exclusion from Windows Defender" "Green" 
+            }
+            catch {
+                WriteOutput "Something went wrong removing the exclusion from Windows Defender" "Red"
+                Write-Warning $Error[0]
+            }
 
-            # Remove autostart
-            WriteOutput "Trying to remove the autostart entry" "DarkGray"
-            Remove-Item -Path "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup\nativeapp.lnk" -ErrorAction Stop
-            WriteOutput "Removed the autostart entry" "Green"
+            try {
+                # Remove autostart
+                WriteOutput "Trying to remove the autostart entry" "DarkGray"
+                Remove-Item -Path "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup\nativeapp.lnk" -ErrorAction Stop
+                WriteOutput "Removed the autostart entry" "Green"
+            }
+            catch {
+                WriteOutput "Something went wrong while removing the autostart entry" "Red"
+                Write-Warning $Error[0]
+            }
 
-            # Remove Host entry
-            WriteOutput "Removing host entry" "DarkGray"
-            Set-Content -Path $hostFile -Value (get-content -Path $hostFile | Select-String -Pattern '#MPSE' -NotMatch) -ErrorAction Stop
-            WriteOutput "Removed successfully host entry" "Green"
+            try {
+                # Remove Host entry
+                WriteOutput "Removing host entry" "DarkGray"
+                Set-Content -Path $hostFile -Value (get-content -Path $hostFile | Select-String -Pattern '#MPSE' -NotMatch) -ErrorAction Stop
+                WriteOutput "Removed successfully host entry" "Green"
+            }
+            catch {
+                WriteOutput "Something went wrong while removing hosts entry" "Red"
+                Write-Warning $Error[0]
+            }
         }
     }
     catch {
-        WriteOutput "Something went wrong creating the autostart entry" "Red"
+        WriteOutput "Something went wrong while uninstalling the native app" "Red"
         Write-Warning $Error[0]
         Exit 1
     }
