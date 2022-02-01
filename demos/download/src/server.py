@@ -7,7 +7,7 @@ from flask import send_from_directory
 
 HOST = "0.0.0.0"  # nosec No Issue in a docker Container
 d_path = os.path.abspath(os.path.dirname(__file__))
-static_folder_path = os.path.join(d_path, "static")
+# static_folder_path = os.path.join(d_path, "static")
 
 app = flask.Flask(__name__, static_url_path='/static')
 
@@ -28,11 +28,12 @@ def run_flask_app():
 
 @app.route("/", methods=["GET"])
 def get_index():
-    return send_from_directory("static", "template.html")
+    return send_from_directory("static", "shop/index.html")
 
 
 @app.route("/<path:path>", methods=["GET"])
 def static_dir(path):
+    print(path)
     return send_from_directory("static", path)
 
 
