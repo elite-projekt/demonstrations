@@ -140,8 +140,8 @@ build:release-zip:
     - cp .env nativeapp-$CI_COMMIT_TAG/.env
     - cp demoCA/rootCA.crt nativeapp-$CI_COMMIT_TAG/rootCA.crt
     - cd native
-    - cp helper.bat ../nativeapp-$CI_COMMIT_TAG/helper.bat
-    - cp nativeapp.ps1 ../nativeapp-$CI_COMMIT_TAG/nativeapp.ps1
+    - cp nativeapp_installer.bat ../nativeapp-$CI_COMMIT_TAG/nativeapp_installer.bat
+    - cp nativeapp_install_helper.ps1 ../nativeapp-$CI_COMMIT_TAG/nativeapp_install_helper.ps1
     - cp src/dist/windows/app.exe ../nativeapp-$CI_COMMIT_TAG/app.exe
     - cp -r stacks ../nativeapp-$CI_COMMIT_TAG/
     - cp -r src/profiles ../nativeapp-$CI_COMMIT_TAG
