@@ -15,8 +15,7 @@
         </div>
         <div class="navbar-end">
           <LangDropdown />
-          
-          </div>
+
           <!-- <div class="navbar-item shopping-cart" @click="showCheckoutModal">
             <span class="icon">
               <i class="fa fa-shopping-cart"></i>
