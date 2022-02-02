@@ -40,8 +40,13 @@ def start_demo_download():
                  "download/unsecure/docker-compose.yml"
                 )
             # sleep until container app is ready
+            # throw error after 30 sec
+            abort_cntr = 0
             while not download_demo.DownloadDemo.probe_container_status():
                 time.sleep(1)
+                abort_cntr += 1
+                if abort_cntr > 30:
+                    raise Exception("Container probe timeout!")
             # start browser and open demo frontend when container is ready
             download_demo.DownloadDemo.start_web_browser(False)
     except Exception:
