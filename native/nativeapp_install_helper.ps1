@@ -1,9 +1,11 @@
 #nativeapp.bat has to be started first
 
-Write-Host "                                      ___                           ";
-Write-Host " |\ |  _. _|_ o     _   /\  ._  ._     |  ._   _ _|_  _. | |  _  ._ ";
-Write-Host " | \| (_|  |_ | \/ (/_ /--\ |_) |_)   _|_ | | _>  |_ (_| | | (/_ |  ";
-Write-Host "                            |   |                                   ";
+# Script Header for prettyness
+# Src: http://patorjk.com/software/taag/#p=display&h=1&v=0&c=echo&f=Mini&t=NativeApp%20Installer%20v.1.5
+Write-Host "                                      ___                                      _  ";
+Write-Host " |\ |  _. _|_ o     _   /\  ._  ._     |  ._   _ _|_  _. | |  _  ._       /|  |_  ";
+Write-Host " | \| (_|  |_ | \/ (/_ /--\ |_) |_)   _|_ | | _>  |_ (_| | | (/_ |    \/ o | o _) ";
+Write-Host "                            |   |                                                 ";
 
 # Get working directory. Should be /demonstrations/native if started from source code or should be the folder from release
 $workingDirectory = Get-Location
@@ -76,6 +78,9 @@ $rootPath="C:\Program Files (x86)\hda\"
 $shortcutPath = "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup\nativeapp.lnk"
 $hostFile = "C:\Windows\System32\drivers\etc\hosts"
 
+WriteOutput "This installer will install the NativeApp v.1.5" "DarkGray"
+
+# If rootPath folder doesn't exists start install routine
 If(!(Test-Path -path $rootPath)) {
     try {
         WriteOutput "Trying to create the folder path: $rootPath" "DarkGray"
@@ -215,7 +220,7 @@ If(!(Test-Path -path $rootPath)) {
             WriteOutput "Trying to pull the latest docker images" "DarkGray"
             docker pull $Env:REGISTRY_URL/$Env:GROUP_NAME/demonstrations/$Env:PHISHING_REPO 
             docker pull $Env:REGISTRY_URL/$Env:GROUP_NAME/demonstrations/$Env:PASSWORD_REPO
-            #docker pull $Env:REGISTRY_URL/$Env:GROUP_NAME/demonstrations/$Env:DOWNLOAD_REPO
+            docker pull $Env:REGISTRY_URL/$Env:GROUP_NAME/demonstrations/$Env:DOWNLOAD_REPO
             WriteOutput "Succesfully pulled the docker images" "Green"
         }
     } catch {
@@ -247,7 +252,8 @@ If(!(Test-Path -path $rootPath)) {
         Remove-MpPreference -ExclusionPath $rootPath
         Exit 1
     }
-                  
+         
+# If rootPath folder exists uninstall routine
 } Else {
     WriteOutput "The given folder path $directoryPath already exists" "DarkGray"
     try {
@@ -257,9 +263,12 @@ If(!(Test-Path -path $rootPath)) {
 
             try {
                 # Kill process if exists
-                WriteOutput "Trying to kill the nativeapp process" "DarkGray"
-                Get-Process | Where-Object { $_.Name -eq "app" } | Select-Object -First 1 | Stop-Process -ErrorAction Stop
-                WriteOutput "Killed the process if exists" "Green"
+                WriteOutput "Trying to kill the nativeapp process if exists" "DarkGray"
+                $NativeApp = Get-Process app -ErrorAction SilentlyContinue
+                if ($NativeApp) {
+                    $NativeApp | Stop-Process -ErrorAction Stop
+                    WriteOutput "Killed the process" "Green"
+                }
             }
             catch {
                 WriteOutput "Something went wrong while killing the native app process" "Red"
