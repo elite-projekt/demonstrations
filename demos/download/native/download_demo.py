@@ -56,7 +56,7 @@ class DownloadDemo:
                 profile_zip = os.path.join(config.EnvironmentConfig.PROFILEDIR,
                                            "1y2st08z.MPSE_download_unsafe.zip")
                 with zipfile.ZipFile(profile_zip, "r") as zipObj:
-                    zipObj.extractall(config.EnvironmentConfig.PROFILEDIR)
+                    zipObj.extractall(os.getenv("TEMP"))
 
                 profile_location \
                     = os.getenv("APPDATA") + f"{os.path.sep}" \
@@ -69,7 +69,7 @@ class DownloadDemo:
                                              f"1y2st08z.MPSE_download_unsafe"
 
                 extracted_profile \
-                    = os.path.join(config.EnvironmentConfig.PROFILEDIR,
+                    = os.path.join(os.getenv("TEMP"),
                                    "1y2st08z.MPSE_download_unsafe")
                 shutil.copytree(extracted_profile, profile_location)
 
@@ -119,7 +119,7 @@ class DownloadDemo:
                 profile_zip = os.path.join(config.EnvironmentConfig.PROFILEDIR,
                                            "fkstz94l.MPSE_download_safe.zip")
                 with zipfile.ZipFile(profile_zip, "r") as zipObj:
-                    zipObj.extractall(config.EnvironmentConfig.PROFILEDIR)
+                    zipObj.extractall(os.getenv("TEMP"))
 
                 profile_location \
                     = os.getenv("APPDATA") + f"{os.path.sep}" \
@@ -132,7 +132,7 @@ class DownloadDemo:
                                              f"fkstz94l.MPSE_download_safe"
 
                 extracted_profile \
-                    = os.path.join(config.EnvironmentConfig.PROFILEDIR,
+                    = os.path.join(os.getenv("TEMP"),
                                    "fkstz94l.MPSE_download_safe")
                 shutil.copytree(extracted_profile, profile_location)
 
@@ -176,7 +176,6 @@ class DownloadDemo:
 
             logging.info("Init done")
         except Exception as e:
-            print(str(e))
             logging.error(str(e))
 
     @staticmethod
@@ -211,7 +210,7 @@ class DownloadDemo:
     def probe_container_status():
         try:
             r = requests.get(
-                'http://printer.io:5001'
+                'http://printer.io:5001/'
             )
             if r.status_code == 200:
                 return True
