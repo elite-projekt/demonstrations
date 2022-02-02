@@ -176,7 +176,6 @@ class DownloadDemo:
 
             logging.info("Init done")
         except Exception as e:
-            print(str(e))
             logging.error(str(e))
 
     @staticmethod
@@ -211,7 +210,7 @@ class DownloadDemo:
     def probe_container_status():
         try:
             r = requests.get(
-                'http://printer.io:5001'
+                'http://printer.io:5001/'
             )
             if r.status_code == 200:
                 return True
