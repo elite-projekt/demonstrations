@@ -1,9 +1,11 @@
 #nativeapp.bat has to be started first
 
-Write-Host "                                      ___                           ";
-Write-Host " |\ |  _. _|_ o     _   /\  ._  ._     |  ._   _ _|_  _. | |  _  ._ ";
-Write-Host " | \| (_|  |_ | \/ (/_ /--\ |_) |_)   _|_ | | _>  |_ (_| | | (/_ |  ";
-Write-Host "                            |   |                                   ";
+# Script Header for prettyness
+# Src: http://patorjk.com/software/taag/#p=display&h=1&v=0&c=echo&f=Mini&t=NativeApp%20Installer%20v.1.5
+Write-Host "                                      ___                                      _  ";
+Write-Host " |\ |  _. _|_ o     _   /\  ._  ._     |  ._   _ _|_  _. | |  _  ._       /|  |_  ";
+Write-Host " | \| (_|  |_ | \/ (/_ /--\ |_) |_)   _|_ | | _>  |_ (_| | | (/_ |    \/ o | o _) ";
+Write-Host "                            |   |                                                 ";
 
 # Get working directory. Should be /demonstrations/native if started from source code or should be the folder from release
 $workingDirectory = Get-Location
@@ -37,27 +39,35 @@ based on https://github.com/rajivharris/Set-PsEnv
 function Set-PsEnv {
     [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'Low')]
     param($localEnvFile = ".env")
-
-    # return if no env file
-    if (!( Test-Path $localEnvFile)) {
-        Throw "could not open $localEnvFile"
+    
+    try {
+        # return if no env file
+        if (!( Test-Path $localEnvFile)) {
+            Throw "could not open $localEnvFile"
     }
 
-    # read the local env file
-    $content = Get-Content $localEnvFile -ErrorAction Stop
-    Write-Verbose "Parsed .env file"
+        # read the local env file
+        $content = Get-Content $localEnvFile -ErrorAction Stop
+        Write-Verbose "Parsed .env file"
 
-    # load the content to environment
-    foreach ($line in $content) {
-        if ($line.StartsWith("#")) { continue };
-        if ($line.Trim()) {
-            $line = $line.Replace("'","")
-            $kvp = $line -split "=",2
-            if ($PSCmdlet.ShouldProcess("$($kvp[0])", "set value $($kvp[1])")) {
-                [Environment]::SetEnvironmentVariable($kvp[0].Trim(), $kvp[1].Trim(), "Process") | Out-Null
+        # load the content to environment
+        foreach ($line in $content) {
+            if ($line.StartsWith("#")) { continue };
+            if ($line.Trim()) {
+                $line = $line.Replace("'","")
+                $kvp = $line -split "=",2
+                if ($PSCmdlet.ShouldProcess("$($kvp[0])", "set value $($kvp[1])")) {
+                    [Environment]::SetEnvironmentVariable($kvp[0].Trim(), $kvp[1].Trim(), "Process") | Out-Null
+                }
             }
         }
     }
+    catch {
+        WriteOutput "Something went wrong while reading the .env file" "Red"
+        Write-Warning $Error[0]
+        Exit 1
+    }
+    
 }
 
 function WriteOutput {
@@ -69,6 +79,7 @@ function WriteOutput {
     Write-Host $Message -ForegroundColor $Color
     Write-Host "=====================================" -ForegroundColor $Color
 }
+
 $ErrorActionPreference = "Stop"
 # Check folder
 $directoryPath="C:\Program Files (x86)\hda\nativeapp"
@@ -76,7 +87,18 @@ $rootPath="C:\Program Files (x86)\hda\"
 $shortcutPath = "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup\nativeapp.lnk"
 $hostFile = "C:\Windows\System32\drivers\etc\hosts"
 
+WriteOutput "This installer will install the NativeApp v.1.5" "DarkGray"
+
+# If rootPath folder doesn't exists start install routine
 If(!(Test-Path -path $rootPath)) {
+
+    # Read env file
+    if($isReleaseDirectory) {
+        Set-PsEnv
+    } else {
+        Set-PsEnv "$workingDirectory\..\..\.env"
+    }
+
     try {
         WriteOutput "Trying to create the folder path: $rootPath" "DarkGray"
         $null = New-Item -Path $rootPath -ItemType directory -ErrorAction Stop
@@ -131,18 +153,21 @@ If(!(Test-Path -path $rootPath)) {
     # Copy data
     try {
         WriteOutput "Trying to copie files to the created folder" "DarkGray"
+
+        #If release folder
         if($isReleaseDirectory) {
             Copy-Item ".env" -Destination $directoryPath -ErrorAction Stop
             Copy-Item "stacks\" -Destination "$directoryPath\stacks" -Recurse -Force -ErrorAction Stop
             Copy-Item "rootCA.crt" -Destination "$directoryPath\stacks" -ErrorAction Stop
             Copy-Item "profiles" -Destination "$directoryPath" -Recurse -ErrorAction Stop
             Copy-Item "app.exe" -Destination "$directoryPath" -ErrorAction Stop
+        # If src folder
         } else {
-            Copy-Item "$workingDirectory\..\.env" -Destination $directoryPath -ErrorAction Stop
-            Copy-Item "$workingDirectory\stacks\" -Destination "$directoryPath\stacks" -Recurse -Force -ErrorAction Stop
-            Copy-Item "$workingDirectory\..\demoCA\rootCA.crt" -Destination "$directoryPath\stacks" -ErrorAction Stop
-            Copy-Item "$workingDirectory\src\profiles" -Destination "$directoryPath" -Recurse -ErrorAction Stop
-            Copy-Item "$workingDirectory\src\dist\windows\app.exe" -Destination "$directoryPath"  -ErrorAction Stop
+            Copy-Item "$workingDirectory\..\..\.env" -Destination $directoryPath -ErrorAction Stop
+            Copy-Item "$workingDirectory\..\stacks\" -Destination "$directoryPath\stacks" -Recurse -Force -ErrorAction Stop
+            Copy-Item "$workingDirectory\..\..\demoCA\rootCA.crt" -Destination "$directoryPath\stacks" -ErrorAction Stop
+            Copy-Item "$workingDirectory\..\src\profiles" -Destination "$directoryPath" -Recurse -ErrorAction Stop
+            Copy-Item "$workingDirectory\..\src\dist\windows\app.exe" -Destination "$directoryPath"  -ErrorAction Stop
         }
         WriteOutput "Copied files to the created folder" "Green"
     }
@@ -190,12 +215,6 @@ If(!(Test-Path -path $rootPath)) {
         Exit 1
     }
 
-    if($isReleaseDirectory) {
-        Set-PsEnv
-    } else {
-        Set-PsEnv "$workingDirectory\..\.env"
-    }
-
     # Information
     Write-Host -ForegroundColor DarkGray "====================================="
     Write-Host -ForegroundColor DarkGray "Information"
@@ -215,7 +234,7 @@ If(!(Test-Path -path $rootPath)) {
             WriteOutput "Trying to pull the latest docker images" "DarkGray"
             docker pull $Env:REGISTRY_URL/$Env:GROUP_NAME/demonstrations/$Env:PHISHING_REPO 
             docker pull $Env:REGISTRY_URL/$Env:GROUP_NAME/demonstrations/$Env:PASSWORD_REPO
-            #docker pull $Env:REGISTRY_URL/$Env:GROUP_NAME/demonstrations/$Env:DOWNLOAD_REPO
+            docker pull $Env:REGISTRY_URL/$Env:GROUP_NAME/demonstrations/$Env:DOWNLOAD_REPO
             WriteOutput "Succesfully pulled the docker images" "Green"
         }
     } catch {
@@ -247,7 +266,8 @@ If(!(Test-Path -path $rootPath)) {
         Remove-MpPreference -ExclusionPath $rootPath
         Exit 1
     }
-                  
+         
+# If rootPath folder exists uninstall routine
 } Else {
     WriteOutput "The given folder path $directoryPath already exists" "DarkGray"
     try {
@@ -257,9 +277,12 @@ If(!(Test-Path -path $rootPath)) {
 
             try {
                 # Kill process if exists
-                WriteOutput "Trying to kill the nativeapp process" "DarkGray"
-                Get-Process | Where-Object { $_.Name -eq "app" } | Select-Object -First 1 | Stop-Process -ErrorAction Stop
-                WriteOutput "Killed the process if exists" "Green"
+                WriteOutput "Trying to kill the nativeapp process if exists" "DarkGray"
+                $NativeApp = Get-Process app -ErrorAction SilentlyContinue
+                if ($NativeApp) {
+                    $NativeApp | Stop-Process -ErrorAction Stop
+                    WriteOutput "Killed the process" "Green"
+                }
             }
             catch {
                 WriteOutput "Something went wrong while killing the native app process" "Red"
