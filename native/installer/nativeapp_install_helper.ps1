@@ -348,15 +348,9 @@ If(!(Test-Path -path $rootPath)) {
 }
 
 try {
-    #$Exit = Read-Host -Prompt "Press any key to exit this script" -ErrorAction Stop
-    #Write-Host -NoNewLine 'Press any key to continue...';
-    #
     Write-Host "Press any key to continue..."
     $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
     Stop-process -Id $PID
-    #if ($Exit -ne $null) {
-    #    Stop-process -Id $PID
-    #}
 }
 catch {
     WriteOutput "Please type a key to exit this script" "Red"
