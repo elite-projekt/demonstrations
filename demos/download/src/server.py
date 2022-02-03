@@ -20,7 +20,15 @@ def run_flask_app():
     :return:
     """
     print("- Start Server")
-    app.run(host=HOST, port=5001, threaded=True)
+    app.run(
+        host=HOST,
+        port=443,
+        threaded=True,
+        ssl_context=(
+            "../certs/download_demo.crt",
+            "../certs/download_demo.key"
+        )
+    )
 
 
 """-------------------ROUTES-------------------"""
