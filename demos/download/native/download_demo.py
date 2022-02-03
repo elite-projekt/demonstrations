@@ -195,12 +195,14 @@ class DownloadDemo:
             if not safe:
                 # False positive. See also:
                 # https://github.com/PyCQA/bandit/issues/333#issuecomment-404103697
-                subprocess.Popen(  # nosec
+                process = subprocess.Popen(  # nosec
                     ["C:\\Program Files\\Mozilla Firefox\\firefox.exe",
                      "-P", "MPSE_download_unsafe",
                      "-url", "https://printer.io/"],
                     shell=False
                 )
+
+                print("pid: " + str(process.pid))
 
             logging.info("Success")
         except Exception as e:
@@ -210,7 +212,8 @@ class DownloadDemo:
     def probe_container_status():
         try:
             r = requests.get(
-                'https://printer.io/'
+                'https://printer.io/',
+                verify=False  # nosec   -   This is only a readiness probe
             )
             if r.status_code == 200:
                 return True
