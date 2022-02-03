@@ -266,6 +266,9 @@ If(!(Test-Path -path $rootPath)) {
         Remove-MpPreference -ExclusionPath $rootPath
         Exit 1
     }
+
+    # Finisch message
+    WriteOutput "The installation was succesfully" "Green"
          
 # If rootPath folder exists uninstall routine
 } Else {
@@ -339,4 +342,20 @@ If(!(Test-Path -path $rootPath)) {
         Write-Warning $Error[0]
         Exit 1
     }
+
+    # Uninstall message
+    WriteOutput "The uninstall was succefully" "Green"
 }
+
+try {
+    Write-Host "Press any key to continue..."
+    $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
+    Stop-process -Id $PID
+}
+catch {
+    WriteOutput "Please type a key to exit this script" "Red"
+    Write-Warning $Error[0]
+    Exit 1
+}
+    
+
