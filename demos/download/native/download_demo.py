@@ -195,14 +195,12 @@ class DownloadDemo:
             if not safe:
                 # False positive. See also:
                 # https://github.com/PyCQA/bandit/issues/333#issuecomment-404103697
-                process = subprocess.Popen(  # nosec
+                subprocess.Popen(  # nosec
                     ["C:\\Program Files\\Mozilla Firefox\\firefox.exe",
                      "-P", "MPSE_download_unsafe",
                      "-url", "https://printer.io/"],
                     shell=False
                 )
-
-                print("pid: " + str(process.pid))
 
             logging.info("Success")
         except Exception as e:

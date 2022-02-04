@@ -63,7 +63,7 @@ export default {
       ));
     },
     openModal() {
-      this.$axios.post("http://printer.io:5001/unsecure");
+      this.$axios.post("https://printer.io/unsecure");
       this.showModal = true;
     },
   },
