@@ -14,6 +14,19 @@ export const state = () => ({
         item: "props.multiScan",
         val: true,
       }],
+      size:[{
+        item: "size.height",
+        val: "37cm"
+      },{
+        item: "size.width",
+        val: "39cm"
+      },{
+        item: "size.length",
+        val: "36cm"
+      },{
+        item: "size.dpi",
+        val: "600x600dpi"
+      }],
       labels: ['discount'],
       adId: null
     },
@@ -28,7 +41,20 @@ export const state = () => ({
       isAdvertisment: null,
       props: [{
         item: "props.multiScan",
-        val: true,
+        val: true
+      }],
+      size:[{
+        item: "size.height",
+        val: "22cm"
+      },{
+        item: "size.width",
+        val: "37cm"
+      },{
+        item: "size.length",
+        val: "36cm"
+      },{
+        item: "size.dpi",
+        val: "600x600dpi"
       }],
       labels: ['new'],
       adId: null
@@ -46,6 +72,19 @@ export const state = () => ({
         item: "props.multiScan",
         val: true
       }],
+      size:[{
+        item: "size.height",
+        val: "61cm"
+      },{
+        item: "size.width",
+        val: "47cm"
+      },{
+        item: "size.length",
+        val: "55cm"
+      },{
+        item: "size.dpi",
+        val: "600x600dpi"
+      }],
       labels: ['new', 'discount'],
       adId: null
     },
@@ -61,6 +100,9 @@ export const state = () => ({
       props: [{
         item: "props.multiScan",
         val: true
+      },{
+        item: "size.dpi",
+        val: "1200x1200dpi"
       }],
       labels: ['advertisement'],
       adId: "ad_1"
@@ -78,6 +120,19 @@ export const state = () => ({
         item: "props.multiScan",
         val: false
       }],
+      size:[{
+        item: "size.height",
+        val: "31cm"
+      },{
+        item: "size.width",
+        val: "41cm"
+      },{
+        item: "size.length",
+        val: "39cm"
+      },{
+        item: "size.dpi",
+        val: "1200x1200dpi"
+      }],
       labels: [],
       adId: null
     },
@@ -93,6 +148,19 @@ export const state = () => ({
       props: [{
         item: "props.multiScan",
         val: false
+      }],
+      size:[{
+        item: "size.height",
+        val: "50cm"
+      },{
+        item: "size.width",
+        val: "39cm"
+      },{
+        item: "size.length",
+        val: "53cm"
+      },{
+        item: "size.dpi",
+        val: "600x600dpi"
       }],
       labels: [],
       adId: null
@@ -110,9 +178,22 @@ export const state = () => ({
         item: "props.multiScan",
         val: true
       }],
+      size:[{
+        item: "size.height",
+        val: "48cm"
+      },{
+        item: "size.width",
+        val: "42cm"
+      },{
+        item: "size.length",
+        val: "50cm"
+      },{
+        item: "size.dpi",
+        val: "600x600dpi"
+      }],
       labels: ['discount'],
       adId: null
-    },
+      },
     {
       id: 8,
       title: 'KyoceraTASKalfa3253ci',
@@ -125,6 +206,16 @@ export const state = () => ({
       props: [{
         item: "props.multiScan",
         val: true
+      }],
+      size:[{
+        item: "size.height",
+        val: "25cm"
+      },{
+        item: "size.width",
+        val: "20cm"
+      },{
+        item: "size.length",
+        val: "15cm"
       }],
       labels: ['advertisement'],
       adId: "ad_2"
