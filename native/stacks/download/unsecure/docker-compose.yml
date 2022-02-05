@@ -10,4 +10,4 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
     ports:
-      - 5001:5001
+      - 443:443

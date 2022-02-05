@@ -29,6 +29,10 @@
             <span> {{ $t(prop.item) + ": " }}</span>
             {{ prop.val ? $t("text.yes") : $t("text.no") }}
           </div>
+          <div v-for="size in product.size">
+            <span> {{ $t(size.item) + ": " }}</span>
+            {{ size.val ? $t(size.val) : $t(size.val) }}
+          </div>
         </div>
         <div class="card-content__btn">
           <button
