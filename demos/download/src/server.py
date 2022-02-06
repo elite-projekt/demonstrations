@@ -25,8 +25,8 @@ def run_flask_app():
         port=443,
         threaded=True,
         ssl_context=(
-            "../certs/download_demo.crt",
-            "../certs/download_demo.key"
+            "./certs/download_demo.crt",
+            "./certs/download_demo.key"
         )
     )
 
