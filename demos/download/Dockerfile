@@ -11,14 +11,14 @@ RUN npm install && npm run build
 FROM python:3.10-alpine
 
 ENV APP_DIR /download/src
-RUN mkdir -p ${APP_DIR} && mkdir -p ${APP_DIR}/static/shop && mkdir -p /download/certs/
+RUN mkdir -p ${APP_DIR} && mkdir -p ${APP_DIR}/static/shop && mkdir -p /download/src/certs/
 WORKDIR ${APP_DIR}
 
 # open port
 EXPOSE 443
 
 COPY ./src/server.py /download/src/
-COPY ./certs/ /download/certs/
+COPY ./src/certs/ /download/src/certs/
 COPY requirements.txt /download/requirements.txt
 RUN pip3 install --no-cache-dir -r /download/requirements.txt
 
