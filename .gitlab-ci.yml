@@ -163,8 +163,9 @@ build:release-zip:
     - echo "Start trivy Container Scan for $SUB_PROJECT_NAME.tar"
     # Build report
     - trivy
-      --exit-code 0
       --cache-dir .trivycache/
+      image
+      --exit-code 0
       --no-progress
       --format template
       --template "@/contrib/gitlab.tpl"
@@ -173,20 +174,24 @@ build:release-zip:
       --input $SUB_PROJECT_NAME.tar
     # Print report
     - trivy
-      --exit-code 0
       --cache-dir .trivycache/
+      image
+      --exit-code 0
       --no-progress
       --ignore-unfixed
       --input $SUB_PROJECT_NAME.tar
     # Fail if High Findings
     - trivy
-      --exit-code 1
       --cache-dir .trivycache/
+      image
+      --exit-code 1
       --severity HIGH
       --no-progress
       --ignore-unfixed
       --input $SUB_PROJECT_NAME.tar
   cache:
+    key: trivy
+    policy: pull-push
     paths:
       - .trivycache/
   artifacts:
