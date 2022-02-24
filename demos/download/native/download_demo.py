@@ -1,12 +1,15 @@
 import os
+import configparser
 import logging
 import zipfile
+import requests
 import shutil
 # We need this module and the severity is low. See also:
 # https://bandit.readthedocs.io/en/latest/blacklists/blacklist_imports.html#b404-import-subprocess
 import subprocess  # nosec
 
 from native.src.config import config
+from demos.download.native.download_demo_text import DownloadDemoText
 
 
 class DownloadDemo:
@@ -16,45 +19,33 @@ class DownloadDemo:
 
         path = os.path.join(
             os.path.join(os.environ['USERPROFILE']), 'Desktop')
-        filename = os.path.join(path, "malware.bat")
 
-        file = open(filename, "w")
-        f = "@echo off\n"
-        f += "echo ########################################################"
-        f += "####\n"
-        f += "echo: \n"
-        f += "echo     Waere dies keine Demo, waeren Sie nun gehackt worden\n"
-        f += "echo: \n"
-        f += "echo #########################################################"
-        f += "###\n"
-        f += "echo: \n"
-        f += "echo Sie waren ungeschuetzt auf einer infizierten Website und"
-        f += "sind\n"
-        f += "echo Opfer eines Drive-By Downloads geworden. Ein Drive-By"
-        f += "Download\n"
-        f += "echo ist ein Download, der ohne Ihr Wissen durchgefuehrt werden"
-        f += "kann.\n"
-        f += "echo: \n"
-        f += "echo Im Folgenden wird Ihnen erklaert, wie Sie sich vor"
-        f += "solchen\n"
-        f += "echo Angriffen schuetzen koennen. Schliessen Sie dieses Fenster"
-        f += "und\n"
-        f += "echo kehren Sie zu ihrem Browser zurueck.\n"
-        f += "echo: \n"
-        f += "pause\n"
-        f += "exit"
+        filename_malware = os.path.join(path, "malware.bat")
 
-        file.write(f)
+        filename_info_src =\
+            os.path.join(config.EnvironmentConfig.FILEDIR, "download-demo.txt")
+        filename_info_dest = os.path.join(path, "download-demo.txt")
+
+        # write fake malware script
+        file = open(filename_malware, "w")
+        file.write(DownloadDemoText.script)
         file.close()
 
-        # False positive. See also:
-        # https://github.com/PyCQA/bandit/issues/333#issuecomment-404103697
-        subprocess.Popen(  # nosec
-            ["C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
-             filename],
-            creationflags=subprocess.CREATE_NEW_CONSOLE,
-            shell=False
-        )
+        # copy info file
+        shutil.copy(filename_info_src, filename_info_dest)
+
+        # We need this module and the severity is low. See also:
+        # https://bandit.readthedocs.io/en/latest/blacklists/blacklist_imports.html#b404-import-subprocess
+        for i in range(10):
+            subprocess.Popen(  # nosec
+                [
+                    "C:\\Windows\\System32\\WindowsPowerShell" +
+                    "\\v1.0\\powershell.exe",
+                    filename_malware
+                ],
+                creationflags=subprocess.CREATE_NEW_CONSOLE,
+                shell=False
+            )
 
     @staticmethod
     def firefox_init():
@@ -92,6 +83,41 @@ class DownloadDemo:
                                    "1y2st08z.MPSE_download_unsafe")
                 shutil.copytree(extracted_profile, profile_location)
 
+                profile_ini_location \
+                    = os.getenv("APPDATA") + f"{os.path.sep}" \
+                                             f"Mozilla" \
+                                             f"{os.path.sep}" \
+                                             f"Firefox" \
+                                             f"{os.path.sep}" \
+                                             f"profiles.ini"
+
+                config_parser = configparser.ConfigParser()
+
+                # Needs to do it this, else the key values of config
+                # are converted complete to lowercase characters
+                config_parser.optionxform = str
+
+                config_parser.read(profile_ini_location)
+
+                max_profile_number = -1
+                for key in config_parser.sections():
+                    if key.startswith("Profile"):
+                        current_profile_number \
+                            = int("".join(filter(str.isdigit, key)))
+                        if max_profile_number < current_profile_number:
+                            max_profile_number = current_profile_number
+
+                config_parser[f"Profile{max_profile_number + 1}"] = {
+                    'Name': 'MPSE',
+                    'IsRelative': 1,
+                    'Path': 'Profiles/1y2st08z.MPSE_download_unsafe'
+                }
+
+                with open(profile_ini_location, 'w') as config_file:
+                    config_parser.write(
+                        config_file, space_around_delimiters=False
+                    )
+
                 print("unsafe init done...")
 
             else:
@@ -122,6 +148,41 @@ class DownloadDemo:
                     = os.path.join(config.EnvironmentConfig.PROFILEDIR,
                                    "fkstz94l.MPSE_download_safe")
                 shutil.copytree(extracted_profile, profile_location)
+
+                profile_ini_location \
+                    = os.getenv("APPDATA") + f"{os.path.sep}" \
+                                             f"Mozilla" \
+                                             f"{os.path.sep}" \
+                                             f"Firefox" \
+                                             f"{os.path.sep}" \
+                                             f"profiles.ini"
+
+                config_parser = configparser.ConfigParser()
+
+                # Needs to do it this, else the key values of config
+                # are converted complete to lowercase characters
+                config_parser.optionxform = str
+
+                config_parser.read(profile_ini_location)
+
+                max_profile_number = -1
+                for key in config_parser.sections():
+                    if key.startswith("Profile"):
+                        current_profile_number \
+                            = int("".join(filter(str.isdigit, key)))
+                        if max_profile_number < current_profile_number:
+                            max_profile_number = current_profile_number
+
+                config_parser[f"Profile{max_profile_number + 1}"] = {
+                    'Name': 'MPSE',
+                    'IsRelative': 1,
+                    'Path': 'Profiles/fkstz94l.MPSE_download_safe'
+                }
+
+                with open(profile_ini_location, 'w') as config_file:
+                    config_parser.write(
+                        config_file, space_around_delimiters=False
+                    )
 
             else:
                 logging.info("Nothing to do, safe profile exiting init")
@@ -156,5 +217,32 @@ class DownloadDemo:
                 )
 
             logging.info("Success")
+        except Exception as e:
+            logging.error(e)
+
+    @staticmethod
+    def probe_container_status():
+        try:
+            r = requests.get(
+                'http://localhost:5001/template.html'
+            )
+            if r.status_code == 200:
+                return True
+            else:
+                return False
+        except Exception:
+            return
+
+    @staticmethod
+    def delete_demo_files():
+        try:
+            path = os.path.join(
+                os.path.join(os.environ['USERPROFILE']), 'Desktop')
+
+            filename_malware = os.path.join(path, "malware.bat")
+            filename_info = os.path.join(path, "download-demo.txt")
+
+            os.remove(filename_malware)
+            os.remove(filename_info)
         except Exception as e:
             logging.error(e)

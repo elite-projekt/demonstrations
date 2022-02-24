@@ -8,21 +8,31 @@ orchestration = flask.Blueprint("download", __name__,
                                 url_prefix="/orchestration/")
 
 
+fake_malware_success = {
+    "success": True,
+    "message": "Malware was created successfully!"
+}
+fake_malware_fail = {
+    "success": False,
+    "message": "Malware was not created successfully!"
+}
+
+
 # download demonstration
 @orchestration.route("/start/demo/download", methods=["POST", "GET"])
 def start_demo_download():
     secure_mode = flask.request.json["secureMode"]
     try:
-        print("start demo")
         download_demo.DownloadDemo.firefox_init()
-        print("init success")
         if secure_mode:
             orchestration_controller.orchestration_service \
                 .docker_compose_start_file(
                  "download/secure/docker-compose.yml"
                 )
             # sleep until container app is ready
-            time.sleep(5)
+            while not download_demo.DownloadDemo.probe_container_status():
+                time.sleep(1)
+            # start browser and open demo frontend when container is ready
             download_demo.DownloadDemo.start_web_browser(True)
         else:
             orchestration_controller.orchestration_service \
@@ -30,7 +40,9 @@ def start_demo_download():
                  "download/unsecure/docker-compose.yml"
                 )
             # sleep until container app is ready
-            time.sleep(5)
+            while not download_demo.DownloadDemo.probe_container_status():
+                time.sleep(1)
+            # start browser and open demo frontend when container is ready
             download_demo.DownloadDemo.start_web_browser(False)
     except Exception:
         return flask.helpers.make_response(
@@ -47,6 +59,7 @@ def stop_demo_download():
     orchestration_controller.orchestration_service.docker_compose_stop_file(
         "download/unsecure/docker-compose.yml"
     )
+    download_demo.DownloadDemo.delete_demo_files()
     return flask.helpers.make_response(
         flask.json.jsonify(orchestration_controller.stop_success), 200)
 
@@ -79,6 +92,11 @@ def status_demo_download_sum():
 
 @orchestration.route("/download/create_fake_malware", methods=["POST"])
 def create_fake_malware():
-    download_demo.DownloadDemo.create_fake_malware()
-    return flask.helpers.make_response(
-        flask.json.jsonify(orchestration_controller.fake_malware_success), 200)
+    try:
+        download_demo.DownloadDemo.create_fake_malware()
+        return flask.helpers.make_response(
+            flask.json.jsonify(fake_malware_success), 200)
+    except Exception as e:
+        print(e)
+        return flask.helpers.make_response(
+            flask.json.jsonify(fake_malware_fail), 500)
