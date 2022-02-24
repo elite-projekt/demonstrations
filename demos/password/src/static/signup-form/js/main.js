@@ -22,6 +22,18 @@ $(function() {
 		  $(this).attr("title","click the eye for showing the password.");
 		}
 	  });
+
+	$(".toggle-passwort").click(function() {
+	$(this).toggleClass("icon-eye icon-eye-slash");
+	var input = $($(this).attr("toggle"));
+	if (input.attr("type") == "password") {
+	  input.attr("type", "text");
+	  $(this).attr("title","klicken Sie auf das Auge, um das Passwort zu verbergen.");
+	} else {
+	  input.attr("type", "password");
+	  $(this).attr("title","klicken Sie auf das Auge, um das Passwort anzuzeigen.");
+	}
+  });
 	
 	$('#pwd-requirements').on('click',function(){
 		$('#pwd-card-icon').toggleClass("icon-chevron-down icon-chevron-up");

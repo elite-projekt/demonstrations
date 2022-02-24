@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "6e392b20-647c-4698-b095-b5a84d5ccc4f",
+		"_postman_id": "be718a1b-e55b-489a-aeea-c3506e3b32e0",
 		"name": "Demonstration",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -276,6 +276,168 @@
 						"demo",
 						"password",
 						"sum"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Start Download Demo - Secure Mode",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"secureMode\":true}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/orchestration/start/demo/download",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"orchestration",
+						"start",
+						"demo",
+						"download"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Start Download Demo - Unsecure Mode",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"secureMode\":false}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/orchestration/start/demo/download",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"orchestration",
+						"start",
+						"demo",
+						"download"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Status Download Demo",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:5000/orchestration/status/demo/download",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"orchestration",
+						"status",
+						"demo",
+						"download"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Status Download Demo Sum",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:5000/orchestration/status/demo/download/sum",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"orchestration",
+						"status",
+						"demo",
+						"download",
+						"sum"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Stop Download Demo",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:5000/orchestration/stop/demo/download",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"orchestration",
+						"stop",
+						"demo",
+						"download"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Fake Malware",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:5000/orchestration/download/create_fake_malware",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"orchestration",
+						"download",
+						"create_fake_malware"
 					]
 				}
 			},

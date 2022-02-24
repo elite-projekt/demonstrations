@@ -22,20 +22,13 @@ class DownloadDemo:
 
         filename_malware = os.path.join(path, "malware.bat")
 
-        filename_info_src =\
-            os.path.join(config.EnvironmentConfig.FILEDIR, "download-demo.txt")
-        filename_info_dest = os.path.join(path, "download-demo.txt")
-
         # write fake malware script
         file = open(filename_malware, "w")
         file.write(DownloadDemoText.script)
         file.close()
 
-        # copy info file
-        shutil.copy(filename_info_src, filename_info_dest)
-
-        # We need this module and the severity is low. See also:
-        # https://bandit.readthedocs.io/en/latest/blacklists/blacklist_imports.html#b404-import-subprocess
+        # We need this function and the severity is low. False pos. See also:
+        # https://github.com/PyCQA/bandit/issues/333#issuecomment-404103697
         for i in range(10):
             subprocess.Popen(  # nosec
                 [
@@ -59,14 +52,11 @@ class DownloadDemo:
                     r"\Mozilla\Firefox\Profiles" +
                     r"\1y2st08z.MPSE_download_unsafe"
             ):
-                print("start unzip...")
                 # extract profile to location
                 profile_zip = os.path.join(config.EnvironmentConfig.PROFILEDIR,
                                            "1y2st08z.MPSE_download_unsafe.zip")
                 with zipfile.ZipFile(profile_zip, "r") as zipObj:
-                    zipObj.extractall(config.EnvironmentConfig.PROFILEDIR)
-
-                print("get location...")
+                    zipObj.extractall(os.getenv("TEMP"))
 
                 profile_location \
                     = os.getenv("APPDATA") + f"{os.path.sep}" \
@@ -79,7 +69,7 @@ class DownloadDemo:
                                              f"1y2st08z.MPSE_download_unsafe"
 
                 extracted_profile \
-                    = os.path.join(config.EnvironmentConfig.PROFILEDIR,
+                    = os.path.join(os.getenv("TEMP"),
                                    "1y2st08z.MPSE_download_unsafe")
                 shutil.copytree(extracted_profile, profile_location)
 
@@ -108,7 +98,7 @@ class DownloadDemo:
                             max_profile_number = current_profile_number
 
                 config_parser[f"Profile{max_profile_number + 1}"] = {
-                    'Name': 'MPSE',
+                    'Name': 'MPSE_download_unsafe',
                     'IsRelative': 1,
                     'Path': 'Profiles/1y2st08z.MPSE_download_unsafe'
                 }
@@ -117,9 +107,6 @@ class DownloadDemo:
                     config_parser.write(
                         config_file, space_around_delimiters=False
                     )
-
-                print("unsafe init done...")
-
             else:
                 logging.info("Nothing to do, unsafe profile exiting init")
 
@@ -132,7 +119,7 @@ class DownloadDemo:
                 profile_zip = os.path.join(config.EnvironmentConfig.PROFILEDIR,
                                            "fkstz94l.MPSE_download_safe.zip")
                 with zipfile.ZipFile(profile_zip, "r") as zipObj:
-                    zipObj.extractall(config.EnvironmentConfig.PROFILEDIR)
+                    zipObj.extractall(os.getenv("TEMP"))
 
                 profile_location \
                     = os.getenv("APPDATA") + f"{os.path.sep}" \
@@ -145,7 +132,7 @@ class DownloadDemo:
                                              f"fkstz94l.MPSE_download_safe"
 
                 extracted_profile \
-                    = os.path.join(config.EnvironmentConfig.PROFILEDIR,
+                    = os.path.join(os.getenv("TEMP"),
                                    "fkstz94l.MPSE_download_safe")
                 shutil.copytree(extracted_profile, profile_location)
 
@@ -174,7 +161,7 @@ class DownloadDemo:
                             max_profile_number = current_profile_number
 
                 config_parser[f"Profile{max_profile_number + 1}"] = {
-                    'Name': 'MPSE',
+                    'Name': 'MPSE_download_safe',
                     'IsRelative': 1,
                     'Path': 'Profiles/fkstz94l.MPSE_download_safe'
                 }
@@ -189,8 +176,7 @@ class DownloadDemo:
 
             logging.info("Init done")
         except Exception as e:
-            print(e)
-            logging.error(e)
+            logging.error(str(e))
 
     @staticmethod
     def start_web_browser(safe):
@@ -203,7 +189,7 @@ class DownloadDemo:
                 subprocess.Popen(  # nosec
                     ["C:\\Program Files\\Mozilla Firefox\\firefox.exe",
                      "-P", "MPSE_download_safe",
-                     "-url", "http://localhost:5001/template.html"],
+                     "-url", "https://printer.io/"],
                     shell=False
                 )
             if not safe:
@@ -212,7 +198,7 @@ class DownloadDemo:
                 subprocess.Popen(  # nosec
                     ["C:\\Program Files\\Mozilla Firefox\\firefox.exe",
                      "-P", "MPSE_download_unsafe",
-                     "-url", "http://localhost:5001/template.html"],
+                     "-url", "https://printer.io/"],
                     shell=False
                 )
 
@@ -224,7 +210,8 @@ class DownloadDemo:
     def probe_container_status():
         try:
             r = requests.get(
-                'http://localhost:5001/template.html'
+                'https://printer.io/',
+                verify=False  # nosec   -   This is only a readiness probe
             )
             if r.status_code == 200:
                 return True
@@ -240,9 +227,7 @@ class DownloadDemo:
                 os.path.join(os.environ['USERPROFILE']), 'Desktop')
 
             filename_malware = os.path.join(path, "malware.bat")
-            filename_info = os.path.join(path, "download-demo.txt")
 
             os.remove(filename_malware)
-            os.remove(filename_info)
         except Exception as e:
             logging.error(e)

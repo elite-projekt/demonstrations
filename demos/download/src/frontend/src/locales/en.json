@@ -1,0 +1,96 @@
+{
+    "products": {
+      "syltherine": {
+        "description": "Der 3-in-1-Laserdrucker Canon imageCLASS MF232w bietet hohe Druckqualität, umfangreiche Funktionen und Zuverlässigkeit. Ideal für jedes kleine Büro oder Home-Office-Umgebung Druck-, Scan- und Kopierfunktionen, damit Sie die notwendigen Aufgaben mit nur einem Gerät erledigen können Drucken Sie mit einer Geschwindigkeit von bis zu 24 Seiten pro Minute und halten Sie den ersten Ausdruck in 6 Sekunden oder weniger in den Händen."
+      },
+      "lolito": {
+        "description": "Da sich die Arbeitsumgebungen radikal verändern, benötigen die Menschen vielseitige Geräte, bei denen Benutzerfreundlichkeit und verbesserte Produktivität im Vordergrund stehen.<ul>   <li>Ideal für kleine und mittlere Unternehmen sowie für Arbeitnehmer, die von zu Hause aus arbeiten müssen</li>   <li>Einfache Installation mit Smart Start Installer</li>   <li>Zuverlässig und vertrauenswürdig</li>    <li>Mobil bereit: Apple AirPrint, Mopria, Wi-Fi Direct</li>\t <li>Umfassende Sicherheitsfeatures</li></ul>"
+      },
+      "respira": {
+        "description": "Die A4-Farb-Multifunktionssysteme d-Color MF3023 - d-Color MF3024 von Olivetti, die bis zu 30 Seiten pro Minute liefern, wurden speziell für die Anforderungen mittelgroßer Arbeitsgruppen entwickelt.<ul>   <li>Bis zu 30 A4-Seiten pro Minute, Schwarzweiß und Farbe</li>   <li>1,200 X 1,200 DPI Druckauflösung</li>   <li>7” Farbtouchscreen</li>   <li>Durchsuchbares PDF (mit Scan Extension Kit)</li></ul>"
+      },
+        "printo": {
+            "description": "Dieses hervorragende Markenprodukt ist bei uns dauerhaft zu einem günstigeren Preis erhältlich. Es verfügt über alle modernen Funktionen, wie MultiScan oder ein Touch-Display. Diese gibt es natürlich in bester Qualität, so dass Sie im Büroalltag optimal unterstützt werden."
+        },
+      "grifo": {
+        "description": "Brother MFC-L2730DW Kompakter Schwarzweiß-Laser-All-in-One-Drucker mit 2,7 Zoll Farb-Touchscreen<ul>   <li>Drucken Sie mehr, warten Sie weniger, erledigen Sie mehr. Schnelle Druckgeschwindigkeiten von bis zu 36 Seiten pro Minute(1) sorgen für mehr Effizienz. So können Sie mehr drucken, weniger warten und haben mehr Zeit, sich auf Ihr Geschäft zu konzentrieren.</li>   <li>Mehrere Druckoptionen erfüllen eine Vielzahl von Anforderungen. Das großzügige, verstellbare Papierfach mit einer Kapazität von 250 Blatt kann problemlos Papier im Letter- und Legal-Format verarbeiten und trägt dazu bei, die Effizienz zu steigern, da weniger Papier nachgefüllt werden muss. Der manuelle Einzug ermöglicht professionelle Ausdrucke auf einer Vielzahl von Papieren und Formaten, einschließlich Kartenmaterial, Umschlägen und mehr.</li>   <li>Optimieren Sie Ihre Dokumenten-Workflows. Über den 2,7-Zoll-Farb-Touchscreen können Sie ganz einfach auf die Brother Cloud Apps zugreifen, eine kostenlose Suite innovativer, cloudbasierter Anwendungen, die speziell für Ihre Anforderungen an die Dokumentenerstellung entwickelt wurden, darunter Scan-to-Office, das ein ausgedrucktes Dokument in eine bearbeitbare Textdatei umwandelt - Word, Excel oder PowerPoint.</li></ul>"
+      },
+      "muggo": {
+        "description": "Erweitern Sie Ihre Möglichkeiten mit erschwinglichem A3-Farbdruck<ul>   <li>Upsize-Farbdruckfunktionen mit Mediengrößen bis zu A3 für beeindruckende Marketingmaterialien und mehr.</li>   <li>Beeindrucken Sie mit festem Text und gleichmäßigen Farben - und erzielen Sie mit der Pantone®-Anpassung die von Ihnen gewünschte Farbausgabe.</li>   <li>Drucken, Kopieren, Scannen und Faxen Sie direkt am MFP-Gerät über den großen Touchscreen</li>   <li>HP ePrint - drucken Sie jetzt von Ihrem Smartphone oder Tablet von praktisch überall aus.</li></ul>"
+      },
+      "pingky": {
+        "description": "Der HP LaserJet M476DN Drucker ist ein netzwerkfähiges Multifunktionsgerät. Er druckt und kopiert in Farbe mit einer Geschwindigkeit von 21 Seiten pro Minute. <ul>   <li>Farbausdrucke</li>   <li>Mobiles Drucken</li>   <li>Kopieren, Drucken, Scannen und Faxen</li>   <li>Druckgeschwindigkeit: 21 Seiten pro Minute</li></ul>"
+      },
+      "potty": {
+          "description": "Dieser hervorragende Markendrucker ist bei uns dauerhaft zu einem günstigeren Preis erhältlich. Er verfügt über alle modernen Features, wie MultiScan oder ein Touch-Display, natürlich in bester Qualität, damit Sie im Büroalltag optimal unterstützt werden."
+      }
+    },
+    "categories": {
+        "standard": "3-in-1 Laserdrucker",
+        "luxury": "Wi-Fi Direct",
+        "minimalist": "Bestseller",
+        "modern": "Moderner Drucker",
+        "heavyDuty": "Neues Modell",
+        "big": "DIN A3 Drucker",
+        "good": "Mobiles Drucken",
+        "highTech": "Hightech-Drucker"
+    },
+    "footer": {
+        "highQuality": {
+            "title": "Hohe Qualität",
+            "description": "aus hochwertigen Materialien hergestellt"
+        },
+        "warranty": {
+            "title": "Garantieschutz",
+            "description": "Über 2 Jahre"
+        },
+        "shipping": {
+            "title": "Kostenloser Versand",
+            "description": "Bestellung über 150€"
+        },
+        "support": {
+            "title": "24/7 Support",
+            "description": "Dedizierter Support"
+        }
+    },
+    "buttons": {
+        "buy": "Jetzt kaufen"
+    },
+    "modal": {
+        "backToHome": "Zurück zur Startseite",
+        "close": "Schließen",
+        "congratulation": "Gratulation",
+        "wrongProduct": {
+            "title": "Fehler",
+            "text": "Sie haben versucht ein Produkt zu kaufen, welches nicht der Aufgabenanforderung entspricht. Bitte wählen Sie ein anderes Produkt."
+        },
+        "correctProduct": {
+            "title": "Herzlichen Glückwunsch",
+            "text": "Sie haben einen der richtigen Drucker ausgewählt. Sie wurden nicht durch einen DriveBy-Download infiziert."
+        },
+        "driveByError": {
+            "title": "Warnung",
+            "text": "Als Sie auf diese Seite gegangen sind, haben Sie sich mit einem Driveby Download infiziert. Dies ist natürlich nur eine Demo."
+        }
+    },
+    "hero": {
+        "title": "Drucker Shop Nr.1",
+        "text": "Beste Drucker mit unschlagbaren Preisen"
+    },
+    "props": {
+        "multiScan": "Multiscan"
+    },
+    "size":{
+        "height" : "Höhe",
+        "width" : "Breite",
+        "length" : "Länge",
+        "dpi" : "Auflösung"
+    },
+    "text": {
+        "specs": "Spezifikationen",
+        "advertisement": "Ad",
+        "newProduct": "Neu",
+        "yes": "Ja",
+        "no": "Nein"
+    }
+}

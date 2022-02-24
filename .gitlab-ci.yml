@@ -140,8 +140,9 @@ build:release-zip:
     - cp .env nativeapp-$CI_COMMIT_TAG/.env
     - cp demoCA/rootCA.crt nativeapp-$CI_COMMIT_TAG/rootCA.crt
     - cd native
-    - cp nativeapp.bat ../nativeapp-$CI_COMMIT_TAG/nativeapp.bat
-    - cp nativeapp.ps1 ../nativeapp-$CI_COMMIT_TAG/nativeapp.ps1
+    - cp installer/nativeapp_installer.bat ../nativeapp-$CI_COMMIT_TAG/nativeapp_installer.bat
+    - cp installer/nativeapp_install_helper.ps1 ../nativeapp-$CI_COMMIT_TAG/nativeapp_install_helper.ps1
+    - cp installer/README.txt ../nativeapp-$CI_COMMIT_TAG/README.txt
     - cp src/dist/windows/app.exe ../nativeapp-$CI_COMMIT_TAG/app.exe
     - cp -r stacks ../nativeapp-$CI_COMMIT_TAG/
     - cp -r src/profiles ../nativeapp-$CI_COMMIT_TAG
@@ -162,8 +163,9 @@ build:release-zip:
     - echo "Start trivy Container Scan for $SUB_PROJECT_NAME.tar"
     # Build report
     - trivy
-      --exit-code 0
       --cache-dir .trivycache/
+      image
+      --exit-code 0
       --no-progress
       --format template
       --template "@/contrib/gitlab.tpl"
@@ -172,20 +174,24 @@ build:release-zip:
       --input $SUB_PROJECT_NAME.tar
     # Print report
     - trivy
-      --exit-code 0
       --cache-dir .trivycache/
+      image
+      --exit-code 0
       --no-progress
       --ignore-unfixed
       --input $SUB_PROJECT_NAME.tar
     # Fail if High Findings
     - trivy
-      --exit-code 1
       --cache-dir .trivycache/
+      image
+      --exit-code 1
       --severity HIGH
       --no-progress
       --ignore-unfixed
       --input $SUB_PROJECT_NAME.tar
   cache:
+    key: trivy
+    policy: pull-push
     paths:
       - .trivycache/
   artifacts:

@@ -93,6 +93,11 @@ def story_intro_um():
     return flask.render_template("um1_story_intro.html")
 
 
+@app1.route("/geschichten_intro")
+def story_intro_um_de():
+    return flask.render_template("um1_geschichten_intro.html")
+
+
 @app1.route("/registration_kontodienste", methods=["POST", "GET"])
 def registration_kontodienste_um():
     if flask.request.method == "POST":
@@ -106,10 +111,32 @@ def registration_kontodienste_um():
         return flask.render_template("um2_registration_kontodienste.html")
 
 
+@app1.route("/registrierung_kontodienste", methods=["POST", "GET"])
+def registration_kontodienste_um_de():
+    if flask.request.method == "POST":
+        user_name = flask.request.form["name"]
+        user_password = flask.request.form["pwd"]
+        resp = flask.make_response(
+            flask.redirect("/geschichte_zweite_registrierung"
+                           ))
+        create_user(user_name, user_password, "um_kd")
+        return resp
+    else:
+        return flask.render_template("um2_registrierung_kontodienste.html")
+
+
 @app1.route("/story_second_registration")
 def story_second_registration_um():
     return flask.render_template(
         "um3_story_second_registration.html", flash="Registration succesfull!"
+    )
+
+
+@app1.route("/geschichte_zweite_registrierung")
+def story_second_registration_um_de():
+    return flask.render_template(
+        "um3_geschichte_zweite_registrierung.html",
+        flash="Erfolgreiche Registrierung!"
     )
 
 
@@ -129,10 +156,32 @@ def registration_webdienste_um():
         )
 
 
+@app1.route("/registrierung_webdienste", methods=["POST", "GET"])
+def registration_webdienste_um_de():
+    if flask.request.method == "POST":
+
+        user_name = flask.request.form["name"]
+        user_password = flask.request.form["pwd"]
+        resp = flask.make_response(flask.redirect("/geschichte_anmeldung"))
+        create_user(user_name, user_password, "um_wd")
+        return resp
+    else:
+        return flask.render_template(
+            "um4_registrierung_webdienste.html",
+            username=users.get("um_kd").username
+        )
+
+
 @app1.route("/story_login")
 def story_login_um():
     return flask.render_template("um5_story_login.html",
                                  flash="Registration succesfull!")
+
+
+@app1.route("/geschichte_anmeldung")
+def story_login_um_de():
+    return flask.render_template("um5_geschichte_anmeldung.html",
+                                 flash="Erfolgreiche Registrierung!")
 
 
 @app1.route("/login", methods=["POST", "GET"])
@@ -154,10 +203,35 @@ def login_um():
         return flask.render_template("um6_login.html")
 
 
+@app1.route("/anmeldung", methods=["POST", "GET"])
+def login_um_de():
+    if flask.request.method == "POST":
+        name = flask.request.form["name"]
+        pwd = flask.request.form["pwd"]
+        if name == users.get("um_kd").username and pwd == users.get(
+                "um_kd").password:
+            resp = flask.make_response(flask.redirect("/ende"))
+            return resp
+        else:
+            return flask.render_template(
+                "um6_anmeldung.html",
+                flash="Wrong credentials!",
+                classes="fade show display",
+            )
+    else:
+        return flask.render_template("um6_anmeldung.html")
+
+
 @app1.route("/end")
 def end_um():
     return flask.render_template("um7_story_end.html",
                                  flash="login sucessfull!")
+
+
+@app1.route("/ende")
+def end_um_de():
+    return flask.render_template("um7_geschichten_ende.html",
+                                 flash="Anmeldung erfolgreich!")
 
 
 """-------------------END UNSAFE MODE-------------------"""
@@ -168,6 +242,11 @@ def end_um():
 @app2.route("/story_intro")
 def story_intro_sm():
     return flask.render_template("sm1_story_intro.html")
+
+
+@app2.route("/geschichten_intro")
+def story_intro_sm_de():
+    return flask.render_template("sm1_geschichten_intro.html")
 
 
 @app2.route("/registration_kontodienste", methods=["POST", "GET"])
@@ -185,10 +264,31 @@ def registration_kontodienste_sm():
         return flask.render_template("sm2_registration_kontodienste.html")
 
 
+@app2.route("/registrierung_kontodienste", methods=["POST", "GET"])
+def registration_kontodienste_sm_de():
+    if flask.request.method == "POST":
+
+        user_name = flask.request.form["name"]
+        user_password = flask.request.form["password"]
+        resp = flask.make_response(flask.redirect("/geschichte_2fa"))
+        user = create_user(user_name, user_password, "sm_kd")
+        qr_code = create_qr(user_name + "_qr_account_services", user.otp)
+        qr_code.save(static_folder_path + "/" + "qrcode3.jpg")
+        return resp
+    else:
+        return flask.render_template("sm2_registrierung_kontodienste.html")
+
+
 @app2.route("/story_2fa")
 def story_2fa_sm():
     return flask.render_template("sm3_story_2fa.html",
                                  flash="Registration succesfull!")
+
+
+@app2.route("/geschichte_2fa")
+def story_2fa_sm_de():
+    return flask.render_template("sm3_geschichte_2fa.html",
+                                 flash="Erfolgreiche Registrierung!")
 
 
 @app2.route("/initial_2fa_kontodienste", methods=["POST", "GET"])
@@ -209,10 +309,37 @@ def initial_2fa_kontodienste_sm():
         return flask.render_template("sm4_initial_2fa_kontodienste.html")
 
 
+@app2.route("/anfaenglich_2fa_kontodienste", methods=["POST", "GET"])
+def initial_2fa_kontodienste_sm_de():
+    if flask.request.method == "POST":
+        validation = flask.request.form["validation"]
+        if validate_otp(users.get("sm_kd").otp, validation):
+            resp = flask.make_response(
+                flask.redirect("/geschichte_zweite_registrierung"))
+            print("Erfolgreiche Validierung von qr")
+            return resp
+        else:
+            print("Falsche Validierung")
+            return flask.render_template(
+                "sm4_anfaenglich_2fa_kontodienste.html",
+                flash="validation failed!"
+            )
+    else:
+        return flask.render_template("sm4_anfaenglich_2fa_kontodienste.html")
+
+
 @app2.route("/story_second_registration")
 def story_second_registration_sm():
     return flask.render_template(
         "sm5_story_second_registration.html", flash="Validation succesfull!"
+    )
+
+
+@app2.route("/geschichte_zweite_registrierung")
+def story_second_registration_sm_de():
+    return flask.render_template(
+        "sm5_geschichte_zweite_registrierung.html",
+        flash="Validation succesfull!"
     )
 
 
@@ -241,6 +368,33 @@ def registration_webdienste_sm():
         )
 
 
+@app2.route("/registrierung_webdienste", methods=["POST", "GET"])
+def registration_webdienste_sm_de():
+    if flask.request.method == "POST":
+
+        user_name = flask.request.form["name"]
+        user_password = flask.request.form["password"]
+        if user_password == users.get("sm_kd").password:
+            return flask.render_template(
+                "sm6_registrierung_webdienste.html",
+                flash="you cannot use the same password as for the "
+                      "Kontodienste ",
+                classes="fade show display",
+            )
+        resp = flask.make_response(
+            flask.redirect("/anfaenglich_2fa_webdienste"
+                           ))
+        user = create_user(user_name, user_password, "sm_wd")
+        qr_code = create_qr(user_name + "_qr_web_services", user.otp)
+        qr_code.save(static_folder_path + "/" + "qrcode4.jpg")
+        return resp
+    else:
+        return flask.render_template(
+            "sm6_registrierung_webdienste.html",
+            username=users.get("sm_kd").username
+        )
+
+
 @app2.route("/initial_2fa_webdienste", methods=["POST", "GET"])
 def initial_2fa_webdienste():
     if flask.request.method == "POST":
@@ -260,9 +414,36 @@ def initial_2fa_webdienste():
         )
 
 
+@app2.route("/anfaenglich_2fa_webdienste", methods=["POST", "GET"])
+def initial_2fa_webdienste_de():
+    if flask.request.method == "POST":
+        validation = flask.request.form["validation"]
+        if validate_otp(users["sm_wd"].otp, validation):
+            resp = flask.make_response(flask.redirect("/geschichte_anmeldung"))
+            print("Erfolgreiche Validierung vom qr")
+            return resp
+        else:
+            print("Falsche Validierung")
+            return flask.render_template(
+                "sm7_anfaenglich_2fa_webdienste.html",
+                flash="Validation failed!"
+            )
+    else:
+        return flask.render_template(
+            "sm7_anfaenglich_2fa_webdienste.html",
+            flash="Registration succesfull!"
+        )
+
+
 @app2.route("/story_login")
 def story_login():
     return flask.render_template("sm8_story_login.html",
+                                 flash="Validation succesfull!")
+
+
+@app2.route("/geschichte_anmeldung")
+def story_login_de():
+    return flask.render_template("sm8_geschichte_anmeldung.html",
                                  flash="Validation succesfull!")
 
 
@@ -285,6 +466,25 @@ def login():
         return flask.render_template("sm9_login.html")
 
 
+@app2.route("/anmeldung", methods=["POST", "GET"])
+def login_de():
+    if flask.request.method == "POST":
+        name = flask.request.form["name"]
+        pwd = flask.request.form["pwd"]
+        if name == users.get("sm_kd").username and pwd == users.get(
+                "sm_kd").password:
+            resp = flask.make_response(flask.redirect("/anmeldung_2fa"))
+            return resp
+        else:
+            return flask.render_template(
+                "sm9_anmeldung.html",
+                flash="Wrong credentials!",
+                classes="fade show display",
+            )
+    else:
+        return flask.render_template("sm9_anmeldung.html")
+
+
 @app2.route("/login_2fa", methods=["POST", "GET"])
 def login_2fa():
     if flask.request.method == "POST":
@@ -301,9 +501,31 @@ def login_2fa():
                                      flash="Succesfully logged in!")
 
 
+@app2.route("/anmeldung_2fa", methods=["POST", "GET"])
+def login_2fa_de():
+    if flask.request.method == "POST":
+        validation = flask.request.form["validation"]
+        if validate_otp(users["sm_kd"].otp, validation):
+            print("Erfolgreiche Validierung von qr")
+            resp = flask.make_response(flask.redirect("/ende"))
+            return resp
+        else:
+            return flask.render_template("sm10_anmeldung_2fa.html",
+                                         flash="Validation failed")
+    else:
+        return flask.render_template("sm10_anmeldung_2fa.html",
+                                     flash="Succesfully logged in!")
+
+
 @app2.route("/end")
 def end():
     return flask.render_template("sm11_story_end.html",
+                                 flash="Validation succesfull!")
+
+
+@app2.route("/ende")
+def end_de():
+    return flask.render_template("sm11_geschichte_ende.html",
                                  flash="Validation succesfull!")
 
 
