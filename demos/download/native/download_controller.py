@@ -71,28 +71,64 @@ def stop_demo_download():
 
 @orchestration.route("/status/demo/download", methods=["GET"])
 def status_demo_download():
-    result = orchestration_controller.orchestration_service \
-        .get_status_docker_compose_file(
-         "download/secure/docker-compose.yml"
-        )
+    try:
+        result_secure = orchestration_controller.orchestration_service \
+            .get_status_docker_compose_file(
+                "download/secure/docker-compose.yml"
+            )
 
-    if len(result) > 0:
-        return flask.helpers.make_response(flask.json.jsonify(result), 200)
-    else:
-        flask.abort(500)
+        result_unsecure = orchestration_controller.orchestration_service \
+            .get_status_docker_compose_file(
+                "download/unsecure/docker-compose.yml"
+            )
+
+        result = {
+            "download-secure": result_secure["download-secure"],
+            "download-unsecure": result_unsecure["download-unsecure"]
+        }
+
+        if len(result) > 0:
+            return flask.helpers.make_response(flask.json.jsonify(result), 200)
+        else:
+            flask.abort(500)
+
+    except Exception:
+        return flask.helpers.make_response(
+            flask.json.jsonify({
+                    "success": False,
+                    "message": "Failed to get container status."
+                }), 500)
 
 
 @orchestration.route("/status/demo/download/sum", methods=["GET"])
 def status_demo_download_sum():
-    result = orchestration_controller.orchestration_service\
-        .get_sum_status_docker_compose_file(
-         "download/secure/docker-compose.yml"
-        )
+    try:
+        result_secure = orchestration_controller.orchestration_service\
+            .get_sum_status_docker_compose_file(
+                "download/secure/docker-compose.yml"
+            )
 
-    if len(result) > 0:
-        return flask.helpers.make_response(flask.json.jsonify(result), 200)
-    else:
-        flask.abort(500)
+        result_unsecure = orchestration_controller.orchestration_service\
+            .get_sum_status_docker_compose_file(
+                "download/unsecure/docker-compose.yml"
+            )
+
+        if result_secure["state"] != "offline":
+            result = result_secure
+        else:
+            result = result_unsecure
+
+        if len(result) > 0:
+            return flask.helpers.make_response(flask.json.jsonify(result), 200)
+        else:
+            flask.abort(500)
+
+    except Exception:
+        return flask.helpers.make_response(
+            flask.json.jsonify({
+                    "success": False,
+                    "message": "Failed to get container status."
+                }), 500)
 
 
 @orchestration.route("/download/create_fake_malware", methods=["POST"])
