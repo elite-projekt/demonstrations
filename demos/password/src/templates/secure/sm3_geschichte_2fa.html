@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="content">
+    <div class=container>
+        <p>Sie haben den ersten Schritt zur Registrierung Ihres Kontos erfolgreich abgeschlossen.</p>
+        <p>Als nächstes müssen Sie die Zwei-Faktor-Authentifizierung (2FA) einrichten.</p>
+        <p>Starten Sie dazu die 2FA Authenticator App auf Ihrem Smartphone und folgen Sie den nachstehenden Anweisungen.
+        </p>
+        <ol>
+            <li> Öffnen Sie Ihre 2FA Authenticator App auf Ihrem Smartphone.</li>
+            <li>Die App zeigt eine Übersicht über alle von Ihnen registrierten Sicherheits-Token an. Wenn Sie die App
+                zum ersten Mal verwenden, sehen Sie eine leere Liste, wie in Abbildung 1 dargestellt.</li>
+            <li>Klicken Sie nun auf das Pluszeichen in der oberen rechten Ecke Ihres Bildschirms und dann auf "QR-Code
+                scannen", wie in Abbildung 2 dargestellt.</li>
+            <li>Die App fragt nach dem Zugriff auf Ihre Kamera. Bestätigen Sie diese Erlaubnis. Nun öffnet die App Ihre
+                Kamera und Sie können den QR-Code auf der nächsten Seite scannen.</li>
+            <li>Wenn der QR-Code wie in Abbildung 3 dargestellt erkannt wurde, wird Ihr Sicherheits-Token hinzugefügt.
+                Klicken Sie nun auf "Schließen", um den Hinzufügungsprozess abzuschließen.</li>
+            <li>Jeder Token ist 60 Sekunden lang gültig. Danach wird ein neuer Token generiert. Geben Sie das aktuell
+                angezeigte Sicherheitstoken einmal zur Validierung ein und bestätigen Sie es.</li>
+        </ol>
+    </div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-sm-3">
+                <img src="{{url_for('static', filename='abbildung1.PNG')}}" alt="Figure1"
+                    class="img-fluid float-left" />
+                <p>Abbildung 1</p>
+            </div>
+            <div class="col-md-3">
+                <img src="{{url_for('static', filename='abbildung2.PNG')}}" alt="Figure2" class="img-fluid" />
+                <p>Abbildung 2</p>
+            </div>
+            <div class="col-md-3">
+                <img src="{{url_for('static', filename='abbildung3.PNG')}}" alt="Figure3"
+                    class="img-fluid float-right" />
+                <p>Abbildung 3</p>
+            </div>
+        </div>
+        <p> Wenn Sie weitere Informationen zu diesem Thema benötigen, sehen Sie sich die entsprechenden
+            <a title="Lernmaterial" id="2FA-info-de" style="text-decoration:underline; color: #888">
+                Lernmaterial
+            </a>an.
+        </p>
+        <p>Wenn Sie bereit sind, klicken Sie auf "Weiter", um den Prozess der Zwei-Faktor-Authentifizierung zu starten.
+        </p>
+        <a href="init_2fa_account_services"><button class="btn btn-block btn-primary">Weiter</button></a>
+    </div>
+</div>
+<script src="{{url_for('static', filename='signup-form/js/jquery-3.3.1.min.js')}}"></script>
+<script src="{{url_for('static', filename='link-router/router.js')}}"></script>
+{% endblock %}
