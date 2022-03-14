@@ -24,3 +24,4 @@ Werkzeug>=1.0.1
 PyYAML>=5.4.1
 flake8
 black
+importlib_resources==5.4.0
