@@ -1,7 +1,9 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
+
 <head>
-    <meta charset="UTF-8">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
 
@@ -11,23 +13,21 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{url_for('static', filename='signup-form-08/css/bootstrap.min.css')}}">
-    
+
     <!-- Style -->
     <link rel="stylesheet" href="{{url_for('static', filename='signup-form-08/css/style.css')}}">
-    <title>Titel</title>
+
+    <title>Password Demo</title>
 </head>
+
 <body>
-<div class="content">
-    <div class="container">
-<img style="float: right;" src="{{url_for('static', filename='logo.PNG')}}" class="img-fluid"/>
-<p>Sie haben sich erfolgreich bei den MPSE Web Services angemeldet.
-Jetzt haben Sie alle erforderlichen Konten erstellt und können mit der Arbeit beginnen.
-Sie werden nun zu den MPSE Kontodiensten weitergeleitet, um sich zum ersten Mal bei Ihrem neuen Konto anzumelden.
-Wenn Sie bereit sind, klicken Sie auf "Weiter".
-</p>
-<br>
-<a href="anmeldung"><button class="btn btn-block btn-primary">Weiter</button></a>
-</div>
-</div>
+    <nav class="navbar navbar-dark" style="background-color: #32b18e;">
+        <span class="navbar-text h1">
+            <img src="{{url_for('static', filename='logo_green.svg')}}" height="50" class="" alt="">
+            ELITE International
+        </span>
+    </nav>
+    {% block content %}{% endblock %}
 </body>
+
 </html>

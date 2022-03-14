@@ -1,0 +1,49 @@
+{% extends "base_green.html" %}
+
+{% block content %}
+<div class="content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <img src="{{url_for('static', filename='signup-form-08/images/undraw_file_sync_ot38.svg')}}" alt="Image"
+          class="img-fluid">
+      </div>
+      <div class="col-md-6 contents">
+        <div class="row justify-content-center">
+          <div class="col-md-8">
+            <div class="mb-4">
+              <h3>Registrierung</h3>
+              <p class="mb-4">Dies ist die Anmeldeseite für unsere Webdienste.</p>
+            </div>
+            <form method="post">
+              <div class="form-group first" id="name_field">
+                <label for="name">Benutzername</label>
+                <input type="text" class="form-control" id="name" name="name">
+
+              </div>
+              <div class="form-group" id="password_field">
+
+                <label for="password">Passwort</label>
+                <div class="input-group">
+                  <input type="password" class="form-control" id="password" name="pwd">
+                  <i toggle="#password" class="icon-eye toggle-passwort input-group-addon" data-toggle="tooltip"
+                    data-placement="right" title="klicken Sie auf das Auge, um das Passwort anzuzeigen."
+                    id="pw-eye"></i>
+                </div>
+
+              </div>
+              <input type="submit" value="Registrieren" class="btn btn-block btn-primary mt-3">
+            </form>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+<script src="{{url_for('static', filename='signup-form-08/js/jquery-3.3.1.min.js')}}"></script>
+<script src="{{url_for('static', filename='signup-form-08/js/popper.min.js')}}"></script>
+<script src="{{url_for('static', filename='signup-form-08/js/bootstrap.min.js')}}"></script>
+<script src="{{url_for('static', filename='signup-form-08/js/main.js')}}"></script>
+{% endblock %}

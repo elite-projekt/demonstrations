@@ -1,0 +1,18 @@
+{% extends "base_green.html" %}
+{% block content %}
+<div class="content">
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{% block cardtitle %}{% endblock %}</h5>
+                <p class="card-text">
+                    {% block cardtext %}{% endblock %}                
+                </p>
+                <div class="card-footer text-center">
+                    <a href="{% block cardbtn %}{% endblock %}"><button class="btn btn-primary">Weiter</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
