@@ -306,7 +306,7 @@ class PhishingDemo:
         time.sleep(delay)
         try:
             container = python_on_whales.docker.container.inspect(
-                "phising_mailserver")
+                "phishing_mailserver")
             for i in range(retries):
                 logging.info(
                     "Checking if mailserver reachable try: {}".format(i + 1))

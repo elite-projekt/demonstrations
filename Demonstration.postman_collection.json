@@ -99,7 +99,7 @@
 			"response": []
 		},
 		{
-			"name": "Status Phising Demo",
+			"name": "Status Phishing Demo",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -121,7 +121,7 @@
 			"response": []
 		},
 		{
-			"name": "Status Phising Demo Sum",
+			"name": "Status Phishing Demo Sum",
 			"request": {
 				"method": "GET",
 				"header": [],

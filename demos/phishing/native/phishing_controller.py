@@ -52,7 +52,7 @@ def stop_demo_phishing():
 
 
 @orchestration.route("/status/demo/phishing", methods=["GET"])
-def status_demo_phising():
+def status_demo_phishing():
     result = orchestration_controller.orchestration_service \
         .get_status_docker_compose_file("phishing/docker-compose.yml")
 
