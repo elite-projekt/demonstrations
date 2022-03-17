@@ -5,7 +5,7 @@ services:
     image:  ${REGISTRY_URL}/${GROUP_NAME}/demonstrations/${DOWNLOAD_REPO}
     # for local build (dev/debug/test purposes)
     # build:
-    #   context: ../../../../demos/download/
+    #   context: ../../../demos/download/
     container_name: download-secure
     extra_hosts:
       - "host.docker.internal:host-gateway"

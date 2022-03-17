@@ -1,4 +1,4 @@
-version: '3.7'
+version: '3.9'
 
 services:
   phishing:
@@ -7,7 +7,7 @@ services:
     ports:
       - 443:443
   mail:
-    image: tvial/docker-mailserver:latest
+    image: mailserver/docker-mailserver:10.5.0
     hostname: mail
     domainname: domain.com
     container_name: phising_mailserver
