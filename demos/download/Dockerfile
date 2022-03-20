@@ -10,6 +10,8 @@ RUN npm install && npm run build
 
 FROM python:3.10-alpine
 
+# Temporary security fix see #131
+RUN apk add --no-cache --upgrade libretls=3.3.4-r3
 ENV APP_DIR /download/src
 RUN mkdir -p ${APP_DIR} && mkdir -p ${APP_DIR}/static/shop && mkdir -p /download/src/certs/
 WORKDIR ${APP_DIR}

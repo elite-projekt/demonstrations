@@ -10,6 +10,9 @@ ENV APP_DIR /phishing/src
 RUN mkdir -p ${APP_DIR}
 WORKDIR ${APP_DIR}
 
+# Temporary security fix see #131
+RUN apk add --no-cache --upgrade libretls=3.3.4-r3
+
 # expose web server port
 EXPOSE 443
 
