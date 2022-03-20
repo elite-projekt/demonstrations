@@ -3,11 +3,14 @@
 
 block_cipher = None
 
+added_files = [
+         ( '..\\..\\demos', 'demos' )
+         ]
 
 a = Analysis(['app.py'],
              pathex=['C:\\src\\native\\src', '/builds/esc-mpse20/demonstrations/native/src', '/builds/esc-mpse20/demonstrations/native', '/builds/esc-mpse20/demonstrations'],
              binaries=[],
-             datas=[],
+             datas = added_files,
              hiddenimports=['config', 'PyYAML'],
              hookspath=[],
              runtime_hooks=[],
