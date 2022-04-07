@@ -19,12 +19,9 @@ class ProductionConfig(Config):
 
 class EnvironmentConfig:
     WORKINGDIR = "C:\\Program Files (x86)\\hda\\nativeapp\\"
-    DOCKERSTACKDIR = WORKINGDIR + "stacks\\"
     PROFILEDIR = WORKINGDIR + "profiles\\"
     ENVDIR = WORKINGDIR
 
 
 class ApplicationInformation:
-    DESCRIPTION = "HDA MPSE Project native app client"
-    VERSION = "1.5"
-    BUILDDATE = "February 2022"
+    DESCRIPTION = "NativeApp Client for ELITE Platform"

@@ -1,4 +1,5 @@
 import argparse
+from datetime import datetime
 import logging
 import os
 
@@ -44,11 +45,12 @@ if __name__ == "__main__":
         config.EnvironmentConfig.WORKINGDIR = args.path
         config.EnvironmentConfig.DOCKERSTACKDIR = args.path + '\\..\\stacks\\'
         config.EnvironmentConfig.PROFILEDIR = args.path + '\\profiles\\'
-        config.EnvironmentConfig.ENVDIR = args.path + '\\..\\..\\'
+        config.EnvironmentConfig.ENVDIR = args.path
 
+    logging_path = config.EnvironmentConfig.WORKINGDIR + "\\nativeapp.log"
     # initiate logging
     logging.basicConfig(
-        filename=config.EnvironmentConfig.WORKINGDIR + "\\service.log",
+        filename=logging_path,
         datefmt="%y-%m-%d %H:%M:%S",
         format="%(asctime)s %(levelname)-8s - [%(module)s:%(funcName)s] : "
                "%(message)s",
@@ -57,6 +59,12 @@ if __name__ == "__main__":
     logging.info("Starting service: native app")
 
     # display application information
+    if not (hasattr(config.ApplicationInformation, "VERSION")
+            and hasattr(config.ApplicationInformation, "BUILDDATE")):
+        setattr(config.ApplicationInformation, "VERSION", "LOCAL DEV")
+        setattr(config.ApplicationInformation, "BUILDDATE",
+                datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+
     logging.info(
         "\n\nVERSION: {}\nBUILDDATE: {}".format(
             config.ApplicationInformation.VERSION,
@@ -66,12 +74,14 @@ if __name__ == "__main__":
 
     # print for display in console window
     print(
-        "\n>> {} <<\n{:15s} {}\n{:15s} {}\n".format(
+        "\n>> {} <<\n{:15s} {}\n{:15s} {}\n{:15s} {}\n".format(
             config.ApplicationInformation.DESCRIPTION,
             "VERSION:",
             config.ApplicationInformation.VERSION,
             "BUILDDATE:",
             config.ApplicationInformation.BUILDDATE,
+            "DEBUG LOG:",
+            logging_path
         )
     )
 

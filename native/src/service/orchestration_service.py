@@ -3,6 +3,7 @@ from os import path
 
 import python_on_whales
 import yaml
+import sys
 
 from native.src.config import config
 
@@ -10,27 +11,40 @@ from native.src.config import config
 class OrchestrationService:
     def docker_compose_start_file(self, filename: str):
         try:
-            file_path = path.join(config.EnvironmentConfig.DOCKERSTACKDIR,
-                                  filename)
+            # get demo name from first word in path: "password/native/(...)"
+            demo_name = filename.split("/")[0]
+            file_path = path.join(config.EnvironmentConfig.WORKINGDIR,
+                                  "demos")
+            file_path = path.join(file_path, filename)
             env_path = path.join(config.EnvironmentConfig.ENVDIR, ".env")
-            docker = python_on_whales.DockerClient(compose_files=[file_path],
-                                                   compose_env_file=env_path)
+            docker = python_on_whales.DockerClient(
+                compose_files=[file_path],
+                compose_env_file=env_path,
+                compose_project_name=demo_name)
             docker.compose.up(detach=True)
         except Exception as e:
             logging.error(e)
+            raise
 
     def docker_compose_stop_file(self, filename: str):
         try:
-            file_path = path.join(config.EnvironmentConfig.DOCKERSTACKDIR,
-                                  filename)
-            docker = python_on_whales.DockerClient(compose_files=[file_path])
+            # get demo name from first word in path: "password/native/(...)"
+            demo_name = filename.split("/")[0]
+            file_path = path.join(config.EnvironmentConfig.WORKINGDIR,
+                                  "demos")
+            file_path = path.join(file_path, filename)
+            docker = python_on_whales.DockerClient(
+                compose_files=[file_path],
+                compose_project_name=demo_name)
             docker.compose.down()
         except Exception as e:
             logging.error(e)
+            raise
 
     def get_status_docker_compose_file(self, filename: str):
-        file_path = path.join(config.EnvironmentConfig.DOCKERSTACKDIR,
-                              filename)
+        file_path = path.join(config.EnvironmentConfig.WORKINGDIR,
+                              "demos")
+        file_path = path.join(file_path, filename)
         container_name_list = []
         result = {}
         try:
@@ -56,8 +70,10 @@ class OrchestrationService:
                     )
                     result[container_name] = state
 
-        except EnvironmentError:
+        except Exception as e:
             # parent of IOError, OSError *and* WindowsError where available
+            logging.error(e)
+            logging.error(sys.exc_info()[0])
             return result
 
         return result

@@ -157,15 +157,13 @@ If(!(Test-Path -path $rootPath)) {
         #If release folder
         if($isReleaseDirectory) {
             Copy-Item ".env" -Destination $directoryPath -ErrorAction Stop
-            Copy-Item "stacks\" -Destination "$directoryPath\stacks" -Recurse -Force -ErrorAction Stop
-            Copy-Item "rootCA.crt" -Destination "$directoryPath\stacks" -ErrorAction Stop
+            Copy-Item "demos\" -Destination "$directoryPath\demos" -Recurse -Force -ErrorAction Stop
             Copy-Item "profiles" -Destination "$directoryPath" -Recurse -ErrorAction Stop
             Copy-Item "app.exe" -Destination "$directoryPath" -ErrorAction Stop
         # If src folder
         } else {
             Copy-Item "$workingDirectory\..\..\.env" -Destination $directoryPath -ErrorAction Stop
-            Copy-Item "$workingDirectory\..\stacks\" -Destination "$directoryPath\stacks" -Recurse -Force -ErrorAction Stop
-            Copy-Item "$workingDirectory\..\..\demoCA\rootCA.crt" -Destination "$directoryPath\stacks" -ErrorAction Stop
+            Copy-Item "$workingDirectory\..\demos\" -Destination "$directoryPath\demos" -Recurse -Force -ErrorAction Stop
             Copy-Item "$workingDirectory\..\src\profiles" -Destination "$directoryPath" -Recurse -ErrorAction Stop
             Copy-Item "$workingDirectory\..\src\dist\windows\app.exe" -Destination "$directoryPath"  -ErrorAction Stop
         }
