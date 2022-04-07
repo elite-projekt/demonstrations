@@ -1,40 +1,10 @@
-## Native Access
+# NativeApp
 
-This component is installed on every workstation. It presents an HTTP-based API. Everything that requires operations on the windows host directly lives inside this component.
+This component is installed on every workstation. It presents an HTTP-based API. Everything that requires operations on the Windows host directly lives inside this component.
 
 ## Setup
 
-### Under Windows
-```bash
-cd native
-python -m venv venv
-.\venv\Scripts\activate
-pip install -r requirements.txt
-cd src\
-
-#For Development Config
-python -m app dev
-
-#For Production Config
-python -m app prod
-
-```
-
-### Under Linux
-```bash
-cd native
-python -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-cd src/
-
-#For Development Config
-python -m app dev
-
-#For Production Config
-python -m app prod
-
-```
+Please look into the Wiki!
 
 ## Platform Integration
 

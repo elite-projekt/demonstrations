@@ -117,7 +117,8 @@ build:python-service:
   image: $REGISTRY_URL/$GROUP_NAME/container-templates/python-windows-service-builder:master
   script:
     - cd ./native/
-    #build:python:begin - DO NOT CHANGE THIS LINE. required by 'init_new_demo.sh' script
+    - sed -i '/ApplicationInformation/r'<(echo "    BUILDDATE = \"$(date)\"") ./src/config/config.py
+    - sed -i '/ApplicationInformation/r'<(echo "    VERSION = \"$CI_COMMIT_REF_NAME - $CI_COMMIT_SHORT_SHA\"") ./src/config/config.py
     - bash ./entrypoint-windows.sh $GROUP_NAME
   artifacts:
     paths:
@@ -139,12 +140,12 @@ build:release-zip:
     - ls -la
     - cp .env nativeapp-$CI_COMMIT_TAG/.env
     - cp demoCA/rootCA.crt nativeapp-$CI_COMMIT_TAG/rootCA.crt
+    - cp --parents -r demos/*/native ./nativeapp-$CI_COMMIT_TAG/
     - cd native
     - cp installer/nativeapp_installer.bat ../nativeapp-$CI_COMMIT_TAG/nativeapp_installer.bat
     - cp installer/nativeapp_install_helper.ps1 ../nativeapp-$CI_COMMIT_TAG/nativeapp_install_helper.ps1
     - cp installer/README.txt ../nativeapp-$CI_COMMIT_TAG/README.txt
     - cp src/dist/windows/app.exe ../nativeapp-$CI_COMMIT_TAG/app.exe
-    - cp -r stacks ../nativeapp-$CI_COMMIT_TAG/
     - cp -r src/profiles ../nativeapp-$CI_COMMIT_TAG
     - cd ../nativeapp-$CI_COMMIT_TAG
     - zip -r .

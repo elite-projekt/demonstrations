@@ -17,7 +17,8 @@ def start_demo_phishing():
     try:
         logging.info("Starting phishing demo stack")
         orchestration_controller.orchestration_service \
-            .docker_compose_start_file("phishing/docker-compose.yml")
+            .docker_compose_start_file(
+                "phishing/native/stacks/docker-compose.yml")
     except Exception as e:
         logging.error(e)
         return flask.helpers.make_response(
@@ -45,7 +46,7 @@ def start_demo_phishing():
 @orchestration.route("/stop/demo/phishing", methods=["POST", "GET"])
 def stop_demo_phishing():
     orchestration_controller.orchestration_service.docker_compose_stop_file(
-        "phishing/docker-compose.yml")
+        "phishing/native/stacks/docker-compose.yml")
     phishing_service.stop_mail_application()
     return flask.helpers.make_response(
         flask.json.jsonify(orchestration_controller.stop_success), 200)
@@ -54,7 +55,8 @@ def stop_demo_phishing():
 @orchestration.route("/status/demo/phishing", methods=["GET"])
 def status_demo_phishing():
     result = orchestration_controller.orchestration_service \
-        .get_status_docker_compose_file("phishing/docker-compose.yml")
+        .get_status_docker_compose_file(
+            "phishing/native/stacks/docker-compose.yml")
 
     if len(result) > 0:
         return flask.helpers.make_response(flask.json.jsonify(result), 200)
@@ -65,7 +67,8 @@ def status_demo_phishing():
 @orchestration.route("/status/demo/phishing/sum", methods=["GET"])
 def status_demo_phishing_sum():
     result = orchestration_controller.orchestration_service \
-        .get_sum_status_docker_compose_file("phishing/docker-compose.yml")
+        .get_sum_status_docker_compose_file(
+            "phishing/native/stacks/docker-compose.yml")
 
     if len(result) > 0:
         return flask.helpers.make_response(flask.json.jsonify(result), 200)

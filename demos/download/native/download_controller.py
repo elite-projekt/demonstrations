@@ -27,7 +27,7 @@ def start_demo_download():
         if secure_mode:
             orchestration_controller.orchestration_service \
                 .docker_compose_start_file(
-                 "download/secure/docker-compose.yml"
+                 "download/native/stacks/secure/docker-compose.yml"
                 )
             # sleep until container app is ready
             while not download_demo.DownloadDemo.probe_container_status():
@@ -37,7 +37,7 @@ def start_demo_download():
         else:
             orchestration_controller.orchestration_service \
                 .docker_compose_start_file(
-                 "download/unsecure/docker-compose.yml"
+                 "download/native/stacks/unsecure/docker-compose.yml"
                 )
             # sleep until container app is ready
             # throw error after 30 sec
@@ -60,9 +60,9 @@ def start_demo_download():
 @orchestration.route("/stop/demo/download", methods=["POST", "GET"])
 def stop_demo_download():
     orchestration_controller.orchestration_service.docker_compose_stop_file(
-        "download/secure/docker-compose.yml")
+        "download/native/stacks/secure/docker-compose.yml")
     orchestration_controller.orchestration_service.docker_compose_stop_file(
-        "download/unsecure/docker-compose.yml"
+        "download/native/stacks/unsecure/docker-compose.yml"
     )
     download_demo.DownloadDemo.delete_demo_files()
     return flask.helpers.make_response(
@@ -74,12 +74,12 @@ def status_demo_download():
     try:
         result_secure = orchestration_controller.orchestration_service \
             .get_status_docker_compose_file(
-                "download/secure/docker-compose.yml"
+                "download/native/stacks/secure/docker-compose.yml"
             )
 
         result_unsecure = orchestration_controller.orchestration_service \
             .get_status_docker_compose_file(
-                "download/unsecure/docker-compose.yml"
+                "download/native/stacks/unsecure/docker-compose.yml"
             )
 
         result = {
@@ -105,12 +105,12 @@ def status_demo_download_sum():
     try:
         result_secure = orchestration_controller.orchestration_service\
             .get_sum_status_docker_compose_file(
-                "download/secure/docker-compose.yml"
+                "download/native/stacks/secure/docker-compose.yml"
             )
 
         result_unsecure = orchestration_controller.orchestration_service\
             .get_sum_status_docker_compose_file(
-                "download/unsecure/docker-compose.yml"
+                "download/native/stacks/unsecure/docker-compose.yml"
             )
 
         if result_secure["state"] != "offline":
