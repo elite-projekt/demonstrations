@@ -110,12 +110,7 @@ If(!(Test-Path -path $rootPath)) {
     }
     
     # Check system language
-    $lang = [CultureInfo]::InstalledUICulture
-    if($lang -eq "de-DE") {
-        $objUser = New-Object System.Security.Principal.NTAccount("VORDEFINIERT\Benutzer")
-    } else {
-        $objUser = New-Object System.Security.Principal.NTAccount("BUILTIN\USER")
-    }
+    $objUser = New-Object System.Security.Principal.NTAccount(whoami)
 
     # Setting directory security
     try {
@@ -164,6 +159,7 @@ If(!(Test-Path -path $rootPath)) {
         } else {
             Copy-Item "$workingDirectory\..\..\.env" -Destination $directoryPath -ErrorAction Stop
             Copy-Item "$workingDirectory\..\demos\" -Destination "$directoryPath\demos" -Recurse -Force -ErrorAction Stop
+            Copy-Item "$workingDirectory\..\..\demoCA\rootCA.crt" -Destination "$directoryPath" -ErrorAction Stop
             Copy-Item "$workingDirectory\..\src\profiles" -Destination "$directoryPath" -Recurse -ErrorAction Stop
             Copy-Item "$workingDirectory\..\src\dist\windows\app.exe" -Destination "$directoryPath"  -ErrorAction Stop
         }
