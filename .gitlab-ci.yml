@@ -15,8 +15,10 @@ variables:
 
 lint:shell-code:
   stage: lint
+  image: koalaman/shellcheck-alpine:stable
   script: 
     - shellcheck init_new_demo.sh
+  needs: []
 
 lint:python-code:
   stage: lint
