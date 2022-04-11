@@ -164,7 +164,7 @@ build:release-zip:
   
 build:test-newdemoscript:
   stage: build
-  image: docker:latest
+  image: bash:latest
   script:
     - bash ./init_new_demo.sh -t
   needs:
