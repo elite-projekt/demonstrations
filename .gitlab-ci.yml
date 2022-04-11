@@ -161,6 +161,14 @@ build:release-zip:
       - nativeapp-$CI_COMMIT_TAG/
   needs:
     - build:python-service
+  
+build:test-newdemoscript:
+  stage: build
+  image: docker:latest
+  script:
+    - bash ./init_new_demo.sh -t
+  needs:
+    - lint:shell-code
 
 # Scan template
 .scan:image: &scan-image
