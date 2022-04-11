@@ -166,6 +166,7 @@ build:test-newdemoscript:
   stage: build
   image: bash:latest
   script:
+    - apk add --update --no-cache libintl gettext
     - bash ./init_new_demo.sh -t
   needs:
     - lint:shell-code
