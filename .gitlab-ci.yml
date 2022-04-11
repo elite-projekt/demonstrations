@@ -164,9 +164,10 @@ build:release-zip:
   
 build:test-newdemoscript:
   stage: build
-  image: bash:latest
+  image: docker/compose:1.29.2
   script:
-    - apk add --update --no-cache libintl gettext
+    - apk add --update --no-cache bash
+    - apk add --update --no-cache libintl gettext curl
     - bash ./init_new_demo.sh -t
   needs:
     - lint:shell-code
