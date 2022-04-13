@@ -38,3 +38,5 @@ indent_size = unset
 trim_trailing_whitespace = unset
 insert_final_newline = unset
 
+[*.{yml,yaml}]
+indent_size = 2
