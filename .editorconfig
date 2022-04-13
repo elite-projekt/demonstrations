@@ -1,0 +1,40 @@
+# editorconfig.org
+# Declares that this is the top-level configuration
+root = true
+
+[*]
+indent_style = space
+indent_size = 2
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+# Use 4 spaces for the Python files
+[*.py]
+indent_size = 4
+max_line_length = 80
+
+# The JSON files contain newlines inconsistently
+[*.json]
+insert_final_newline = unset
+
+# Batch files use tabs for indentation
+[*.bat]
+indent_style = tab
+end_of_line = crlf
+
+[*.md]
+trim_trailing_whitespace = false
+insert_final_newline = false
+
+[*.ps1]
+indent_size = 4
+
+# Minified JavaScript and text files shouldn't be changed
+[*.{txt,min.js}]
+indent_style = unset
+indent_size = unset
+trim_trailing_whitespace = unset
+insert_final_newline = unset
+
