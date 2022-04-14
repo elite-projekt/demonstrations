@@ -1,6 +1,6 @@
 import logging
-from os import path
 
+import pathlib
 import python_on_whales
 import yaml
 import sys
@@ -9,14 +9,17 @@ from nativeapp.config import config
 
 
 class OrchestrationService:
+    def _get_demo_path(self):
+        return pathlib.Path(config.EnvironmentConfig.WORKINGDIR) / "demos"
+
     def docker_compose_start_file(self, filename: str):
         try:
             # get demo name from first word in path: "password/native/(...)"
+            # FIXME
             demo_name = filename.split("/")[0]
-            file_path = path.join(config.EnvironmentConfig.WORKINGDIR,
-                                  "demos")
-            file_path = path.join(file_path, filename)
-            env_path = path.join(config.EnvironmentConfig.ENVDIR, ".env")
+            file_path = self._get_demo_path() / filename
+            env_path = pathlib.Path(config.EnvironmentConfig.ENVDIR) \
+                / ".env"
             docker = python_on_whales.DockerClient(
                 compose_files=[file_path],
                 compose_env_file=env_path,
@@ -29,10 +32,9 @@ class OrchestrationService:
     def docker_compose_stop_file(self, filename: str):
         try:
             # get demo name from first word in path: "password/native/(...)"
+            # FIXME
             demo_name = filename.split("/")[0]
-            file_path = path.join(config.EnvironmentConfig.WORKINGDIR,
-                                  "demos")
-            file_path = path.join(file_path, filename)
+            file_path = self._get_demo_path() / filename
             docker = python_on_whales.DockerClient(
                 compose_files=[file_path],
                 compose_project_name=demo_name)
@@ -42,9 +44,7 @@ class OrchestrationService:
             raise
 
     def get_status_docker_compose_file(self, filename: str):
-        file_path = path.join(config.EnvironmentConfig.WORKINGDIR,
-                              "demos")
-        file_path = path.join(file_path, filename)
+        file_path = self._get_demo_path() / filename
         container_name_list = []
         result = {}
         try:

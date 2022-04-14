@@ -1,3 +1,6 @@
+import pathlib
+
+
 class Config(object):
     DEBUG = False
     DEVELOPMENT = False
@@ -17,12 +20,14 @@ class ProductionConfig(Config):
     PORT = 5000
 
 
-class EnvironmentConfig:
-    WORKINGDIR = "C:\\Program Files (x86)\\hda\\nativeapp\\"
-    PROFILEDIR = WORKINGDIR + "profiles\\"
-    ENVDIR = WORKINGDIR
+class EnvironmentConfig():
+    WORKINGDIR: pathlib.Path
+    PROFILEDIR: pathlib.Path
+    ENVDIR: pathlib.Path
     LANGUAGE = "de"
 
 
 class ApplicationInformation:
     DESCRIPTION = "NativeApp Client for ELITE Platform"
+    VERSION = None
+    BUILDDATE = None
