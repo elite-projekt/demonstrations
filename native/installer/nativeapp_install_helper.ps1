@@ -14,7 +14,16 @@ $isReleaseDirectory = $false
 if(Test-Path .env) {
     $isReleaseDirectory = $true   
 }
+$dockerCMD = "docker"
 
+function run-docker {
+    param(
+        [string] $param
+    )
+    Write-Host $param
+    $cmd = -join($dockerCMD, " ", $param)
+    iex $cmd
+}
 <#
 .Synopsis
 Exports environment variable from the .env file to the current process.
@@ -108,8 +117,7 @@ If(!(Test-Path -path $rootPath)) {
         Write-Warning $Error[0]
         Exit 1
     }
-    
-    # Check system language
+
     $objUser = New-Object System.Security.Principal.NTAccount(whoami)
 
     # Setting directory security
@@ -220,15 +228,15 @@ If(!(Test-Path -path $rootPath)) {
     Write-Host -ForegroundColor DarkGray "====================================="
     # Pull docker images
     try {
-        WriteOutput "Login with your username and password for the $Env:REGISTRY_URL repository" "DarkGray" 
-        docker login $Env:REGISTRY_URL 
+        WriteOutput "Login with your username and password for the $Env:REGISTRY_URL repository" "DarkGray"
+        run-docker "login $Env:REGISTRY_URL"
         if($? -eq $false) {
             throw
         } else {
             WriteOutput "Trying to pull the latest docker images" "DarkGray"
-            docker pull $Env:REGISTRY_URL/$Env:GROUP_NAME/demonstrations/$Env:PHISHING_REPO 
-            docker pull $Env:REGISTRY_URL/$Env:GROUP_NAME/demonstrations/$Env:PASSWORD_REPO
-            docker pull $Env:REGISTRY_URL/$Env:GROUP_NAME/demonstrations/$Env:DOWNLOAD_REPO
+            run-docker "pull $Env:REGISTRY_URL/$Env:GROUP_NAME/demonstrations/$Env:PHISHING_REPO"
+            run-docker "pull $Env:REGISTRY_URL/$Env:GROUP_NAME/demonstrations/$Env:PASSWORD_REPO"
+            run-docker "pull $Env:REGISTRY_URL/$Env:GROUP_NAME/demonstrations/$Env:DOWNLOAD_REPO"
             WriteOutput "Succesfully pulled the docker images" "Green"
         }
     } catch {
