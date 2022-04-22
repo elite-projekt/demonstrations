@@ -9,7 +9,7 @@ import flask_cors
 from demos.download.native import download_controller
 from demos.password.native import password_controller
 from demos.phishing.native import phishing_controller
-from native.src.config import config
+from nativeapp.config import config
 
 app = flask.Flask(__name__)
 flask_cors.CORS(app)
@@ -18,7 +18,8 @@ app.register_blueprint(download_controller.orchestration)
 app.register_blueprint(phishing_controller.orchestration)
 app.register_blueprint(password_controller.orchestration)
 
-if __name__ == "__main__":
+
+def main():
     # set working directory
     config.EnvironmentConfig.WORKINGDIR = os.getenv(
         "ProgramFiles(x86)") + r"\hda\nativeapp"
@@ -88,3 +89,7 @@ if __name__ == "__main__":
     # start flask
     app.run(host=app.config["HOST"], debug=app.config["DEBUG"],
             port=app.config["PORT"])
+
+
+if __name__ == "__main__":
+    main()

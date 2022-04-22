@@ -1,4 +1,4 @@
-from native.src.service import orchestration_service
+from nativeapp.service import orchestration_service
 
 orchestration_service = orchestration_service.OrchestrationService()
 

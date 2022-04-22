@@ -5,7 +5,7 @@ import python_on_whales
 import yaml
 import sys
 
-from native.src.config import config
+from nativeapp.config import config
 
 
 class OrchestrationService:

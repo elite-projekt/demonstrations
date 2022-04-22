@@ -1,6 +1,7 @@
 import os
 import configparser
 import logging
+import pathlib
 import zipfile
 import requests
 import shutil
@@ -8,8 +9,8 @@ import shutil
 # https://bandit.readthedocs.io/en/latest/blacklists/blacklist_imports.html#b404-import-subprocess
 import subprocess  # nosec
 
-from native.src.config import config
 from demos.download.native.download_demo_text import DownloadDemoText
+from importlib_resources import files
 
 
 class DownloadDemo:
@@ -53,9 +54,10 @@ class DownloadDemo:
                     r"\1y2st08z.MPSE_download_unsafe"
             ):
                 # extract profile to location
-                profile_zip = os.path.join(config.EnvironmentConfig.PROFILEDIR,
-                                           "1y2st08z.MPSE_download_unsafe.zip")
-                with zipfile.ZipFile(profile_zip, "r") as zipObj:
+                import demos.download.native.profiles as profiles
+                filename = files(profiles).joinpath(
+                    "1y2st08z.MPSE_download_unsafe.zip")
+                with zipfile.ZipFile(filename, "r") as zipObj:
                     zipObj.extractall(os.getenv("TEMP"))
 
                 profile_location \
@@ -116,9 +118,10 @@ class DownloadDemo:
                     r"\fkstz94l.MPSE_download_safe"
             ):
                 # extract profile to location
-                profile_zip = os.path.join(config.EnvironmentConfig.PROFILEDIR,
-                                           "fkstz94l.MPSE_download_safe.zip")
-                with zipfile.ZipFile(profile_zip, "r") as zipObj:
+                import demos.download.native.profiles as profiles
+                filename = files(profiles).joinpath(
+                    "1y2st08z.MPSE_download_unsafe.zip")
+                with zipfile.ZipFile(filename, "r") as zipObj:
                     zipObj.extractall(os.getenv("TEMP"))
 
                 profile_location \
@@ -183,11 +186,15 @@ class DownloadDemo:
         """Start web browser"""
         logging.info("Try starting firefox process...")
         try:
+            exec_path = "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe"
+            if not (pathlib.Path(exec_path).is_file()):
+                exec_path = "C:\\Program Files\\Mozilla Firefox\\firefox.exe"
+
             if safe:
                 # False positive. See also:
                 # https://github.com/PyCQA/bandit/issues/333#issuecomment-404103697
                 subprocess.Popen(  # nosec
-                    ["C:\\Program Files\\Mozilla Firefox\\firefox.exe",
+                    [exec_path,
                      "-P", "MPSE_download_safe",
                      "-url", "https://printer.io/"],
                     shell=False
@@ -196,7 +203,7 @@ class DownloadDemo:
                 # False positive. See also:
                 # https://github.com/PyCQA/bandit/issues/333#issuecomment-404103697
                 subprocess.Popen(  # nosec
-                    ["C:\\Program Files\\Mozilla Firefox\\firefox.exe",
+                    [exec_path,
                      "-P", "MPSE_download_unsafe",
                      "-url", "https://printer.io/"],
                     shell=False

@@ -15,7 +15,7 @@ import zipfile
 
 import python_on_whales
 
-from native.src.config import config
+
 from importlib_resources import files
 
 
@@ -361,9 +361,9 @@ class PhishingDemo:
                 return
 
             # extract profile to location
-            profile_zip = os.path.join(config.EnvironmentConfig.PROFILEDIR,
-                                       "profile.zip")
-            with zipfile.ZipFile(profile_zip, "r") as zipObj:
+            import demos.phishing.native.profiles as profiles
+            filename = files(profiles).joinpath("profile.zip")
+            with zipfile.ZipFile(filename, mode="r") as zipObj:
                 zipObj.extractall(os.getenv("TEMP"))
 
             profile_location = os.getenv("APPDATA") + \

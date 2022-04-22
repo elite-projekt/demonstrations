@@ -1,7 +1,7 @@
 import flask
 import time
 
-from native.src.controller import orchestration_controller
+from nativeapp.controller import orchestration_controller
 from demos.download.native import download_demo
 
 orchestration = flask.Blueprint("download", __name__,
