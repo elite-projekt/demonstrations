@@ -1,0 +1,16 @@
+to: 
+    display_name: Max Mustermann
+    email: max.mustermann@mpseinternational.com
+from: 
+    display_name: Lena Vogt
+    email: lena.vogt@mpseinternational.com
+subject: Farewell gift for Harald
+time: "16:42"
+content: |
+    Hey Max,
+
+    we want to say good bye to Harald soon. Has the gift you ordered arrived 
+    yet?
+
+    Best Regards,
+    Lena

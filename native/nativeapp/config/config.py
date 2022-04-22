@@ -21,6 +21,7 @@ class EnvironmentConfig:
     WORKINGDIR = "C:\\Program Files (x86)\\hda\\nativeapp\\"
     PROFILEDIR = WORKINGDIR + "profiles\\"
     ENVDIR = WORKINGDIR
+    LANGUAGE = "de"
 
 
 class ApplicationInformation:
