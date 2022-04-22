@@ -1,6 +1,6 @@
 import flask
 
-from native.src.controller import orchestration_controller
+from nativeapp.controller import orchestration_controller
 
 orchestration = flask.Blueprint("password", __name__,
                                 url_prefix="/orchestration/")

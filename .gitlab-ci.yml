@@ -31,7 +31,7 @@ lint:python-code:
     name: registry.gitlab.com/pipeline-components/hadolint:latest
   script:
     - echo "Start hadolint for $CI_PROJECT_DIR/$SUB_PROJECT_FOLDER/Dockerfile"
-    - hadolint "$CI_PROJECT_DIR/$SUB_PROJECT_FOLDER/Dockerfile" 
+    - hadolint "$CI_PROJECT_DIR/$SUB_PROJECT_FOLDER/Dockerfile"
   needs: []
 
 #lint:demo:begin - DO NOT CHANGE THIS LINE. required by 'init_new_demo.sh' script
@@ -112,48 +112,48 @@ build:password-image:
   needs:
     - lint:password-dockerfile
 
-build:python-service:
+build:nativeapp-package:
   stage: build
-  image: $REGISTRY_URL/$GROUP_NAME/container-templates/python-windows-service-builder:master
+  image: python:3.7
+  before_script:
+    - pip3 install build
   script:
-    - cd ./native/
-    - sed -i '/ApplicationInformation/r'<(echo "    BUILDDATE = \"$(date)\"") ./src/config/config.py
-    - sed -i '/ApplicationInformation/r'<(echo "    VERSION = \"$CI_COMMIT_REF_NAME - $CI_COMMIT_SHORT_SHA\"") ./src/config/config.py
-    - bash ./entrypoint-windows.sh $GROUP_NAME
+    # set version and builddate
+    - sed -i '/ApplicationInformation/r'<(echo "    BUILDDATE = \"$(date)\"") ./native/nativeapp/config/config.py
+    - sed -i '/ApplicationInformation/r'<(echo "    VERSION = \"$CI_COMMIT_REF_NAME - $CI_COMMIT_SHORT_SHA\"") ./native/nativeapp/config/config.py
+    - python3 -m build
   artifacts:
     paths:
-      - /builds/$GROUP_NAME/demonstrations/native/src/dist/windows/*
+    - dist/
   needs:
     - lint:python-code
+
 
 build:release-zip:
   stage: build
   image: alpine:latest
   before_script:
     - apk add --update zip
-  rules:
-    - if: $CI_COMMIT_TAG
-  dependencies:
-    - build:python-service
+      #rules:
+    #    - if: $CI_COMMIT_TAG
   script:
     - mkdir nativeapp-$CI_COMMIT_TAG
     - ls -la
+    - cp dist/*.whl nativeapp-$CI_COMMIT_TAG/
+    - cp --parents -r demos setup.py native/nativeapp nativeapp-$CI_COMMIT_TAG/
     - cp .env nativeapp-$CI_COMMIT_TAG/.env
     - cp demoCA/rootCA.crt nativeapp-$CI_COMMIT_TAG/rootCA.crt
-    - cp --parents -r demos/*/native ./nativeapp-$CI_COMMIT_TAG/
     - cd native
     - cp installer/nativeapp_installer.bat ../nativeapp-$CI_COMMIT_TAG/nativeapp_installer.bat
     - cp installer/nativeapp_install_helper.ps1 ../nativeapp-$CI_COMMIT_TAG/nativeapp_install_helper.ps1
     - cp installer/README.txt ../nativeapp-$CI_COMMIT_TAG/README.txt
-    - cp src/dist/windows/app.exe ../nativeapp-$CI_COMMIT_TAG/app.exe
-    - cp -r src/profiles ../nativeapp-$CI_COMMIT_TAG
     - cd ../nativeapp-$CI_COMMIT_TAG
     - zip -r .
   artifacts:
     paths:
       - nativeapp-$CI_COMMIT_TAG/
   needs:
-    - build:python-service
+    - build:nativeapp-package
 
 # Scan template
 .scan:image: &scan-image
@@ -226,7 +226,7 @@ scan:password-image:
     SUB_PROJECT_FOLDER: demos/password
   needs:
   - build:password-image
-  
+
 # Push template
 .push:image: &push-image
   stage: push

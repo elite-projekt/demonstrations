@@ -1,18 +1,18 @@
 #nativeapp.bat has to be started first
 
 # Script Header for prettyness
-# Src: http://patorjk.com/software/taag/#p=display&h=1&v=0&c=echo&f=Mini&t=NativeApp%20Installer%20v.1.5
-Write-Host "                                      ___                                      _  ";
-Write-Host " |\ |  _. _|_ o     _   /\  ._  ._     |  ._   _ _|_  _. | |  _  ._       /|  |_  ";
-Write-Host " | \| (_|  |_ | \/ (/_ /--\ |_) |_)   _|_ | | _>  |_ (_| | | (/_ |    \/ o | o _) ";
-Write-Host "                            |   |                                                 ";
+# Src: http://patorjk.com/software/taag/#p=display&h=1&v=0&c=echo&f=Mini&t=NativeApp%20Installer
+Write-Host "                                      ___                             ";
+Write-Host " |\ |  _. _|_ o     _   /\  ._  ._     |  ._   _ _|_  _. | |  _  ._   ";
+Write-Host " | \| (_|  |_ | \/ (/_ /--\ |_) |_)   _|_ | | _>  |_ (_| | | (/_ |    ";
+Write-Host "                            |   |                                     ";
 
 # Get working directory. Should be /demonstrations/native if started from source code or should be the folder from release
 $workingDirectory = Get-Location
 # Check if working directory is src folder or release folder
 $isReleaseDirectory = $false
 if(Test-Path .env) {
-    $isReleaseDirectory = $true   
+    $isReleaseDirectory = $true
 }
 $dockerCMD = "docker"
 
@@ -48,7 +48,7 @@ based on https://github.com/rajivharris/Set-PsEnv
 function Set-PsEnv {
     [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'Low')]
     param($localEnvFile = ".env")
-    
+
     try {
         # return if no env file
         if (!( Test-Path $localEnvFile)) {
@@ -76,7 +76,7 @@ function Set-PsEnv {
         Write-Warning $Error[0]
         Exit 1
     }
-    
+
 }
 
 function WriteOutput {
@@ -96,7 +96,7 @@ $rootPath="C:\Program Files (x86)\hda\"
 $shortcutPath = "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup\nativeapp.lnk"
 $hostFile = "C:\Windows\System32\drivers\etc\hosts"
 
-WriteOutput "This installer will install the NativeApp v.1.5" "DarkGray"
+WriteOutput "This installer will install the NativeApp" "DarkGray"
 
 # If rootPath folder doesn't exists start install routine
 If(!(Test-Path -path $rootPath)) {
@@ -123,9 +123,9 @@ If(!(Test-Path -path $rootPath)) {
     # Setting directory security
     try {
         WriteOutput "Trying to set directory security" "DarkGray"
-        $colRights = [System.Security.AccessControl.FileSystemRights]"Modify" 
-        $inheritanceFlag = [System.Security.AccessControl.InheritanceFlags]"ContainerInherit, ObjectInherit" 
-        $propagationFlag = [System.Security.AccessControl.PropagationFlags]::None 
+        $colRights = [System.Security.AccessControl.FileSystemRights]"Modify"
+        $inheritanceFlag = [System.Security.AccessControl.InheritanceFlags]"ContainerInherit, ObjectInherit"
+        $propagationFlag = [System.Security.AccessControl.PropagationFlags]::None
         $objType =[System.Security.AccessControl.AccessControlType]::Allow
         $objACE = New-Object System.Security.AccessControl.FileSystemAccessRule($objUser, $colRights, $inheritanceFlag, $propagationFlag, $objType)
         $objACL = Get-Acl -Path $rootPath
@@ -140,7 +140,7 @@ If(!(Test-Path -path $rootPath)) {
         Remove-Item -Path $rootPath -Recurse
         Exit 1
     }
-    
+
     try {
         WriteOutput "Trying to create the folder path: $directoryPath" "DarkGray"
         $null = New-Item -ItemType Directory -Path $directoryPath -ErrorAction Stop
@@ -155,21 +155,19 @@ If(!(Test-Path -path $rootPath)) {
 
     # Copy data
     try {
-        WriteOutput "Trying to copie files to the created folder" "DarkGray"
+        WriteOutput "Trying to copy files to the created folder" "DarkGray"
 
         #If release folder
         if($isReleaseDirectory) {
+            Copy-Item "nativeapp-0.0.0-py3-none-any.whl" -Destination $directoryPath -ErrorAction Stop
             Copy-Item ".env" -Destination $directoryPath -ErrorAction Stop
             Copy-Item "demos\" -Destination "$directoryPath\demos" -Recurse -Force -ErrorAction Stop
-            Copy-Item "profiles" -Destination "$directoryPath" -Recurse -ErrorAction Stop
-            Copy-Item "app.exe" -Destination "$directoryPath" -ErrorAction Stop
         # If src folder
         } else {
             Copy-Item "$workingDirectory\..\..\.env" -Destination $directoryPath -ErrorAction Stop
             Copy-Item "$workingDirectory\..\demos\" -Destination "$directoryPath\demos" -Recurse -Force -ErrorAction Stop
             Copy-Item "$workingDirectory\..\..\demoCA\rootCA.crt" -Destination "$directoryPath" -ErrorAction Stop
-            Copy-Item "$workingDirectory\..\src\profiles" -Destination "$directoryPath" -Recurse -ErrorAction Stop
-            Copy-Item "$workingDirectory\..\src\dist\windows\app.exe" -Destination "$directoryPath"  -ErrorAction Stop
+
         }
         WriteOutput "Copied files to the created folder" "Green"
     }
@@ -180,7 +178,7 @@ If(!(Test-Path -path $rootPath)) {
         Remove-Item -Path $rootPath -Recurse
         Exit 1
     }
-    
+
     # Host File
     $localRedirects = "127.0.0.1`twww.shipment-support-amazon.com covidsupportgermany.de coronahilfengermany.de mpseinternational.com mail.domain.com printer.io #MPSE"
     try {
@@ -216,6 +214,23 @@ If(!(Test-Path -path $rootPath)) {
         Set-Content -Path $hostFile -Value (get-content -Path $hostFile | Select-String -Pattern '#MPSE' -NotMatch)
         Exit 1
     }
+
+    # Install nativeapp from wheel
+    try {
+        WriteOutput "Trying to install native app from build wheel" "DarkGray"
+        python -m venv $directoryPath/.venv
+        . $directoryPath/.venv/Scripts/Activate.ps1
+        pip install nativeapp-0.0.0-py3-none-any.whl
+        WriteOutput "Installed nativeapp into venv" "Green"
+    } catch {
+        WriteOutput "Something went wrong while installing native app from wheel" "Red"
+        Write-Warning $Error[0]
+        WriteOutput "Resetting all changes" "Red"
+        Remove-Item -Path $rootPath -Recurse
+        Set-Content -Path $hostFile -Value (get-content -Path $hostFile | Select-String -Pattern '#MPSE' -NotMatch)
+        Exit 1
+    }
+
 
     # Information
     Write-Host -ForegroundColor DarkGray "====================================="
@@ -254,10 +269,11 @@ If(!(Test-Path -path $rootPath)) {
         WriteOutput "Try to create a new autostart entry" "DarkGray"
         $WshShell = New-Object -comObject WScript.Shell -ErrorAction Stop
         $Shortcut = $WshShell.CreateShortcut($shortcutPath)
-        $Shortcut.TargetPath = "$directoryPath\app.exe"
+        # TODO: does this work?
+        $Shortcut.TargetPath = "$directoryPath\.venv\Scripts\nativeapp.exe"
         $Shortcut.WindowStyle = 7
         $Shortcut.Save()
-        WriteOutput "Created an autostart entry" "Green"  
+        WriteOutput "Created an autostart entry" "Green"
     }
     catch {
         WriteOutput "Something went wrong creating the autostart entry" "Red"
@@ -266,12 +282,13 @@ If(!(Test-Path -path $rootPath)) {
         Remove-Item -Path $rootPath -Recurse
         Set-Content -Path $hostFile -Value (get-content -Path $hostFile | Select-String -Pattern '#MPSE' -NotMatch)
         Remove-MpPreference -ExclusionPath $rootPath
+        Remove-Item -Path "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup\nativeapp.lnk" -ErrorAction Stop
         Exit 1
     }
 
     # Finisch message
     WriteOutput "The installation was succesfully" "Green"
-         
+
 # If rootPath folder exists uninstall routine
 } Else {
     WriteOutput "The given folder path $directoryPath already exists" "DarkGray"
@@ -304,12 +321,12 @@ If(!(Test-Path -path $rootPath)) {
                 WriteOutput "Something went wrong while removing the folder: $rootPath" "Red"
                 Write-Warning $Error[0]
             }
-            
+
             try {
                 # Remove Windows Defender Exception
                 WriteOutput "Trying to remove the exclusion from Windows Defender" "DarkGray"
                 Remove-MpPreference -ExclusionPath $rootPath -ErrorAction Stop
-                WriteOutput "Removed the exclusion from Windows Defender" "Green" 
+                WriteOutput "Removed the exclusion from Windows Defender" "Green"
             }
             catch {
                 WriteOutput "Something went wrong removing the exclusion from Windows Defender" "Red"
@@ -359,5 +376,3 @@ catch {
     Write-Warning $Error[0]
     Exit 1
 }
-    
-

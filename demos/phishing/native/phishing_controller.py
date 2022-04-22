@@ -2,7 +2,7 @@ import logging
 
 import flask
 
-from native.src.controller import orchestration_controller
+from nativeapp.controller import orchestration_controller
 from demos.phishing.native import phishing_demo
 
 phishing_service = phishing_demo.PhishingDemo()
