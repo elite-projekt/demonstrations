@@ -1,10 +1,9 @@
 import configparser
 import datetime
-import email
 import imaplib
 import logging
 import os
-import re
+import random
 import shutil
 import smtplib
 # We need this module and the severity is low. See also:
@@ -15,7 +14,7 @@ import zipfile
 
 import python_on_whales
 
-
+from nativeapp.config import config
 from importlib_resources import files
 
 
@@ -54,89 +53,92 @@ class PhishingDemo:
         box.logout()
 
     # Ports to be used: secure_server_smtp_port or unsecure_server_smtp_port
-    def send_mail(self, sender, password, port, recipient, message,
-                  local_server):
+    def send_mail(self, message):
         # Try to log in to server and send email
-        server = smtplib.SMTP_SSL(local_server, port)
+        server = smtplib.SMTP_SSL(self.default_email_server,
+                                  self.secure_server_smtp_port)
         try:
-            # server.auth_plain()
-            server.login(sender, password)
-            # server.auth_plain()
+            # bare address of user in format: user@domain.com
+            sender = message["to"].addresses[0].addr_spec
+            server.login(sender, self.default_email_account_password)
             logging.info("Sending mail from {} to {}".format(sender,
-                                                             recipient))
-            server.sendmail(sender, recipient, message)
+                                                             message["to"]))
+            server.sendmail(sender, message["to"], message.as_bytes())
         except Exception as e:
             logging.error(e)
         server.close()
 
     # sends mails based on *.txt files specified in the
     # email_files_location-path
-    def send_mail_files(
-            self,
-            use_secured_client=True,
-            local_password=default_email_account_password,
-            local_smtp_port=secure_server_smtp_port,
-            local_server=default_email_server,
-    ):
-        import demos.phishing.native.emails.eng as eng_mails
+    def send_mail_files(self, use_secured_client=True):
+        import yaml
+        from email.headerregistry import Address
+        from email.message import EmailMessage
+        from email import policy
+        from email.parser import BytesParser
 
-        email_filenames_eng = [
-            "doodle.txt", "fake amazon.txt", "fwd corona.txt",
-            "nina_signed.txt", "real amazon.txt", "reminder gift.txt"
+        if (config.EnvironmentConfig.LANGUAGE == "de"):
+            import demos.phishing.native.emails.de as mails
+        else:
+            import demos.phishing.native.emails.en as mails
+
+        email_files = [
+            "doodle.yml", "fake_amazon.txt", "fwd_corona.txt",
+            "real_amazon.txt", "reminder_gift.yml"
+            # "nina_signed.txt" unused due to invalid smime signature
         ]
 
         logging.info(
-            "Checking for mails in: {}".format(email_filenames_eng)
+            "Checking for mails in: {}".format(email_files)
         )
 
-        for email_filename in email_filenames_eng:
-            email_text = files(eng_mails).joinpath(email_filename).read_text()
-            # print('sending mail file: ' + file)
+        for email_filename in email_files:
             logging.info("Sending mail file: {}".format(email_filename))
-            email_mime = email.message_from_string(email_text)
+            filename = files(mails).joinpath(email_filename)
 
+            if (filename.suffix == ".yml"):
+                try:
+                    with open(filename, 'r',  encoding='utf-8') as file:
+                        yml_data = yaml.safe_load(file)
+                except Exception as e:
+                    logging.error(e)
+
+                msg = EmailMessage()
+                msg['Subject'] = yml_data["subject"]
+                msg['From'] = Address(
+                    display_name=yml_data["from"]["display_name"],
+                    addr_spec=yml_data["from"]["email"])
+                msg['To'] = Address(
+                    display_name=yml_data["to"]["display_name"],
+                    addr_spec=yml_data["to"]["email"])
+                msg['Date'] = datetime.datetime.strptime(
+                    "2020-01-01 " + str(yml_data["time"]), '%Y-%d-%m %H:%M')
+                msg.set_content(yml_data["content"])
+
+            elif (filename.suffix == ".txt"):
+                with open(filename, 'rb') as fp:
+                    msg = BytesParser(policy=policy.default).parse(fp)
+
+            # TODO
             # check if secure mode, if no do not process smime mails
-            if not use_secured_client:
-                if "Content-Type: multipart/signed;" in email_text:
-                    continue
+            # if not use_secured_client:
+            #    if "Content-Type: multipart/signed;" in email_text:
+            #        print("skipping because smime", email_filename)
+            #        continue
 
-            # Extract the sender of the email
-            # If the form '"name" <name@domain>' is used the raw address is
-            # extracted
-            local_sender = email_mime["From"]
-            local_left_bracket = local_sender.find("<")
-            local_right_bracket = local_sender.find(">")
-            if -1 < local_left_bracket < local_right_bracket:
-                local_sender = re.split("[<>]", local_sender)[1]
+            # Substract 1-3 days from today so the sent date is more random
 
-            # Extract the "Sent" time from the email source
-            email_date = email_mime["Date"]
-            email_time = datetime.datetime.strptime(email_date,
-                                                    "%a, %d %b %Y %H:%M:%S "
-                                                    "+0100")
+            #  we don't use random for crypto. no sec issue
+            day_offset = random.randint(1, 3)  # nosec B311
+            date_obj = datetime.date.today() - \
+                datetime.timedelta(days=day_offset)
+            # replace msg header with new date and remain previous time
+            date_str = date_obj.strftime(
+                "%a, %d %b %Y {}".format(
+                    msg["Date"].datetime.strftime("%H:%M")))
+            msg.replace_header("date", date_str)
 
-            # Substract one day so the sent date is yesterday
-            date_object = datetime.date.today() - datetime.timedelta(days=1)
-            # If more randomness in the dates is desired:
-            # timedelta(days=random.randint(1, 3))
-
-            # Email date format "Fri, 01 Jan 2021 00:00:00 +0100"
-            email_date = date_object.strftime(
-                "%a, %d %b %Y " + email_time.strftime("%H:%M:%S") + " +0100"
-            )
-
-            # Replace date in header with the newly generated datetime
-            email_mime.replace_header("Date", email_date)
-            email_text = email_mime.as_string()
-
-            self.send_mail(
-                local_sender,
-                local_password,
-                local_smtp_port,
-                email_mime["To"],
-                email_text,
-                local_server,
-            )
+            self.send_mail(msg)
 
     def change_client_profile(self, use_secured_client=True,
                               change_ports=False):
