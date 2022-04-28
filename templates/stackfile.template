@@ -5,5 +5,5 @@ services:
     #image:  ${REGISTRY_URL}/${GROUP_NAME}/demonstrations/${DEMO_ID}:master
     # for local build (dev/debug/test purposes)
     build:
-      context: ../../../../${DEMO_DIR}
+      context: ../../../
     container_name: ${DEMO_ID}-${DEMO_MODE}
