@@ -1,7 +1,7 @@
 import argparse
 from datetime import datetime
 import logging
-import os
+import pathlib
 
 import flask
 import flask_cors
@@ -22,19 +22,17 @@ app.register_blueprint(password_controller.orchestration)
 
 
 def main():
-    # set working directory
-    config.EnvironmentConfig.WORKINGDIR = os.getenv(
-        "ProgramFiles(x86)") + r"\hda\nativeapp"
-
     # argument parser
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(
+            formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument(
         "-p",
         "--path",
         help='Basepath of project relative from here files will be accessed. '
-             'Default is "C:\\Program Files (x86)\\hda\\nativeapp". If passed '
-             'path - structure is fixed on current repo relative placement of '
-             'files!!\n\nno trailing slashes',
+             'If passed path - '
+             'structure is fixed on current repo relative placement of '
+             'files!!',
+        default="C:\\Program Files (x86)\\hda\\nativeapp"
     )
     parser.add_argument("-d", "--dev", help="Starts flask in dev-mode")
     args = parser.parse_args()
@@ -44,13 +42,14 @@ def main():
         app.config.from_object(config.DevelopmentConfig)
     else:
         app.config.from_object(config.ProductionConfig)
-    if args.path is not None:
-        config.EnvironmentConfig.WORKINGDIR = args.path
-        config.EnvironmentConfig.DOCKERSTACKDIR = args.path + '\\..\\stacks\\'
-        config.EnvironmentConfig.PROFILEDIR = args.path + '\\profiles\\'
-        config.EnvironmentConfig.ENVDIR = args.path
+    arg_path = pathlib.Path(args.path)
+    config.EnvironmentConfig.WORKINGDIR = arg_path
+    config.EnvironmentConfig.DOCKERSTACKDIR = arg_path / "../stacks"
+    config.EnvironmentConfig.PROFILEDIR = arg_path / "profiles"
+    config.EnvironmentConfig.ENVDIR = arg_path
 
-    logging_path = config.EnvironmentConfig.WORKINGDIR + "\\nativeapp.log"
+    logging_path = pathlib.Path(config.EnvironmentConfig.WORKINGDIR) / \
+        "nativeapp.log"
     # initiate logging
     logging.basicConfig(
         filename=logging_path,
@@ -62,11 +61,11 @@ def main():
     logging.info("Starting service: native app")
 
     # display application information
-    if not (hasattr(config.ApplicationInformation, "VERSION")
-            and hasattr(config.ApplicationInformation, "BUILDDATE")):
-        setattr(config.ApplicationInformation, "VERSION", "LOCAL DEV")
-        setattr(config.ApplicationInformation, "BUILDDATE",
-                datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+    if config.ApplicationInformation.VERSION is None:
+        config.ApplicationInformation.VERSION = "LOCAL DEV"
+    if config.ApplicationInformation.BUILDDATE is None:
+        config.ApplicationInformation.BUILDDATE = \
+                datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     logging.info(
         "\n\nVERSION: {}\nBUILDDATE: {}".format(
