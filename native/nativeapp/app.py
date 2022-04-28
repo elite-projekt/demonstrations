@@ -5,7 +5,7 @@ import pathlib
 
 import flask
 import flask_cors
-from native.src.config import config
+from nativeapp.config import config
 
 # import demo controllers
 from demos.download.native import download_controller
