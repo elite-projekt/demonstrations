@@ -69,6 +69,7 @@ export DEMO_SRC_DIR="${DEMO_DIR}/src/"
 export DEMO_NATIVE_DIR="${DEMO_DIR}/native/"
 export DEMO_NATIVE_STACKS_DIR="${DEMO_NATIVE_DIR}/stacks/"
 export TEMP_DIR=/tmp/new_demo_init/
+export NATIVEAPP_PATH="native/nativeapp/app.py"
 
 # Check if demo exists
 if test -d "$DEMO_DIR"; then
@@ -129,7 +130,6 @@ dos2unix "${DEMO_NATIVE_STACKS_DIR}unsecure/docker-compose.yml"
 
 # Orchestration Controller Blueprint registration
 #####################################
-NATIVEAPP_PATH="native/src/app.py"
 rollback_blueprint_steps()
 {
     mv ${TEMP_DIR}"$(basename ${NATIVEAPP_PATH})".orig ${NATIVEAPP_PATH}
@@ -152,7 +152,7 @@ rollback_installer_steps()
     mv ${TEMP_DIR}"$(basename ${INSTALLER_PATH})".orig ${INSTALLER_PATH}
 }
 echo "adding demo to installer"
-INSTALLER_SNIPPET="            docker pull \$Env:REGISTRY_URL/\$Env:GROUP_NAME/demonstrations/\$Env:${DEMO_ID^^}_REPO"
+INSTALLER_SNIPPET="            run-docker \"pull \$Env:REGISTRY_URL/\$Env:GROUP_NAME/demonstrations/\$Env:${DEMO_ID^^}_REPO\""
 # backup file
 cp ${INSTALLER_PATH} ${TEMP_DIR}/"$(basename ${INSTALLER_PATH})".orig
 add_rollback rollback_installer_steps
