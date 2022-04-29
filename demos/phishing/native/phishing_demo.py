@@ -11,6 +11,8 @@ import smtplib
 import subprocess  # nosec
 import time
 import zipfile
+import pathlib
+import tempfile
 
 import python_on_whales
 
@@ -31,8 +33,11 @@ class PhishingDemo:
     unsecure_server_smtp_port = 26
     unsecure_server_imap_port = 144
 
-    email_client_config_location = os.getenv("APPDATA") + \
-        r"\Thunderbird\Profiles\{}\prefs.js".format(default_email_profile)
+    profile_dir = pathlib.Path(os.getenv("APPDATA")) / \
+        "Thunderbird/Profiles"
+
+    email_client_config_location = profile_dir / \
+        f"{default_email_profile}/prefs.js"
 
     # deletes all mail in a mail box
     def delete_mailbox(
@@ -355,33 +360,24 @@ class PhishingDemo:
         logging.info("Thunderbird init")
         # check if profile already present
         try:
-            if os.path.isdir(
-                    os.getenv("APPDATA") + r"\Thunderbird\Profiles\{}".format(
-                        self.default_email_profile)
-            ):
+            if (self.profile_dir / self.default_email_profile).is_dir():
                 logging.info("Nothing to do, exiting init")
                 return
 
             # extract profile to location
             import demos.phishing.native.profiles as profiles
             filename = files(profiles).joinpath("profile.zip")
-            with zipfile.ZipFile(filename, mode="r") as zipObj:
-                zipObj.extractall(os.getenv("TEMP"))
+            with tempfile.mkdtemp() as temp_dir:
+                with zipfile.ZipFile(filename, mode="r") as zipObj:
+                    zipObj.extractall(temp_dir)
 
-            profile_location = os.getenv("APPDATA") + \
-                f"{os.path.sep}Thunderbird" \
-                f"{os.path.sep}Profiles" \
-                f"{os.path.sep}{self.default_email_profile}"
+                extracted_profile = pathlib.Path(temp_dir) / \
+                    "Profiles" / \
+                    self.default_email_profile
+                shutil.copytree(extracted_profile,
+                                self.profile_dir / self.default_email_profile)
 
-            extracted_profile = os.path.join(
-                os.getenv("TEMP"),
-                f"Profiles{os.path.sep}{self.default_email_profile}")
-            shutil.copytree(extracted_profile, profile_location)
-
-            profile_ini_location = os.getenv("APPDATA") + f"{os.path.sep}" \
-                                                          f"Thunderbird" \
-                                                          f"{os.path.sep}" \
-                                                          f"profiles.ini"
+            profile_ini_location = self.profile_dir.parent() / "profiles.ini"
 
             config_parser = configparser.ConfigParser()
 
