@@ -45,8 +45,7 @@ do
     esac
 done
 # Read user input
-if [ $OPTIND -eq 1 ]
-then
+if [ -z "${DEMO_ID}" ]; then
     read -rp 'Enter the name of the demo you would like to create: ' DEMO_ID
     if [ -z "${DEMO_ID}" ]
     then 
@@ -63,28 +62,26 @@ WORKING_DIR=$(dirname "$(readlink -f "$0")") # path where this init script is
 pushd "${WORKING_DIR}"
 
 # Set variables
+TEMP_DIR=$(mktemp -d)
+export TEMP_DIR
 export DEMO_ID
 export DEMO_DIR="demos/${DEMO_ID}/"
 export DEMO_SRC_DIR="${DEMO_DIR}/src/"
 export DEMO_NATIVE_DIR="${DEMO_DIR}/native/"
 export DEMO_NATIVE_STACKS_DIR="${DEMO_NATIVE_DIR}/stacks/"
-export TEMP_DIR=/tmp/new_demo_init/
 export NATIVEAPP_PATH="native/nativeapp/app.py"
+
+cleanup()
+{
+  rm -rf -- "${TEMP_DIR}"
+}
+
 
 # Check if demo exists
 if test -d "$DEMO_DIR"; then
     echo "ERROR: A demo with the name '${DEMO_ID}' already exists!"
     exit 125
 fi
-
-# create temp dir for storing backup files in case of errors
-mkdir "${TEMP_DIR}"
-cleanup()
-{
-    popd
-    rm -rf "${TEMP_DIR}"
-}
-
 
 # Create files and directories based on the template files in templates and
 # convert the new directories to python packages
@@ -99,14 +96,14 @@ mkdir -p "${DEMO_SRC_DIR}"
 mkdir -p "${DEMO_NATIVE_DIR}"
 
 
-touch "${DEMO_DIR}Dockerfile"
-dos2unix "${DEMO_DIR}Dockerfile"
+touch "${DEMO_DIR}/Dockerfile"
+dos2unix "${DEMO_DIR}/Dockerfile"
 
-touch "${DEMO_DIR}__init__.py"
-dos2unix "${DEMO_DIR}__init__.py"
+touch "${DEMO_DIR}/__init__.py"
+dos2unix "${DEMO_DIR}/__init__.py"
 
-touch "${DEMO_NATIVE_DIR}__init__.py"
-dos2unix "${DEMO_NATIVE_DIR}__init__.py"
+touch "${DEMO_NATIVE_DIR}/__init__.py"
+dos2unix "${DEMO_NATIVE_DIR}/__init__.py"
 
 
 echo "creating endpoints for native app..."
@@ -116,15 +113,15 @@ dos2unix "${DEMO_NATIVE_DIR}/${DEMO_ID}_controller.py"
 
 echo "preparing stack directories..."
 export DEMO_MODE=secure
-mkdir -p "${DEMO_NATIVE_STACKS_DIR}secure"
+mkdir -p "${DEMO_NATIVE_STACKS_DIR}/secure"
 # shellcheck disable=SC2016
-envsubst '${DEMO_ID},${DEMO_DIR},${DEMO_MODE}' < templates/stackfile.template > "${DEMO_NATIVE_STACKS_DIR}secure/docker-compose.yml"
-dos2unix "${DEMO_NATIVE_STACKS_DIR}secure/docker-compose.yml"
+envsubst '${DEMO_ID},${DEMO_DIR},${DEMO_MODE}' < templates/stackfile.template > "${DEMO_NATIVE_STACKS_DIR}/secure/docker-compose.yml"
+dos2unix "${DEMO_NATIVE_STACKS_DIR}/secure/docker-compose.yml"
 export DEMO_MODE=unsecure
-mkdir -p "${DEMO_NATIVE_STACKS_DIR}unsecure"
+mkdir -p "${DEMO_NATIVE_STACKS_DIR}/unsecure"
 # shellcheck disable=SC2016
-envsubst '${DEMO_ID},${DEMO_DIR},${DEMO_MODE}' < templates/stackfile.template > "${DEMO_NATIVE_STACKS_DIR}unsecure/docker-compose.yml"
-dos2unix "${DEMO_NATIVE_STACKS_DIR}unsecure/docker-compose.yml"
+envsubst '${DEMO_ID},${DEMO_DIR},${DEMO_MODE}' < templates/stackfile.template > "${DEMO_NATIVE_STACKS_DIR}/unsecure/docker-compose.yml"
+dos2unix "${DEMO_NATIVE_STACKS_DIR}/unsecure/docker-compose.yml"
 
 
 
@@ -132,11 +129,11 @@ dos2unix "${DEMO_NATIVE_STACKS_DIR}unsecure/docker-compose.yml"
 #####################################
 rollback_blueprint_steps()
 {
-    mv ${TEMP_DIR}"$(basename ${NATIVEAPP_PATH})".orig ${NATIVEAPP_PATH}
+    mv "${TEMP_DIR}"/"$(basename ${NATIVEAPP_PATH})".orig ${NATIVEAPP_PATH}
 }
 echo "adding demo blueprint controller to NativeApp"
 # backup file
-cp ${NATIVEAPP_PATH} ${TEMP_DIR}/"$(basename ${NATIVEAPP_PATH})".orig
+cp ${NATIVEAPP_PATH} "${TEMP_DIR}"/"$(basename ${NATIVEAPP_PATH})".orig
 add_rollback rollback_blueprint_steps
 BP_IMPORT_SNIPPET="from demos.${DEMO_ID}.native import ${DEMO_ID}_controller"
 BP_REGISTER_SNIPPET="app.register_blueprint(${DEMO_ID}_controller.orchestration)"
@@ -149,12 +146,12 @@ sed -i '/register demo controllers/r'<(echo "$BP_REGISTER_SNIPPET") ${NATIVEAPP_
 INSTALLER_PATH="native/installer/nativeapp_install_helper.ps1"
 rollback_installer_steps()
 {
-    mv ${TEMP_DIR}"$(basename ${INSTALLER_PATH})".orig ${INSTALLER_PATH}
+    mv "${TEMP_DIR}"/"$(basename ${INSTALLER_PATH})".orig ${INSTALLER_PATH}
 }
 echo "adding demo to installer"
 INSTALLER_SNIPPET="            run-docker \"pull \$Env:REGISTRY_URL/\$Env:GROUP_NAME/demonstrations/\$Env:${DEMO_ID^^}_REPO\""
 # backup file
-cp ${INSTALLER_PATH} ${TEMP_DIR}/"$(basename ${INSTALLER_PATH})".orig
+cp ${INSTALLER_PATH} "${TEMP_DIR}"/"$(basename ${INSTALLER_PATH})".orig
 add_rollback rollback_installer_steps
 sed -i '/pull the latest docker images/r'<(echo "$INSTALLER_SNIPPET") ${INSTALLER_PATH}
 
@@ -162,12 +159,12 @@ sed -i '/pull the latest docker images/r'<(echo "$INSTALLER_SNIPPET") ${INSTALLE
 # GitLab CI
 rollback_ci_settings()
 {
-    mv ${TEMP_DIR}/.gitlab-ci.yml.orig .gitlab-ci.yml
+    mv "${TEMP_DIR}"/.gitlab-ci.yml.orig .gitlab-ci.yml
 }
 echo "adding demo to gitlab-ci.yml"
 source  ./templates/ci-script.template
 # backup file
-cp .gitlab-ci.yml ${TEMP_DIR}/.gitlab-ci.yml.orig
+cp .gitlab-ci.yml "${TEMP_DIR}"/.gitlab-ci.yml.orig
 add_rollback rollback_ci_settings
 sed -i '/lint:demo:begin/r'<(echo "$LINTING_SNIPPET") .gitlab-ci.yml
 sed -i '/build:demo:begin/r'<(echo "$BUILD_SNIPPET") .gitlab-ci.yml
@@ -180,8 +177,7 @@ dos2unix "./.gitlab-ci.yml"
 if [ "${DEMO_ID}" == "test" ]
 then
 # Create python app (Ref: https://docs.docker.com/compose/gettingstarted/)
-touch ./demos/test/src/app.py
-cat << EOT >> ./demos/test/src/app.py
+cat << EOT > ./demos/test/src/app.py
 import time
 
 import redis
@@ -210,14 +206,13 @@ def hello():
 EOT
 
 # create requirements.txt
-touch ./demos/test/requirements.txt
-cat << EOT >> ./demos/test/requirements.txt
+cat << EOT > ./demos/test/requirements.txt
 flask
 redis
 EOT
 
 # fill Dockerfile
-cat << EOT >> ./demos/test/Dockerfile
+cat << EOT > ./demos/test/Dockerfile
 # syntax=docker/dockerfile:1
 FROM python:3.7-alpine
 WORKDIR /code
@@ -238,10 +233,10 @@ cat << EOT >> ./demos/test/native/stacks/unsecure/docker-compose.yml
     image: "redis:alpine"
 EOT
 
-cd ./demos/test/native/stacks/unsecure/
+pushd ./demos/test/native/stacks/unsecure/
 docker-compose rm -f -s -v
 docker-compose up -d --build --force-recreate
-cd -
+popd
 sleep 5
 content=$(curl -s --connect-timeout 5 --max-time 5 "http://localhost:8000/")
 if ! echo "$content" | grep -"Hello World! I have been seen 1 times."
