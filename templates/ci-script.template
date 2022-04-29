@@ -11,7 +11,6 @@ BUILD_SNIPPET="build:${DEMO_ID}-image:
   needs:
     - lint:${DEMO_ID}-dockerfile
 "
-BUILD_PYTHON_SNIPPET="    - echo \"> docker pull \$REGISTRY_URL/\$GROUP_NAME/demonstrations/${DEMO_ID}:master\par\" >> infos.rtf"
 SCAN_SNIPPET="scan:${DEMO_ID}-image:
   <<: *scan-image
   variables:

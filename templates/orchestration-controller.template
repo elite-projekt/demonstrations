@@ -1,6 +1,7 @@
 import flask
+import logging
 
-from native.src.controller import orchestration_controller
+from nativeapp.controller import orchestration_controller
 
 orchestration = flask.Blueprint("${DEMO_ID}", __name__,
                                 url_prefix="/orchestration/")
@@ -11,15 +12,17 @@ orchestration = flask.Blueprint("${DEMO_ID}", __name__,
 def start_demo_${DEMO_ID}():
     secure_mode = flask.request.json["secureMode"]
     try:
+        logging.info("Starting ${DEMO_ID} demo stack")
         if secure_mode:
             orchestration_controller.orchestration_service \
                 .docker_compose_start_file(
-                    "${DEMO_ID}/secure/docker-compose.yml")
+                    "${DEMO_ID}/native/stacks/secure/docker-compose.yml")
         else:
             orchestration_controller.orchestration_service \
                 .docker_compose_start_file(
-                    "${DEMO_ID}/unsecure/docker-compose.yml")
-    except Exception:
+                    "${DEMO_ID}/native/stacks/unsecure/docker-compose.yml")
+    except Exception as e:
+        logging.error(e)
         return flask.helpers.make_response(
             flask.json.jsonify(orchestration_controller.no_docker_error), 500)
     return flask.helpers.make_response(
@@ -29,9 +32,9 @@ def start_demo_${DEMO_ID}():
 @orchestration.route("/stop/demo/${DEMO_ID}", methods=["POST", "GET"])
 def stop_demo_${DEMO_ID}():
     orchestration_controller.orchestration_service.docker_compose_stop_file(
-        "${DEMO_ID}/secure/docker-compose.yml")
+        "${DEMO_ID}/native/stacks/secure/docker-compose.yml")
     orchestration_controller.orchestration_service.docker_compose_stop_file(
-        "${DEMO_ID}/unsecure/docker-compose.yml")
+        "${DEMO_ID}/native/stacks/unsecure/docker-compose.yml")
     return flask.helpers.make_response(
         flask.json.jsonify(orchestration_controller.stop_success), 200)
 
@@ -40,7 +43,7 @@ def stop_demo_${DEMO_ID}():
 def status_demo_${DEMO_ID}():
     result = orchestration_controller.orchestration_service \
         .get_status_docker_compose_file(
-            "${DEMO_ID}/secure/docker-compose.yml")
+            "${DEMO_ID}/native/stacks/secure/docker-compose.yml")
 
     if len(result) > 0:
         return flask.helpers.make_response(flask.json.jsonify(result), 200)
@@ -53,7 +56,7 @@ def status_demo_${DEMO_ID}_sum():
     result \
         = orchestration_controller.orchestration_service \
         .get_sum_status_docker_compose_file(
-            "${DEMO_ID}/secure/docker-compose.yml")
+            "${DEMO_ID}/native/stacks/unsecure/docker-compose.yml")
 
     if len(result) > 0:
         return flask.helpers.make_response(flask.json.jsonify(result), 200)
