@@ -360,8 +360,9 @@ class PhishingDemo:
         logging.info("Thunderbird init")
         # check if profile already present
         try:
-            shutil.rmtree(self.profile_dir / self.default_email_profile,
-                          ignore_errors=True)
+            if (self.profile_dir / self.default_email_profile).is_dir():
+                logging.info("Nothing to do, exiting init")
+                return
             # extract profile to location
             import demos.phishing.native.profiles as profiles
             filename = files(profiles).joinpath("profile.zip")
