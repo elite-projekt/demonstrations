@@ -15,7 +15,7 @@ if(Test-Path .env) {
     $isReleaseDirectory = $true
 }
 # This should also work with docker desktop
-$dockerCMD = "wsl docker"
+$dockerCMD = "wsl --user root docker"
 
 function run-docker {
     param(

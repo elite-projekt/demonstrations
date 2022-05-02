@@ -3,6 +3,7 @@ import importlib
 import logging
 import pathlib
 import pkgutil
+import subprocess  # nosec
 from datetime import datetime
 
 import flask
@@ -94,6 +95,9 @@ def main():
             logging_path
         )
     )
+    # ensure dockerd is running. it won't start if it is already running
+    subprocess.Popen(["wsl", "--user", "root", "dockerd"],  # nosec
+                     stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
 
     # start flask
     app.run(host=app.config["HOST"], debug=app.config["DEBUG"],

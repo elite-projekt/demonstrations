@@ -3,7 +3,7 @@ import pathlib
 import tarfile
 import sys
 
-from subprocess import Popen, PIPE
+from subprocess import Popen, PIPE  # nosec
 from setuptools import setup, find_packages
 
 from typing import List
@@ -17,7 +17,7 @@ WSL_PATCH = """
      def docker_cmd(self) -> Command:
 
 -        result = Command([self.get_docker_path()])
-+        result = Command(["wsl", "docker"])
++        result = Command(["wsl", "--user", "root", "docker"])
 
          if self.config is not None:
              result += ["--config", self.config]
@@ -27,7 +27,7 @@ PYTHON_EXE = sys.executable
 
 
 def call_cmd(command_list: List[str], workdir: pathlib.Path):
-    with Popen(
+    with Popen(  # nosec
             command_list, stdout=PIPE, cwd=workdir) as process:
         process.communicate()
 
