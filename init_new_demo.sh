@@ -125,22 +125,6 @@ dos2unix "${DEMO_NATIVE_STACKS_DIR}/unsecure/docker-compose.yml"
 
 
 
-# Orchestration Controller Blueprint registration
-#####################################
-rollback_blueprint_steps()
-{
-    mv "${TEMP_DIR}"/"$(basename ${NATIVEAPP_PATH})".orig ${NATIVEAPP_PATH}
-}
-echo "adding demo blueprint controller to NativeApp"
-# backup file
-cp ${NATIVEAPP_PATH} "${TEMP_DIR}"/"$(basename ${NATIVEAPP_PATH})".orig
-add_rollback rollback_blueprint_steps
-BP_IMPORT_SNIPPET="from demos.${DEMO_ID}.native import ${DEMO_ID}_controller"
-BP_REGISTER_SNIPPET="app.register_blueprint(${DEMO_ID}_controller.orchestration)"
-sed -i '/import demo controllers/r'<(echo "$BP_IMPORT_SNIPPET") ${NATIVEAPP_PATH}
-sed -i '/register demo controllers/r'<(echo "$BP_REGISTER_SNIPPET") ${NATIVEAPP_PATH}
-
-
 # NativeApp installer
 #####################################
 INSTALLER_PATH="native/installer/nativeapp_install_helper.ps1"

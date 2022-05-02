@@ -1,24 +1,33 @@
 import argparse
-from datetime import datetime
+import importlib
 import logging
 import pathlib
+import pkgutil
+from datetime import datetime
 
 import flask
 import flask_cors
 from nativeapp.config import config
 
-# import demo controllers
-from demos.download.native import download_controller
-from demos.password.native import password_controller
-from demos.phishing.native import phishing_controller
+import demos
 
 app = flask.Flask(__name__)
 flask_cors.CORS(app)
 
-# register demo controllers
-app.register_blueprint(download_controller.orchestration)
-app.register_blueprint(phishing_controller.orchestration)
-app.register_blueprint(password_controller.orchestration)
+for _, name, ispkg in pkgutil.iter_modules(demos.__path__):
+    if ispkg:
+        controller_path = 'demos.' + name + '.native.' + name + '_controller'
+        try:
+            # import demo controllers
+            controller = importlib.import_module(controller_path)
+            # register blueprints from controllers
+            app.register_blueprint(controller.orchestration)
+        except ModuleNotFoundError:
+            print("ERROR while importing controller for: {} demo".format(name))
+            print("Please check the existence of: {}".format(controller_path))
+            raise
+        except Exception as e:
+            raise e
 
 
 def main():
@@ -44,7 +53,6 @@ def main():
         app.config.from_object(config.ProductionConfig)
     arg_path = pathlib.Path(args.path)
     config.EnvironmentConfig.WORKINGDIR = arg_path
-    config.EnvironmentConfig.DOCKERSTACKDIR = arg_path / "../stacks"
     config.EnvironmentConfig.PROFILEDIR = arg_path / "profiles"
     config.EnvironmentConfig.ENVDIR = arg_path
 
