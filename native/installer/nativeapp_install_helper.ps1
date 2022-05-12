@@ -222,6 +222,7 @@ If(!(Test-Path -path $rootPath)) {
         python -m venv $directoryPath/.venv
         . $directoryPath/.venv/Scripts/Activate.ps1
         pip install nativeapp-0.0.0-py3-none-any.whl
+        pip install git+https://gitlab.com/kevin.koester/python_on_whales
         WriteOutput "Installed nativeapp into venv" "Green"
     } catch {
         WriteOutput "Something went wrong while installing native app from wheel" "Red"
@@ -272,6 +273,8 @@ If(!(Test-Path -path $rootPath)) {
         $Shortcut = $WshShell.CreateShortcut($shortcutPath)
         # TODO: does this work?
         $Shortcut.TargetPath = "$directoryPath\.venv\Scripts\nativeapp.exe"
+        $Shortcut.WorkingDirectory = "C:\Program Files (x86)\hda\nativeapp"
+        $Shortcut.Arguments = "-p ."
         $Shortcut.WindowStyle = 7
         $Shortcut.Save()
         WriteOutput "Created an autostart entry" "Green"

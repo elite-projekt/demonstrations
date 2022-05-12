@@ -5,4 +5,5 @@ set scriptFileName=%~n0
 set scriptFolderPath=%~dp0
 set powershellScriptFileName=nativeapp_install_helper.ps1
 
+start /b wsl --user root dockerd
 powershell -Command "Start-Process powershell \"-ExecutionPolicy Bypass -NoProfile -NoExit -Command `\"cd \`\"%scriptFolderPath%`\"; & \`\".\%powershellScriptFileName%\`\"`\"\" -Verb RunAs"
