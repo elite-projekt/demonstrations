@@ -13,6 +13,7 @@ import time
 import zipfile
 import pathlib
 import tempfile
+import re
 
 import python_on_whales
 
@@ -360,9 +361,7 @@ class PhishingDemo:
         logging.info("Thunderbird init")
         # check if profile already present
         try:
-            if (self.profile_dir / self.default_email_profile).is_dir():
-                logging.info("Nothing to do, exiting init")
-                return
+            shutil.rmtree(self.profile_dir / self.default_email_profile)
             # extract profile to location
             import demos.phishing.native.profiles as profiles
             filename = files(profiles).joinpath("profile.zip")
@@ -385,16 +384,23 @@ class PhishingDemo:
             config_parser.optionxform = str
 
             config_parser.read(profile_ini_location)
+            profile_regex = re.compile(r"^Profile([\d]+)$")
 
             max_profile_number = -1
+            target_profile = None
             for key in config_parser.sections():
-                if key.startswith("Profile"):
-                    current_profile_number \
-                        = int("".join(filter(str.isdigit, key)))
-                    if max_profile_number < current_profile_number:
-                        max_profile_number = current_profile_number
+                m = profile_regex.match(key)
+                if m is not None:
+                    num = int(m.groups()[0])
+                    max_profile_number = max(max_profile_number, num)
+                    if "Name" in config_parser[key]:
+                        if config_parser[key]["Name"] == "MPSE":
+                            target_profile = key
+                            break
+            if target_profile is None:
+                target_profile = f"Profile{max_profile_number + 1}"
 
-            config_parser[f"Profile{max_profile_number + 1}"] = {
+            config_parser[target_profile] = {
                 'Name': 'MPSE',
                 'IsRelative': 1,
                 'Path': 'Profiles/' + self.default_email_profile
