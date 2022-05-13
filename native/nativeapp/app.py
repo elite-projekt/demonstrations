@@ -97,7 +97,8 @@ def main():
     )
     # ensure dockerd is running. it won't start if it is already running
     subprocess.Popen(["wsl", "--user", "root", "dockerd"],  # nosec
-                     stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+                     stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+                     cwd=pathlib.Path().home())
 
     # start flask
     app.run(host=app.config["HOST"], debug=app.config["DEBUG"],
