@@ -14,7 +14,8 @@ $isReleaseDirectory = $false
 if(Test-Path .env) {
     $isReleaseDirectory = $true
 }
-$dockerCMD = "docker"
+# This should also work with docker desktop
+$dockerCMD = "wsl --user root docker"
 
 function run-docker {
     param(
@@ -221,6 +222,7 @@ If(!(Test-Path -path $rootPath)) {
         python -m venv $directoryPath/.venv
         . $directoryPath/.venv/Scripts/Activate.ps1
         pip install nativeapp-0.0.0-py3-none-any.whl
+        pip install git+https://gitlab.com/kevin.koester/python_on_whales
         WriteOutput "Installed nativeapp into venv" "Green"
     } catch {
         WriteOutput "Something went wrong while installing native app from wheel" "Red"
@@ -244,7 +246,7 @@ If(!(Test-Path -path $rootPath)) {
     # Pull docker images
     try {
         WriteOutput "Login with your username and password for the $Env:REGISTRY_URL repository" "DarkGray"
-        run-docker "login $Env:REGISTRY_URL"
+        run-docker "login --username Gitlab_Deploy_Token  --password T7_VSx_mHbKwG4Hx9Ntm $Env:REGISTRY_URL"
         if($? -eq $false) {
             throw
         } else {
@@ -271,6 +273,8 @@ If(!(Test-Path -path $rootPath)) {
         $Shortcut = $WshShell.CreateShortcut($shortcutPath)
         # TODO: does this work?
         $Shortcut.TargetPath = "$directoryPath\.venv\Scripts\nativeapp.exe"
+        $Shortcut.WorkingDirectory = "C:\Program Files (x86)\hda\nativeapp"
+        $Shortcut.Arguments = "-p ."
         $Shortcut.WindowStyle = 7
         $Shortcut.Save()
         WriteOutput "Created an autostart entry" "Green"

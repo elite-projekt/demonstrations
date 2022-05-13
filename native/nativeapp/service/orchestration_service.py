@@ -20,9 +20,10 @@ class OrchestrationService:
             file_path = self._get_demo_path() / filename
             env_path = pathlib.Path(config.EnvironmentConfig.ENVDIR) \
                 / ".env"
+            # we need posix paths for "wsl docker"
             docker = python_on_whales.DockerClient(
-                compose_files=[file_path],
-                compose_env_file=env_path,
+                compose_files=[file_path.as_posix()],
+                compose_env_file=env_path.as_posix(),
                 compose_project_name=demo_name)
             docker.compose.up(detach=True)
         except Exception as e:
@@ -36,7 +37,7 @@ class OrchestrationService:
             demo_name = filename.split("/")[0]
             file_path = self._get_demo_path() / filename
             docker = python_on_whales.DockerClient(
-                compose_files=[file_path],
+                compose_files=[file_path.as_posix()],
                 compose_project_name=demo_name)
             docker.compose.down()
         except Exception as e:
