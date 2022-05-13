@@ -1,5 +1,6 @@
 stages:
   - lint
+  - test
   - build
   - scan
   - push
@@ -69,6 +70,14 @@ sast:python-code:
     - bandit -r .
   allow_failure: true
   needs: []
+
+test:python:
+  stage: test
+  image: python:3.7
+  script:
+    - cd native
+    - pip install -r nativeapp/requirements.txt
+    - python -m unittest
 
 # Build template
 .build:image: &build-image
@@ -161,6 +170,7 @@ build:release-zip:
       - nativeapp-$CI_COMMIT_TAG/
   needs:
     - build:nativeapp-package
+
 
 # Scan template
 .scan:image: &scan-image
