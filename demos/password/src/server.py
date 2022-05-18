@@ -304,7 +304,8 @@ def initial_2fa_kontodienste_sm():
 #             if LANGUAGE == "de":
 #                 return flask.render_template(
 #                     "secure/sm6_registrierung_webdienste.html",
-#                     flash="Sie können nicht zweimal dasselbe Passwort nutzen!",
+#                     flash="Sie \
+#                     können nicht zweimal dasselbe Passwort nutzen!",
 #                     classes="fade show display",
 #                 )
 #             else:
