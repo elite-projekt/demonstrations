@@ -1,38 +1,20 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
-    
-        <link rel="stylesheet" href="{{url_for('static', filename='signup-form-08/fonts/icomoon/style.css')}}">
-
-        <link rel="stylesheet" href="{{url_for('static', filename='signup-form-08/css/owl.carousel.min.css')}}">
-    
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="{{url_for('static', filename='signup-form-08/css/bootstrap.min.css')}}">
-        
-        <!-- Style -->
-        <link rel="stylesheet" href="{{url_for('static', filename='signup-form-08/css/style.css')}}">
-    <title>Titel</title>
-</head>
-<body>
-    <div class="content">
-        <div class=container>
-<img style="float: right;" src="{{url_for('static', filename='logo.PNG')}}" class="img-fluid" />
-<p>Sie sind nun vollständig bei den MPSE-Diensten registriert! Jetzt haben Sie alle notwendigen Konten erstellt
-    und Sie können anfangen zu arbeiten. Sie werden nun zu den MPSE Kontodiensten weitergeleitet, um sich zum ersten Mal bei Ihrem neuen Konto anzumelden.
-    Wenn Sie bereit sind, klicken Sie auf "Weiter".
-</p>
-   <p> Wenn Sie weitere Informationen zu diesem Thema benötigen, sehen Sie sich die entsprechenden
-<a title="Lernmaterial" id="2FA-info-de" style="text-decoration:underline; color: #888">
-    Lernmaterial
-</a> an.</p>
-<a href="anmeldung"><button class="btn btn-block btn-primary">Weiter</button></a>
-        </div>
+{% extends "base.html" %}
+{% block content %}
+<div class="content">
+    <div class=container>
+        <img style="float: right;" src="{{url_for('static', filename='logo.PNG')}}" class="img-fluid" />
+        <p>Sie sind nun vollständig bei ELITE registriert! Sie werden nun zu den ELITE Account-Services weitergeleitet, um sich zum
+            ersten Mal bei Ihrem neuen Konto anzumelden.
+            Wenn Sie bereit sind, klicken Sie auf "Weiter".
+        </p>
+        <p> Wenn Sie weitere Informationen zu diesem Thema benötigen, sehen Sie sich die entsprechenden
+            <a title="Lernmaterial" id="2FA-info-de" style="text-decoration:underline; color: #888">
+                Lernmaterial
+            </a> an.
+        </p>
+        <a href="login"><button class="btn btn-block btn-primary">Weiter</button></a>
     </div>
-    <script src="{{url_for('static', filename='signup-form-08/js/jquery-3.3.1.min.js')}}"></script>
-    <script src="{{url_for('static', filename='link-router/router.js')}}"></script>
-</body>
-</html>
+</div>
+<script src="{{url_for('static', filename='signup-form-08/js/jquery-3.3.1.min.js')}}"></script>
+<script src="{{url_for('static', filename='link-router/router.js')}}"></script>
+{% endblock %}

@@ -1,35 +1,18 @@
-<html>
-    <head>
-       <!-- Required meta tags -->
-       <meta charset="utf-8">
-       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-       <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
-   
-       <link rel="stylesheet" href="{{url_for('static', filename='signup-form/fonts/icomoon/style.css')}}">
-
-       <link rel="stylesheet" href="{{url_for('static', filename='signup-form/css/owl.carousel.min.css')}}">
-   
-       <!-- Bootstrap CSS -->
-       <link rel="stylesheet" href="{{url_for('static', filename='signup-form/css/bootstrap.min.css')}}">
-       
-       <!-- Style -->
-       <link rel="stylesheet" href="{{url_for('static', filename='signup-form/css/style.css')}}">
-    </head>
-   <body>
-
-
-   <div class="content">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6">
-          <img src="{{url_for('static', filename='signup-form/images/undraw_remotely_2j6y.svg')}}" alt="Image" class="img-fluid">
-        </div>
-        <div class="col-md-6 contents">
-          <div class="row justify-content-center">
-            <div class="col-md-8">
-              <div class="mb-4">
-              <h3>Anmeldung Kontodienste</h3>
-              <p class="mb-4">Dies ist die Anmeldungsseite für unsere Kontodienste.</p>
+{% extends "base.html" %}
+{% block content %}
+<div class="content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <img src="{{url_for('static', filename='signup-form/images/undraw_remotely_2j6y.svg')}}" alt="Image"
+          class="img-fluid">
+      </div>
+      <div class="col-md-6 contents">
+        <div class="row justify-content-center">
+          <div class="col-md-8">
+            <div class="mb-4">
+              <h3>Anmeldung<br>ELITE Account-Services</h3>
+              <p class="mb-4">Bitte melden Sie sich mit Ihren Zugangsdaten für ELITE Account-Services ein</p>
             </div>
             <form method="post">
 
@@ -39,17 +22,20 @@
 
               </div>
               <div class="form-group" id="password_field">
-                
+
                 <label for="password">Passwort</label>
                 <div class="input-group">
-                <input type="password" class="form-control" id="password" name="pwd">
-                <i toggle="#password" class="icon-eye toggle-passwort input-group-addon" data-toggle="tooltip"  data-placement="right" title="klicken Sie auf das Auge, um das Passwort anzuzeigen." id="pw-eye"></i>
+                  <input type="password" class="form-control" id="password" name="pwd">
+                  <i toggle="#password" class="icon-eye toggle-passwort input-group-addon" data-toggle="tooltip"
+                    data-placement="right" title="klicken Sie auf das Auge, um das Passwort anzuzeigen."
+                    id="pw-eye"></i>
                 </div>
-                
+
               </div>
-              <div role="alert" aria-live="assertive" aria-atomic="true" class="toast {{classes}} dont-display mt-3" data-autohide="false" id=toast>
+              <div role="alert" aria-live="assertive" aria-atomic="true" class="toast {{classes}} dont-display mt-3"
+                data-autohide="false" id=toast>
                 <div class="toast-header">
-                  <strong class="mr-auto">MPSE</strong>
+                  <strong class="mr-auto">ELITE</strong>
                   <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
@@ -60,18 +46,17 @@
               </div>
               <input type="submit" value="Anmelden" class="btn btn-block btn-primary mt-3">
             </form>
-            
-            </div>
+
           </div>
-          
         </div>
-        
+
       </div>
+
     </div>
   </div>
-    <script src="{{url_for('static', filename='signup-form/js/jquery-3.3.1.min.js')}}"></script>
-    <script src="{{url_for('static', filename='signup-form/js/popper.min.js')}}"></script>
-    <script src="{{url_for('static', filename='signup-form/js/bootstrap.min.js')}}"></script>
-    <script src="{{url_for('static', filename='signup-form/js/main.js')}}"></script>
-   </body>
-</html>
+</div>
+<script src="{{url_for('static', filename='signup-form/js/jquery-3.3.1.min.js')}}"></script>
+<script src="{{url_for('static', filename='signup-form/js/popper.min.js')}}"></script>
+<script src="{{url_for('static', filename='signup-form/js/bootstrap.min.js')}}"></script>
+<script src="{{url_for('static', filename='signup-form/js/main.js')}}"></script>
+{% endblock %}

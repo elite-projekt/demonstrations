@@ -1,9 +1,19 @@
 version: '3.7'
 
+# services:
+#   password:
+#     image: ${REGISTRY_URL}/${GROUP_NAME}/demonstrations/${PASSWORD_REPO}
+#     container_name: password_webserver
+#     ports:
+#       - 5001:5000
+
 services:
   password:
-    image: ${REGISTRY_URL}/${GROUP_NAME}/demonstrations/${PASSWORD_REPO}
-    container_name: password_webserver
+    build:
+      context: ./demos/password/
+    container_name: password-unsecure
     ports:
-      - 5001:5000
+      - "5001:5000"
+  redis:
+    image: "redis:alpine"
 
