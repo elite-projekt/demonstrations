@@ -442,6 +442,138 @@
 				}
 			},
 			"response": []
+		}, 		
+		{
+			"name": "Start FOKUS Ransomware Demo",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"secureMode\":false}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/orchestration/start/demo/fokusrnware",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"orchestration",
+						"start",
+						"demo",
+						"fokusrnware"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Stop FOKUS Ransomware Demo",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/orchestration/stop/demo/fokusrnware",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"orchestration",
+						"stop",
+						"demo",
+						"fokusrnware"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Status FOKUS Ransomware Demo",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/orchestration/status/demo/fokusrnware",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"orchestration",
+						"status",
+						"demo",
+						"fokusrnware"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Status FOKUS Ransomware Demo Sum",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/orchestration/status/demo/phishing/sum",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"orchestration",
+						"status",
+						"demo",
+						"fokusrnware",
+						"sum"
+					]
+				}
+			},
+			"response": []
+		}, 
+		{
+			"name": "Create Fake Malware",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:5000/orchestration/run/prog",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"orchestration",
+						"run",
+						"prog"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

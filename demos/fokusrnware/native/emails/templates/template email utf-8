@@ -1,0 +1,24 @@
+Content-Type: multipart/alternative; boundary="===============0157018281873709021=="
+MIME-Version: 1.0
+Subject: Test2
+From: max.mustermann@mpseinternational.com
+To: test2@example.org
+Date: Fri, 01 Jan 2021 00:00:00 +0100
+
+--===============0157018281873709021==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+
+UGxhY2Vob2xkZXI=
+
+--===============0157018281873709021==
+Content-Type: text/html; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+
+PGh0bWw+CiAgICA8Ym9keT4KICAgICAgICA8cD4KICAgICAgICAgICAgPGEgaHJlZj0iaHR0cDov
+L3d3dy5leGFtcGxlLm9yZyI+UGxhY2Vob2xkZXI8L2E+IAogICAgICAgIDwvcD4KICAgIDwvYm9k
+eT4KPC9odG1sPgo=
+
+--===============0157018281873709021==--

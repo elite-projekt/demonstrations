@@ -1,0 +1,16 @@
+to: 
+    display_name: Max Mustermann
+    email: max.mustermann@mpseinternational.com
+from: 
+    display_name: "Erika Mustermann"
+    email: Erika.Mustermann@mpseinternational.com
+subject: "Herzlich willkommen Zurück"
+time: "12:31"
+content: |
+    Hi Max,
+
+    wie es aussieht, läuft bei dir wieder alles rund. Gut, dass du wieder in allen Projekten eingebunden bist. Viel hast du nicht verpasst, abgesehen von der vielen Arbeit. Vielleicht sollte ich auch mal meinen Rechner kaputt machen, damit ich endlich einen neuen für das Home-Office bekomme :D 
+    - Das ist natürlich nur ein Spaß.
+
+    Viele Grüße
+    Erika  

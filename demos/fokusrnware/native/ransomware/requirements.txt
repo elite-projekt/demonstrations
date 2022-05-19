@@ -1,0 +1,7 @@
+Pillow==9.0.1
+playsound==1.2.2
+pycparser==2.21
+pycryptodome==3.14.1
+pypiwin32==223
+pywin32==303
+PyYAML==6.0
