@@ -277,6 +277,11 @@ If(!(Test-Path -path $rootPath)) {
         $task = New-ScheduledTask -Action $action -Principal $principal -Trigger $trigger -Settings $settings
         Register-ScheduledTask "ELITE nativeapp" -InputObject $task
 
+        $action_admin = New-ScheduledTaskAction -Execute "powershell " -Argument "-Windowstyle hidden ./.venv/Scripts/python.exe -m nativeapp.utils.admin.admin_app --mode server" -WorkingDirectory "$directoryPath"
+        $principal_admin = New-ScheduledTaskPrincipal -UserId $(whoami) -RunLevel Highest
+        $task_admin = New-ScheduledTask -Action $action_admin -Principal $principal_admin -Trigger $trigger -Settings $settings
+        Register-ScheduledTask "ELITE nativeapp admin" -InputObject $task_admin
+
         WriteOutput "Created an autostart entry" "Green"
     }
     catch {
@@ -287,6 +292,7 @@ If(!(Test-Path -path $rootPath)) {
         Set-Content -Path $hostFile -Value (get-content -Path $hostFile | Select-String -Pattern '#MPSE' -NotMatch)
         Remove-MpPreference -ExclusionPath $rootPath
         Unregister-ScheduledTask -TaskName "ELITE nativeapp"
+        Unregister-ScheduledTask -TaskName "ELITE nativeapp admin"
         Exit 1
     }
 
@@ -351,6 +357,7 @@ If(!(Test-Path -path $rootPath)) {
                 # Remove task
                 WriteOutput "Trying to remove the task entry" "DarkGray"
                 Unregister-ScheduledTask -TaskName "ELITE nativeapp"
+                Unregister-ScheduledTask -TaskName "ELITE nativeapp admin"
                 WriteOutput "Removed the task entry" "Green"
             }
             catch {
