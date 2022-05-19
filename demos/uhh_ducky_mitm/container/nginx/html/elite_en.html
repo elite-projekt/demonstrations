@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1", charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+
+<h2>ELITE GmbH Login</h2>
+
+<script>
+
+function submit_form(theForm) {
+	let info_string_elite= `
+   <h1>
+  Login successful!
+</h1>
+<br>
+You successfully reverted the proxy settings of the operating system. Congratulations.
+<br>
+Here are some tips: <br>
+<ul>
+ <li>Always pay attention that the domain you visit is correct, encrypted and the used certificate can be trusted. </li>
+ <br>
+<li> Use a secure browser. This demo is not possible using Firefox as it detects the changing certificate and blocks access to the site.
+ <br>
+<li> E-Mails should always be digitally signed (S/MIME or OpenPGP). </li>
+ <br>
+<li> One should never blindly trust USB devices. </li>
+ <br>
+<li> The trusted certificates and settings of the operating system should be regularly checked. </li>
+</ul>
+		`;
+	let info_string_evil= `
+   <h1>
+Your data has been stolen!
+</h1>
+<br>
+
+Username: ${theForm.uname.value} <br>
+Passwort: ${theForm.psw.value} <br>
+<br>
+In case you did not see this: You inserting the "defect" USB-Stick enabled us to execute any command we desired.
+We used that to change the Proxy-Settings of your operating system so that they would install a wrong certificate.<br>
+If you take a close look at the address bar, you will realize that the URL is still the correct one. If you however were to look out for the certificate, you would realize that it has been changed to an illegitimate one named "mitmproxy".
+ <br>
+ <br>
+To display this, you can click on the lock beside the address bar to output the connection status. After that, click on the certificate symbol (next to the "X").
+
+ <br>
+<img src="about_connection_secure.png" alt="Secure connection">
+ <img src="open_cert.png" alt="Secure connection">
+ <br>
+ <img src="cert.png" alt="Secure connection">
+ <br>
+
+This certificate obviously is not a legitimate one and thus, we are able to read and even manipulate all of your encrypted data traffic.
+
+
+
+<br><br>
+
+Additionally, we changed the proxy settings, through which the data traffic is redirected through a server of the attacker.
+
+Search the bar at the bottom of the screen with the text "Enter search term here" for "Proxy" and click on the entry "Proxy Settings".
+Scroll down the window to see that the proxy settings of your computer have been changed.
+Delete those new proxy settings by changing the switch from "on" to "off".
+<br>
+
+<img src="proxy_settings.png" alt="Windows proxy settings">
+ <br>
+Hold the "CTRL" and "Shift"-key and press "R". This forces your browser to request new data from the server without using a locally saved version.
+
+		`;
+  let attacked = false;
+	let overlay_text_elem = document.getElementById("text");
+	if (attacked) {
+		overlay_text_elem.innerHTML = info_string_evil;
+	} else {
+		overlay_text_elem.innerHTML = info_string_elite;
+	}
+	on();
+	return false;
+}
+
+
+
+</script>
+
+<form action="#" onsubmit="return submit_form(this);">
+
+  <div class="container">
+    <label for="uname"><b>Username</b></label>
+    <input type="text" placeholder="Enter Username" name="uname" required>
+
+    <label for="psw"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="psw" required>
+
+    <button type="submit">Login</button>
+    <label>
+      <input type="checkbox" checked="checked" name="remember"> Remember me
+    </label>
+  </div>
+
+  <div class="container" style="background-color:#f1f1f1">
+    <button type="button" class="cancelbtn">Cancel</button>
+    <span class="psw">Forgot <a href="#">password?</a></span>
+  </div>
+</form>
+
+<!-- <div id="overlay" onclick="off()"> -->
+<div id="overlay">
+  <a href="javascript:void(0)" class="closebtn" onclick="off()">&times;</a>
+  <div id="text">
+  </div>
+</div>
+
+<script>
+function on() {
+  document.getElementById("overlay").style.display = "block";
+}
+
+function off() {
+  document.getElementById("overlay").style.display = "none";
+}
+</script>
+
+</body>
+</html>

@@ -13,11 +13,12 @@ variables:
   # See https://docs.gitlab.com/ee/user/packages/generic_packages/#publish-a-package-file
   PACKAGE_REGISTRY_URL: "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/nativeapp/${CI_COMMIT_TAG}"
   ZIP: "nativeapp-${CI_COMMIT_TAG}.zip"
+  SUB_PROJECT_DOCKERFILE: Dockerfile
 
 lint:shell-code:
   stage: lint
   image: koalaman/shellcheck-alpine:stable
-  script: 
+  script:
     - shellcheck -x init_new_demo.sh
   needs: []
 
@@ -52,6 +53,16 @@ lint:ransomware-dockerfile:
   <<: *lint-dockerfile
   variables:
     SUB_PROJECT_FOLDER: demos/ransomware/
+
+lint:uhh_ducky_mitm-dockerfile-proxy:
+  <<: *lint-dockerfile
+  variables:
+    SUB_PROJECT_FOLDER: demos/uhh_ducky_mitm/container/mitmproxy
+
+lint:uhh_ducky_mitm-dockerfile-web:
+  <<: *lint-dockerfile
+  variables:
+    SUB_PROJECT_FOLDER: demos/uhh_ducky_mitm/container/nginx
 
 lint:phishing-dockerfile:
   <<: *lint-dockerfile
@@ -94,7 +105,7 @@ test:python:
     - image_name="$CI_REGISTRY_IMAGE/$SUB_PROJECT_NAME:$CI_COMMIT_BRANCH"
     - /kaniko/executor
       --context "$CI_PROJECT_DIR/$SUB_PROJECT_FOLDER/"
-      --dockerfile "$CI_PROJECT_DIR/$SUB_PROJECT_FOLDER/Dockerfile"
+      --dockerfile "$CI_PROJECT_DIR/$SUB_PROJECT_FOLDER/$SUB_PROJECT_DOCKERFILE"
       --no-push
       --destination "$image_name"
       --tarPath "$SUB_PROJECT_NAME.tar"
@@ -124,6 +135,29 @@ build:ransomware-image:
     SUB_PROJECT_FOLDER: demos/ransomware/
   needs:
     - lint:ransomware-dockerfile
+
+build:uhh_ducky_mitm-image-proxy:
+  <<: *build-image
+  variables:
+    SUB_PROJECT_NAME: uhh_ducky_mitm_proxy
+    SUB_PROJECT_FOLDER: demos/uhh_ducky_mitm/container/mitmproxy/
+  needs:
+    - lint:uhh_ducky_mitm-dockerfile-proxy
+
+build:uhh_ducky_mitm-image-web:
+  <<: *build-image
+  variables:
+    SUB_PROJECT_NAME: uhh_ducky_mitm_web
+    SUB_PROJECT_FOLDER: demos/uhh_ducky_mitm/container/nginx/
+  needs:
+    - lint:uhh_ducky_mitm-dockerfile-web
+
+build:uhh_ducky_mitm-image-web-en:
+  <<: *build-image
+  variables:
+    SUB_PROJECT_NAME: uhh_ducky_mitm_web_en
+    SUB_PROJECT_FOLDER: demos/uhh_ducky_mitm/container/nginx/
+    SUB_PROJECT_DOCKERFILE: Dockerfile_en
 
 
 build:phishing-image:
@@ -292,6 +326,26 @@ push:ransomware-image:
   needs:
   - build:ransomware-image
 
+push:uhh_ducky_mitm-image-web:
+  <<: *push-image
+  variables:
+    SUB_PROJECT_NAME: uhh_ducky_mitm_web
+  needs:
+  - build:uhh_ducky_mitm-image-web
+
+push:uhh_ducky_mitm-image-web-en:
+  <<: *push-image
+  variables:
+    SUB_PROJECT_NAME: uhh_ducky_mitm_web_en
+  needs:
+  - build:uhh_ducky_mitm-image-web-en
+
+push:uhh_ducky_mitm-image-proxy:
+  <<: *push-image
+  variables:
+    SUB_PROJECT_NAME: uhh_ducky_mitm_proxy
+  needs:
+  - build:uhh_ducky_mitm-image-proxy
 
 push:phishing-image:
   <<: *push-image

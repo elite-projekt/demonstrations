@@ -1,0 +1,22 @@
+to:
+    display_name: Max Mustermann
+    email: max.mustermann@mpseinternational.com
+from:
+    display_name: "Christina Sauer"
+    email: christina.sauer@mpseinternational.com
+subject: "Falscher USB-Stick"
+content: |
+  Hallo Max,
+
+  es tut mir Leid, aber ich habe dir versehentlich den falschen USB-Stick gesendet.
+  Den mit den Bildern habe ich gerade in meiner Schublade gefunden. Der den ich dir gesendet habe wird immer nicht erkannt und ich erhalte dort ständig Fehler. Eigentlich wollte ich den schon längst entsorgt haben.
+
+  Ich versuche gerade noch die Fotos in unser System hochzuladen. Bisher sind erst wenige Fotos vorhanden, aber du kannst dir ja diese bereits anschauen.
+
+  Durch die neuen Richtlinien gegen Phishing-Angriffe, kann ich dir leider die URL nicht zusenden, aber diese solltest du ja in deinen Favoriten gespeichert haben.
+  Nutze hierfür bitte den "Edge"-Browser, da die Webseite nur mit diesem einwandfrei funktioniert.
+
+  Liebe Grüße
+  Christina
+
+

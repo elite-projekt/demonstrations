@@ -1,3 +1,4 @@
 include .env native/installer/*
 graft demos/**/native/*
 graft native/**/native/*
+graft native/nativeapp/resources/*

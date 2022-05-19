@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1", charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+
+<h2>ELITE GmbH Login</h2>
+
+<script>
+
+function submit_form(theForm) {
+	let info_string_elite= `
+  <h1>
+  Login erfolgreich!
+</h1>
+<br>
+Sie haben es geschafft die Proxy-Einstellungen zurückzusetzen und auf die korrekte Seite zu gelangen. Herzlichen Glückwunsch.
+<br>
+Einige Tipps: <br>
+<ul>
+<li>Immer darauf achten, dass die besuchte Domain korrekt ist, über eine Verschlüsselung verfügt und das genutzte Zertifikat vertrauenswürdig ist.</li>
+<br>
+ <li> Einen sicheren Browser verwenden. Browser wie zum Beispiel Firefox blockieren den Zugriff auf Domains, wenn sich plötzlich das Zertifikat ändert. Dieser Demonstrator wäre unter Firefox nicht möglich gewesen.</li>
+ <br>
+<li> E-Mails sollten immer mit einer digitalen Signatur versehen werden (S/MIME oder OpenPGP). </li>
+ <br>
+<li> USB-Geräten sollte nie blind vertraut werden. </li>
+ <br>
+<li> Die vertrauten Zertifikate und Einstellungen im Betriebsystem sollten regelmäßig überprüft werden. </li>
+</ul>
+		`;
+	let info_string_evil= `
+  <h1>
+Ihre Daten wurden gestohlen!
+</h1>
+<br>
+
+Username: ${theForm.uname.value} <br>
+Passwort: ${theForm.psw.value} <br>
+<br>
+Falls Sie es nicht gesehen haben: Beim Einstecken des "defekten" USB-Sticks konnten wir beliebige Befehle ausführen.
+Dies haben wir genutzt, um die Proxy-Einstellungen des Betriebssystems zu ändern und ein falsches Zertifikat zu installieren.<br>
+Wenn Sie auf die Adressleiste schauen, sehen Sie, dass es sich um die korrekte URL handelt. Schaut man sich jedoch das Zertifikat an, erkennt man, dass dieses nicht legitim und auf "mitmproxy" ausgestellt ist.
+ <br>
+ <br>
+Um dies anzuzeigen, können Sie auf das Schloss neben der Adressleiste klicken und sich dann den Verbindungsstatus anzeigen lassen. Hier auf das Zertifikatssymbol (neben dem "X") klicken.
+
+ <br>
+<img src="about_connection_secure.png" alt="Secure connection">
+ <img src="open_cert.png" alt="Secure connection">
+ <br>
+ <img src="cert.png" alt="Secure connection">
+ <br>
+
+Dieses Zertifikat ist offensichtlich kein legitimes und mit diesem sind wir in der Lage allen verschlüsselten Datenverkehr zu lesen und zu manipulieren.
+
+
+<br><br>
+
+Zusätzlich haben wir die Proxy-Einstellungen geändert, wodurch der Datenverkehr über einen Server vom Angreifer geleitet wird.
+
+Suchen Sie in der Leiste am unteren Bildschirmrand mit dem Text "Suchbegriff hier eingeben" nach "Proxy" und klicken Sie auf den Eintrag "Proxy Einstellungen".
+Wenn Sie in diesem Fenster nach unten Scrollen sehen Sie, dass wir die Proxyeinstellungen ihres Rechners verändert haben.
+Löschen Sie den Proxy, indem Sie den Schalter von "Ein" auf "Aus" stellen.
+<br>
+
+<img src="proxy_settings.png" alt="Windows proxy settings">
+ <br>
+Dann die "STRG" und "Shift"-Taste gedrückt halten und dann "R" drücken. Hiermit wird der Browser gezwungen neue Daten vom Serveranzufordern und es wird keine lokal gespeicherte Version genutzt.
+
+		`;
+  let attacked = false;
+	let overlay_text_elem = document.getElementById("text");
+	if (attacked) {
+		overlay_text_elem.innerHTML = info_string_evil;
+	} else {
+		overlay_text_elem.innerHTML = info_string_elite;
+	}
+	on();
+	return false;
+}
+
+
+
+</script>
+
+<form action="#" onsubmit="return submit_form(this);">
+
+  <div class="container">
+    <label for="uname"><b>Username</b></label>
+    <input type="text" placeholder="Enter Username" name="uname" required>
+
+    <label for="psw"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="psw" required>
+
+    <button type="submit">Login</button>
+    <label>
+      <input type="checkbox" checked="checked" name="remember"> Remember me
+    </label>
+  </div>
+
+  <div class="container" style="background-color:#f1f1f1">
+    <button type="button" class="cancelbtn">Cancel</button>
+    <span class="psw">Forgot <a href="#">password?</a></span>
+  </div>
+</form>
+
+<!-- <div id="overlay" onclick="off()"> -->
+<div id="overlay">
+  <a href="javascript:void(0)" class="closebtn" onclick="off()">&times;</a>
+  <div id="text">
+  </div>
+</div>
+
+<script>
+function on() {
+  document.getElementById("overlay").style.display = "block";
+}
+
+function off() {
+  document.getElementById("overlay").style.display = "none";
+}
+</script>
+
+</body>
+</html>
