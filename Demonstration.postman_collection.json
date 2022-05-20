@@ -551,7 +551,7 @@
 			"response": []
 		}, 
 		{
-			"name": "Create Fake Malware",
+			"name": "Run FOKUS Ransomware",
 			"request": {
 				"method": "POST",
 				"header": [],

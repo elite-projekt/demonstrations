@@ -19,7 +19,11 @@ def corona_ger():
     file_path = os.path.join(html_folder_path, "eng/index.html")
     return flask.send_file(file_path)
 
-
+@app.route("/anon.jpg")
+def cons_pic():
+        file_path = os.path.join(html_folder_path, "eng/anon.jpg")
+        return flask.send_file(file_path)
+        
 @app.route("/cons.jpg")
 def cons_pic():
         file_path = os.path.join(html_folder_path, "eng/construction.jpg")

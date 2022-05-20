@@ -89,11 +89,6 @@ class fokusrnwareDemo:
         else:
             import demos.fokusrnware.native.emails.en as mails
 
-        '''email_files = [
-            "doodle.yml", "fake_amazon.txt", "fwd_corona.txt",
-            "real_amazon.txt", "reminder_gift.yml"
-            # "nina_signed.txt" unused due to invalid smime signature
-        ]'''
         email_files = [
             "Nina.yml", "Erika.yml", "Marius.yml",
             "Marius2.yml"
@@ -138,10 +133,7 @@ class fokusrnwareDemo:
             #        print("skipping because smime", email_filename)
             #        continue
 
-            # Substract 1-3 days from today so the sent date is more random
-
-            #  we don't use random for crypto. no sec issue
-            day_offset = random.randint(1, 3)  # nosec B311
+            day_offset = 1  # nosec B311
             date_obj = datetime.date.today() - \
                 datetime.timedelta(days=day_offset)
             # replace msg header with new date and remain previous time
