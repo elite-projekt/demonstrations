@@ -271,8 +271,8 @@ class Controller:
             if(attr == "emailworm"):
                 print("SSSHHHHHHHHHHHHHHHHHHHH")
             # filters everything besides attributes
-            if not attr.startswith('__') and not type(getattr(
-                    objectValue, attr)) == types.MethodType:
+            if not attr.startswith('__') and not isinstance(getattr(
+                    objectValue, attr), types.MethodType):
                 value = getattr(objectValue, attr)
                 print(" " * 3 + str(attr) + " = " + str(value))
                 # print("\n")

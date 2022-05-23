@@ -437,8 +437,8 @@ class fokusrnwareDemo:
                 shutil.copy(filename, newPath)
                 # subprocess.call(command, shell=true)
 
-            except:
-                pass
+            except Exception as e:
+                print(e)
         original_wallpaper = self.getWallpaper()
         original_wallpaper = bytes(original_wallpaper, 'utf-8')
 
