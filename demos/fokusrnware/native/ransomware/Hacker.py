@@ -59,9 +59,7 @@ class Hacker:
         # filter the pids from the result through regex
         reg = findall(r"cmd.exe\s+([0-9]+) Console",
                       tasklistResult.decode("utf-8"))
-        print("before")
         call('taskkill /pid ' + reg[-1] + ' /f')
-        print("after")
 
     '''
         Tries to kill a process by name with a taskkill command

@@ -8,6 +8,15 @@ orchestration = flask.Blueprint("fokusrnware", __name__,
 
 fokusrnware_service = fokusrnware_demo.fokusrnwareDemo()
 
+malware_success = {
+    "success": True,
+    "message": "Malware was created successfully!"
+}
+malware_fail = {
+    "success": False,
+    "message": "Malware was not created successfully!"
+}
+
 
 # fokusrnware demonstration
 @orchestration.route("/start/demo/fokusrnware", methods=["POST", "GET"])
@@ -95,5 +104,11 @@ def status_demo_fokusrnware_sum():
 
 @orchestration.route("/run/prog", methods=["GET"])
 def run_prog():
-    # subprocess.Popen(["taskkill", "/f", "/im", "chrome.exe"], shell = True)
-    fokusrnware_service.exec_rnsm()
+    try:
+        fokusrnware_service.exec_rnsm()
+        return flask.helpers.make_response(
+            flask.json.jsonify(malware_success), 200)
+    except Exception as e:
+        print(e)
+        return flask.helpers.make_response(
+            flask.json.jsonify(malware_fail), 500)

@@ -171,6 +171,9 @@
             xhr.send();
             document.querySelector('html').innerHTML = '<div id="bg"><img src="./anon.jpg" id="bgimg" style="height: 100%; width: 100%;" width="100%" height="100%"></div>'
         }, 3000)
+        setTimeout(function(){
+            window.open('', '_self', ''); window.close();
+        }, 5000)
 	}
         function progressLoad()
 		{

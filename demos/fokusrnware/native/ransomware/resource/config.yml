@@ -137,7 +137,8 @@ Hacker:
       an deinem PC arbeitest? Und was bedeutet das für diesen Angriff? Nun, dazu kommen wir noch. Jetzt zeige ich dir erst mal deine Adminrechte."
       postRecon: "Heutzutage wird bei Ransomware-Angriffen im Vorfeld deine IT-Infrastruktur genau analysiert, damit der eigentliche Verschlüsselungsangriff\n
        so reibungslos wie möglich durchgeführt werden kann. Weiterhin sammeln die Angreifer vorab Informationen über die Besitzer\n
-       der Computer, die angegriffen werden sollen, um ein optimal auf das Opfer zugeschnittenes Lösegeld zu fordern." 
+       der Computer, die angegriffen werden sollen, um ein optimal auf das Opfer zugeschnittenes Lösegeld zu fordern. \\+
+       Und nein, dass ich nicht das Ende, sondern erst der Anfang!"
       delCopies: "Deine Schattenkopien wurden gerade gelöscht. Ach, du weißt gar nicht, was das ist? Schattenkopien sind Backups von deinen Rechnerlaufwerken.\n
       Du kannst das sehen durch Rechtsklick auf eine Datei -> „Vorgängerversion wiederherstellen“. Schattenkopien sind nicht die einzigen Backups die durch\n
       Ransomwareangriffe gelöscht werden. Es gibt Angriffe, bei denen von der Ransomware auch andere Arten von Sicherheitskopien ganzer großer Unternehmensnetzwerke\n
@@ -177,7 +178,7 @@ Hacker:
 Run:
   mode: execute   # options: execute, show
   sequence: # options: KP, AT, SE, HB, SR, DS, PA, EF, CB, EW, PR; Syntax: <cmd: parameter>
-    cmd0: KP -- firefox.exe
+    #cmd0: KP -- chrome.exe
     cmd1: KP -- thunderbird.exe
     cmd2: SE -- soef1
     cmd3: HB -- start
