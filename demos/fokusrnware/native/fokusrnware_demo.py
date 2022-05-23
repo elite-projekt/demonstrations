@@ -5,7 +5,6 @@ import glob
 import imaplib
 import logging
 import os
-import random
 import shutil
 import smtplib
 # We need this module and the severity is low. See also:
@@ -437,7 +436,7 @@ class fokusrnwareDemo:
                 # os.system(command)
                 shutil.copy(filename, newPath)
                 # subprocess.call(command, shell=true)
-                
+
             except:
                 pass
         original_wallpaper = self.getWallpaper()

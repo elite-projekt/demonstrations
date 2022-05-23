@@ -553,7 +553,7 @@
 		{
 			"name": "Run FOKUS Ransomware",
 			"request": {
-				"method": "POST",
+				"method": "GET",
 				"header": [],
 				"body": {
 					"mode": "raw",

