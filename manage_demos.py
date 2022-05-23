@@ -13,7 +13,7 @@ from questionary import Validator, ValidationError, Style, Choice
 
 DEMOS_PATH = 'native/nativeapp/demos.json'
 demos = {}
-CreatingDemo = bool()
+CreatingDemo = False
 answers_update = {}
 
 categories = {
@@ -66,7 +66,7 @@ def iterate_all(iterable, returned="key"):
 
 
 # load json files
-with open(DEMOS_PATH) as f_demos:
+with open(DEMOS_PATH, encoding='utf-8') as f_demos:
     data_demos = json.load(f_demos)
 
 # parse demos to a dict for easier handling
@@ -191,6 +191,7 @@ def create_new_demo():
             "status": 0,
             "time": 0,
             "secureMode": False,
+            "disableSecureMode": True,
             "isRunning": False,
             "isAvailable": True,
             "messages": {
@@ -215,7 +216,7 @@ def create_new_demo():
 
 
 def write_json_to_file(json_data: dict or list, file_path: str):
-    with open(file_path, "w") as outfile:
+    with open(file_path, "w", encoding='utf-8') as outfile:
         json_obj = json.dumps(json_data, indent=4, ensure_ascii=False)
         outfile.write(json_obj)
 
@@ -255,6 +256,7 @@ questions_update_demo = [
             {'name': 'categories'},
             {'name': 'level'},
             {'name': 'time'},
+            {'name': 'disableSecureMode'},
             ],
     }
 ]
@@ -287,6 +289,16 @@ questions_general = [
         'filter': lambda val: int(val),
         'when': lambda _:
             CreatingDemo or 'time' in answers_update['fieldToUpdate']
+    },
+    {
+        'type': 'confirm',
+        'message': 'Does the demo have a secure mode?',
+        'name': 'disableSecureMode',
+        'default': True,
+        'filter': lambda val: not(val),
+        'when': lambda _:
+            CreatingDemo
+            or 'disableSecureMode' in answers_update['fieldToUpdate']
     }
 ]
 
@@ -304,9 +316,7 @@ def update_demo():
             demo_id = answers_update["demoToUpdate"]
             demos[demo_id][field] = answers_update[field]
         data_demos = list(demos.values())
-        json_obj = json.dumps(data_demos, indent=4)
-        with open(DEMOS_PATH, "w") as outfile:
-            outfile.write(json_obj)
+        write_json_to_file(data_demos, DEMOS_PATH)
 
         questionary.print("The demo has been successfully updated",
                           style="bold italic fg:green")
