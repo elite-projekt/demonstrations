@@ -9,12 +9,14 @@ from datetime import datetime
 import flask
 import flask_cors
 from nativeapp.config import config
+from nativeapp.controller import native_controller
 
 import demos
 
 app = flask.Flask(__name__)
 flask_cors.CORS(app)
 
+app.register_blueprint(native_controller.native)
 for _, name, ispkg in pkgutil.iter_modules(demos.__path__):
     if ispkg:
         controller_path = 'demos.' + name + '.native.' + name + '_controller'
