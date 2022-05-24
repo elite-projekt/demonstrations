@@ -7,3 +7,13 @@ services:
     ports:
       - 5001:5000
 
+# services:
+#   password:
+#     build:
+#       context: ./demos/password/
+#     container_name: password-unsecure
+#     ports:
+#       - "5001:5000"
+#   redis:
+#     image: "redis:alpine"
+
