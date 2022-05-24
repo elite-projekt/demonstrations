@@ -1,7 +1,8 @@
-from string import ascii_letters, digits
-from random import SystemRandom
 from hashlib import sha1
-from Crypto.Cipher import AES
+# import os
+# import base64
+# from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
+# from cryptography.hazmat.backends import default_backend
 
 
 '''
@@ -59,28 +60,36 @@ class Encrypter:
         @return: encrypted data of a file
     '''
 
-    def AES(self, byteData) -> bytes:
-        iv = bytes(''.join(SystemRandom().choice(ascii_letters + digits)
-                   for _ in range(16)), "utf-8")
-        cipher = AES.new(bytes(self.key, "utf-8"), AES.MODE_EAX, iv)
-        ciphertext, tag = cipher.encrypt_and_digest(byteData)
-        cipherw = cipher.nonce + tag + ciphertext
-        return cipherw
+    '''def _cipher(self, iv):
+        return Cipher(
+            algorithms.AES(self.key.encode()),
+            modes.CBC(iv),
+            backend=default_backend()
+        )
 
-    '''
-        Decrypts data, which were encrypted with "AES-128 EAX mode"
-        @param nonce: nonce, which was passed in a ciphertext
-        after encryption (16 bytes)
-        @param tag: tag, which was passed in a ciphertext
-        after encryption (16 bytes)
-        @param ciphertext: The binary data of a ciphertext
-        @return: plaintext, if decryption was successfull
-    '''
+    def AES(self, raw):
+        iv = os.urandom(16)
+        encryptor = self._cipher(iv).encryptor()
+        padded = self._pad(raw)
+        cipher_text = encryptor.update(padded.encode()) + encryptor.finalize()
+        return base64.b64encode(cipher_text + iv)
 
-    def AESdec(self, nonce, tag, ciphertext) -> bytes:
-        cipher = AES.new(bytes(self.key, "utf-8"), AES.MODE_EAX, nonce)
-        plaintext = cipher.decrypt_and_verify(ciphertext, tag)
-        return plaintext
+    def AESdec(self, encoded):
+        raw = base64.b64decode(encoded)
+        cipher_text = raw[:-16]
+        iv = raw[-16:]
+        decryptor = self._cipher(iv).decryptor()
+        padded = decryptor.update(cipher_text) + decryptor.finalize()
+        return self._unpad(padded)
+
+    def _pad(self,raw):
+        ordinal = 16 - len(raw) % 16
+        return raw + ordinal * chr(ordinal)
+
+    @staticmethod
+    def _unpad(padded):
+        return padded[:-ord(padded[len(padded) - 1:])]
+    '''
 
     '''
         Hashes a string with sha1 and ends the extension .enc
@@ -89,7 +98,8 @@ class Encrypter:
     '''
 
     def fileNameByHashSHA1(self, fileName) -> str:
-        return str(sha1(bytes(fileName, encoding='utf8')).hexdigest()) + ".enc"
+        return str(sha1(bytes(fileName, encoding='utf8'),
+                   usedforsecurity=False).hexdigest()) + ".enc"
 
     '''
         Encrypt/modifies a file with an a algrothm based
@@ -101,7 +111,7 @@ class Encrypter:
     def enc(self, byteData) -> bytes:
         if self.encMode == "OTP":
             return self.OTPVernam(byteData)
-        elif self.encMode == "AES":
-            return self.AES(byteData)
+        # elif self.encMode == "AES":
+        #     return self.AES(byteData.decode())
         else:
             return self.INVB(byteData)

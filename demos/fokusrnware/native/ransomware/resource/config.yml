@@ -63,7 +63,7 @@ Ransomware:
 Encryption:
   # Which cryptographic encryption algorithm or file modification to use.
   encMode: 
-    value: AES        # options: OTP, INVB, AES; defaut: INVB 
+    value: OTP        # options: OTP, INVB, AES; defaut: INVB 
     checker: available
     parameter: OTP, INVB, AES
   # 16 characters long key

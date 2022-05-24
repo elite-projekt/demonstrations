@@ -1,4 +1,4 @@
-from subprocess import PIPE, DEVNULL, STDOUT, call, Popen
+from subprocess import PIPE, DEVNULL, STDOUT, call, Popen  # nosec
 from ctypes import windll
 from re import findall
 from time import sleep
@@ -49,17 +49,20 @@ class Hacker:
         # if self.checkAdminRights() == False:
         #    return
         timeout = 6
-        call('start cmd /k \"net user ' + self.user + '\"', shell=True)
+        call('cmd /c start cmd /k \"net user ' + self.user + '\"',
+             shell=False)  # nosec
         # so the timeout in that spawned command prompt can be readed
         sleep(timeout)
         # saving the result of tasklist command
-        tasklistResult = Popen("tasklist", stdout=PIPE,
-                               stderr=STDOUT, stdin=DEVNULL)
+        tasklistResult = Popen("cmd /c" +
+                               "tasklist", stdout=PIPE,  # nosec
+                               stderr=STDOUT, stdin=DEVNULL,
+                               shell=False)  # nosec
         tasklistResult = tasklistResult.stdout.read()
         # filter the pids from the result through regex
         reg = findall(r"cmd.exe\s+([0-9]+) Console",
                       tasklistResult.decode("utf-8"))
-        call('taskkill /pid ' + reg[-1] + ' /f')
+        call('taskkill /pid ' + reg[-2] + ' /f')  # nosec
 
     '''
         Tries to kill a process by name with a taskkill command
@@ -68,8 +71,8 @@ class Hacker:
 
     def kProcessByName(self, processName) -> None:
         # That line is for the drive-by-download attackvector
-        call('taskkill /f /t /im ' + processName,
-             shell=True, creationflags=self.CREATE_NO_WINDOW)
+        call('cmd /c taskkill /f /t /im ' + processName,
+             shell=False, creationflags=self.CREATE_NO_WINDOW)  # nosec
 
     '''
         Plays a soundfile
@@ -127,24 +130,25 @@ class Hacker:
         if self.asciiArt == "":
             return
         for i in range(20):
-            Popen(["start", "cmd", "/k", "color 0a &  type " +
-                   self.asciiArt], shell=True)
+            Popen(["cmd", "/c", "start", "cmd",
+                   "/k", "color 0a &  type " +  # nosec
+                   self.asciiArt], shell=False)  # nosec
             # with this, it will look more sequetially, when the cmds get open
             sleep(0.05)
         # waiting 2 seconds, so the ascii-art can load inside the cmds before
         # closing them again
         sleep(2)
         # saving the result of tasklist command
-        tasklistResult = Popen("tasklist", stdout=PIPE,
-                               stderr=STDOUT, stdin=DEVNULL)
+        tasklistResult = Popen("tasklist", stdout=PIPE,  # nosec
+                               stderr=STDOUT, stdin=DEVNULL)  # nosec
         tasklistResult = tasklistResult.stdout.read()
         # filter the pids from the result through regex
         reg = findall(r"cmd.exe\s+([0-9]+) Console",
                       tasklistResult.decode("utf-8"))
         for i in range(20):
             idx = len(reg) - 1 - i
-            call("Taskkill /PID " + reg[idx] + " /F",
-                 shell=True, creationflags=self.CREATE_NO_WINDOW)
+            call("cmd /c Taskkill /PID " + reg[idx] + " /F",
+                 shell=False, creationflags=self.CREATE_NO_WINDOW)  # nosec
             sleep(0.05)
 
     def mailWormShow(self):
@@ -156,7 +160,8 @@ class Hacker:
             'Chistiane.Ziesing@mpseinternational.com'
             ]
         for username in usernameList:
-            Popen("\"C:\\Program Files\\Mozilla Thunderbird\\thunderbird\"" +
+            Popen("\"C:\\Program Files\\Mozilla Thunderbird\\" +  # nosec
+                  "thunderbird\"" +
                   " -compose \"to='" + username + "',subject='Sensible Daten" +
                   " auf deinem LinkedIn Profil',body='Hallo, <br><br>Auf" +
                   " deinem Profil in LinkedIn sind sensible persönliche und" +
@@ -168,5 +173,5 @@ class Hacker:
                   stderr=None, stdin=None, close_fds=True)
             sleep(0.5)
         sleep(3)
-        call("taskkill /f /im thunderbird.exe", shell=True,
-             creationflags=self.CREATE_NO_WINDOW)
+        call("cmd /c taskkill /f /im thunderbird.exe", shell=False,  # nosec
+             creationflags=self.CREATE_NO_WINDOW)  # nosec
