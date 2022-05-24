@@ -1,12 +1,21 @@
-{% extends "base_card.html" %}
+{% extends "base.html" %}
 
-{% block cardtitle %}
-Registration erfolgreich
+
+{% block content %}
+<div class="content">
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Registration erfolgreich</h5>
+                <p class="card-text">Sie haben sich erfolgreich bei unseren ELITE Account-Services registriert und angemeldet!</p>
+                <br><br>
+                <p class="card-text">Wir wünschen Ihnen viel Spaß bei uns!  
+                    Weitere Informationen und andere Demos finden Sie auf unserer Lernplattform.
+                </p>
+            </div>
+        </div>
+        </p>
+        <br>
+    </div>
+</div>
 {% endblock %}
-{% block cardtext %}
-Sie haben sich erfolgreich bei unseren ELITE Account-Services registriert und angemeldet!<br>
-<br><br>
-Wir wünschen Ihnen viel Spaß bei uns!  
-Weitere Informationen finden Sie auf unserer <a title="Lernplattform" id="pw-einheit" style="text-decoration:underline; color: #888">Lernplattform</a>
-{% endblock %}
-{% block cardbtn %}{% endblock %}
