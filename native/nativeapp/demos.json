@@ -152,6 +152,7 @@
         "status": 0,
         "time": 10,
         "secureMode": false,
+        "disableSecureMode": true,
         "isRunning": false,
         "isAvailable": true,
         "messages": {
