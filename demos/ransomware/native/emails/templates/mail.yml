@@ -1,0 +1,15 @@
+# YAML Template for mail parser in phishing demo
+to: 
+    display_name: "Max Mustermann"
+    email: "max.mustermann@mpseinternational.com"
+from: 
+    display_name: "C. Sauer"
+    email: "christina.sauer@mpseinternational.com"
+subject: "Your phishy subject lives here" 
+time: "12:00" # use this format!
+content: |
+    Hello,
+
+    here you can use multiline text for the mail. (Plaintext only)
+
+    Best regards!
