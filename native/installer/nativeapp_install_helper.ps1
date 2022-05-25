@@ -251,6 +251,7 @@ If(!(Test-Path -path $rootPath)) {
             throw
         } else {
             WriteOutput "Trying to pull the latest docker images" "DarkGray"
+            run-docker "pull $Env:REGISTRY_URL/$Env:GROUP_NAME/demonstrations/$Env:RANSOMWARE_REPO"
             run-docker "pull $Env:REGISTRY_URL/$Env:GROUP_NAME/demonstrations/$Env:PHISHING_REPO"
             run-docker "pull $Env:REGISTRY_URL/$Env:GROUP_NAME/demonstrations/$Env:PASSWORD_REPO"
             run-docker "pull $Env:REGISTRY_URL/$Env:GROUP_NAME/demonstrations/$Env:DOWNLOAD_REPO"
