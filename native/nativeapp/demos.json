@@ -167,10 +167,6 @@
                     {
                         "title": "During Demo",
                         "content": "Read through the emails which are in the inbox."
-                    },
-                    {
-                        "title": "After Demo",
-                        "content": ""
                     }
                 ]
             },
@@ -179,16 +175,12 @@
                 "description": "In dieser Demo wird der Nutzer mit einem Ransomware-Angriff und einem Drive-by-Download als Angriffsvektor konfrontiert.",
                 "guide": [
                     {
-                        "title": "Briefing",
+                        "title": "Einweisung",
                         "content": "Der E-Mail-Client Thunderbird wird geöffnet, sobald die Demo gestartet ist. In diesem Szenario spielen Sie den Mitarbeiter Max."
                     },
                     {
-                        "title": "During Demo",
+                        "title": "Während der Demo",
                         "content": "Lesen Sie durch die E-Mails, welche sich im Posteingang befinden."
-                    },
-                    {
-                        "title": "After Demo",
-                        "content": ""
                     }
                 ]
             }
