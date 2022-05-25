@@ -48,6 +48,11 @@ lint:fokusrnware-dockerfile:
   variables:
     SUB_PROJECT_FOLDER: demos/fokusrnware/
 
+lint:ransomware-dockerfile:
+  <<: *lint-dockerfile
+  variables:
+    SUB_PROJECT_FOLDER: demos/ransomware/
+
 lint:download-dockerfile:
   <<: *lint-dockerfile
   variables:
@@ -116,6 +121,14 @@ build:fokusrnware-image:
     SUB_PROJECT_FOLDER: demos/fokusrnware/
   needs:
     - lint:fokusrnware-dockerfile
+    
+build:ransomware-image:
+  <<: *build-image
+  variables:
+    SUB_PROJECT_NAME: ransomware
+    SUB_PROJECT_FOLDER: demos/ransomware/
+  needs:
+    - lint:ransomware-dockerfile
 
 build:download-image:
   <<: *build-image
@@ -240,6 +253,14 @@ scan:fokusrnware-image:
     SUB_PROJECT_FOLDER: demos/fokusrnware/
   needs:
   - build:fokusrnware-image
+  
+scan:ransomware-image:
+  <<: *scan-image
+  variables:
+    SUB_PROJECT_NAME: ransomware
+    SUB_PROJECT_FOLDER: demos/ransomware/
+  needs:
+  - build:ransomware-image
 
 scan:download-image:
   <<: *scan-image
@@ -283,6 +304,13 @@ push:fokusrnware-image:
     SUB_PROJECT_NAME: fokusrnware
   needs:
   - build:fokusrnware-image
+
+push:ransomware-image:
+  <<: *push-image
+  variables:
+    SUB_PROJECT_NAME: ransomware
+  needs:
+  - build:ransomware-image
 
 push:download-image:
   <<: *push-image

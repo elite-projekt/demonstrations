@@ -31,3 +31,7 @@ class ApplicationInformation:
     DESCRIPTION = "NativeApp Client for ELITE Platform"
     VERSION = None
     BUILDDATE = None
+
+
+class AdminConfig:
+    LISTEN_PORT = 5005

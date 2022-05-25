@@ -1,0 +1,23 @@
+to: 
+    display_name: Max Mustermann
+    email: max.mustermann@mpseinternational.com
+from: 
+    display_name: "Andrea Müller"
+    email: andrea.mueller@mpseinternational.com
+subject: "EILIG: Prüfung Projektkalkulation"
+time: "09:15"
+content: |
+    Hallo Herr Mustermann,
+
+    anbei sende ich Ihnen die Projektkalkulation zur Prüfung.
+    Stimmt das Diagramm so?
+
+    Der Kunde hat es ziemlich eilig. Könnten Sie mir hierzu bis morgen Rückmeldung geben?
+
+    Vielen Dank!
+
+    Freundliche Grüße,
+
+    Andrea Müller
+    
+attachment: "Projektkalkulation.xlsm"
