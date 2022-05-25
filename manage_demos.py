@@ -13,8 +13,8 @@ from questionary import Validator, ValidationError, Style, Choice
 
 DEMOS_PATH = 'native/nativeapp/demos.json'
 demos = {}
-CreatingDemo = bool()
-answers_update = dict()
+CreatingDemo = False
+answers_update = {}
 
 categories = {
     "phishing": "Phishing",
@@ -66,9 +66,8 @@ def iterate_all(iterable, returned="key"):
 
 
 # load json files
-f_demos = open(DEMOS_PATH)
-data_demos = json.load(f_demos)
-f_demos.close()
+with open(DEMOS_PATH, encoding='utf-8') as f_demos:
+    data_demos = json.load(f_demos)
 
 # parse demos to a dict for easier handling
 demos = {demo['id']: demo for demo in data_demos}
@@ -89,7 +88,8 @@ def validate_locales():
                 "There are invalid locales files!\n"
                 "Check for same key existence of items in both languages:",
                 style="bold italic fg:ansired")
-        questionary.print("  location: " + DEMOS_PATH, style="fg:ansicyan")
+        questionary.print("  location: {}".format(DEMOS_PATH),
+                          style="fg:ansicyan")
         exit(18)
 
 
@@ -100,8 +100,8 @@ class TimeValidator(Validator):
     def validate(self, document):
         min_val = 5
         max_val = 90
-        message = 'Please enter a number (min. ' + str(min_val) + ', max. ' \
-                  + str(max_val) + ') dividable through 5 (10, 15, ...)'
+        message = 'Please enter a number from {}-{} and dividable ' \
+                  'through 5 (10, 15, ...)'.format(str(min_val), str(max_val))
         try:
             number = int(document.text)
             # raise error if number is not dividable through 5
@@ -191,6 +191,7 @@ def create_new_demo():
             "status": 0,
             "time": 0,
             "secureMode": False,
+            "disableSecureMode": True,
             "isRunning": False,
             "isAvailable": True,
             "messages": {
@@ -208,13 +209,14 @@ def create_new_demo():
                           "specify the language specific contents (title, "
                           "description, guide) in the locales:",
                           style="bold italic fg:green")
-        questionary.print("  file location: " + DEMOS_PATH, style="fg:blue")
+        questionary.print("  file location: {}".format(DEMOS_PATH),
+                          style="fg:blue")
     except KeyboardInterrupt:
         print("Cancelled by user")
 
 
 def write_json_to_file(json_data: dict or list, file_path: str):
-    with open(file_path, "w") as outfile:
+    with open(file_path, "w", encoding='utf-8') as outfile:
         json_obj = json.dumps(json_data, indent=4, ensure_ascii=False)
         outfile.write(json_obj)
 
@@ -254,6 +256,7 @@ questions_update_demo = [
             {'name': 'categories'},
             {'name': 'level'},
             {'name': 'time'},
+            {'name': 'disableSecureMode'},
             ],
     }
 ]
@@ -286,6 +289,16 @@ questions_general = [
         'filter': lambda val: int(val),
         'when': lambda _:
             CreatingDemo or 'time' in answers_update['fieldToUpdate']
+    },
+    {
+        'type': 'confirm',
+        'message': 'Does the demo have a secure mode?',
+        'name': 'disableSecureMode',
+        'default': True,
+        'filter': lambda val: not(val),
+        'when': lambda _:
+            CreatingDemo
+            or 'disableSecureMode' in answers_update['fieldToUpdate']
     }
 ]
 
@@ -303,9 +316,7 @@ def update_demo():
             demo_id = answers_update["demoToUpdate"]
             demos[demo_id][field] = answers_update[field]
         data_demos = list(demos.values())
-        json_obj = json.dumps(data_demos, indent=4)
-        with open(DEMOS_PATH, "w") as outfile:
-            outfile.write(json_obj)
+        write_json_to_file(data_demos, DEMOS_PATH)
 
         questionary.print("The demo has been successfully updated",
                           style="bold italic fg:green")

@@ -43,6 +43,11 @@ lint:python-code:
   needs: []
 
 #lint:demo:begin - DO NOT CHANGE THIS LINE. required by 'init_new_demo.sh' script
+lint:ransomware-dockerfile:
+  <<: *lint-dockerfile
+  variables:
+    SUB_PROJECT_FOLDER: demos/ransomware/
+
 lint:download-dockerfile:
   <<: *lint-dockerfile
   variables:
@@ -104,6 +109,14 @@ test:python:
     - lint:python-code
 
 #build:demo:begin - DO NOT CHANGE THIS LINE. required by 'init_new_demo.sh' script
+build:ransomware-image:
+  <<: *build-image
+  variables:
+    SUB_PROJECT_NAME: ransomware
+    SUB_PROJECT_FOLDER: demos/ransomware/
+  needs:
+    - lint:ransomware-dockerfile
+
 build:download-image:
   <<: *build-image
   variables:
@@ -220,6 +233,14 @@ build:release-zip:
   allow_failure: true
 
 #scan:demo:begin - DO NOT CHANGE THIS LINE. required by 'init_new_demo.sh' script
+scan:ransomware-image:
+  <<: *scan-image
+  variables:
+    SUB_PROJECT_NAME: ransomware
+    SUB_PROJECT_FOLDER: demos/ransomware/
+  needs:
+  - build:ransomware-image
+
 scan:download-image:
   <<: *scan-image
   variables:
@@ -256,6 +277,13 @@ scan:password-image:
   - crane push $SUB_PROJECT_NAME.tar $CI_REGISTRY_IMAGE/$SUB_PROJECT_NAME:$CI_COMMIT_BRANCH
 
 #push:demo:begin - DO NOT CHANGE THIS LINE. required by 'init_new_demo.sh' script
+push:ransomware-image:
+  <<: *push-image
+  variables:
+    SUB_PROJECT_NAME: ransomware
+  needs:
+  - build:ransomware-image
+
 push:download-image:
   <<: *push-image
   variables:

@@ -17,6 +17,7 @@ import datetime
 import random
 import pathlib
 import yaml
+import time
 
 
 class MailClient:
@@ -27,17 +28,42 @@ class MailClient:
         self.username = username
         self.password = password
 
+    def wait_for_imap_server(self, max_timeout_s: float = 10) -> bool:
+        start_time = time.time()
+        while time.time() - start_time < max_timeout_s:
+            with self.imap_connect(False) as session:
+                if session:
+                    logging.info("IMAP Server online")
+                    return True
+            logging.info("IMAP Server still offline")
+        logging.info("Giving up after reaching timeout")
+        return False
+
+    def wait_for_smtp_server(self, max_timeout_s: float = 10) -> bool:
+        start_time = time.time()
+        while time.time() - start_time < max_timeout_s:
+            with self.smtp_connect(False) as session:
+                if session:
+                    logging.info("SMTP Server online")
+                    return True
+            logging.info("SMTP Server still offline")
+        logging.info("Giving up after reaching timeout")
+        return False
+
     @contextmanager
-    def imap_connect(self):
+    def imap_connect(self, show_error=True):
         imap_connection = None
         try:
             imap_connection = imaplib.IMAP4_SSL(
                     host=self.hostname, port=self.imap_port)
             imap_connection.login(user=self.username, password=self.password)
+            imap_connection.select()
             yield imap_connection
         except Exception as e:
-            logging.error(f"IMAP connection to \
-                    \"{self.hostname}:{self.imap_port}\"failed: {e}")
+            if show_error:
+                logging.error(f"IMAP connection to \
+                        \"{self.hostname}:{self.imap_port}\"failed: {e}")
+            yield None
 
         finally:
             if imap_connection is not None:
@@ -45,17 +71,21 @@ class MailClient:
                 imap_connection.logout()
 
     @contextmanager
-    def smtp_connect(self):
+    def smtp_connect(self, show_error=True):
+        smtp_connection = None
         try:
             smtp_connection = smtplib.SMTP_SSL(
                     host=self.hostname, port=self.smtp_port)
             smtp_connection.login(self.username, self.password)
             yield smtp_connection
         except Exception as e:
-            logging.error(f"SMTP connection to \
-                    \"{self.hostname}:{self.smtp_port}\"failed: {e}")
+            if show_error:
+                logging.error(f"SMTP connection to \
+                        \"{self.hostname}:{self.smtp_port}\"failed: {e}")
+            yield None
         finally:
-            smtp_connection.quit()
+            if smtp_connection is not None:
+                smtp_connection.quit()
 
     def send_mail(self, message: EmailMessage):
         with self.smtp_connect() as session:
