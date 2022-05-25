@@ -139,5 +139,58 @@
                 ]
             }
         }
+    },
+    {
+        "id": "ransomware",
+        "categories": [
+            "phishing",
+            "email",
+            "ransomware"
+        ],
+        "level": "beginner",
+        "status": 0,
+        "time": 5,
+        "secureMode": false,
+        "disableSecureMode": true,
+        "isRunning": false,
+        "isAvailable": true,
+        "messages": {
+            "en": {
+                "title": "Ransomware",
+                "description": "This demo shows a ransomware attack based on an everyday scenario.",
+                "guide": [
+                    {
+                        "title": "Briefing",
+                        "content": "You are Max and you are employed at the company \"MPSE international\". There you are working in controlling."
+                    },
+                    {
+                        "title": "During Demo",
+                        "content": "The mail application Thunderbird starts automtically. Check your e-mails. Open any attachments."
+                    },
+                    {
+                        "title": "After Demo",
+                        "content": "If you started the ransomware malware your system is encrrypted."
+                    }
+                ]
+            },
+            "de": {
+                "title": "Ransomware",
+                "description": "Diese Demo zeigt die Gefahren von Verschlüsselungs-Trojanern anhand eines alltäglichen Szenarios auf.",
+                "guide": [
+                    {
+                        "title": "Hintergrund",
+                        "content": "Sie sind Max und Sie sind angestellt in der Firma \"MPSE international\". Dort sind Sie in der Buchhaltung angestellt."
+                    },
+                    {
+                        "title": "Mails überprüfen",
+                        "content": "Das Mailprogram Thunderbird öffnet sich automatisch. Überprüfen Sie Ihr Mail-Postfach und arbeiten Sie die E-Mails ab. Öffnen Sie die angehängten Dateien."
+                    },
+                    {
+                        "title": "After Demo",
+                        "content": "Wenn Sie eine Schadsoftware gestartet haben wird Ihr System verschlüsselt."
+                    }
+                ]
+            }
+        }
     }
 ]
