@@ -16,9 +16,6 @@ RUN apk --no-cache update\
     && apk --no-cache add jpeg-dev zlib-dev libjpeg\
     && pip install --no-cache-dir Pillow
 
-# Temporary security fix see #131
-RUN apk add --no-cache --upgrade libretls=3.3.4-r3
-
 COPY . /password
 COPY requirements.txt /password/requirements.txt
 RUN pip3 install --no-cache-dir -r /password/requirements.txt
