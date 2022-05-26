@@ -4,7 +4,8 @@ import ctypes
 import time
 import pyautogui
 import win32con
-import subprocess
+import subprocess  # nosec
+import shutil
 
 
 global desktop_files
@@ -104,7 +105,9 @@ def run():
     # 'demos/ransomware/native/shelloutput.py')
     # print(path_shelloutput)
     # os.system('cmd /c shelloutput.bat')
-    subprocess.call([r'demos\ransomware\native\shelloutput.bat'])
+    path = os.path.join(os.path.abspath(
+        os.path.dirname(__file__)), "shelloutput.bat")
+    subprocess.call([path])  # nosec
     # pause
     time.sleep(1.5)
 
@@ -171,8 +174,11 @@ def prep():
     for filename in desktop_files:
         try:
             base = os.path.basename(filename)
-            command = 'copy ' + filename + ' ' + desktop + '\\' + base
-            os.system(command)
+            filename = os.path.join(os.path.abspath(
+                os.path.dirname(__file__)), 'desktop_files', base)
+            newPath = desktop + '\\' + base
+            # os.system(command)
+            shutil.copy(filename, newPath)
         except Exception as e:
             print(e)
 
