@@ -192,5 +192,51 @@
                 ]
             }
         }
+    },
+    {
+        "id": "fokusrnware",
+        "categories": [
+            "phishing",
+            "email",
+            "driveByDownload",
+            "ransomware"
+        ],
+        "level": "intermediate",
+        "status": 0,
+        "time": 10,
+        "secureMode": false,
+        "disableSecureMode": true,
+        "isRunning": false,
+        "isAvailable": true,
+        "messages": {
+            "en": {
+                "title": "Ransomware (Malicious Website)",
+                "description": "In this demo the user is confronted with a Ransomware-Attack and a Drive-by-Download as the attackvector",
+                "guide": [
+                    {
+                        "title": "Briefing",
+                        "content": "The Thunderbird e-mail client opens as soon as the demo is started. In this scenario, you play the employee Max."
+                    },
+                    {
+                        "title": "During Demo",
+                        "content": "Read through the emails which are in the inbox."
+                    }
+                ]
+            },
+            "de": {
+                "title": "Ransomware (Schadhafte Website)",
+                "description": "In dieser Demo wird der Nutzer mit einem Ransomware-Angriff und einem Drive-by-Download als Angriffsvektor konfrontiert.",
+                "guide": [
+                    {
+                        "title": "Einweisung",
+                        "content": "Der E-Mail-Client Thunderbird wird geöffnet, sobald die Demo gestartet ist. In diesem Szenario spielen Sie den Mitarbeiter Max."
+                    },
+                    {
+                        "title": "Während der Demo",
+                        "content": "Lesen Sie durch die E-Mails, welche sich im Posteingang befinden."
+                    }
+                ]
+            }
+        }
     }
 ]
