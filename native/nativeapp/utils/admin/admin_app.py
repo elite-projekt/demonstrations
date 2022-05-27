@@ -119,12 +119,12 @@ class NativeappAdmin:
             with open(HOSTS_PATH, "r+") as host_file:
                 hosts_dict = {}
                 for line in host_file:
-                    split = line.split(" ", 1)
+                    split = line.split(maxsplit=1)
                     if len(split) > 1:
                         m = IP_REGEX.match(split[0])
                         if m:
                             print(split)
-                            all_hosts = split[1].strip().split(" ")
+                            all_hosts = split[1].strip().split()
                             for h in all_hosts:
                                 hosts_dict[h] = split[0].strip()
                 if mode == "0":
