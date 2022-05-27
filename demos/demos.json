@@ -1,0 +1,201 @@
+[
+    {
+        "id": "phishing",
+        "categories": [
+            "phishing",
+            "email"
+        ],
+        "level": "beginner",
+        "time": 30,
+        "status": 0,
+        "secureMode": false,
+        "isAvailable": true,
+        "messages": {
+            "en": {
+                "title": "Phishing",
+                "description": "This demo shows security risks when dealing with phishing attempts. You will run through a short scenario from everyday office life.",
+                "guide": [
+                    {
+                        "title": "Dummy",
+                        "content": "Dummy"
+                    },
+                    {
+                        "title": "Dummy",
+                        "content": "Dummy"
+                    }
+                ]
+            },
+            "de": {
+                "title": "Phishing",
+                "description": "Diese Demo zeigt Sicherheitsrisiken im Umgang mit Phishing-Versuchen auf. Sie werden ein kurzes Szenario aus dem Büroalltag durchspielen.",
+                "guide": [
+                    {
+                        "title": "Einleitung",
+                        "content": "&nbsp;<p>Die Phishing Demo gibt es als sichere und unsichere Variante. Am besten starten Sie mit der unsicheren und starten danach die sichere Variante.<\/p>\r\n\r\n<p>Sowohl bei der sicheren als auch der unsicheren Variante wird sich automaitsch ein Fenster von Thunderbird &ouml;ffnen.<\/p>\r\n\r\n<p>Thunderbird ist ein kostenloses E-Mail Programm und wird f&uuml;r beide Varianten Ihre E-Mails innerhalb der Demos anzeigen.<\/p>"
+                    },
+                    {
+                        "title": "Aufgabenstellung",
+                        "content": "&nbsp;<p>Die Aufgabenstellung f&uuml;r beide Demos ist gleich:<\/p>\r\n\r\n<p>Innerhalb der Demo ist Ihr Name Max Mustermann.<\/p>\r\n\r\n<p>Bitte lesen und bearbeiten Sie, wenn n&ouml;tig, alle E-Mails.<\/p>\r\n\r\n<p>Wenn Sie alle E-Mails bearbeitet haben, ist die Demo abgeschlossen.<\/p>\r\n\r\n<p><\/p>\r\n\r\n<p>Falls Sie die sichere Demo gestartet haben, empfielt es sich die sichere Demo im Anschluss zu machen.<br \/>\r\nAndernfalls k&ouml;nnen Sie mehr Informationen zu dem Thema Phishing in unseren Lernmaterialien erhalten oder eine andere Demo starten.<\/p>"
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "id": "password",
+        "categories": [
+            "password",
+            "twoFactorAuthentication"
+        ],
+        "level": "intermediate",
+        "time": 20,
+        "status": 0,
+        "secureMode": false,
+        "isAvailable": true,
+        "messages": {
+            "en": {
+                "title": "Password",
+                "description": "This demo shows how secure passwords should be and how to use a second factor to make your login more secure.",
+                "guide": [
+                    {
+                        "title": "Preparing for the Demo",
+                        "content": "To get started, please go to the new browser tab that should have opened after you started the demo. If this is not the case, go to the following page in a new tab: <a href='http://localhost:5001/'>http://localhost:5001</a>. Then follow the instructions of the demo."
+                    },
+                    {
+                        "title": "Dummy",
+                        "content": "Dummy"
+                    },
+                    {
+                        "title": "Dummy",
+                        "content": "Dummy"
+                    },
+                    {
+                        "title": "Dummy",
+                        "content": "Dummy"
+                    }
+                ]
+            },
+            "de": {
+                "title": "Kennwort",
+                "description": "Diese Demo zeigt, wie sicher Passwörter sein sollten und wie Sie einen zweiten Faktor verwenden können, um Ihre Anmeldung sicherer zu machen.",
+                "guide": [
+                    {
+                        "title": "Einleitung",
+                        "content": "<p>&nbsp;<\/p>\r\n\r\n<p>Die Passwort Demo gibt es als unsichere und sichere Variante. Am besten starten Sie mit der unsichere Variante.<br \/>\r\nLesen Sie sich die entsprechende Einleitung f&uuml;r ihre gew&auml;hlte Variante, die Sie starten wollen, durch.<br \/>\r\nDanach k&ouml;nnen Sie die jeweilige Demo in dem Reiter <strong>Starten der Demo<\/strong> starten.<\/p>\r\n\r\n<p><strong>Bitte denken Sie daran in keiner Demo Ihre pers&ouml;nlichen Passw&ouml;rter zu verwenden!<\/strong><\/p>"
+                    },
+                    {
+                        "title": "Unsichere Demo",
+                        "content": "<p>&nbsp;<\/p>\r\n\r\n<p>Bei der unsicheren Demo wird das System ihr Passwort nicht auf Sicherheit oder &auml;hnliches &uuml;berpr&uuml;fen. Halten Sie sich an die Anweisungen innerhalb der Demo.<\/p>\r\n\r\n<p><strong>Bitte denken Sie daran in keiner Demo Ihre pers&ouml;nlichen Passw&ouml;rter zu verwenden!<\/strong><\/p>"
+                    },
+                    {
+                        "title": "Sichere Demo",
+                        "content": "<p>&nbsp;<\/p>\r\n\r\n<p>Bei der sicheren Demo wird das System ihr Passwort bei der Registrierung auf aktuelle Sicherheitsempfehlungen pr&uuml;fen und au&szlig;erdem wird <strong>Zwei-Faktor-Authentisierung (2FA)<\/strong> eingesetzt, um noch mehr Sicherheit zu gew&auml;hrleisten.<\/p>\r\n\r\n<p>Zwei-Faktor-Authentisierung ist ein Verfahren, das einen weiteren Faktor (z.B. Mobiltelefon, Fingerabdruck) einsetzt, um ein Loginversuch zu verifizieren. Sie werden in der Demo eine kurze Einweisung dazu erhalten und f&uuml;r genauere Informationen k&ouml;nnen Sie unsere Lerninhalte zu dem Thema Passw&ouml;rter oder auch gezielt f&uuml;r Zwei-Faktor-Authentisierung anschauen.<\/p>\r\n\r\n<p><strong>Bitte denken Sie daran in keiner Demo Ihre pers&ouml;nlichen Passw&ouml;rter zu verwenden!<\/strong><\/p>"
+                    },
+                    {
+                        "title": "Starten der Demo",
+                        "content": "<p>&nbsp;<\/p>\r\n\r\n<p>Um die Demo zu starten dr&uuml;cken Sie <a href=\"http:\/\/localhost:5001\/\" target=\"_blank\">hier<\/a>. Folgen Sie anschlie&szlig;end den Anweisungen der Demo.<\/p>\r\n\r\n<p><strong>Bitte denken Sie daran in keiner Demo Ihre pers&ouml;nlichen Passw&ouml;rter zu verwenden!<\/strong><\/p>"
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "id": "ransomware",
+        "categories": [
+            "phishing",
+            "email",
+            "ransomware"
+        ],
+        "level": "beginner",
+        "status": 0,
+        "time": 5,
+        "secureMode": false,
+        "disableSecureMode": true,
+        "isRunning": false,
+        "isAvailable": true,
+        "messages": {
+            "en": {
+                "title": "Ransomware",
+                "description": "This demo shows a ransomware attack based on an everyday scenario.",
+                "guide": [
+                    {
+                        "title": "Briefing",
+                        "content": "You are Max and you are employed at the company \"MPSE international\". There you are working in controlling."
+                    },
+                    {
+                        "title": "During Demo",
+                        "content": "The mail application Thunderbird starts automtically. Check your e-mails. Open any attachments."
+                    },
+                    {
+                        "title": "After Demo",
+                        "content": "If you started the ransomware malware your system is encrrypted."
+                    }
+                ]
+            },
+            "de": {
+                "title": "Ransomware",
+                "description": "Diese Demo zeigt die Gefahren von Verschlüsselungs-Trojanern anhand eines alltäglichen Szenarios auf.",
+                "guide": [
+                    {
+                        "title": "Hintergrund",
+                        "content": "Sie sind Max und Sie sind angestellt in der Firma \"MPSE international\". Dort sind Sie in der Buchhaltung angestellt."
+                    },
+                    {
+                        "title": "Mails überprüfen",
+                        "content": "Das Mailprogram Thunderbird öffnet sich automatisch. Überprüfen Sie Ihr Mail-Postfach und arbeiten Sie die E-Mails ab. Öffnen Sie die angehängten Dateien."
+                    },
+                    {
+                        "title": "After Demo",
+                        "content": "Wenn Sie eine Schadsoftware gestartet haben wird Ihr System verschlüsselt."
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "id": "fokusrnware",
+        "categories": [
+            "phishing",
+            "email",
+            "driveByDownload",
+            "ransomware"
+        ],
+        "level": "intermediate",
+        "status": 0,
+        "time": 10,
+        "secureMode": false,
+        "disableSecureMode": true,
+        "isRunning": false,
+        "isAvailable": true,
+        "messages": {
+            "en": {
+                "title": "Ransomware (Malicious Website)",
+                "description": "In this demo the user is confronted with a Ransomware-Attack and a Drive-by-Download as the attackvector",
+                "guide": [
+                    {
+                        "title": "Briefing",
+                        "content": "The Thunderbird e-mail client opens as soon as the demo is started. In this scenario, you play the employee Max."
+                    },
+                    {
+                        "title": "During Demo",
+                        "content": "Read through the emails which are in the inbox."
+                    }
+                ]
+            },
+            "de": {
+                "title": "Ransomware (Schadhafte Website)",
+                "description": "In dieser Demo wird der Nutzer mit einem Ransomware-Angriff und einem Drive-by-Download als Angriffsvektor konfrontiert.",
+                "guide": [
+                    {
+                        "title": "Einweisung",
+                        "content": "Der E-Mail-Client Thunderbird wird geöffnet, sobald die Demo gestartet ist. In diesem Szenario spielen Sie den Mitarbeiter Max."
+                    },
+                    {
+                        "title": "Während der Demo",
+                        "content": "Lesen Sie durch die E-Mails, welche sich im Posteingang befinden."
+                    }
+                ]
+            }
+        }
+    }
+]
