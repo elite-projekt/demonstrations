@@ -16,20 +16,12 @@
                 "description": "This demo shows security risks when dealing with phishing attempts. You will run through a short scenario from everyday office life.",
                 "guide": [
                     {
-                        "title": "Open Mail Program",
-                        "content": "To begin please arrange this browser window to the right of your screen. Open the email application \"Thunderbird\" and arrange this window to the left side."
+                        "title": "Dummy",
+                        "content": "Dummy"
                     },
                     {
-                        "title": "Point of View",
-                        "content": "You are Max and you are employed at the company \"MPSE international\". There you are assigned as an assistant to the management. At the moment, the mood in the office is a bit tense. The management is awaiting information on government assistance regarding the COVID-19 pandemic. In addition, a popular co-worker leaves the company and the department is planning a farewell party. You ordered a gift for him and you are expecting it to arrive soon. So, this is how you start your workday and the first thing you do is check your e-mails."
-                    },
-                    {
-                        "title": "Check Mails",
-                        "content": "Go through your e-mails.\n Is there already a date for the party?\n Has the farewell gift been sent?\n Are there other important emails?"
-                    },
-                    {
-                        "title": "End of Demo",
-                        "content": "This concludes this demo. Remember that there are two different modes available on the ECS-Portal. If you want to learn more about the topic Phishing you can reach the prepared Teaching Material by clicking on the button below. To end the demo please close Thunderbird and then close this tab. After that you can start any other demo available on the ECS-portal."
+                        "title": "Dummy",
+                        "content": "Dummy"
                     }
                 ]
             },
@@ -38,20 +30,12 @@
                 "description": "Diese Demo zeigt Sicherheitsrisiken im Umgang mit Phishing-Versuchen auf. Sie werden ein kurzes Szenario aus dem Büroalltag durchspielen.",
                 "guide": [
                     {
-                        "title": "Öffnen vom E-Mail Programm",
-                        "content": "Um zu beginnen, ordnen Sie bitte dieses Browser-Fenster auf der rechten Seite Ihres Bildschirms an. Öffnen Sie die E-Mail-Anwendung \"Thunderbird\" und ordnen Sie dieses Fenster auf der linken Seite an."
+                        "title": "Einleitung",
+                        "content": "&nbsp;<p>Die Phishing Demo gibt es als sichere und unsichere Variante. Am besten starten Sie mit der unsicheren und starten danach die sichere Variante.<\/p>\r\n\r\n<p>Sowohl bei der sicheren als auch der unsicheren Variante wird sich automaitsch ein Fenster von Thunderbird &ouml;ffnen.<\/p>\r\n\r\n<p>Thunderbird ist ein kostenloses E-Mail Programm und wird f&uuml;r beide Varianten Ihre E-Mails innerhalb der Demos anzeigen.<\/p>"
                     },
                     {
-                        "title": "Hintergrund",
-                        "content": "Sie sind Max und Sie sind angestellt in der Firma \"MPSE international\". Dort sind Sie als Assistenz der Geschäftsführung eingestellt. Zur Zeit ist die Stimmung im Büro etwas angespannt. Nächste Woche findet ein Treffen mit wichtigen Geschäftspartnern statt und noch immer sind nicht alle Terminzusagen bei Ihnen eingegangen. Und das Geschenk, welches Sie im Namen der Abteilung für eine in Rente gehende Kollegin bestellt hatten,  sollte auch schon längst geliefert sein. So beginnen Sie also Ihren Arbeitstag und sehen als erstes nach Ihren E-Mails."
-                    },
-                    {
-                        "title": "Mails überprüfen",
-                        "content": "Gehen Sie Ihre E-Mails durch.\n Gibt es schon einen Termin für die Party?\n Wurde das Abschiedsgeschenk versandt?\n Gibt es sonst noch wichtige E-Mails?"
-                    },
-                    {
-                        "title": "Ende der Demo",
-                        "content": "Damit ist diese Demo beendet. Denken Sie daran, dass auf dem ECS-Portal zwei verschiedene Modi verfügbar sind. Wenn Sie mehr über das Thema Phishing erfahren möchten, können Sie das vorbereitete Lehrmaterial durch Klicken auf die Schaltfläche unten aufrufen. Um die Demo zu beenden, schließen Sie bitte Thunderbird und dann diese Registerkarte. Danach können Sie jede andere im ECS-Portal verfügbare Demo starten."
+                        "title": "Aufgabenstellung",
+                        "content": "&nbsp;<p>Die Aufgabenstellung f&uuml;r beide Demos ist gleich:<\/p>\r\n\r\n<p>Innerhalb der Demo ist Ihr Name Max Mustermann.<\/p>\r\n\r\n<p>Bitte lesen und bearbeiten Sie, wenn n&ouml;tig, alle E-Mails.<\/p>\r\n\r\n<p>Wenn Sie alle E-Mails bearbeitet haben, ist die Demo abgeschlossen.<\/p>\r\n\r\n<p><\/p>\r\n\r\n<p>Falls Sie die sichere Demo gestartet haben, empfielt es sich die sichere Demo im Anschluss zu machen.<br \/>\r\nAndernfalls k&ouml;nnen Sie mehr Informationen zu dem Thema Phishing in unseren Lernmaterialien erhalten oder eine andere Demo starten.<\/p>"
                     }
                 ]
             }
@@ -76,6 +60,18 @@
                     {
                         "title": "Preparing for the Demo",
                         "content": "To get started, please go to the new browser tab that should have opened after you started the demo. If this is not the case, go to the following page in a new tab: <a href='http://localhost:5001/'>http://localhost:5001</a>. Then follow the instructions of the demo."
+                    },
+                    {
+                        "title": "Dummy",
+                        "content": "Dummy"
+                    },
+                    {
+                        "title": "Dummy",
+                        "content": "Dummy"
+                    },
+                    {
+                        "title": "Dummy",
+                        "content": "Dummy"
                     }
                 ]
             },
@@ -84,8 +80,20 @@
                 "description": "Diese Demo zeigt, wie sicher Passwörter sein sollten und wie Sie einen zweiten Faktor verwenden können, um Ihre Anmeldung sicherer zu machen.",
                 "guide": [
                     {
-                        "title": "Vorbereitung für die Demo",
-                        "content": "Um zu beginnen, gehen Sie bitte auf den neuen Browser Tab, der sich nach dem Start der Demo geöffnet haben sollte. Wenn dies nicht der Fall ist, so rufen Sie in einem neuen Tab folgenden Seite auf: <a href='http://localhost:5001/'>http://localhost:5001</a>. Folgen Sie anschließend den Anweisungen der Demo."
+                        "title": "Einleitung",
+                        "content": "<p>&nbsp;<\/p>\r\n\r\n<p>Die Passwort Demo gibt es als unsichere und sichere Variante. Am besten starten Sie mit der unsichere Variante.<br \/>\r\nLesen Sie sich die entsprechende Einleitung f&uuml;r ihre gew&auml;hlte Variante, die Sie starten wollen, durch.<br \/>\r\nDanach k&ouml;nnen Sie die jeweilige Demo in dem Reiter <strong>Starten der Demo<\/strong> starten.<\/p>\r\n\r\n<p><strong>Bitte denken Sie daran in keiner Demo Ihre pers&ouml;nlichen Passw&ouml;rter zu verwenden!<\/strong><\/p>"
+                    },
+                    {
+                        "title": "Unsichere Demo",
+                        "content": "<p>&nbsp;<\/p>\r\n\r\n<p>Bei der unsicheren Demo wird das System ihr Passwort nicht auf Sicherheit oder &auml;hnliches &uuml;berpr&uuml;fen. Halten Sie sich an die Anweisungen innerhalb der Demo.<\/p>\r\n\r\n<p><strong>Bitte denken Sie daran in keiner Demo Ihre pers&ouml;nlichen Passw&ouml;rter zu verwenden!<\/strong><\/p>"
+                    },
+                    {
+                        "title": "Sichere Demo",
+                        "content": "<p>&nbsp;<\/p>\r\n\r\n<p>Bei der sicheren Demo wird das System ihr Passwort bei der Registrierung auf aktuelle Sicherheitsempfehlungen pr&uuml;fen und au&szlig;erdem wird <strong>Zwei-Faktor-Authentisierung (2FA)<\/strong> eingesetzt, um noch mehr Sicherheit zu gew&auml;hrleisten.<\/p>\r\n\r\n<p>Zwei-Faktor-Authentisierung ist ein Verfahren, das einen weiteren Faktor (z.B. Mobiltelefon, Fingerabdruck) einsetzt, um ein Loginversuch zu verifizieren. Sie werden in der Demo eine kurze Einweisung dazu erhalten und f&uuml;r genauere Informationen k&ouml;nnen Sie unsere Lerninhalte zu dem Thema Passw&ouml;rter oder auch gezielt f&uuml;r Zwei-Faktor-Authentisierung anschauen.<\/p>\r\n\r\n<p><strong>Bitte denken Sie daran in keiner Demo Ihre pers&ouml;nlichen Passw&ouml;rter zu verwenden!<\/strong><\/p>"
+                    },
+                    {
+                        "title": "Starten der Demo",
+                        "content": "<p>&nbsp;<\/p>\r\n\r\n<p>Um die Demo zu starten dr&uuml;cken Sie <a href=\"http:\/\/localhost:5001\/\" target=\"_blank\">hier<\/a>. Folgen Sie anschlie&szlig;end den Anweisungen der Demo.<\/p>\r\n\r\n<p><strong>Bitte denken Sie daran in keiner Demo Ihre pers&ouml;nlichen Passw&ouml;rter zu verwenden!<\/strong><\/p>"
                     }
                 ]
             }
