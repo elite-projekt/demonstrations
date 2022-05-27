@@ -1,0 +1,16 @@
+to: 
+    display_name: Max Mustermann
+    email: max.mustermann@mpseinternational.com
+from: 
+    display_name: "Nina Folan"
+    email: Nina.Folan@mpseinternational.com
+subject: "Alles neu"
+time: "12:31"
+content: |
+    Hallo Max,
+    
+    ich hoffe, das Einrichten Deines E-Mailprogramms und E-Mailaccounts auf dem neuen Rechner lief ohne Probleme. Glücklicherweise konnten alle deine Dateien sicher von deinem alten Rechner auf den neuen übertragen werden. 
+    In Zukunft bitte ich Dich, dass du dich bei technischen Problemen beim IT-Service meldest und die Angelegenheiten nicht selbst versuchst zu lösen.
+
+    Liebe Grüße
+    Nina

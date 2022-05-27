@@ -43,6 +43,11 @@ lint:python-code:
   needs: []
 
 #lint:demo:begin - DO NOT CHANGE THIS LINE. required by 'init_new_demo.sh' script
+lint:fokusrnware-dockerfile:
+  <<: *lint-dockerfile
+  variables:
+    SUB_PROJECT_FOLDER: demos/fokusrnware/
+
 lint:ransomware-dockerfile:
   <<: *lint-dockerfile
   variables:
@@ -109,6 +114,14 @@ test:python:
     - lint:python-code
 
 #build:demo:begin - DO NOT CHANGE THIS LINE. required by 'init_new_demo.sh' script
+build:fokusrnware-image:
+  <<: *build-image
+  variables:
+    SUB_PROJECT_NAME: fokusrnware
+    SUB_PROJECT_FOLDER: demos/fokusrnware/
+  needs:
+    - lint:fokusrnware-dockerfile
+    
 build:ransomware-image:
   <<: *build-image
   variables:
@@ -233,6 +246,14 @@ build:release-zip:
   allow_failure: true
 
 #scan:demo:begin - DO NOT CHANGE THIS LINE. required by 'init_new_demo.sh' script
+scan:fokusrnware-image:
+  <<: *scan-image
+  variables:
+    SUB_PROJECT_NAME: fokusrnware
+    SUB_PROJECT_FOLDER: demos/fokusrnware/
+  needs:
+  - build:fokusrnware-image
+  
 scan:ransomware-image:
   <<: *scan-image
   variables:
@@ -277,6 +298,13 @@ scan:password-image:
   - crane push $SUB_PROJECT_NAME.tar $CI_REGISTRY_IMAGE/$SUB_PROJECT_NAME:$CI_COMMIT_BRANCH
 
 #push:demo:begin - DO NOT CHANGE THIS LINE. required by 'init_new_demo.sh' script
+push:fokusrnware-image:
+  <<: *push-image
+  variables:
+    SUB_PROJECT_NAME: fokusrnware
+  needs:
+  - build:fokusrnware-image
+
 push:ransomware-image:
   <<: *push-image
   variables:
