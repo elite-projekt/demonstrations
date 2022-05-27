@@ -92,55 +92,6 @@
         }
     },
     {
-        "id": "download",
-        "categories": [
-            "driveByDownload"
-        ],
-        "level": "intermediate",
-        "status": 0,
-        "time": 20,
-        "secureMode": false,
-        "isAvailable": true,
-        "messages": {
-            "en": {
-                "title": "Drive-By Download",
-                "description": "This demo shows what a drive-by download is, why it is dangerous and how you can protect yourself against it.",
-                "guide": [
-                    {
-                        "title": "Start",
-                        "content": "As soon as you start the demo, a new browser window opens. When you start the secure mode, notice that there is a red shield-shaped icon in the upper right corner of the browser window."
-                    },
-                    {
-                        "title": "Execution",
-                        "content": "Your task during this demo is to buy a printer for your company. This printer shall bring a multiscan functionality. Unsafe mode: Is it safe for you, the user, to click on the advertisements displayed in the online store? Safe mode: Click on the red shield-shaped icon in the upper right corner of your browser window and try to understand why no advertisements are displayed."
-                    },
-                    {
-                        "title": "End",
-                        "content": "After you have finished the demo by either buying the correct printer or becoming a victim of a simulated drive-by download, you can find more information about this topic in the teaching material."
-                    }
-                ]
-            },
-            "de": {
-                "title": "Drive-By Download",
-                "description": "Diese Demo erklärt wie ein Drive-By Download funktioniert, wo die Gefahren liegen und Sie sich davor schützen können.",
-                "guide": [
-                    {
-                        "title": "Start",
-                        "content": "Sobald Sie die Demo starten, öffnet sich ein neues Browserfenster. Achten Sie beim Start im sicheren Modus darauf, dass sich ein rotes schildförmiges Symbol in der oberen rechten Ecke des Browserfensters befindet."
-                    },
-                    {
-                        "title": "Durchführung",
-                        "content": "Ihre Aufgabe während dieser Demo ist es, einen Drucker für Ihr Unternehmen zu kaufen. Dieser soll die Funktion \"Multiscan\" besitzen. Unsicherer Modus: Ist es für Sie als Anwender sicher, auf die im Onlineshop angezeigte Werbung zu klicken? Sicherer Modus: Klicken sie auf das rote schildförmige Symbol in der oberen rechten Ecke Ihres Browserfensters und versuchen Sie nachzuvollziehen wieso Ihnen keine Werbung angezeigt wird."
-                    },
-                    {
-                        "title": "Ende",
-                        "content": "Nachdem Sie die Demo beendet haben indem Sie entweder einen richtigen Drucker gekauft oder Opfer eines simulierten Drive-By Downloads geworden sind, finden Sie weitere Information zum Thema im Teaching Material."
-                    }
-                ]
-            }
-        }
-    },
-    {
         "id": "ransomware",
         "categories": [
             "phishing",

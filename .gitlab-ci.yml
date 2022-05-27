@@ -48,11 +48,6 @@ lint:ransomware-dockerfile:
   variables:
     SUB_PROJECT_FOLDER: demos/ransomware/
 
-lint:download-dockerfile:
-  <<: *lint-dockerfile
-  variables:
-    SUB_PROJECT_FOLDER: demos/download/
-
 lint:phishing-dockerfile:
   <<: *lint-dockerfile
   variables:
@@ -117,13 +112,6 @@ build:ransomware-image:
   needs:
     - lint:ransomware-dockerfile
 
-build:download-image:
-  <<: *build-image
-  variables:
-    SUB_PROJECT_NAME: download
-    SUB_PROJECT_FOLDER: demos/download/
-  needs:
-    - lint:download-dockerfile
 
 build:phishing-image:
   <<: *build-image
@@ -241,14 +229,6 @@ scan:ransomware-image:
   needs:
   - build:ransomware-image
 
-scan:download-image:
-  <<: *scan-image
-  variables:
-    SUB_PROJECT_NAME: download
-    SUB_PROJECT_FOLDER: demos/download/
-  needs:
-  - build:download-image
-
 scan:phishing-image:
   <<: *scan-image
   variables:
@@ -284,12 +264,6 @@ push:ransomware-image:
   needs:
   - build:ransomware-image
 
-push:download-image:
-  <<: *push-image
-  variables:
-    SUB_PROJECT_NAME: download
-  needs:
-  - build:download-image
 
 push:phishing-image:
   <<: *push-image
