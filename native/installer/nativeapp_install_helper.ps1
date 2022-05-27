@@ -181,7 +181,7 @@ If(!(Test-Path -path $rootPath)) {
     }
 
     # Host File
-    $localRedirects = "127.0.0.1`twww.shipment-support-amazon.com covidsupportgermany.de coronahilfengermany.de mpseinternational.com mail.domain.com #MPSE"
+    $localRedirects = "127.0.0.1`twww.shipment-support-amazon.com covidsupportgermany.de coronahilfengermany.de mpseinternational.com mail.domain.com de.linkedln.com #MPSE"
     try {
         $containsRedirecets = Select-String -Path $hostFile -Pattern '#MPSE' -ErrorAction Stop
         if($containsRedirecets -ne $null) {
@@ -251,6 +251,7 @@ If(!(Test-Path -path $rootPath)) {
             throw
         } else {
             WriteOutput "Trying to pull the latest docker images" "DarkGray"
+            run-docker "pull $Env:REGISTRY_URL/$Env:GROUP_NAME/demonstrations/$Env:FOKUSRNWARE_REPO"
             run-docker "pull $Env:REGISTRY_URL/$Env:GROUP_NAME/demonstrations/$Env:RANSOMWARE_REPO"
             run-docker "pull $Env:REGISTRY_URL/$Env:GROUP_NAME/demonstrations/$Env:PHISHING_REPO"
             run-docker "pull $Env:REGISTRY_URL/$Env:GROUP_NAME/demonstrations/$Env:PASSWORD_REPO"

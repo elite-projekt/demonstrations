@@ -1,0 +1,199 @@
+# This file can be used to set the flow and various properties of the attack
+# Do not modify the values in <checker> and <parameter> for the individual properties.
+# If the code is used as PyInstaller exe, then for files also only the filename can be entered
+# \\+ is used as a escape sequenz for seperating text to multiple Hackboxes
+# "Mode: execute" -> executes all the cmds in "sequence" sequenctially
+# "Mode: show" -> shows all attributes of the builded objects 
+# The keys cmd* in "sequence" can be renamed arbitrarily as long as they remain unique 
+# abbreviations
+  # commands:
+    # KP = kills the given process name   # parameter <processname> requiered
+    # AT = Adds running software as trusted, admin rights are requiered
+    # SE = plays a given soundeffect  # parameter <soundeffect> requiered
+    # HB = pops the "Hackbox" with the given message  # parameter <message> is requiered
+    # SR = pops a console and shows the user the results of net user <username>
+    # DS = deletes shadow-copys on the system, admin rights are requiered
+    # PA = pops up a bunch of consoles with ascii-art combined
+    # EF = encrypts files on the system
+    # CB = changes the desktop background
+    # EW = uses the Emailworm, outlook-app on system is requiered
+    # PR = places the ransomnote on the desktop
+# acronyms:
+    # OTP = One Time Pad
+    # INVB = inverted Bits
+    # AES = Advanced Encryption Standard
+
+Ransomware: 
+  # threads for the exe to encrypt faster
+  threadsNum: 
+    value: 10         # options: <Number>; default: 0
+    checker: type
+    parameter: int
+  # whether to modify the files to be encrypted with "overwrite" variant or "copy" variant
+  fileMod: 
+    value: overwrite  # options: overwrite, copy; default: overwrite
+    checker: available
+    parameter: overwrite, copy
+  # list of suffixes used to search for files, which will be encrypted
+  fileSuffixList: 
+    value: txt, jfif, xlsx, docx, text, jpg, pdf, pptx, ppt, ics, json  # options: <Suffix1, Suffix2,...>; default: <empty list> 
+    checker: 
+    parameter:
+  # Listing of directories which are skipped when searching for files, which will be encrypted
+  dirBlacklist: 
+    value: Program Files (x86), Program Files, Windows, PerfLogs, ProgramData, AppData, All Users, $Recycle.Bin # options <folder1, folder2,...>; default: <empty list>
+    checker: 
+    parameter:
+  # the start directory from which the recursive search for matching files begins
+  encArea: 
+    value: desktop          # options: desktop, user, root, drives; default: desktop
+    checker: available
+    parameter: desktop, user, root, drives;
+  # path for desktop background, which will be used in CB
+  desktopBackground:
+    value: ELITE_Hintergrund.png         # options: <path>; <empty string> 
+    checker: openable
+    parameter: 
+  # path for ransomnote, which will be used in PR
+  ransomnote: 
+    value: ransom.docx     # options: <path>; <empty string> 
+    checker: openable
+    parameter: 
+#########################################################################################################################################################
+Encryption:
+  # Which cryptographic encryption algorithm or file modification to use.
+  encMode: 
+    value: OTP        # options: OTP, INVB, AES; defaut: INVB 
+    checker: available
+    parameter: OTP, INVB, AES
+  # 16 characters long key
+  key:
+    value: abcdefghijklmnop            # options: <keyvalue>; default: aaaaaaaaaaaaaaaa
+    checker: length
+    parameter: 16
+#########################################################################################################################################################
+Emailworm:
+  # wheter the E-mails will be displayed on the desktop before sendin them
+  useDisplay:
+    value: True
+    checker: type
+    parameter: bool
+  # subject of the E-mail
+  subject:
+    value: "Sensible Daten auf deinem LinkedIn Profil"
+    checker: 
+    parameter:
+  # message of the E-mail
+  message:
+    value: "Hallo, <br> <br> auf deinem Profil in LinkedIn sind sensible persönliche und unser Unternehmen betreffende <br>
+    Informationen eingetragen worden. Schau dir das bitte mal auf LinkedIn an <a href=\"http://de.linkedln.com\">http://de.linkedln.com </a>. <br><br>
+    Viele Grüße"
+    checker:
+    parameter:
+#########################################################################################################################################################
+Hacker:  
+  # path to AsciiArt, which will be used in PA
+  asciiArt:
+    value: AsciiArt.txt   # options: <path>; default: <empty string>
+    checker: openable
+    parameter:
+  # path to the hackerbox icon, which will be used in HB
+  messageIcon: 
+    value: hacker.ico   # options: <path>; <empty string> 
+    checker: openable
+    parameter:
+  # path to the hackerbox background, which will be used in HB
+  messageBackground: 
+    value: hacker.png   # options: <path>; <empty string> 
+    checker: openable
+    parameter:
+  # path to the sound effects, which can be used as a parameter for SE
+  soundeffects:
+    value: # options: <path>; <empty List> 
+      soef1: startSound.wav  
+      soef2: evilLaugh.wav 
+      soef3: lockedDoor.wav
+      soef4: end.wav
+    checker: openableList
+    parameter:
+  # path to the messages, which can be used as a parameter for HB
+  messages:
+    value: #options: <path>; <empty List> 
+      start: "Willkommen, Willkommen!! Wie es aussieht, hat sich dein System erfolgreich durch einen Drive-by-Download mit meiner Ransomware infiziert.\n
+      Ransomware? Drive-by-was? Immer mit der Ruhe! Du wirst nun durch den Ablauf des Ransomwareangriffs von mir begleitet. Nur damit wir uns verstehen,\n 
+      ich bin kein „Nice Guy“… ich werde in jedem Fall dein System beschädigen. Betrachte das Ganze als ein Geben und ein Nehmen...\\+
+      Erst mal - wie wurde dein System infiziert, wenn du doch nur eine Webseite besucht hast? Bestimmt war dein Browser veraltet.\n 
+      Durch eine Schwachstelle, welche in veralteten Browsern enthalten ist, wurde dieser Drive-by-Download möglich gemacht.\n 
+      Durch diese Schwachstelle konnte der Angreifer (das war in diesem Fall ich) schädlichen Software-Code auf deinem System ausführen.\\+
+      Hast du dir eigentlich den Link angeguckt, auf welchen du raufgeklickt hattest? Der sah richtig und sicher aus, oder?\n
+      Tatsächlich wurde im Namen „LinkedIn“ das große „i“ mit einem kleinen „L“ ausgetauscht.\n
+      Weiterhin werden in Links alle Zeichen in Kleinbuchstaben geschrieben.\n
+      Dies bedeutet, dass die echte Seite von LinkedIn „de.linkedin.com“ lautet und nicht „de.linkedln.com“\\+
+      Ja - genau so schnell kann es gehen, wenn man eine infizierte Webseite besucht. \nDeswegen ist es immer wichtig, das System auf dem aktuellen Stand zu halten.\\+
+      Mit System ist nicht nur der Browser gemeint. Schwachstellen können auch in anderen Programmen, einem Office-Paket, einem E-Mail-Programm,\n 
+      einer Bildbearbeitung oder sogar direkt im Betriebssystem verborgen sein. Deshalb zukünftig immer mal wieder auf den Websites der -Hersteller nachschauen,\n 
+      ob es neue Versionen Deiner Lieblings-Programme und-Apps gibt und diese immer sofort installieren." 
+      preRecon: "Interessant! Dein Benutzeraccount gehört zur Administratorengruppe. Weißt du das überhaupt? Und weißt Du was es bedeutet, wenn du mit Administratorenrechten\n
+      an deinem PC arbeitest? Und was bedeutet das für diesen Angriff? Nun, dazu kommen wir noch. Jetzt zeige ich dir erst mal deine Adminrechte."
+      postRecon: "Heutzutage wird bei Ransomware-Angriffen im Vorfeld deine IT-Infrastruktur genau analysiert, damit der eigentliche Verschlüsselungsangriff\n
+       so reibungslos wie möglich durchgeführt werden kann. Weiterhin sammeln die Angreifer vorab Informationen über die Besitzer\n
+       der Computer, die angegriffen werden sollen, um ein optimal auf das Opfer zugeschnittenes Lösegeld zu fordern. \\+
+       Und nein, dass ich nicht das Ende, sondern erst der Anfang!"
+      delCopies: "Deine Schattenkopien wurden gerade gelöscht. Ach, du weißt gar nicht, was das ist? Schattenkopien sind Backups von deinen Rechnerlaufwerken.\n
+      Du kannst das sehen durch Rechtsklick auf eine Datei -> „Vorgängerversion wiederherstellen“. Schattenkopien sind nicht die einzigen Backups die durch\n
+      Ransomwareangriffe gelöscht werden. Es gibt Angriffe, bei denen von der Ransomware auch andere Arten von Sicherheitskopien ganzer großer Unternehmensnetzwerke\n
+      gelöscht wurden. Wieso konnte ich nun deine Backups löschen? Ganz einfach! Du arbeitest mit Administratorenrechten. Hättest du einen separaten Nutzer ohne \n
+      Admin-Berechtigung angelegt für alle üblichen Arbeitsabläufe oder den Besuch von Websites, dann wäre dies nicht passiert.\\+
+      Und nein, dass ich nicht das Ende, sondern erst der Anfang!" 
+      beforeEnc: "Nun kommen wir zum Herzstück der Ransomware! Deine Dateien werden von mir „als Geiseln genommen“.  Ich werde diese Dateien mit einem \n 
+      kryptografischen Algorithmus verschlüsseln. Und weil du mit Administratorenrechten gearbeitet hast, kann ich wirklich alle Dateien auf deinem System verschlüsseln.\n
+      Keine Sorge! Es geht auch ganz schnell."       
+      afterEnc: "Nun sind deine Dateien verschlüsselt. Gerne kannst du die Dateien mit einem Editor einsehen. Ich warte solange.\\+
+      Deine Dateien sind noch nicht verloren. Sie können wieder entschlüsselt werden. \n
+      Dafür wird ein Schlüssel benötigt, den ich als Angreifer besitze. Natürlich ist der Schlüssel nicht gratis, wir kommen gleich dazu."       
+      emailWorm: "Eine Ransomware-Attacke wirkt am effektivsten, wenn die Dateien von so vielen Betroffenen verschlüsselt werden als möglich.\n
+      Deswegen ist die Weiterverbreitung der Ransomware ganz wichtig für den gesamten Angriff. Moderne Ransomware besitzt „wurmartige Fähigkeiten“.\n
+      Würmer sind eine Malware-Komponente, die eine automatische Vervielfältigung und Weiterverbreitung der Schadsoftware ermöglicht. \n
+      In deinem Falle hat die Wurm-Komponente der Ransomware deinen E-Mail-Account im Thunderbird-Client genutzt, um sich weiterzuverbreiten.\n"    
+      ransom: "In deinem Desktop wird nun eine Lösegeldforderung abgelegt.\nIn der findet das Opfer meistens Kontaktmöglichkeiten zu den Angreifern\n
+      und ihre Forderungen für den vorher erwähnten Entschlüsselungsschlüssel.\nEs wird immer erst eine Zahlung erwartet, jedoch ist es nicht garantiert, dass das Opfer\nden 
+      Entschlüsselungsschlüssel nach der Zahlung des Lösegeldes erhält!\n Durch das Bezahlen des Lösegeldes werden solche Angriffe für Hacker\nweiter profitabel bleiben, 
+      wodurch noch mehr Ransomware-Angriffe in der Zukunft entstehen."
+      ransomv2: "In deinem Desktop-Hintergrund ist nun eine Lösegeldforderung zu erkennen.\nIn Lösegeldforderungen findet das Opfer meistens Kontaktmöglichkeiten zu den Angreifern\n
+      und ihre Forderungen für den vorher erwähnten Entschlüsselungsschlüssel.\nEs wird immer erst eine Zahlung erwartet, jedoch ist es nicht garantiert, dass das Opfer\nden 
+      Entschlüsselungsschlüssel nach der Zahlung des Lösegeldes erhält!\n Durch das Bezahlen des Lösegeldes werden solche Angriffe für Hacker\nweiter profitabel bleiben, 
+      wodurch noch mehr Ransomware-Angriffe in der Zukunft entstehen."
+      end: "Nun sind wir am Ende angekommen. Ist dir etwas aufgefallen? Windows-Defender hat diesen Angriff nicht erkannt, obwohl wirklich\n
+      deine Dateien verschlüsselt und dein Email Account zur Verbreitung der infizierten Webseite missbraucht wurden. Gute Antiviren-Programme können \n
+      solche Angriffe und andere Malware-Varianten erkennen und stoppen, bevor Schaden angerichtet werden kann. Diese Antiviren-Programme sind definitiv \n
+      günstiger als eine Lösegeldforderung. Hoffentlich konnte ich Dir diesen Angriff einigermaßen gut erklären.\n 
+      Nun würde ich sagen, Du zahlst das Lösegeld und wir hoffen, dass wir uns nicht noch einmal begegnen ;)"    
+      endv2: "Nun sind wir am Ende angekommen. Ist dir etwas aufgefallen? Das Antivirus Programm hat diesen Angriff nicht erkannt, obwohl deine Dateien verschlüsselt\n 
+      und dein E-Mail-Konto zur Verbreitung der infizierten Webseite missbraucht wurden. Antiviren-Programme müssen regelmäßig aktualisert werden, um solche Angriffe\n
+      und andere Malware-Varianten verlässlich erkennen und stoppen zu können, bevor Schaden angerichtet werden kann. Hoffentlich konnte ich Dir diesen Angriff\n
+      einigermaßen gut erklären. Nun würde ich sagen, Du zahlst das Lösegeld und wir hoffen, dass wir uns nicht noch einmal begegnen ;)"
+    checker:
+    parameter: 
+# Determines the order of the attack
+Run:
+  mode: execute   # options: execute, show
+  sequence: # options: KP, AT, SE, HB, SR, DS, PA, EF, CB, EW, PR; Syntax: <cmd: parameter>
+    #cmd0: KP -- chrome.exe
+    cmd1: KP -- thunderbird.exe
+    cmd2: SE -- soef1
+    cmd3: HB -- start
+    cmd4: HB -- preRecon
+    cmd5: SR 
+    cmd6: HB -- postRecon
+    cmd7: SE -- soef2
+    cmd8: PA 
+    cmd9: HB -- beforeEnc
+    cmd10: EF 
+    cmd11: CB
+    cmd12: SE -- soef3
+    cmd13: HB -- afterEnc
+    cmd14: HB -- ransomv2
+    cmd15: HB -- emailWorm
+    cmd16: EW 
+    cmd17: HB -- endv2
+    cmd18: SE -- soef4
