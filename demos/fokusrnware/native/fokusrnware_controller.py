@@ -50,28 +50,12 @@ def start_demo_fokusrnware():
         logging.error(e)
     return flask.helpers.make_response(
         flask.json.jsonify(orchestration_controller.start_success), 201)
-    '''try:
-        if secure_mode:
-            orchestration_controller.orchestration_service \
-                .docker_compose_start_file(
-                    "fokusrnware/native/stacks/secure/docker-compose.yml")
-        else:
-            orchestration_controller.orchestration_service \
-                .docker_compose_start_file(
-                    "fokusrnware/native/stacks/unsecure/docker-compose.yml")
-    except Exception:
-        return flask.helpers.make_response(
-            flask.json.jsonify(orchestration_controller.no_docker_error), 500)
-    return flask.helpers.make_response(
-        flask.json.jsonify(orchestration_controller.start_success), 201)'''
 
 
 @orchestration.route("/stop/demo/fokusrnware", methods=["POST", "GET"])
 def stop_demo_fokusrnware():
     orchestration_controller.orchestration_service.docker_compose_stop_file(
-        "fokusrnware/secure/docker-compose.yml")
-    orchestration_controller.orchestration_service.docker_compose_stop_file(
-        "fokusrnware/unsecure/docker-compose.yml")
+        "fokusrnware/native/stacks/docker-compose.yml")
     fokusrnware_service.reset()
     return flask.helpers.make_response(
         flask.json.jsonify(orchestration_controller.stop_success), 200)
@@ -81,7 +65,7 @@ def stop_demo_fokusrnware():
 def status_demo_fokusrnware():
     result = orchestration_controller.orchestration_service \
         .get_status_docker_compose_file(
-            "fokusrnware/secure/docker-compose.yml")
+            "fokusrnware/native/stacks/docker-compose.yml")
 
     if len(result) > 0:
         return flask.helpers.make_response(flask.json.jsonify(result), 200)
@@ -94,7 +78,7 @@ def status_demo_fokusrnware_sum():
     result \
         = orchestration_controller.orchestration_service \
         .get_sum_status_docker_compose_file(
-            "fokusrnware/secure/docker-compose.yml")
+            "fokusrnware/native/stacks/docker-compose.yml")
 
     if len(result) > 0:
         return flask.helpers.make_response(flask.json.jsonify(result), 200)

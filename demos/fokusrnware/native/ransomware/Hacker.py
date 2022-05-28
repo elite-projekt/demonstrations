@@ -49,10 +49,9 @@ class Hacker:
         # if self.checkAdminRights() == False:
         #    return
         timeout = 6
-        call('cmd /c start cmd /k \"net user ' + self.user + '\"',
-             shell=False)  # nosec
+        Popen('cmd /c start cmd /k \"net user ' + self.user + '\"',
+              shell=False)  # nosec
         # so the timeout in that spawned command prompt can be readed
-        sleep(timeout)
         # saving the result of tasklist command
         tasklistResult = Popen("cmd /c" +
                                "tasklist", stdout=PIPE,  # nosec
@@ -62,7 +61,12 @@ class Hacker:
         # filter the pids from the result through regex
         reg = findall(r"cmd.exe\s+([0-9]+) Console",
                       tasklistResult.decode("utf-8"))
-        call('taskkill /pid ' + reg[-2] + ' /f')  # nosec
+        sleep(timeout)
+        try:
+            if len(reg) >= 2:
+                call('taskkill /pid ' + reg[-1] + ' /f')  # nosec
+        except IndexError as e:
+            print(e)
 
     '''
         Tries to kill a process by name with a taskkill command
@@ -130,9 +134,10 @@ class Hacker:
         if self.asciiArt == "":
             return
         for i in range(20):
-            Popen(["cmd", "/c", "start", "cmd",
-                   "/k", "color 0a &  type " +  # nosec
-                   self.asciiArt], shell=False)  # nosec
+            path = (".\\demos\\fokusrnware\\native\\ransomware\\" +
+                    "resource\\AsciiArt.txt")
+            command = "cmd /c start cmd /k \"color 0a &  type " + path + "\""
+            Popen(command, shell=False)  # nosec
             # with this, it will look more sequetially, when the cmds get open
             sleep(0.05)
         # waiting 2 seconds, so the ascii-art can load inside the cmds before
