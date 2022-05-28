@@ -3,6 +3,8 @@ version: '3.9'
 services:
   phishing:
     image: ${REGISTRY_URL}/${GROUP_NAME}/demonstrations/${PHISHING_REPO}
+    # build:
+    #   context: ../../../phishing/
     container_name: phishing_webserver
     ports:
       - 443:443
