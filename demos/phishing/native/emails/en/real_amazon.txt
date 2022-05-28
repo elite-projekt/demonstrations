@@ -701,7 +701,8 @@ gn: left">=20
                      <td style=3D"border-collapse: collapse !important; -we=
 bkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; font-family: Arial=
 , sans-serif"><span class=3D"emailClosing" style=3D"font-size: 9px; line-he=
-ight: 15px; color: rgb(134, 134, 134)">This is an automatically sent email. Please do not reply to this message, as the email address is not set up to receive emails.</span> </td>=20
+ight: 15px; color: rgb(134, 134, 134)">Dies ist eine automatisch versendete E-Mail. Bitte antworten Sie nicht auf diese Nachricht,=
+ da die E-Mail-Adresse nicht zum Empfang von E-Mails eingerichtet ist.</span> </td>=20
                     </tr>=20
                    </tbody>
                   </table> </td>=20

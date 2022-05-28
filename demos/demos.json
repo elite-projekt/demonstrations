@@ -166,7 +166,7 @@
         "secureMode": false,
         "disableSecureMode": true,
         "isRunning": false,
-        "isAvailable": true,
+        "isAvailable": false,
         "messages": {
             "en": {
                 "title": "Ransomware (Malicious Website)",
