@@ -131,9 +131,12 @@ class MailClient:
             msg['To'] = "{} <{}>".format(
                 yml_data["to"]["display_name"],
                 yml_data["to"]["email"])
-            msg['Date'] = format_datetime(datetime.datetime.strptime(
-                "2020-01-01 {}".format(str(yml_data["time"])),
-                '%Y-%d-%m %H:%M'))
+            if "time" in yml_data:
+                msg['Date'] = format_datetime(datetime.datetime.strptime(
+                    "2020-01-01 {}".format(str(yml_data["time"])),
+                    '%Y-%d-%m %H:%M'))
+            else:
+                msg["Date"] = format_datetime(datetime.datetime.now())
             msg.attach(MIMEText(yml_data["content"]))
 
             if "attachment" in yml_data:
@@ -169,6 +172,6 @@ class MailClient:
 
         return msg
 
-    def send_mail_from_file(self, email_file):
-        msg = self.get_message_from_file(email_file)
+    def send_mail_from_file(self, email_file, random_date_interval=(1, 3)):
+        msg = self.get_message_from_file(email_file, random_date_interval)
         self.send_mail(msg)

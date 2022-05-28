@@ -4,6 +4,7 @@ import pathlib
 import python_on_whales
 import yaml
 import sys
+import time
 
 from nativeapp.config import config
 
@@ -104,3 +105,21 @@ class OrchestrationService:
                 result = running_container.state.status
 
         return result
+
+    # Wait for a container to start
+    def wait_for_container(self, name, timeout_ms=10000, check_delay_ms=1000):
+        """Checks if the mailserver docker container is up"""
+        current_wait = 0
+        try:
+            container = python_on_whales.docker.container.inspect(
+                name)
+            while current_wait < timeout_ms:
+                logging.info(
+                   f"Checking if container {name} is running")
+                if container.state.running:
+                    time.sleep(5)
+                    return
+                time.sleep(check_delay_ms)
+                current_wait += check_delay_ms
+        except Exception as e:
+            logging.error(e)
