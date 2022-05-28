@@ -106,8 +106,13 @@ def run():
     # print(path_shelloutput)
     # os.system('cmd /c shelloutput.bat')
     path = os.path.join(os.path.abspath(
-        os.path.dirname(__file__)), "shelloutput.bat")
-    subprocess.call([path])  # nosec
+        os.path.dirname(__file__)), "shelloutput.py")
+
+    command = "cmd /c start cmd /c python \"" + path + "\""
+
+    for i in range(3):
+        subprocess.call(command)  # nosec
+
     # pause
     time.sleep(1.5)
 
