@@ -90,6 +90,13 @@ class BrowserProgramEdge(BrowserProgram):
                 self.process.kill()
             # Edge doesn't seem to care so we just send a SIGKILL
             self.kill_edge()
+            shutil.rmtree(self.profile_dir, ignore_errors=True)
+            key_path = fr"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Edge\PreferenceMACs\{self.profile_name}"  # noqa: E501
+            subprocess.Popen(  # nosec
+                    ["reg", "delete", key_path, "/va", "/f"])
+            subprocess.Popen(  # nosec
+                    ["reg", "delete", key_path + r"\extensions.settings",
+                     "/va", "/f"])
             logging.info("Success")
         except Exception as e:
             logging.error(e)
