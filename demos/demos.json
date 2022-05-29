@@ -116,7 +116,7 @@
         "messages": {
             "en": {
                 "title": "Ransomware",
-                "description": "The ransomware-demo shows the threats of encryption-trojans using an everyday work scenario.<\/p>\r\n\r\n<p>At the beginning of the demo a thunderbird window will open automatically.<\/p>\r\n\r\n<p>Thunderbird is a free email-application that will show your emails within the demo.<\/p>\r\n\r\n<p>&nbsp;<\/p>\r\n",
+                "description": "The ransomware-demo shows the threats of encryption-trojans using an everyday work scenario.",
                 "guide": [
                     {
                         "title": "Briefing",
