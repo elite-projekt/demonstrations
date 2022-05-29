@@ -116,37 +116,37 @@
         "messages": {
             "en": {
                 "title": "Ransomware",
-                "description": "This demo shows a ransomware attack based on an everyday scenario.",
+                "description": "The ransomware-demo shows the threats of encryption-trojans using an everyday work scenario.<\/p>\r\n\r\n<p>At the beginning of the demo a thunderbird window will open automatically.<\/p>\r\n\r\n<p>Thunderbird is a free email-application that will show your emails within the demo.<\/p>\r\n\r\n<p>&nbsp;<\/p>\r\n",
                 "guide": [
                     {
                         "title": "Briefing",
-                        "content": "You are Max and you are employed at the company \"MPSE international\". There you are working in controlling."
+                        "content": "<p>&nbsp;<\/p>\r\n\r\n<p>At the beginning of the demo a thunderbird window will open automatically.<\/p>\r\n\r\n<p>Thunderbird is a free email-application that will show your emails within the demo.<\/p>\r\n\r\n<p>&nbsp;<\/p>\r\n"
                     },
                     {
-                        "title": "During Demo",
-                        "content": "The mail application Thunderbird starts automtically. Check your e-mails. Open any attachments."
+                        "title": "Instructions",
+                        "content": "<p>&nbsp;<\/p>\r\n\r\n<p>Within the demo your name is Max Mustermann<\/p>\r\n\r\n<p>Please read and process all emails. Open the attached files.<\/p>\r\n\r\n<p>When you have processed all emails, the demo is complete.<\/p>\r\n"
                     },
                     {
                         "title": "After Demo",
-                        "content": "If you started the ransomware malware your system is encrrypted."
+                        "content": "<p>&nbsp;<\/p>\r\n\r\n<p>If you&#39;ve started the malware the documents on your system are encrypted and a ransom note is displayed.<\/p>\r\n"
                     }
                 ]
             },
             "de": {
                 "title": "Ransomware",
-                "description": "Diese Demo zeigt die Gefahren von Verschlüsselungs-Trojanern anhand eines alltäglichen Szenarios auf.",
+                "description": "Die Ransomware-Demo macht die Gefahren von Verschlüsselungs-Trojanern anhand eines alltäglichen Szenarios aus der Arbeitswelt erlebbar.",
                 "guide": [
                     {
-                        "title": "Hintergrund",
-                        "content": "Sie sind Max und Sie sind angestellt in der Firma \"MPSE international\". Dort sind Sie in der Buchhaltung angestellt."
+                        "title": "Einleitung",
+                        "content": "<p>&nbsp;<\/p>\r\n\r\n<p>Zu Beginn der Demo wird sich automaitsch ein Fenster von Thunderbird &ouml;ffnen.<\/p>\r\n\r\n<p>Thunderbird ist ein kostenloses E-Mail Programm und wird Ihre E-Mails innerhalb der Demos anzeigen.<\/p>\r\n\r\n<p>&nbsp;<\/p>\r\n\r\n<p>&nbsp;<\/p>\r\n"
                     },
                     {
-                        "title": "Mails überprüfen",
-                        "content": "Das Mailprogram Thunderbird öffnet sich automatisch. Überprüfen Sie Ihr Mail-Postfach und arbeiten Sie die E-Mails ab. Öffnen Sie die angehängten Dateien."
+                        "title": "Aufgabenstellung",
+                        "content": "<p>&nbsp;<\/p>\r\n\r\n<p>Innerhalb der Demo ist Ihr Name Max Mustermann.<\/p>\r\n\r\n<p>Bitte lesen und bearbeiten Sie alle E-Mails. &Ouml;ffnen Sie die angeh&auml;ngten Dateien.<\/p>\r\n\r\n<p>Wenn Sie alle E-Mails bearbeitet haben, ist die Demo abgeschlossen.<\/p>\r\n"
                     },
                     {
-                        "title": "After Demo",
-                        "content": "Wenn Sie eine Schadsoftware gestartet haben wird Ihr System verschlüsselt."
+                        "title": "Nach der Demo",
+                        "content": "<p>&nbsp;<\/p>\r\n\r\n<p>Wenn Sie eine Schadsoftware ausgef&uuml;hrt haben werden die Dokumente auf Ihrem System verschl&uuml;sselt und eine L&ouml;segeldforderung angezeigt.<\/p>\r\n"
                     }
                 ]
             }
