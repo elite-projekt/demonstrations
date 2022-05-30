@@ -222,7 +222,6 @@ If(!(Test-Path -path $rootPath)) {
         python -m venv $directoryPath/.venv
         . $directoryPath/.venv/Scripts/Activate.ps1
         pip install nativeapp-0.0.0-py3-none-any.whl
-        pip install git+https://gitlab.com/kevin.koester/python_on_whales
         WriteOutput "Installed nativeapp into venv" "Green"
     } catch {
         WriteOutput "Something went wrong while installing native app from wheel" "Red"
