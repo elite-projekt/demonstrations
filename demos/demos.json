@@ -211,7 +211,7 @@
     "secureMode": false,
     "disableSecureMode": true,
     "isRunning": false,
-    "isAvailable": false,
+    "isAvailable": true,
     "messages": {
         "en": {
             "title": "USB attack",
