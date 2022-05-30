@@ -1,11 +1,10 @@
-to: 
+to:
     display_name: Max Mustermann
     email: max.mustermann@mpseinternational.com
-from: 
-    display_name: "Andrea Müller"
-    email: andrea.mueller@mpseinternational.com
+from:
+    display_name: "Andrea Berger"
+    email: andrea.berger@mpseinternational.com
 subject: "EILIG: Prüfung Projektkalkulation"
-time: "09:15"
 content: |
     Hallo Herr Mustermann,
 
@@ -18,6 +17,6 @@ content: |
 
     Freundliche Grüße,
 
-    Andrea Müller
-    
+    Andrea Berger
+
 attachment: "Projektkalkulation.xlsm"
