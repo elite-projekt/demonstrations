@@ -166,7 +166,7 @@ class Hacker:
             ]
         for username in usernameList:
             Popen("\"C:\\Program Files\\Mozilla Thunderbird\\" +  # nosec
-                  "thunderbird\"" +
+                  "thunderbird\"" + " -p MPSE" +
                   " -compose \"to='" + username + "',subject='Sensible Daten" +
                   " auf deinem LinkedIn Profil',body='Hallo, <br><br>Auf" +
                   " deinem Profil in LinkedIn sind sensible persönliche und" +
