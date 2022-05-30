@@ -473,5 +473,14 @@ class fokusrnwareDemo:
             os.path.join(desktop, '**', '*.enc'), recursive=True)
         ctypes.windll.user32.SystemParametersInfoA(
                 20, 0, original_wallpaper, 0)
-        for file in files:
-            os.remove(file)
+        subprocess.Popen("taskkill /f /im thunderbird.exe")  # nosec
+        if len(files) > 0:
+            for file in files:
+                os.remove(file)
+        else:
+            dirName = "demos\\fokusrnware\\native\\desktop_files"
+            files = self.getListOfFiles(dirName)
+            for filename in files:
+                base = os.path.basename(filename)
+                path = desktop + '\\' + base
+                os.remove(path)
