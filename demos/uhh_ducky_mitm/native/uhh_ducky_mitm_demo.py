@@ -66,9 +66,9 @@ class DuckyDemo:
                 "max.mustermann@mpseinternational.com",
                 "123")
         mail_profile = importlib.resources.path(
-                "nativeapp.resources.mail", "mpse_profile.zip")
+                "demos.uhh_ducky_mitm.resources.mail", "mpse_profile.zip")
         browser_profile = importlib.resources.path(
-                "nativeapp.resources.edge", "profile_uhh.zip")
+                "demos.uhh_ducky_mitm.resources.edge", "profile_uhh.zip")
         self.email_program = mail_program.MailProgramThunderbird(
                 "MPSE", mail_profile)
         self.browser_program = browser_program.BrowserProgramEdge(
@@ -128,7 +128,7 @@ class DuckyDemo:
     def _send_mail(self, mail_files: List[str]) -> None:
         for mail_file in mail_files:
             mail_path = (importlib.resources.path(
-                "nativeapp.resources.mail", mail_file))
+                "demos.uhh_ducky_mitm.resources.mail", mail_file))
             logging.info(f"Getting path for file {mail_file}: {mail_path}")
             self.email_client.send_mail_from_file(mail_path, (0, 0))
 
