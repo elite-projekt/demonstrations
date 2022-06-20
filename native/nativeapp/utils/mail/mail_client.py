@@ -1,4 +1,20 @@
 #!/usr/bin/env python3
+"""
+Copyright (C) 2022 Kevin Köster
+
+This program is free software: you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) any later
+version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+or FITNESS FOR A PARTICULAR PURPOSE.
+See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with
+this program. If not, see <https://www.gnu.org/licenses/>.
+"""
 
 from contextlib import contextmanager
 from email.message import EmailMessage
@@ -8,7 +24,7 @@ from email.mime.text import MIMEText
 from email import encoders
 from email import policy
 from email.parser import BytesParser
-from email.utils import format_datetime, parsedate_to_datetime
+from email.utils import format_datetime, parsedate_to_datetime, formataddr
 
 import imaplib
 import smtplib
@@ -125,12 +141,10 @@ class MailClient:
 
             msg = MIMEMultipart()
             msg['Subject'] = yml_data["subject"]
-            msg['From'] = "{} <{}>".format(
-                    yml_data["from"]["display_name"],
-                    yml_data["from"]["email"])
-            msg['To'] = "{} <{}>".format(
-                yml_data["to"]["display_name"],
-                yml_data["to"]["email"])
+            msg['From'] = formataddr((yml_data["from"]["display_name"],
+                                      yml_data["from"]["email"]))
+            msg['To'] = formataddr((yml_data["to"]["display_name"],
+                                    yml_data["to"]["email"]))
             if "time" in yml_data:
                 msg['Date'] = format_datetime(datetime.datetime.strptime(
                     "2020-01-01 {}".format(str(yml_data["time"])),
