@@ -36,7 +36,7 @@ from typing import List
 from . import set_proxy_cert
 
 
-def get_ipv4(interface: str) -> ipaddress.IPv4Address:
+def _get_ipv4(interface: str) -> ipaddress.IPv4Address:
     prefix = ""
     if sys.platform == "win32":
         prefix = "wsl"
@@ -48,10 +48,7 @@ def get_ipv4(interface: str) -> ipaddress.IPv4Address:
     p = subprocess.Popen(cmd, stdout=subprocess.PIPE,  # nosec
                          stderr=subprocess.PIPE)
     out, _ = p.communicate()
-    logging.info(f"got my data {out}")
-    logging.info(f"got data {out.split()}")
     out = out.split()[1]
-    logging.info(f"Output: {out}")
     net = ipaddress.IPv4Interface(out.decode())
     return net.ip
 
@@ -89,7 +86,7 @@ class DuckyDemo:
         self.usb_monitor = usb_monitor.USBMonitor(on_connect=self.get_script)
 
         # get wsl ip
-        ip = get_ipv4("eth0")
+        ip = _get_ipv4("eth0")
 
         self.admin_client.send_command(
                 admin_app.NativeappCommands.DISABLE_USB, b"1")
