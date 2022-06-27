@@ -17,91 +17,61 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 import flask
 import logging
 
-from nativeapp.controller import orchestration_controller
+from nativeapp.controller import orchestration_controller, demo_controller
 from nativeapp.config import config
 
 from demos.uhh_ducky_mitm.native import uhh_ducky_mitm_demo
 
 
-orchestration = flask.Blueprint("uhh_ducky_mitm", __name__,
-                                url_prefix="/orchestration/")
+class DuckyController(demo_controller.DemoController):
+    def __init__(self):
+        super().__init__("uhh_ducky_mitm",
+                         "uhh_ducky_mitm/native/stacks/docker-compose.yml")
+        self.ducky_service = uhh_ducky_mitm_demo.DuckyDemo()
 
-ducky_service = uhh_ducky_mitm_demo.DuckyDemo()
+    def stop(self, subpath) -> int:
+        """
+        Stops the demo
+        """
+        self.set_state("stopping")
+        orchestration_controller.orchestration_service.\
+            docker_compose_stop_file(self.compose_file)
+        self.ducky_service.stop()
+        self.set_state("offline")
+        return orchestration_controller.stop_success
 
-state = "offline"
+    def start(self, subpath) -> int:
+        """
+        Start the demo
+        """
+        if subpath == "script_downloaded":
+            self.ducky_service.add_cert()
+            self.ducky_service.show_error_box()
+            self.ducky_service.send_second_mail()
+            return 1
 
-
-def set_state(new_state: str) -> None:
-    global state
-    state = new_state
-
-
-def get_state() -> str:
-    return state
-
-
-# uhh_ducky_mitm demonstration
-@orchestration.route("/start/demo/uhh_ducky_mitm", methods=["POST", "GET"])
-def start_demo_uhh_ducky_mitm():
-    try:
-        try:
-            config.EnvironmentConfig.LANGUAGE = flask.request.json["language"]
-        except Exception:
-            pass
-        logging.info("Starting uhh_ducky_mitm demo stack")
-        set_state("starting")
-        orchestration_controller.orchestration_service \
-            .docker_compose_start_file(
-                "uhh_ducky_mitm/native/stacks/docker-compose.yml",
-                additional_env={
-                    "ELITE_LANG": config.EnvironmentConfig.LANGUAGE
-                    })
-        orchestration_controller.orchestration_service \
-            .wait_for_container("uhh_ducky_mitm_mailserver")
-        ducky_service.start()
-        set_state("running")
-    except Exception as e:
-        logging.error(e)
-        return flask.helpers.make_response(
-            flask.json.jsonify(orchestration_controller.no_docker_error), 500)
-    return flask.helpers.make_response(
-        flask.json.jsonify(orchestration_controller.start_success), 201)
-
-
-@orchestration.route("/stop/demo/uhh_ducky_mitm", methods=["POST", "GET"])
-def stop_demo_uhh_ducky_mitm():
-    set_state("stopping")
-    orchestration_controller.orchestration_service.docker_compose_stop_file(
-        "uhh_ducky_mitm/native/stacks/docker-compose.yml")
-    ducky_service.stop()
-    set_state("offline")
-    return flask.helpers.make_response(
-        flask.json.jsonify(orchestration_controller.stop_success), 200)
+        else:
+            try:
+                try:
+                    config.EnvironmentConfig.LANGUAGE = \
+                            flask.request.json["language"]
+                except Exception:
+                    pass
+                logging.info("Starting uhh_ducky_mitm demo stack")
+                self.set_state("starting")
+                lang_env = {"ELITE_LANG": config.EnvironmentConfig.LANGUAGE}
+                orchestration_controller.orchestration_service \
+                    .docker_compose_start_file(self.compose_file,
+                                               additional_env=lang_env)
+                orchestration_controller.orchestration_service \
+                    .wait_for_container("uhh_ducky_mitm_mailserver")
+                self.ducky_service.start()
+                self.set_state("running")
+            except Exception as e:
+                logging.error(e)
+                return orchestration_controller.no_docker_error
+            return orchestration_controller.start_success
 
 
-@orchestration.route("/status/demo/uhh_ducky_mitm", methods=["GET"])
-def status_demo_uhh_ducky_mitm():
-    result = {"state": get_state()}
-    if len(result) > 0:
-        return flask.helpers.make_response(flask.json.jsonify(result), 200)
-    else:
-        flask.abort(500)
-
-
-@orchestration.route("/status/demo/uhh_ducky_mitm/sum", methods=["GET"])
-def status_demo_uhh_ducky_mitm_sum():
-    result = {"state": get_state()}
-    if len(result) > 0:
-        return flask.helpers.make_response(flask.json.jsonify(result), 200)
-    else:
-        flask.abort(500)
-
-
-@orchestration.route("/start/demo/uhh_ducky_mitm/script_downloaded",
-                     methods=["GET"])
-def on_script_downloaded():
-    ducky_service.add_cert()
-    ducky_service.show_error_box()
-    ducky_service.send_second_mail()
-
-    return flask.helpers.make_response(flask.json.jsonify(1), 200)
+def get_controller():
+    return DuckyController()
