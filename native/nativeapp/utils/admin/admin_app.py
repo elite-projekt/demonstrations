@@ -14,9 +14,6 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU General Public License along with
 this program. If not, see <https://www.gnu.org/licenses/>.
 """
-import struct
-import socket
-import binascii
 import pathlib
 import sys
 import re
@@ -31,6 +28,8 @@ from argparse import ArgumentParser, RawTextHelpFormatter
 from typing import List
 
 from nativeapp.config import config
+
+from nativeapp.utils.net import network_control_protocol
 
 
 NATIVEAPP_ADMIN_HEADER = 0xe11e
@@ -57,73 +56,18 @@ class NativeappCommands:
     SET_REDIRECT = 2
 
 
-class NativeappAdminClient:
-    def connect(self):
-        self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-        self.socket.connect(("127.0.0.1", NATIVEAPP_ADMIN_PORT))
-
-    def send_command(self, command: int, payload: bytes):
-        self.connect()
-        data_len = len(payload)
-        header_data = struct.pack(
-                "<HII", NATIVEAPP_ADMIN_HEADER, command, data_len)
-        header_crc = binascii.crc32(header_data)
-        header_data = struct.pack(
-                "<HIII", NATIVEAPP_ADMIN_HEADER, command, data_len, header_crc)
-        payload_crc = struct.pack("<I", binascii.crc32(payload))
-        self.socket.send(header_data + payload + payload_crc)
-
-
 def create_host_payload(
             enable: bool, domain: str, ip: str = "127.0.0.1") -> bytes:
     return f"{int(enable)};{ip};{domain}".encode()
 
 
-class NativeappAdmin:
+class NativeappAdmin(network_control_protocol.NativeappControlServer):
 
     def __init__(self):
+        super().__init__(NATIVEAPP_ADMIN_HEADER, NATIVEAPP_ADMIN_PORT)
         self.running = False
 
-    def run_socket(self):
-        self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-        self.socket.bind(("127.0.0.1", NATIVEAPP_ADMIN_PORT))
-        self.socket.listen(1)
-        self.running = True
-        while self.running:
-            conn, addr = self.socket.accept()
-            with conn:
-                data = conn.recv(1024)
-                if data:
-                    self.parse_packet(data)
-
-    def parse_packet(self, packet: bytes) -> None:
-        # 14 header + min 1 payload + 4 payload crc
-        if len(packet) < 19:
-            print("Invalid packet len")
-            return
-        # checking header
-        magic, command, data_len, header_crc = struct.unpack("<HIII",
-                                                             packet[:14])
-        if magic != NATIVEAPP_ADMIN_HEADER:
-            print("Invalid header")
-            return
-        # check crc
-        if header_crc != binascii.crc32(packet[:10]):
-            print("Invalid header crc")
-            return
-
-        payload = packet[14:-4]
-        payload_crc = struct.unpack("<I", packet[-4:])[0]
-        calc_crc = binascii.crc32(payload)
-        if calc_crc != payload_crc:
-            print("Invalid payload crc")
-            return
-        print("crc correct")
-        print(f"{command=} {data_len=} {header_crc=}")
-        print(payload)
-
+    def on_packet(self, command, payload):
         if command == NativeappCommands.DISABLE_USB:
             val = 4
             if payload == b"0":
@@ -157,6 +101,11 @@ class NativeappAdmin:
                 host_file.truncate()
 
 
+class NativeappAdminClient(network_control_protocol.NativeappControlClient):
+    def __init__(self):
+        super().__init__(NATIVEAPP_ADMIN_HEADER, NATIVEAPP_ADMIN_PORT)
+
+
 def main():
     parser = ArgumentParser(formatter_class=RawTextHelpFormatter)
     parser.add_argument("--mode", dest="mode", help="Set the mode. \
@@ -180,7 +129,7 @@ def main():
             pid_file.write(str(os.getpid()))
 
         app = NativeappAdmin()
-        app.run_socket()
+        app.run()
 
         pid_file_path.unlink()
 
