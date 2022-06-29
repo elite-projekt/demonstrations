@@ -8,10 +8,18 @@ import time
 
 from nativeapp.config import config
 
+if sys.platform == "win32":
+    DOCKER_CMD_LIST = ["wsl", "--user", "root", "docker"]
+else:
+    DOCKER_CMD_LIST = ["docker"]
+
 
 class OrchestrationService:
     def _get_demo_path(self):
         return pathlib.Path(config.EnvironmentConfig.WORKINGDIR) / "demos"
+
+    def get_docker_client(self):
+        return python_on_whales.DockerClient(client_call=DOCKER_CMD_LIST)
 
     def docker_compose_start_file(self, filename: str):
         try:
@@ -23,6 +31,7 @@ class OrchestrationService:
                 / ".env"
             # we need posix paths for "wsl docker"
             docker = python_on_whales.DockerClient(
+                client_call=DOCKER_CMD_LIST,
                 compose_files=[file_path.as_posix()],
                 compose_env_file=env_path.as_posix(),
                 compose_project_name=demo_name)
@@ -38,6 +47,7 @@ class OrchestrationService:
             demo_name = filename.split("/")[0]
             file_path = self._get_demo_path() / filename
             docker = python_on_whales.DockerClient(
+                client_call=DOCKER_CMD_LIST,
                 compose_files=[file_path.as_posix()],
                 compose_project_name=demo_name)
             docker.compose.down()
@@ -63,7 +73,7 @@ class OrchestrationService:
                 # The call is made here because it takes a very long time and
                 # otherwise the call duration would only add up in the method
                 # call.
-                running_container_list = python_on_whales.docker.container\
+                running_container_list = self.get_docker_client().container\
                     .list(all).copy()
 
                 for container_name in container_name_list:
@@ -111,7 +121,7 @@ class OrchestrationService:
         """Checks if the mailserver docker container is up"""
         current_wait = 0
         try:
-            container = python_on_whales.docker.container.inspect(
+            container = self.get_docker_client().container.inspect(
                 name)
             while current_wait < timeout_ms:
                 logging.info(
