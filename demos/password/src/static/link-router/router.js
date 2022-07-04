@@ -19,7 +19,9 @@ $(function() {
 
     $("#phrase-info-de").click(function() {
 
-    window.open("https://portal.ecs.fbi.h-da.de/kurse/passwort/einheiten/wie-erstellt-man-ein-sicheres-passwort/teile#0","_blank");
+        window.open("https://portal.ecs.fbi.h-da.de/kurse/passwort/einheiten/wie-erstellt-man-ein-sicheres-passwort/teile#0","_blank");
+        // window.location.href="/end";
+        // window.open("/end", "_blank", "popup=true, left=100, top=100, width=1720, height=880");
 
     });
 
@@ -31,7 +33,8 @@ $(function() {
 
     $("#2FA-info-de").click(function() {
 
-    window.open("https://portal.ecs.fbi.h-da.de/kurse/passwort/einheiten/multi-faktor-authentifizierung/teile#0","_blank");
+    //window.open("https://portal.ecs.fbi.h-da.de/kurse/passwort/einheiten/multi-faktor-authentifizierung/teile#0","_blank");
+    window.open("/story_2fa", "_blank", "popup=true, left=100, top=100, width=1720, height=880");
 
     });
 

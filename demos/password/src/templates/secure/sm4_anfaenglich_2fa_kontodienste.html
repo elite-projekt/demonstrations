@@ -9,26 +9,41 @@
       </div>
       <div class="col-md-6 contents">
         <div class="row justify-content-center">
-          <div class="col-md-8">
+          <div class="col-md-8 card-body card">
             <div class="mb-4">
-              <h3>Zwei-Faktor-Authentifizierung für ELITE Account-Services</h3>
-              <p class="mb-4">Bitte geben Sie den Code aus ihrer 2FA App ein.</p>
+              <h4>Zwei-Faktor-Authentifizierung für ELITE Account-Services</h3>
+              <p class="small">Bitte scannen Sie den Code mit Ihrer 2FA App und geben Sie anschließend den angezeigten Code, der von Ihrer 2FA App angezeigt wird, ein.</p>
             </div>
             <form method="post">
 
               <img src="{{url_for('static', filename='qrcode3.jpg')}}" class="img-fluid" />
 
-
-
-              <div class="form-group last mb-4">
-                <label for="validation">Überprüfung</label>
+              <div class="form-group last mb-4 border">
+                <label for="validation">Bestätigungs-Code eingeben</label>
                 <div class="input-group">
                   <input class="form-control" name="validation" id="validation">
                 </div>
               </div>
 
-              <input type="submit" value="Überprüfen" class="btn btn-block btn-primary">
+              <input type="submit" value="Überprüfen" class="btn btn-block btn-primary mb-4">
             </form>
+
+            <!-- <div class="card text-dark bg-light mb-3 mt-3">
+              <div class="card-header small" id="tipp">Hilfe zu 2FA<div class="icon-chevron-down float-right" id="tipp-card-icon">
+                </div>
+              </div> -->
+              <a target="popup" id="2FA-info-de"><button class="btn btn-secondary btn-block">2FA Anleitung</button> </a>
+              <!-- onclick="window.open('/story_2fa','_blank','width=1720,height=880')"
+                
+                <div class="card-body collapse" id="tipp-body">
+                <p class="password-info small">Klicken Sie hier Es ist am besten, eine Phrase als Passwort zu verwenden: <i><strong>Die Sonne
+                      geht immer um 12 Uhr auf!</strong></i><br> Mehr Informationen finden Sie in den Lernmateralien.
+                      <br>
+                      <i id="phrase-info-de" class="icon-info_outline" data-toggle="tooltip" data-placement="right"
+                      title="Für weitere Informationen zur Erstellung eines sicheren und speicherbaren Passworts klicken Sie auf das Symbol."></i>
+                </p>
+              </div> -->
+            </div>
 
           </div>
         </div>
@@ -38,6 +53,7 @@
     </div>
   </div>
 </div>
+<div class="flashes"><p>Code ungültig</p></div>
 <script src="{{url_for('static', filename='signup-form/js/jquery-3.3.1.min.js')}}"></script>
 <script src="{{url_for('static', filename='signup-form/js/popper.min.js')}}"></script>
 <script src="{{url_for('static', filename='signup-form/js/bootstrap.min.js')}}"></script>

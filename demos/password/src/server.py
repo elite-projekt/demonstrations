@@ -221,7 +221,7 @@ def registration_kontodienste_sm():
     if flask.request.method == "POST":
         user_name = flask.request.form["name"]
         user_password = flask.request.form["password"]
-        resp = flask.make_response(flask.redirect("/story_2fa"))
+        resp = flask.make_response(flask.redirect("/init_2fa_account_services"))
         user = create_user(user_name, user_password, "sm_kd")
         qr_code = create_qr(user_name + "_qr_account_services", user.otp)
         if LANGUAGE == "de":
@@ -263,6 +263,9 @@ def initial_2fa_kontodienste_sm():
         else:
             print("wrong validation")
             if LANGUAGE == "de":
+                # flask.flash("Code ungültig")
+                # return flask.render_template(
+                #      "secure/sm4_anfaenglich_2fa_kontodienste.html")
                 return flask.render_template(
                     "secure/sm4_anfaenglich_2fa_kontodienste.html",
                     flash="validation failed!"
