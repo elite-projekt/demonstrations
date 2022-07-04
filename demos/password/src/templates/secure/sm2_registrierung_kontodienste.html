@@ -9,10 +9,10 @@
       </div>
       <div class="col-md-6 contents">
         <div class="row justify-content-center">
-          <div class="col-md-8">
+          <div class="col-md-8 card-body card">
             <div class="mb-4">
-              <h3>Registrierung<br>ELITE Account-Services</h3>
-              <p class="mb-4">Bitte registrieren Sie sich und verwenden Sie dabei ein sicheres Passwort.<br>Halten Sie sich dafür an die Passwort-Anforderungen unter den Eingabefeldern.</p>
+              <h4>Registrierung<br>ELITE Account-Services</h3>
+              <p class="small">Bitte registrieren Sie sich und verwenden Sie dabei ein sicheres Passwort.<br>Halten Sie sich dafür an die Passwort-Anforderungen unter den Eingabefeldern.</p>
             </div>
             <form method="post">
 
@@ -25,7 +25,7 @@
 
                 <label for="password">Passwort</label>
                 <div class="input-group">
-                  <input type="password" class="form-control password" id="password" name="password">
+                  <input type="password" class="password form-control" id="password" name="password">
                   <i toggle="#password" class="icon-eye toggle-passwort input-group-addon" data-toggle="tooltip"
                     data-placement="right" title="klicken Sie auf das Auge, um das Passwort anzuzeigen."></i>
                 </div>
@@ -40,32 +40,50 @@
             </form>
 
 
-            <div class="card text-dark bg-light mb-3 mt-3">
-              <div class="card-header" id="pwd-requirements">Passwort-Anforderungen<div
-                  class="icon-chevron-down float-right" id="pwd-card-icon"></div>
+            <!-- <div class="card text-dark bg-light mb-3 mt-3 border">
+              <div class="card-header small" id="pwd-requirements">Passwort-Anforderungen
+                <div
+                  class="icon-chevron-up float-right" id="pwd-card-icon"></div>
               </div>
               <div class="card-body" id="pwd-req-body">
-                <div class="small-letter card-text icon-remove"> mindestens 1 Kleinbuchstabe.</div>
-                <div class="capital-letter card-text icon-remove"> mindestens 1 Großbuchstabe.</div>
-                <div class="number-char card-text icon-remove"> mindestens 1 Nummer.</div>
-                <div class="special-char card-text icon-remove"> mindestens 1 Sonderzeichen.</div>
-                <div class="lenght-check card-text icon-remove"> mindestens eine Länge von 10 Zeichen haben.</div>
-                <div class="guessable card-text icon-remove"> nicht leicht zu erraten.<i id="pw-info-de"
+                <div class="small-letter card-text icon-remove small"> mindestens 1 Kleinbuchstabe.</div>
+                <div class="capital-letter card-text icon-remove small"> mindestens 1 Großbuchstabe.</div>
+                <div class="number-char card-text icon-remove small"> mindestens 1 Nummer.</div>
+                <div class="special-char card-text icon-remove small"> mindestens 1 Sonderzeichen.</div>
+                <div class="lenght-check card-text icon-remove small"> mindestens eine Länge von 10 Zeichen haben.</div>
+                <div class="guessable card-text icon-remove small"> nicht leicht zu erraten. <i id="pw-info-de"
                     class="icon-info_outline" data-toggle="tooltip" data-placement="right"
                     title="Zum Beispiel sollte es kein sich wiederholendes Muster geben. Für weitere Informationen klicken Sie auf das Symbol."></i>
+                </div>
+              </div>
+            </div> -->
+
+
+            <div class="card text-dark bg-light mb-3 mt-3 border">
+              <div class="card-header small">Passwort-Anforderungen
+              </div>
+              <div class="card-body" id="pwd-req-body">
+                <div class="small-letter card-text icon-remove small"> mindestens 1 Kleinbuchstabe.</div>
+                <div class="capital-letter card-text icon-remove small"> mindestens 1 Großbuchstabe.</div>
+                <div class="number-char card-text icon-remove small"> mindestens 1 Nummer.</div>
+                <div class="special-char card-text icon-remove small"> mindestens 1 Sonderzeichen.</div>
+                <div class="lenght-check card-text icon-remove small"> mindestens eine Länge von 10 Zeichen haben.</div>
+                <div class="guessable card-text icon-remove small"> nicht leicht zu erraten. <!-- <i id="pw-info-de"
+                    class="icon-info_outline" data-toggle="tooltip" data-placement="right"
+                    title="Zum Beispiel sollte es kein sich wiederholendes Muster geben. Für weitere Informationen klicken Sie auf das Symbol."></i> -->
                 </div>
               </div>
             </div>
 
             <div class="card text-dark bg-light mb-3">
-              <div class="card-header" id="tipp">Tipp <div class="icon-chevron-down float-right" id="tipp-card-icon">
-                </div>
+              <div class="card-header small">Tipp 
               </div>
-              <div class="card-body collapse" id="tipp-body">
-                <p class="password-info">Es ist am besten, eine Phrase als Passwort zu verwenden: <i><strong>Die Sonne
-                      geht immer um 12 Uhr auf!</strong></i><br><i id="phrase-info-de" class="icon-info_outline"
-                    data-toggle="tooltip" data-placement="right"
-                    title="Für weitere Informationen zur Erstellung eines sicheren und speicherbaren Passworts klicken Sie auf das Symbol."></i>
+              <div class="card-body" id="tipp-body">
+                <p class="password-info small">Es ist am besten, eine Phrase als Passwort zu verwenden: <i><strong>Die Sonne
+                      geht immer um 12 Uhr auf!</strong></i><br> Mehr Informationen finden Sie in den Lernmateralien.
+                      <!-- <br>
+                      <i id="phrase-info-de" class="icon-info_outline" data-toggle="tooltip" data-placement="right"
+                      title="Für weitere Informationen zur Erstellung eines sicheren und speicherbaren Passworts klicken Sie auf das Symbol."></i> -->
                 </p>
               </div>
             </div>
