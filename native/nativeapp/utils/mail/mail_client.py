@@ -129,7 +129,9 @@ class MailClient:
                               random_date_interval=(1, 3),
                               _=None):
         if _ is None:
-            _ = lambda x: x
+            def identity(x):
+                return x
+            _ = identity
         email_file = pathlib.Path(email_file)
         logging.info("Sending mail file: {}".format(email_file))
         if not email_file.is_file():

@@ -1,0 +1,8 @@
+to:
+    display_name: Max Mustermann
+    email: max.mustermann@mpseinternational.com
+from:
+    display_name: "Christina Sauer"
+    email: christina.sauer@mpseinternational.com
+subject: "uhh_picture_mail_subject"
+content: "uhh_picture_mail_content"

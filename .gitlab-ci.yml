@@ -127,7 +127,7 @@ build:fokusrnware-image:
     SUB_PROJECT_FOLDER: demos/fokusrnware/
   needs:
     - lint:fokusrnware-dockerfile
-    
+
 build:ransomware-image:
   <<: *build-image
   variables:
@@ -151,13 +151,6 @@ build:uhh_ducky_mitm-image-web:
     SUB_PROJECT_FOLDER: demos/uhh_ducky_mitm/container/nginx/
   needs:
     - lint:uhh_ducky_mitm-dockerfile-web
-
-build:uhh_ducky_mitm-image-web-en:
-  <<: *build-image
-  variables:
-    SUB_PROJECT_NAME: uhh_ducky_mitm_web_en
-    SUB_PROJECT_FOLDER: demos/uhh_ducky_mitm/container/nginx/
-    SUB_PROJECT_DOCKERFILE: Dockerfile_en
 
 
 build:phishing-image:
@@ -275,7 +268,7 @@ scan:fokusrnware-image:
     SUB_PROJECT_FOLDER: demos/fokusrnware/
   needs:
   - build:fokusrnware-image
-  
+
 scan:ransomware-image:
   <<: *scan-image
   variables:
@@ -332,13 +325,6 @@ push:uhh_ducky_mitm-image-web:
     SUB_PROJECT_NAME: uhh_ducky_mitm_web
   needs:
   - build:uhh_ducky_mitm-image-web
-
-push:uhh_ducky_mitm-image-web-en:
-  <<: *push-image
-  variables:
-    SUB_PROJECT_NAME: uhh_ducky_mitm_web_en
-  needs:
-  - build:uhh_ducky_mitm-image-web-en
 
 push:uhh_ducky_mitm-image-proxy:
   <<: *push-image

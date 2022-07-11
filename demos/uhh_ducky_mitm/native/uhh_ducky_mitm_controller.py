@@ -16,7 +16,6 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 """
 import flask
 import logging
-import os
 
 from nativeapp.controller import orchestration_controller
 from nativeapp.config import config
@@ -34,11 +33,13 @@ ducky_service = uhh_ducky_mitm_demo.DuckyDemo()
 @orchestration.route("/start/demo/uhh_ducky_mitm", methods=["POST", "GET"])
 def start_demo_uhh_ducky_mitm():
     try:
-        os.environ["ELITE_LANG"] = config.EnvironmentConfig.LANGUAGE
         logging.info("Starting uhh_ducky_mitm demo stack")
         orchestration_controller.orchestration_service \
             .docker_compose_start_file(
-                "uhh_ducky_mitm/native/stacks/docker-compose.yml")
+                "uhh_ducky_mitm/native/stacks/docker-compose.yml",
+                additional_env={
+                    "ELITE_LANG": config.EnvironmentConfig.LANGUAGE
+                    })
         orchestration_controller.orchestration_service \
             .wait_for_container("uhh_ducky_mitm_mailserver")
         ducky_service.start()
