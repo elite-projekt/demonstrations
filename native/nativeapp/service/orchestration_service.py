@@ -5,8 +5,11 @@ import python_on_whales
 import yaml
 import sys
 import time
+import tempfile
 
 from nativeapp.config import config
+
+from typing import Dict
 
 if sys.platform == "win32":
     DOCKER_CMD_LIST = ["wsl", "--user", "root", "docker"]
@@ -14,14 +17,22 @@ else:
     DOCKER_CMD_LIST = ["docker"]
 
 
+def windows_to_wsl_path(path: pathlib.Path):
+    return str(pathlib.Path(path).absolute()).replace("\\", "/").replace("C:", "/mnt/c/")  # noqa: 501
+
+
 class OrchestrationService:
+    def __init__(self):
+        self.temp_env_file = tempfile.NamedTemporaryFile()
+
     def _get_demo_path(self):
         return pathlib.Path(config.EnvironmentConfig.WORKINGDIR) / "demos"
 
     def get_docker_client(self):
         return python_on_whales.DockerClient(client_call=DOCKER_CMD_LIST)
 
-    def docker_compose_start_file(self, filename: str):
+    def docker_compose_start_file(self, filename: str,
+                                  additional_env: Dict[str, str] = {}):
         try:
             # get demo name from first word in path: "password/native/(...)"
             # FIXME
@@ -29,11 +40,19 @@ class OrchestrationService:
             file_path = self._get_demo_path() / filename
             env_path = pathlib.Path(config.EnvironmentConfig.ENVDIR) \
                 / ".env"
+            self.temp_env_file.file.seek(0)
+            self.temp_env_file.file.truncate()
+            with open(env_path, "r") as orig_env:
+                self.temp_env_file.file.write(orig_env.read().encode())
+            for key, val in additional_env.items():
+                self.temp_env_file.file.write(f"{key}='{val}'".encode())
+            self.temp_env_file.file.flush()
+
             # we need posix paths for "wsl docker"
             docker = python_on_whales.DockerClient(
                 client_call=DOCKER_CMD_LIST,
-                compose_files=[file_path.as_posix()],
-                compose_env_file=env_path.as_posix(),
+                compose_files=[windows_to_wsl_path(file_path)],
+                compose_env_file=windows_to_wsl_path(self.temp_env_file.name),
                 compose_project_name=demo_name)
             docker.compose.up(detach=True)
         except Exception as e:
