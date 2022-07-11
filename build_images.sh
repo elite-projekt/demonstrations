@@ -1,5 +1,21 @@
 #!/bin/bash
 
-./build_image.sh -c demos/uhh_ducky_mitm/container/mitmproxy -i uhh_ducky_mitm_proxy -u -p
-./build_image.sh -c demos/uhh_ducky_mitm/container/nginx -i uhh_ducky_mitm_web -u -p
-./build_image.sh -c demos/uhh_ducky_mitm/container/nginx -d Dockerfile_en -i uhh_ducky_mitm_web_en -u -p
+SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
+
+function build_demo() {
+  PATH=$1
+  TAG=$2
+
+  ${SCRIPT_DIR}/build_image.sh -c ${PATH} -i ${TAG} -u -p
+}
+
+build_demo ${SCRIPT_DIR}/demos/uhh_ducky_mitm/container/mitmproxy uhh_ducky_mitm_proxy
+build_demo ${SCRIPT_DIR}/demos/uhh_ducky_mitm/container/nginx uhh_ducky_mitm_web
+
+build_demo ${SCRIPT_DIR}/demos/fokusrnware fokusrnware-image
+
+build_demo ${SCRIPT_DIR}/demos/ransomware ransomware-image
+
+build_demo ${SCRIPT_DIR}/demos/phishing phishing-image
+
+build_demo ${SCRIPT_DIR}/demos/password password-image
