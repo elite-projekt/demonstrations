@@ -22,6 +22,10 @@ import time
 import importlib.resources
 import subprocess  # nosec
 import ipaddress
+import gettext
+import pathlib
+
+from typing import List
 
 from tkinter import messagebox
 from nativeapp.utils.mail import mail_client, mail_program
@@ -31,9 +35,20 @@ from nativeapp.utils.usb import usb_monitor
 from nativeapp.config import config
 from pynput.keyboard import Controller, Key
 
-from typing import List
-
 from . import set_proxy_cert
+
+
+def update_locale():
+    global _
+    localedir = pathlib.Path(__file__).parent.parent / "locales"
+    lang = gettext.translation("base",
+                               localedir=localedir.absolute(),
+                               languages=[config.EnvironmentConfig.LANGUAGE])
+    lang.install()
+    _ = lang.gettext
+
+
+update_locale()
 
 
 def _get_ipv4(interface: str) -> ipaddress.IPv4Address:
@@ -77,7 +92,7 @@ class DuckyDemo:
     def start(self):
         if self.running:
             self.stop()
-        # disable usb
+        update_locale()
 
         # set hosts entry
         self.running = True
@@ -123,24 +138,18 @@ class DuckyDemo:
         logging.info("Stop done")
 
     def _send_mail(self, mail_files: List[str]) -> None:
+        print(config.EnvironmentConfig.LANGUAGE)
         for mail_file in mail_files:
             mail_path = (importlib.resources.path(
                 "demos.uhh_ducky_mitm.resources.mail", mail_file))
             logging.info(f"Getting path for file {mail_file}: {mail_path}")
-            self.email_client.send_mail_from_file(mail_path, (0, 0))
+            self.email_client.send_mail_from_file(mail_path, (0, 0), _)
 
     def send_mails(self) -> None:
-        # TODO: proper language
-        if (config.EnvironmentConfig.LANGUAGE == "de"):
-            self._send_mail(["bilder.yml"])
-        else:
-            self._send_mail(["bilder_en.yml"])
+        self._send_mail(["pictures.yml"])
 
     def send_second_mail(self) -> None:
-        if (config.EnvironmentConfig.LANGUAGE == "de"):
-            self._send_mail(["falscher_stick.yml"])
-        else:
-            self._send_mail(["falscher_stick_en.yml"])
+        self._send_mail(["wrong_stick.yml"])
 
     def add_cert(self) -> None:
         set_proxy_cert.add_cert()
@@ -163,13 +172,5 @@ class DuckyDemo:
         keyboard.release(Key.enter)
 
     def show_error_box(self) -> None:
-        error_title = "USB device not recognized (Error 10)"
-        error_msg = "The last USB device you connected to this computer malfunctioned, and Windows does not recognize it"  # noqa: E501
-        if (config.EnvironmentConfig.LANGUAGE == "de"):
-            error_title = "Problem mit dem USB-Gerät (Fehlercode 10)"
-            error_msg = "Es ist ein Fehler bei der Enumerierung des Gerätes \
-                     unterlaufen. Bitte prüfen Sie, ob das Gerät korrekt \
-                     angeschlossen ist und alle Treiber installiert sind. \
-                     (Fehlercode 10)"
-
-        messagebox.showerror(error_title, error_msg)
+        messagebox.showerror(_("uhh_usb_error_title"),
+                             _("uhh_usb_error_msg"))

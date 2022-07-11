@@ -124,7 +124,12 @@ class MailClient:
                 session.store(num, "+FLAGS", "\\Deleted")
             session.expunge()
 
-    def get_message_from_file(self, email_file, random_date_interval=(1, 3)):
+    def get_message_from_file(self,
+                              email_file,
+                              random_date_interval=(1, 3),
+                              _=None):
+        if _ is None:
+            _ = lambda x: x
         email_file = pathlib.Path(email_file)
         logging.info("Sending mail file: {}".format(email_file))
         if not email_file.is_file():
@@ -140,7 +145,7 @@ class MailClient:
                 return None
 
             msg = MIMEMultipart()
-            msg['Subject'] = yml_data["subject"]
+            msg['Subject'] = _(yml_data["subject"])
             msg['From'] = formataddr((yml_data["from"]["display_name"],
                                       yml_data["from"]["email"]))
             msg['To'] = formataddr((yml_data["to"]["display_name"],
@@ -151,7 +156,7 @@ class MailClient:
                     '%Y-%d-%m %H:%M'))
             else:
                 msg["Date"] = format_datetime(datetime.datetime.now())
-            msg.attach(MIMEText(yml_data["content"]))
+            msg.attach(MIMEText(_(yml_data["content"])))
 
             if "attachment" in yml_data:
                 file_name = yml_data["attachment"]
@@ -186,6 +191,7 @@ class MailClient:
 
         return msg
 
-    def send_mail_from_file(self, email_file, random_date_interval=(1, 3)):
-        msg = self.get_message_from_file(email_file, random_date_interval)
+    def send_mail_from_file(self, email_file, random_date_interval=(1, 3),
+                            _=None):
+        msg = self.get_message_from_file(email_file, random_date_interval, _)
         self.send_mail(msg)
