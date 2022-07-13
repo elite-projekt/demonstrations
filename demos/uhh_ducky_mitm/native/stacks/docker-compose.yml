@@ -7,6 +7,8 @@ services:
     ports:
       - 443:443
       - 80:80
+    environment:
+      - ELITE_LANG=${ELITE_LANG}
   proxy:
     image: ${REGISTRY_URL}/${GROUP_NAME}/demonstrations/uhh_ducky_mitm_proxy
     container_name: uhh_ducky_proxy
