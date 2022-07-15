@@ -33,6 +33,10 @@ ducky_service = uhh_ducky_mitm_demo.DuckyDemo()
 @orchestration.route("/start/demo/uhh_ducky_mitm", methods=["POST", "GET"])
 def start_demo_uhh_ducky_mitm():
     try:
+        try:
+            config.EnvironmentConfig.LANGUAGE = flask.request.json["language"]
+        except Exception:
+            pass
         logging.info("Starting uhh_ducky_mitm demo stack")
         orchestration_controller.orchestration_service \
             .docker_compose_start_file(
