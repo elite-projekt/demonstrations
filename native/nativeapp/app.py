@@ -9,28 +9,9 @@ from datetime import datetime
 import flask
 import flask_cors
 from nativeapp.config import config
-from nativeapp.controller import native_controller
+from nativeapp.controller import native_controller, demo_controller
 
 import demos
-
-app = flask.Flask(__name__)
-flask_cors.CORS(app)
-
-app.register_blueprint(native_controller.native)
-for _, name, ispkg in pkgutil.iter_modules(demos.__path__):
-    if ispkg:
-        controller_path = 'demos.' + name + '.native.' + name + '_controller'
-        try:
-            # import demo controllers
-            controller = importlib.import_module(controller_path)
-            # register blueprints from controllers
-            app.register_blueprint(controller.orchestration)
-        except ModuleNotFoundError:
-            print("ERROR while importing controller for: {} demo".format(name))
-            print("Please check the existence of: {}".format(controller_path))
-            raise
-        except Exception as e:
-            raise e
 
 
 def main():
@@ -49,11 +30,6 @@ def main():
     parser.add_argument("-d", "--dev", help="Starts flask in dev-mode")
     args = parser.parse_args()
 
-    # Only for debugging while developing
-    if args.dev is not None:
-        app.config.from_object(config.DevelopmentConfig)
-    else:
-        app.config.from_object(config.ProductionConfig)
     arg_path = pathlib.Path(args.path)
     config.EnvironmentConfig.WORKINGDIR = arg_path
     config.EnvironmentConfig.PROFILEDIR = arg_path / "profiles"
@@ -97,6 +73,41 @@ def main():
             logging_path
         )
     )
+    app = flask.Flask(__name__)
+    flask_cors.CORS(app)
+
+    app.register_blueprint(native_controller.native)
+    app.register_blueprint(demo_controller.DemoManager.orchestration)
+    for _, name, ispkg in pkgutil.iter_modules(demos.__path__):
+        if ispkg:
+            controller_path = 'demos.' + name + '.native.' + name + \
+                              '_controller'
+            try:
+                # import demo controllers
+                controller = importlib.import_module(controller_path)
+                # get the controller using the new code
+                try:
+                    c = controller.get_controller()
+                    demo_controller.DemoManager.register_demo(c)
+                    continue
+                except AttributeError:
+                    logging.warning(f"Loading {name} as a legacy module")
+                # register bluepints using legacy code
+                try:
+                    app.register_blueprint(controller.orchestration)
+                except NameError:
+                    logging.warning(f"Failed to load legacy module {name}")
+
+            except ModuleNotFoundError:
+                print(f"ERROR while importing controller for: {name} demo")
+                print(f"Please check the existence of: {controller_path}")
+
+    # Only for debugging while developing
+    if args.dev is not None:
+        app.config.from_object(config.DevelopmentConfig)
+    else:
+        app.config.from_object(config.ProductionConfig)
+
     # ensure dockerd is running. it won't start if it is already running
     subprocess.Popen(["wsl", "--user", "root", "dockerd"],  # nosec
                      stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
