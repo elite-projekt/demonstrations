@@ -28,6 +28,8 @@ def main():
         default="C:\\Program Files (x86)\\hda\\nativeapp"
     )
     parser.add_argument("-d", "--dev", help="Starts flask in dev-mode")
+    parser.add_argument("--verbose-flask", help="Enable flask verbose output",
+                        action="store_true", dest="verbose_flask")
     args = parser.parse_args()
 
     arg_path = pathlib.Path(args.path)
@@ -74,6 +76,10 @@ def main():
         )
     )
     app = flask.Flask(__name__)
+    if not args.verbose_flask:
+        log = logging.getLogger('werkzeug')
+        log.setLevel(logging.ERROR)
+
     flask_cors.CORS(app)
 
     app.register_blueprint(native_controller.native)
