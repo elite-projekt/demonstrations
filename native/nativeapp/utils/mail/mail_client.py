@@ -46,23 +46,25 @@ class MailClient:
 
     def wait_for_imap_server(self, max_timeout_s: float = 10) -> bool:
         start_time = time.time()
+        logging.info("Waiting for IMAP server")
         while time.time() - start_time < max_timeout_s:
             with self.imap_connect(False) as session:
                 if session:
-                    logging.info("IMAP Server online")
+                    logging.info(f"IMAP Server online after \
+                        {time.time() - start_time} seconds")
                     return True
-            logging.info("IMAP Server still offline")
         logging.info("Giving up after reaching timeout")
         return False
 
     def wait_for_smtp_server(self, max_timeout_s: float = 10) -> bool:
         start_time = time.time()
+        logging.info("Waiting for SMTP server")
         while time.time() - start_time < max_timeout_s:
             with self.smtp_connect(False) as session:
                 if session:
-                    logging.info("SMTP Server online")
+                    logging.info(f"SMTP Server online after \
+                        {time.time() - start_time} seconds")
                     return True
-            logging.info("SMTP Server still offline")
         logging.info("Giving up after reaching timeout")
         return False
 
