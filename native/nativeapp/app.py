@@ -27,7 +27,8 @@ def main():
              'files!!',
         default="C:\\Program Files (x86)\\hda\\nativeapp"
     )
-    parser.add_argument("-d", "--dev", help="Starts flask in dev-mode")
+    parser.add_argument("-d", "--dev", help="Starts flask in dev-mode",
+                        action="store_true", dest="dev")
     parser.add_argument("--verbose-flask", help="Enable flask verbose output",
                         action="store_true", dest="verbose_flask")
     args = parser.parse_args()
@@ -109,7 +110,7 @@ def main():
                 print(f"Please check the existence of: {controller_path}")
 
     # Only for debugging while developing
-    if args.dev is not None:
+    if args.dev:
         app.config.from_object(config.DevelopmentConfig)
     else:
         app.config.from_object(config.ProductionConfig)
