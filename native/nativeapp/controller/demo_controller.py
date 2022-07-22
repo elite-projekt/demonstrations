@@ -22,7 +22,7 @@ class DemoController(ABC):
     def get_state(self) -> str:
         return self.state
 
-    def stop(self, subpath: str) -> int:
+    def stop(self, subpath: str) -> Dict[str, object]:
         """
         Stops the demo
         """
@@ -30,7 +30,7 @@ class DemoController(ABC):
             docker_compose_stop_file(self.compose_file)
         return orchestration_controller.stop_success
 
-    def start(self, subpath: str) -> int:
+    def start(self, subpath: str, params: Dict[str, str]) -> Dict[str, object]:
         """
         Start the demo
         """
@@ -79,7 +79,8 @@ class DemoManager():
         demo_name = escape(demo_name)
         subpath = escape(subpath)
         if demo_name in DemoManager.demos:
-            ret_val = DemoManager.demos[demo_name].start(subpath)
+            ret_val = DemoManager.demos[demo_name].\
+                    start(subpath=subpath, params=flask.request.json)
             return DemoManager.get_flask_response(ret_val)
         flask.abort(500)
 
