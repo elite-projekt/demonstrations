@@ -14,7 +14,6 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU General Public License along with
 this program. If not, see <https://www.gnu.org/licenses/>.
 """
-import flask
 import logging
 
 from nativeapp.controller import orchestration_controller, demo_controller
@@ -40,7 +39,7 @@ class DuckyController(demo_controller.DemoController):
         self.set_state("offline")
         return orchestration_controller.stop_success
 
-    def start(self, subpath) -> int:
+    def start(self, subpath, params) -> int:
         """
         Start the demo
         """
@@ -52,11 +51,9 @@ class DuckyController(demo_controller.DemoController):
 
         else:
             try:
-                try:
-                    config.EnvironmentConfig.LANGUAGE = \
-                            flask.request.json["language"]
-                except Exception:
-                    pass
+                if "language" in params:
+                    config.EnvironmentConfig.LANGUAGE = params["language"]
+
                 logging.info("Starting uhh_ducky_mitm demo stack")
                 self.set_state("starting")
                 lang_env = {"ELITE_LANG": config.EnvironmentConfig.LANGUAGE}
