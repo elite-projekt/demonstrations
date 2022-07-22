@@ -11,20 +11,33 @@ from typing import Dict
 
 class DemoController(ABC):
 
-    def __init__(self, name, compose_file):
+    def __init__(self, name: str, compose_file: str):
         self.compose_file = compose_file
         self.name = name
         self.state = "offline"
 
     def set_state(self, state: str) -> None:
+        """
+        Sets the current state of the demo
+
+        :param sate: The current state. Possible states:
+            "offline", "starting", "running", "stopping", "error"
+        """
         self.state = state
 
     def get_state(self) -> str:
+        """
+        Returns the current state
+
+        :return: The current state as a string
+        """
         return self.state
 
     def stop(self, subpath: str) -> Dict[str, object]:
         """
         Stops the demo
+
+        :param subpath: The subpath the request might have had
         """
         orchestration_controller.orchestration_service.\
             docker_compose_stop_file(self.compose_file)
@@ -33,6 +46,10 @@ class DemoController(ABC):
     def start(self, subpath: str, params: Dict[str, str]) -> Dict[str, object]:
         """
         Start the demo
+
+        :param subpath: The subpath the request might have had
+        :param params: A dict of additional options.
+            For example language settings
         """
         orchestration_controller.orchestration_service.\
             docker_compose_start_file(self.compose_file)
