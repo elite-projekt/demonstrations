@@ -16,7 +16,7 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 """
 import logging
 
-from nativeapp.controller import orchestration_controller, demo_controller
+from nativeapp.controller import demo_controller
 from nativeapp.config import config
 
 from demos.uhh_ducky_mitm.native import uhh_ducky_mitm_demo
@@ -33,11 +33,10 @@ class DuckyController(demo_controller.DemoController):
         Stops the demo
         """
         self.set_state("stopping")
-        orchestration_controller.orchestration_service.\
-            docker_compose_stop_file(self.compose_file)
+        self.stop_container()
         self.ducky_service.stop()
         self.set_state("offline")
-        return orchestration_controller.stop_success
+        return demo_controller.ErrorCodes.stop_success
 
     def start(self, subpath, params) -> int:
         """
@@ -57,17 +56,13 @@ class DuckyController(demo_controller.DemoController):
                 logging.info("Starting uhh_ducky_mitm demo stack")
                 self.set_state("starting")
                 lang_env = {"ELITE_LANG": config.EnvironmentConfig.LANGUAGE}
-                orchestration_controller.orchestration_service \
-                    .docker_compose_start_file(self.compose_file,
-                                               additional_env=lang_env)
-                orchestration_controller.orchestration_service \
-                    .wait_for_container("uhh_ducky_mitm_mailserver")
+                self.start_container(lang_env)
                 self.ducky_service.start()
                 self.set_state("running")
             except Exception as e:
                 logging.error(e)
-                return orchestration_controller.no_docker_error
-            return orchestration_controller.start_success
+                return demo_controller.ErrorCodes.no_docker_error
+            return demo_controller.ErrorCodes.start_success
 
 
 def get_controller():
