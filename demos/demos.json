@@ -76,7 +76,7 @@
                 ]
             },
             "de": {
-                "title": "Kennwort",
+                "title": "Passwortsicherheit",
                 "description": "Diese Demo zeigt, wie sicher Passwörter sein sollten und wie Sie einen zweiten Faktor verwenden können, um Ihre Anmeldung sicherer zu machen.",
                 "guide": [
                     {
@@ -133,7 +133,7 @@
                 ]
             },
             "de": {
-                "title": "Ransomware",
+                "title": "Ransomware (Schadhafter Anhang)",
                 "description": "Die Ransomware-Demo macht die Gefahren von Verschlüsselungs-Trojanern anhand eines alltäglichen Szenarios aus der Arbeitswelt erlebbar.",
                 "guide": [
                     {
@@ -183,7 +183,7 @@
                 ]
             },
             "de": {
-                "title": "Ransomware (Schadhafte Website)",
+                "title": "Ransomware (Infizierte Website)",
                 "description": "In dieser Demo wird der Nutzer mit einem Ransomware-Angriff und einem Drive-by-Download als Angriffsvektor konfrontiert.",
                 "guide": [
                     {
@@ -236,7 +236,7 @@
             ]
         },
         "de": {
-            "title": "USB Angriff",
+            "title": "USB-Angriff",
             "description": "Diese Demo zeigt die Gefahren von Angriffen durch manipulierte USB-Sticks auf.",
             "guide": [
                 {
