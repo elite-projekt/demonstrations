@@ -221,7 +221,8 @@ def registration_kontodienste_sm():
     if flask.request.method == "POST":
         user_name = flask.request.form["name"]
         user_password = flask.request.form["password"]
-        resp = flask.make_response(flask.redirect("/init_2fa_account_services"))
+        resp = flask.make_response(flask.redirect(
+            "/init_2fa_account_services"))
         user = create_user(user_name, user_password, "sm_kd")
         qr_code = create_qr(user_name + "_qr_account_services", user.otp)
         if LANGUAGE == "de":

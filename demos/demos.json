@@ -52,6 +52,7 @@
         "status": 0,
         "secureMode": true,
         "isAvailable": true,
+        "disableSecureMode": true,
         "messages": {
             "en": {
                 "title": "Password",
