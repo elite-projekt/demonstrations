@@ -286,7 +286,7 @@ questions_general = [
         'name': 'time',
         'message': 'Estimate the time duration in rounded minutes:',
         'validate': TimeValidator,
-        'filter': lambda val: int(val),
+        'filter': lambda val: int (val),
         'when': lambda _:
             CreatingDemo or 'time' in answers_update['fieldToUpdate']
     },
