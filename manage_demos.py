@@ -286,7 +286,7 @@ questions_general = [
         'name': 'time',
         'message': 'Estimate the time duration in rounded minutes:',
         'validate': TimeValidator,
-        'filter': lambda val: int (val),
+        'filter': lambda val: int(val),
         'when': lambda _:
             CreatingDemo or 'time' in answers_update['fieldToUpdate']
     },
@@ -295,7 +295,7 @@ questions_general = [
         'message': 'Does the demo have a secure mode?',
         'name': 'disableSecureMode',
         'default': True,
-        'filter': lambda val: not(val),
+        'filter': lambda val: not (val),
         'when': lambda _:
             CreatingDemo
             or 'disableSecureMode' in answers_update['fieldToUpdate']
