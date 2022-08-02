@@ -268,7 +268,7 @@ class Controller:
         classObjectList = list()
         # for attr, value in objectValue.__dict__.items():
         for attr in dir(objectValue):
-            if(attr == "emailworm"):
+            if (attr == "emailworm"):
                 print("SSSHHHHHHHHHHHHHHHHHHHH")
             # filters everything besides attributes
             if not attr.startswith('__') and not isinstance(getattr(
