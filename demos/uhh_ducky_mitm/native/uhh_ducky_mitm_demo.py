@@ -22,7 +22,6 @@ import time
 import importlib.resources
 import subprocess  # nosec
 import ipaddress
-import gettext
 import pathlib
 
 from typing import List
@@ -32,23 +31,11 @@ from nativeapp.utils.mail import mail_client, mail_program
 from nativeapp.utils.browser import browser_program
 from nativeapp.utils.admin import admin_app
 from nativeapp.utils.usb import usb_monitor
+from nativeapp.utils.locale import locale
 from nativeapp.config import config
 from pynput.keyboard import Controller, Key
 
 from . import set_proxy_cert
-
-
-def update_locale():
-    global _
-    localedir = pathlib.Path(__file__).parent.parent / "locales"
-    lang = gettext.translation("base",
-                               localedir=localedir.absolute(),
-                               languages=[config.EnvironmentConfig.LANGUAGE])
-    lang.install()
-    _ = lang.gettext
-
-
-update_locale()
 
 
 def _get_ipv4(interface: str) -> ipaddress.IPv4Address:
@@ -88,11 +75,13 @@ class DuckyDemo:
 
         self.running = False
         self.admin_client = admin_app.NativeappAdminClient()
+        localedir = pathlib.Path(__file__).parent.parent / "locales"
+        self.locale = locale.Locale(localedir)
 
     def start(self):
         if self.running:
             self.stop()
-        update_locale()
+        self.locale.update_locale(config.EnvironmentConfig.LANGUAGE)
 
         # set hosts entry
         self.running = True
@@ -143,7 +132,8 @@ class DuckyDemo:
             mail_path = (importlib.resources.path(
                 "demos.uhh_ducky_mitm.resources.mail", mail_file))
             logging.info(f"Getting path for file {mail_file}: {mail_path}")
-            self.email_client.send_mail_from_file(mail_path, (0, 0), _)
+            self.email_client.send_mail_from_file(mail_path, (0, 0),
+                                                  self.locale.translate)
 
     def send_mails(self) -> None:
         self._send_mail(["pictures.yml"])
@@ -172,5 +162,5 @@ class DuckyDemo:
         keyboard.release(Key.enter)
 
     def show_error_box(self) -> None:
-        messagebox.showerror(_("uhh_usb_error_title"),
-                             _("uhh_usb_error_msg"))
+        messagebox.showerror(self.locale.translate("uhh_usb_error_title"),
+                             self.locale.translate("uhh_usb_error_msg"))
