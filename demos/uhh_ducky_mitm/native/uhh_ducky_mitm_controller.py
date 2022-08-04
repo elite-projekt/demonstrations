@@ -15,6 +15,7 @@ You should have received a copy of the GNU General Public License along with
 this program. If not, see <https://www.gnu.org/licenses/>.
 """
 import logging
+import traceback
 
 from nativeapp.controller import demo_controller
 from nativeapp.config import config
@@ -60,6 +61,7 @@ class DuckyController(demo_controller.DemoController):
                 self.ducky_service.start()
                 self.set_state("running")
             except Exception as e:
+                logging.error(traceback.format_exc())
                 logging.error(e)
                 return demo_controller.ErrorCodes.no_docker_error
             return demo_controller.ErrorCodes.start_success
