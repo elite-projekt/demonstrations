@@ -157,19 +157,7 @@ If(!(Test-Path -path $rootPath)) {
     # Copy data
     try {
         WriteOutput "Trying to copy files to the created folder" "DarkGray"
-
-        #If release folder
-        if($isReleaseDirectory) {
-            Copy-Item "nativeapp-0.0.0-py3-none-any.whl" -Destination $directoryPath -ErrorAction Stop
-            Copy-Item ".env" -Destination $directoryPath -ErrorAction Stop
-            Copy-Item "demos\" -Destination "$directoryPath\demos" -Recurse -Force -ErrorAction Stop
-        # If src folder
-        } else {
-            Copy-Item "$workingDirectory\..\..\.env" -Destination $directoryPath -ErrorAction Stop
-            Copy-Item "$workingDirectory\..\demos\" -Destination "$directoryPath\demos" -Recurse -Force -ErrorAction Stop
-            Copy-Item "$workingDirectory\..\..\demoCA\rootCA.crt" -Destination "$directoryPath" -ErrorAction Stop
-
-        }
+        Copy-Item "$workingDirectory/../../*" -Destination "$directoryPath/" -Recurse -Force -ErrorAction Stop
         WriteOutput "Copied files to the created folder" "Green"
     }
     catch {
@@ -180,7 +168,7 @@ If(!(Test-Path -path $rootPath)) {
         Exit 1
     }
 
-    # Host File
+    # Host File DEPRECATED! Use Admin component instead
     $localRedirects = "127.0.0.1`twww.lieferung-amazon.de www.shipment-support-amazon.com covidsupportgermany.de coronahilfengermany.de mpseinternational.com mail.domain.com de.linkedln.com #MPSE"
     try {
         $containsRedirecets = Select-String -Path $hostFile -Pattern '#MPSE' -ErrorAction Stop
@@ -221,7 +209,7 @@ If(!(Test-Path -path $rootPath)) {
         WriteOutput "Trying to install native app from build wheel" "DarkGray"
         python -m venv $directoryPath/.venv
         . $directoryPath/.venv/Scripts/Activate.ps1
-        pip install nativeapp-0.0.0-py3-none-any.whl
+        pip install -I $directoryPath
         WriteOutput "Installed nativeapp into venv" "Green"
     } catch {
         WriteOutput "Something went wrong while installing native app from wheel" "Red"
