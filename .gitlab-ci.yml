@@ -72,7 +72,7 @@ lint:phishing-dockerfile:
 lint:password-dockerfile:
   <<: *lint-dockerfile
   variables:
-    SUB_PROJECT_FOLDER: demos/password
+    SUB_PROJECT_FOLDER: demos/hda_password
 
 
 sast:python-code:
