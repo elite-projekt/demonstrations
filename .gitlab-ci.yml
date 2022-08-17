@@ -69,7 +69,7 @@ lint:phishing-dockerfile:
   variables:
     SUB_PROJECT_FOLDER: demos/phishing
 
-lint:password-dockerfile:
+lint:hda_password-dockerfile:
   <<: *lint-dockerfile
   variables:
     SUB_PROJECT_FOLDER: demos/hda_password
@@ -161,13 +161,13 @@ build:phishing-image:
   needs:
     - lint:phishing-dockerfile
 
-build:password-image:
+build:hda_password-image:
   <<: *build-image
   variables:
-    SUB_PROJECT_NAME: password
-    SUB_PROJECT_FOLDER: demos/password
+    SUB_PROJECT_NAME: hda_password
+    SUB_PROJECT_FOLDER: demos/hda_password
   needs:
-    - lint:password-dockerfile
+    - lint:hda_password-dockerfile
 
 # Scan template
 .scan:image: &scan-image
@@ -241,13 +241,13 @@ scan:phishing-image:
   needs:
   - build:phishing-image
 
-scan:password-image:
+scan:hda_password-image:
   <<: *scan-image
   variables:
     SUB_PROJECT_NAME: password
-    SUB_PROJECT_FOLDER: demos/password
+    SUB_PROJECT_FOLDER: demos/hda_password
   needs:
-  - build:password-image
+  - build:hda_password-image
 
 # Push template
 .push:image: &push-image
@@ -296,12 +296,12 @@ push:phishing-image:
   needs:
   - build:phishing-image
 
-push:password-image:
+push:hda_password-image:
   <<: *push-image
   variables:
-    SUB_PROJECT_NAME: password
+    SUB_PROJECT_NAME: hda_password
   needs:
-  - build:password-image
+  - build:hda_password-image
 
 release:
   # Caution, as of 2021-02-02 these assets links require a login, see:
