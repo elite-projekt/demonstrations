@@ -8,7 +8,7 @@ class PasswordController(demo_controller.DemoController):
     def __init__(self):
         super().__init__("hda_password",
                          "hda_password/native/stacks/"
-                         + "secure/docker-compose.yml")
+                         "secure/docker-compose.yml")
 
     def start(self, subpath, params):
         secure_mode = True
@@ -16,13 +16,11 @@ class PasswordController(demo_controller.DemoController):
         if "secureMode" in params:
             secure_mode = params["secureMode"]
         if secure_mode is True:
-            super().__init__("hda_password",
-                             "hda_password/native/stacks/"
-                             + "secure/docker-compose.yml")
+            self.compose_file = "hda_password/native/stacks/"\
+                             "secure/docker-compose.yml"
         else:
-            super().__init__("hda_password",
-                             "hda_password/native/stacks/"
-                             + "secure/docker-compose.yml")
+            self.compose_file = "hda_password/native/stacks/"\
+                             "secure/docker-compose.yml"
         try:
             logging.info("Starting password demo stack")
             self.start_container()
