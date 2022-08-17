@@ -42,7 +42,7 @@
         }
     },
     {
-        "id": "password",
+        "id": "hda_password",
         "categories": [
             "password",
             "twoFactorAuthentication"

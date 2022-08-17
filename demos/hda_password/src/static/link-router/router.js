@@ -34,7 +34,7 @@ $(function() {
     $("#2FA-info-de").click(function() {
 
     //window.open("https://portal.ecs.fbi.h-da.de/kurse/passwort/einheiten/multi-faktor-authentifizierung/teile#0","_blank");
-    window.open("/story_2fa", "_blank", "popup=true, left=100, top=100, width=575, height=880");
+    window.open("/story_2fa", "PasswortAnleitung", "left=100, top=100, width=575, height=880");
 
     });
 
@@ -69,12 +69,12 @@ $(function() {
 
     });
 
-    if($("2FA-info").has("a")){
-        $("2FA-info").attr("href","https://portal.ecs.fbi.h-da.de/courses/password/units/multi-factor-authentication/parts#0");
-        $("2FA-info").attr("type","_blank");
-    }
-    if($("2FA-info-de").has("a")){
-        $("2FA-info-de").attr("href","https://portal.ecs.fbi.h-da.de/kurse/passwort/einheiten/multi-faktor-authentifizierung/teile#0");
-        $("2FA-info-de").attr("type","_blank");
-    }
+    // if($("2FA-info").has("a")){
+    //     $("2FA-info").attr("href","https://portal.ecs.fbi.h-da.de/courses/password/units/multi-factor-authentication/parts#0");
+    //     $("2FA-info").attr("type","_blank");
+    // }
+    // if($("2FA-info-de").has("a")){
+    //     $("2FA-info-de").attr("href","https://portal.ecs.fbi.h-da.de/kurse/passwort/einheiten/multi-faktor-authentifizierung/teile#0");
+    //     $("2FA-info-de").attr("type","_blank");
+    // }
 });
