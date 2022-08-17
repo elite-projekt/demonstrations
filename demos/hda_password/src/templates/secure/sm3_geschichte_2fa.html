@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="content">
+    <div class=container>
+        <p>Hier finden Sie eine kurze Einführung wie sie eine 2FA App einrichten.</p>
+        <p>Wir werden in diesem Beispiel die App <b>Google Authenticator</b> nutzen.</p>
+        <p>Der Google Authenticator ist sowohl für 
+            <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=de&gl=DE">Android</a> 
+            als auch <a href="https://apps.apple.com/de/app/google-authenticator/id388497605">iOS erhältlich</a>.</p>
+        <p>Es gibt noch weitere kostenfreie 2FA Apps. Wenn Sie eine andere App nutzen möchten, informieren 
+            Sie sich vorher über die Sicherheit der App. Eine gute Grundvorraussetzung ist, wenn die App eine Open-Source-Lizenz besitzt.
+            Weitere 2FA Apps finden Sie, indem Sie im <b>Play Store</b> oder im <b>Apple App Store</b> nach <b>Authentifizierung</b> suchen.</p>
+        <p></p>
+        <ol>
+            <li style="padding-bottom:1em">Öffnen Sie Ihre Google Authenticator App auf Ihrem Smartphone.</li>
+            <li style="padding-bottom:1em">Beim ersten Starten sehen Sie einen Willkommensbildschirm. Klicken Sie auf <b>Jetzt Starten</b>.</li>
+            <img width="200px" style="padding-bottom:1em" src="{{url_for('static', filename='screen0.png')}}" alt="Figure1"
+                class="rounded mx-auto d-block" />
+            <li style="padding-bottom:1em">Klicken Sie nun auf <b>QR-Code scannen</b>.</li>
+            <img width="200px" style="padding-bottom:1em" src="{{url_for('static', filename='screen1.png')}}" alt="Figure2" 
+                class="rounded mx-auto d-block" />
+            <li style="padding-bottom:1em">Die App fragt nach dem Zugriff auf Ihre Kamera. Bestätigen Sie diese Erlaubnis. Nun öffnet die App Ihre
+                Kamera und Sie können den QR-Code auf der nächsten Seite scannen.</li>
+            <li style="padding-bottom:1em">Scannen Sie jetzt den angezeigten QR-Code auf dem Monitor.</li>
+            <img width="200px" style="padding-bottom:1em" src="{{url_for('static', filename='screen2.png')}}" alt="Figure3"
+                class="rounded mx-auto d-block" />
+            <li style="padding-bottom:1em">Es wird ein neues Konto angelegt und Sie sehen eine 6-stellige Zahl - der Sicherheitstoken
+                Jeder Token ist 60 Sekunden lang gültig.</li>
+            <img width="200px" style="padding-bottom:1em" src="{{url_for('static', filename='screen3.png')}}" alt="Figure3"
+                class="rounded mx-auto d-block" />
+            <li style="padding-bottom:1em">Geben Sie den Code in das Eingabefeld ein und bestätigen Sie die Eingabe.</li>
+            <img width="200px" style="padding-bottom:1em" src="{{url_for('static', filename='screen4.png')}}" alt="Figure3"
+                class="rounded mx-auto d-block" />
+        </ol>
+    </div>
+</div>
+<script src="{{url_for('static', filename='signup-form/js/jquery-3.3.1.min.js')}}"></script>
+<script src="{{url_for('static', filename='link-router/router.js')}}"></script>
+{% endblock %}
