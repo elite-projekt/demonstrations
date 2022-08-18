@@ -264,8 +264,6 @@ def initial_2fa_kontodienste_sm():
         else:
             print("wrong validation")
             if LANGUAGE == "de":
-                # return flask.render_template(
-                #      "secure/sm4_anfaenglich_2fa_kontodienste.html")
                 return flask.render_template(
                     "secure/sm4_anfaenglich_2fa_kontodienste.html",
                     flash="validation failed!"
