@@ -266,12 +266,14 @@ def initial_2fa_kontodienste_sm():
             if LANGUAGE == "de":
                 return flask.render_template(
                     "secure/sm4_anfaenglich_2fa_kontodienste.html",
-                    flash="validation failed!"
+                    flash="validation failed!",
+                    classes="fade show display",
                 )
             else:
                 return flask.render_template(
                     "secure/sm4_initial_2fa_kontodienste.html",
-                    flash="validation failed!"
+                    flash="validation failed!",
+                    classes="fade show display",
                 )
     else:
         if LANGUAGE == "de":
@@ -422,11 +424,15 @@ def login_2fa():
             if LANGUAGE == "de":
                 return flask.render_template(
                     "secure/sm10_anmeldung_2fa.html",
-                    flash="Validierung fehlgeschlagen")
+                    flash="Validierung fehlgeschlagen",
+                    classes="fade show display",
+                )
             else:
                 return flask.render_template(
                     "secure/sm10_login_2fa.html",
-                    flash="Validation failed")
+                    flash="Validation failed",
+                    classes="fade show display",
+                )
     else:
         if LANGUAGE == "de":
             return flask.render_template(
