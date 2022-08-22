@@ -315,10 +315,6 @@ release:
     - |
       release-cli create --name "Release $CI_COMMIT_TAG" --tag-name $CI_COMMIT_TAG
 
-# Cache pages to enable
-cache:
-  paths:
-    - public
 
 pages:
   stage: release
@@ -331,5 +327,10 @@ pages:
     - mdbook build mdbook -d ../public/$CI_COMMIT_REF_NAME
   artifacts:
     name: "demonstrations"
+    paths:
+      - public
+  # Cache pages to enable
+  cache:
+    key: "doc"
     paths:
       - public
