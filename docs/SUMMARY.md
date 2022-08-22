@@ -7,4 +7,5 @@
   - [Install the Guest](setup/vm_setup_guest.md)
   - [Manage the VM](setup/vm_setup_manage.md)
   - [Additional Tips](setup/vm_setup_tips.md)
+- [Setup of Workstation (Client)](setup/client_setup.md)
 
