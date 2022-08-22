@@ -8,7 +8,7 @@
         "level": "beginner",
         "time": 30,
         "status": 0,
-        "secureMode": false,
+        "secureMode": true,
         "isAvailable": true,
         "messages": {
             "en": {
@@ -42,7 +42,7 @@
         }
     },
     {
-        "id": "password",
+        "id": "hda_password",
         "categories": [
             "password",
             "twoFactorAuthentication"
@@ -50,8 +50,9 @@
         "level": "intermediate",
         "time": 20,
         "status": 0,
-        "secureMode": false,
+        "secureMode": true,
         "isAvailable": true,
+        "disableSecureMode": true,
         "messages": {
             "en": {
                 "title": "Password",

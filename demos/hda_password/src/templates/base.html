@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="{{url_for('static', filename='signup-form/fonts/icomoon/style.css')}}">
+
+    <link rel="stylesheet" href="{{url_for('static', filename='signup-form/css/owl.carousel.min.css')}}">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{{url_for('static', filename='signup-form/css/bootstrap.min.css')}}">
+    
+    <!-- Style -->
+    <link rel="stylesheet" href="{{url_for('static', filename='signup-form/css/style.css')}}">
+    <title>Passwort Demo</title>
+</head>
+<body>
+    <nav class="navbar navbar-dark" style="background-color: #6c63ff;">
+        <img src="{{url_for('static', filename='Nimbus Logo.svg')}}" height="80" class="logo" alt="">
+    </nav>
+    {% block content %}{% endblock %}
+    <script src="{{url_for('static', filename='signup-form/js/jquery-3.3.1.min.js')}}"></script>
+    <script src="{{url_for('static', filename='link-router/router.js')}}"></script>
+</body>
+</html>
+</body>
+</html>
