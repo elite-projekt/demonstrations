@@ -1,6 +1,7 @@
 import logging
 
 from nativeapp.controller import demo_controller
+from nativeapp.utils.admin import admin_app
 
 
 class PasswordController(demo_controller.DemoController):
@@ -9,6 +10,7 @@ class PasswordController(demo_controller.DemoController):
         super().__init__("hda_password",
                          "hda_password/native/stacks/"
                          "secure/docker-compose.yml")
+        self.admin_client = admin_app.NativeappAdminClient()
 
     def start(self, subpath, params):
         secure_mode = True
@@ -21,6 +23,14 @@ class PasswordController(demo_controller.DemoController):
         else:
             self.compose_file = "hda_password/native/stacks/"\
                              "secure/docker-compose.yml"
+
+        ip = "127.0.0.1"
+
+        self.admin_client.send_command(
+                admin_app.NativeappCommands.SET_REDIRECT,
+                admin_app.create_host_payload(
+                    True, "nimbus.de", f"{ip}"))
+
         try:
             logging.info("Starting password demo stack")
             self.start_container()
