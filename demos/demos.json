@@ -259,5 +259,66 @@
             ]
         }
     }
+  },
+    {
+    "id": "uhh_usb_kill",
+    "categories": [
+        "phishing",
+        "email",
+        "badusb"
+    ],
+    "level": "beginner",
+    "status": 0,
+    "time": 5,
+    "secureMode": false,
+    "disableSecureMode": true,
+    "isRunning": false,
+    "isAvailable": true,
+    "messages": {
+        "en": {
+            "title": "USB Kill",
+            "description": "This demo displays the dangers of attacks with manipulated USB-Sticks.",
+            "guide": [
+                {
+                    "title": "Briefing",
+                    "content": "You are Max and you are employed at the company \"MPSE international\"."
+                },
+                {
+                    "title": "Checking your mails",
+                    "content": "The Thunderbird mailprogram will be opened automatically. Check your E-Mails and follow the instructions in those E-Mails. The USB-Stick you will need for that will be prepared for you. Login credentials can be chosen freely. Just make sure you never use any real passwords."
+                },
+                {
+                    "title": "During the Demo",
+                    "content": "During the demo you will come to see that not everything you were instructed to do works as planned."
+                },
+                {
+                    "title": "After the Demo",
+                    "content": "At the end of the Demo you will be shown what the attack did to your computer, how this was achieved and you will be instructed how to revert those changes. Furthermore, you will be given tips on how to prevent attacks of this type."
+                }
+            ]
+        },
+        "de": {
+            "title": "USB-Kill",
+            "description": "Diese Demo zeigt die Gefahren von Angriffen durch manipulierte USB-Sticks auf.",
+            "guide": [
+                {
+                    "title": "Hintergrund",
+                    "content": "Sie sind Max und Sie sind angestellt in der Firma \"MPSE international\"."
+                },
+                {
+                    "title": "Mails überprüfen",
+                    "content": "Das Mailprogram Thunderbird öffnet sich automatisch. Überprüfen Sie Ihr Mail-Postfach und arbeiten Sie die E-Mails ab. Der USB-Stick, welchen Sie dafür benötigen liegt bereit. Login Daten während der Demo können frei gewählt werden. Achten Sie jedoch darauf keine echten Passwörter zu nutzen."
+                },
+                {
+                    "title": "Während der Demo",
+                    "content": "Während der Demo werden Sie bemerken, dass nicht alles so abläuft, wie in den E-Mails gewollt."
+                },
+                {
+                    "title": "Nach der Demo",
+                    "content": "Am Ende der Demo wird Ihnen aufgezeigt, was der Angriff bewirkt hat, wie dies zustande kam und Sie werden angeleitet, wie Sie dies rückgängig machen können. Des Weiteren werden Ihnen Tipps gegeben, wie Sie solche Angriffe vermeiden können."
+                }
+            ]
+        }
+    }
   }
 ]
