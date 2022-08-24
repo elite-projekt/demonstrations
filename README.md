@@ -1,5 +1,5 @@
 # Demonstrations
-[![Latest Release](https://code.fbi.h-da.de/esc-mpse20/demonstrations/-/badges/release.svg)](https://code.fbi.h-da.de/esc-mpse20/demonstrations/-/releases)
+[![Latest Release](https://code.fbi.h-da.de/elite-projekt/demonstrations/-/badges/release.svg)](https://code.fbi.h-da.de/elite-projekt/demonstrations/-/releases)
 
 Documentation can be found in the Wiki.
 

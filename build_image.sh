@@ -25,7 +25,7 @@ do
       ;;
     u) USE_DOCKER=1
       ;;
-    p) IMAGE_PREFIX="registry.code.fbi.h-da.de/esc-mpse20/demonstrations"
+    p) IMAGE_PREFIX="registry.code.fbi.h-da.de/elite-projekt/demonstrations"
       if [ "${OPTARG}" != "" ]; then
         IMAGE_PREFIX=${OPTARG}
       fi
