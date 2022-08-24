@@ -145,7 +145,7 @@ class DuckyDemo:
         set_proxy_cert.add_cert()
         set_proxy_cert.enable_and_set_proxy()
 
-    def get_script(self) -> None:
+    def get_script(self, usb_info) -> None:
         keyboard = Controller()
         keystroke_injection_sleeps = 0.5
         hostname = "127.0.0.1"
