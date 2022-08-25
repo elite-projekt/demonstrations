@@ -233,7 +233,7 @@ If(!(Test-Path -path $rootPath)) {
     # Pull docker images
     try {
         WriteOutput "Login with your username and password for the $Env:REGISTRY_URL repository" "DarkGray"
-        run-docker "login --username Gitlab_Deploy_Token  --password T7_VSx_mHbKwG4Hx9Ntm $Env:REGISTRY_URL"
+        run-docker "login --username WorkstationToken  --password SAHRbswUazao1W_EyuYW $Env:REGISTRY_URL"
         if($? -eq $false) {
             throw
         } else {
