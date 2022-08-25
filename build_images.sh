@@ -3,10 +3,10 @@
 SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
 
 function build_demo() {
-  PATH=$1
+  DOCKER_PATH=$1
   TAG=$2
 
-  ${SCRIPT_DIR}/build_image.sh -c ${PATH} -i ${TAG} -u -p
+  ${SCRIPT_DIR}/build_image.sh -c ${DOCKER_PATH} -i ${TAG} -u -p
 }
 
 build_demo ${SCRIPT_DIR}/demos/uhh_ducky_mitm/container/mitmproxy uhh_ducky_mitm_proxy
