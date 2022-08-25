@@ -8,4 +8,9 @@
   - [Manage the VM](setup/vm_setup_manage.md)
   - [Additional Tips](setup/vm_setup_tips.md)
 - [Setup of Workstation (Client)](setup/client_setup.md)
+- [Adding a Demo to the Ecosystem](add_demo.md)
+- [Native App](nativeapp.md)
+  - [Native API](nativeapp_api.md)
+- [Known issues](issues.md)
+- [Creating Certificates](cert.md)
 
