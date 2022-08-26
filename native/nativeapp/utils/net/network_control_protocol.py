@@ -66,21 +66,25 @@ class NativeappControlServer(ABC):
 
     def stop(self):
         self.running = False
+        self.socket.close()
         if self.listen_thread:
             self.listen_thread.join()
 
     def _run(self):
         self.running = True
         while self.running:
-            conn, addr = self.socket.accept()
-            with conn:
-                data = conn.recv(1024)
-                if data:
-                    try:
-                        command, payload = self.parse_packet(data)
-                        self.on_packet(command, payload)
-                    except ValueError as e:
-                        logging.warning(f"Ignoring invalid packet: {e}")
+            try:
+                conn, addr = self.socket.accept()
+                with conn:
+                    data = conn.recv(1024)
+                    if data:
+                        try:
+                            command, payload = self.parse_packet(data)
+                            self.on_packet(command, payload)
+                        except ValueError as e:
+                            logging.warning(f"Ignoring invalid packet: {e}")
+            except Exception:
+                pass
 
     def parse_packet(self, packet: bytes) -> Tuple[int, bytes]:
         # 14 header + min 1 payload + 4 payload crc
