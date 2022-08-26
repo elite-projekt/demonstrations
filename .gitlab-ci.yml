@@ -175,6 +175,7 @@ build:hda_password-image:
   stage: scan
   image:
     name: aquasec/trivy:latest
+    entrypoint: [""]
   script:
     - echo "Start trivy Container Scan for $SUB_PROJECT_NAME.tar"
     # Build report
