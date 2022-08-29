@@ -338,3 +338,24 @@ pages:
       - public
   only:
     - develop
+
+
+
+generate-license-jobs:
+  stage: lint
+  image: alpine
+  script:
+    - apk update && apk add python3
+    - python3 generate_ci_jobs.py
+    - cat generated_ci.yml
+  artifacts:
+    paths:
+      - generated_ci.yml
+
+license-child:
+  stage: test
+  trigger:
+    include:
+      - artifact: generated_ci.yml
+        job: generate-license-jobs
+
