@@ -6,7 +6,7 @@ function build_demo() {
   DOCKER_PATH=$1
   TAG=$2
 
-  "${SCRIPT_DIR}/build_image.sh" -c ${DOCKER_PATH} -i ${TAG} -u -p
+  "${SCRIPT_DIR}/build_image.sh" -c "${DOCKER_PATH}" -i "${TAG}" -u -p
 }
 
 build_demo "${SCRIPT_DIR}/demos/uhh_ducky_mitm/container/mitmproxy" uhh_ducky_mitm_proxy
