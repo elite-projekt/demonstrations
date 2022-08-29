@@ -245,7 +245,8 @@ If(!(Test-Path -path $rootPath)) {
             # run-docker "pull $Env:REGISTRY_URL/$Env:GROUP_NAME/demonstrations/$Env:UHH_DUCKY_MITM_REPO_WEB_EN"
             # run-docker "pull $Env:REGISTRY_URL/$Env:GROUP_NAME/demonstrations/$Env:UHH_DUCKY_MITM_REPO_PROXY"
             # run-docker "pull $Env:REGISTRY_URL/$Env:GROUP_NAME/demonstrations/$Env:PHISHING_REPO"
-            # run-docker "pull $Env:REGISTRY_URL/$Env:GROUP_NAME/demonstrations/$Env:PASSWORD_REPO"
+            # run-docker "pull $Env:REGISTRY_URL/$Env:GROUP_NAME/demonstrations/$Env:HDA_PASSWORD_REPO"
+            # run-docker "pull $Env:REGISTRY_URL/$Env:GROUP_NAME/demonstrations/$Env:HDA_PASSWORD_NGINX_REPO"
             # WriteOutput "Succesfully pulled the docker images" "Green"
 
             # when building locally just login successfully" 
