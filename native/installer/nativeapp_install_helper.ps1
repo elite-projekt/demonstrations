@@ -250,8 +250,8 @@ If(!(Test-Path -path $rootPath)) {
             # WriteOutput "Succesfully pulled the docker images" "Green"
 
             # when building locally just login successfully" 
-            WriteOutput "Successfully logged in"
-        }
+            WriteOutput "Successfully logged in" "Green"
+
     } catch {
         # For Pulling Images from Repo
         # WriteOutput "Something went wrong while login into docker or pulling the repositories" "Red"
