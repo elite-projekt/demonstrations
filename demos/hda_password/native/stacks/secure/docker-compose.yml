@@ -3,12 +3,12 @@ version: '3.7'
 services:
   password:
     image: ${REGISTRY_URL}/${GROUP_NAME}/demonstrations/${HDA_PASSWORD_REPO}
-    container_name: password_webserver
+    container_name: hda_password_webserver
     ports:
       - "5001:5001"
   nginx:
     image: ${REGISTRY_URL}/${GROUP_NAME}/demonstrations/${HDA_PASSWORD_NGINX_REPO}
-    container_name: password_nginx_server
+    container_name: hda_password_nginx_server
     ports:
       - "443:443"
 

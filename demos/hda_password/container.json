@@ -1,6 +1,10 @@
 [
 {
-  "name": "hda_password",
+  "name": "hda_password_webserver",
   "dockerfile": "Dockerfile"
+},
+{
+  "name": "hda_password_nginx_server",
+  "dockerfile": "src/nginx/Dockerfile"
 }
 ]
