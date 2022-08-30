@@ -47,9 +47,15 @@ openssl req -x509 -new -nodes -key rootCA.key -sha256 -days 1024 -out rootCA.crt
 
 In `demoCA` run
 ```
-./sign_cert.py --domains <domain> --ca-cert rootCA.crt --ca-key rootCA.key
+./sign_cert.py --domains <domain> --ca-cert eliteCA.crt --ca-key eliteCA.key
 ```
 to generate a new certificate.
+
+### Create a cert chain
+Just concat the certs:
+```
+cat <your cert> eliteCA.crt rootCA.crt > cert_chain.pem
+```
 
 
 ### smime

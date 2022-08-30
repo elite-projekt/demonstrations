@@ -34,10 +34,14 @@ def generate_csr(key: OpenSSL.crypto.PKey,
                  locality="Darmstadt",
                  organization="h-da",
                  organizational_unit="ECS",
-                 email="webmaster@ecs.fbi.h-da.de"
+                 email="webmaster@ecs.fbi.h-da.de",
+                 CN=None,
+                 CA=False
                  ) -> OpenSSL.crypto.X509Req:
     req = OpenSSL.crypto.X509Req()
-    req.get_subject().CN = dns_names[0]
+    if len(dns_names) > 0 and CN is None:
+        CN = dns_names[0]
+    req.get_subject().CN = CN
     req.get_subject().C = country_code
     req.get_subject().ST = state
     req.get_subject().L = locality
@@ -47,21 +51,25 @@ def generate_csr(key: OpenSSL.crypto.PKey,
 
     req.set_pubkey(key)
 
-    san_names = ""
-    san_list = []
-    for name in dns_names:
-        san_list.append(f"DNS: {name}")
-    san_names = ", ".join(san_list)
     extensions = []
-    extensions.append(OpenSSL.crypto.X509Extension(
-             b"subjectAltName",
-             False,
-             san_names.encode()
-             ))
+    if len(dns_names) > 0:
+        san_names = ""
+        san_list = []
+        for name in dns_names:
+            san_list.append(f"DNS: {name}")
+        san_names = ", ".join(san_list)
+        extensions.append(OpenSSL.crypto.X509Extension(
+                 b"subjectAltName",
+                 False,
+                 san_names.encode()
+                 ))
+    ca_val = b"CA:FALSE"
+    if CA:
+        ca_val = b"CA:TRUE"
     extensions.append(OpenSSL.crypto.X509Extension(
             b"basicConstraints",
             False,
-            b"CA:FALSE"
+            ca_val
             ))
     extensions.append(OpenSSL.crypto.X509Extension(
             b"keyUsage",
@@ -148,17 +156,26 @@ if __name__ == "__main__":
     parser.add_argument("--domains", dest="domains",
                         help="Domains to use for the cert. \
                               The first domain is the CN and output name",
-                        type=str, nargs="+", required=True)
+                        type=str, nargs="+", default=[])
     parser.add_argument("--csr", dest="csr", help="Use an existing csr",
                         type=str, default=None)
     parser.add_argument("--key", dest="key", help="Use an existing key",
+                        type=str, default=None)
+    parser.add_argument("--ca", dest="ca", help="Add the CA flag",
+                        action="store_true")
+    parser.add_argument("-o", dest="output", help="Custom output name",
+                        type=str)
+    parser.add_argument("--cn", dest="cn", help="Custom common name",
                         type=str, default=None)
 
     args = parser.parse_args()
 
     ca_key = load_key(args.ca_key)
     ca_cert = load_cert(args.ca_cert)
-    cn = args.domains[0]
+    if args.output:
+        output_name = args.output
+    else:
+        output_name = args.domains[0]
 
     csr = None
     key = None
@@ -170,9 +187,9 @@ if __name__ == "__main__":
             key = generate_key()
         else:
             key = load_key(args.key)
-        csr = generate_csr(key, args.domains)
+        csr = generate_csr(key, args.domains, CA=args.ca, CN=args.cn)
 
     cert = sign_req(ca_cert, ca_key, csr)
     if args.key is None and args.csr is None:
-        save_key(key, f"{cn}.key")
-    save_cert(cert, f"{cn}.pem")
+        save_key(key, f"{output_name}.key")
+    save_cert(cert, f"{output_name}.crt")
