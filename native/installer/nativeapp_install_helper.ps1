@@ -249,9 +249,9 @@ If(!(Test-Path -path $rootPath)) {
             # run-docker "pull $Env:REGISTRY_URL/$Env:GROUP_NAME/demonstrations/$Env:HDA_PASSWORD_NGINX_REPO"
             # WriteOutput "Succesfully pulled the docker images" "Green"
 
-            # when building locally just login successfully" 
+            # when building locally just login successfully"
             WriteOutput "Successfully logged in" "Green"
-
+        }
     } catch {
         # For Pulling Images from Repo
         # WriteOutput "Something went wrong while login into docker or pulling the repositories" "Red"
