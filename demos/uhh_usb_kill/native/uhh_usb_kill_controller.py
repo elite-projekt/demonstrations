@@ -15,6 +15,7 @@ You should have received a copy of the GNU General Public License along with
 this program. If not, see <https://www.gnu.org/licenses/>.
 """
 import logging
+import pathlib
 
 from nativeapp.controller import demo_controller
 from nativeapp.config import config
@@ -25,7 +26,7 @@ from demos.uhh_usb_kill.native import uhh_usb_kill_demo
 class KillController(demo_controller.DemoController):
     def __init__(self):
         super().__init__("uhh_usb_kill",
-                         "uhh_usb_kill/native/stacks/docker-compose.yml")
+                        f"{pathlib.Path(uhh_usb_kill_demo.__file__).parent}/stacks/docker-compose.yml") # noqa: 501
         self.kill_service = uhh_usb_kill_demo.KillDemo()
 
     def stop(self, subpath) -> int:
