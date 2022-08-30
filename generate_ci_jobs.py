@@ -111,7 +111,7 @@ def generate_docker_lint_ci():
                 # scan job
                 template = PipelineTemplate(name, "scan:image", image="aquasec/trivy:latest") # noqa: 501
                 template.entrypoint = ""
-                template.add_command(f"trivy --cache-dir .trivycache/ image --security-checks vuln,config --exit-code 1 --no-progress --ignore-unfixed --input {name}.tar") # noqa: 501
+                template.add_command(f"trivy --cache-dir .trivycache/ image -s HIGH,CRITICAL --security-checks vuln --exit-code 1 --no-progress --ignore-unfixed --input {name}.tar") # noqa: 501
                 template.allow_failure = True
                 template.add_dependency(f"build:image-{name}")
                 template.stage = "scan"
