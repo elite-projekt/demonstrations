@@ -99,7 +99,7 @@ def generate_docker_lint_ci():
                 # build job
                 template = PipelineTemplate(name, "build:image", image="gcr.io/kaniko-project/executor:debug") # noqa: 501
                 template.entrypoint = ""
-                template.add_command(f"image_name=\"$CI_REGISTRY_IMAGE/demos/{name}:$CI_COMMIT_BRANCH\"") # noqa: 501
+                template.add_command(f"image_name=\"$CI_REGISTRY_IMAGE/{name}:$CI_COMMIT_BRANCH\"") # noqa: 501
                 template.add_command(f"/kaniko/executor --context \"$CI_PROJECT_DIR/demos/{demo.name}/{demo_path}\" --dockerfile \"$CI_PROJECT_DIR/demos/{demo.name}/{dockerfile}\" --no-push --destination \"$image_name\" --tarPath {name}.tar") # noqa: 501
                 template.add_before_script_command("mkdir -p /kaniko/.docker")
                 template.add_before_script_command("echo \"{'auths':{'$CI_REGISTRY':{'username':'$CI_REGISTRY_USER','password':'$CI_REGISTRY_PASSWORD'}}}\" > /kaniko/.docker/config.json".replace("'", "\\\"")) # noqa: 501
