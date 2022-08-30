@@ -56,6 +56,8 @@ class DuckyController(demo_controller.DemoController):
                     config.EnvironmentConfig.LANGUAGE = params["language"]
 
                 logging.info("Starting uhh_ducky_mitm demo stack")
+                if self.get_state() != "offline":
+                    return demo_controller.ErrorCodes.invalid_state
                 self.set_state("starting")
                 lang_env = {"ELITE_LANG": config.EnvironmentConfig.LANGUAGE}
                 self.start_container(lang_env)

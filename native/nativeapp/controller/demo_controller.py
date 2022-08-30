@@ -17,6 +17,7 @@ class DemoStatus:
 
 class ErrorCodes():
     start_success = DemoStatus("Successfully started the Demo.", 200)
+    invalid_state = DemoStatus("Demo is in an invalid state", 500)
     stop_success = DemoStatus("Stopped all remaining Demos.", 200)
     stop_failed = DemoStatus("Failed to stop containers.", 500)
     no_docker_error = DemoStatus(
