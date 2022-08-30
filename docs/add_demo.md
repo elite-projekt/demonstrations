@@ -15,6 +15,22 @@
 1. In case you have to interact with the native host you can describe your procedures in the NativeApp files. Have a look on the existing demos for small guidance.
 1. Now you can install and run the NativeApp as described in [NativeApp (Section Developing/Testing Locally)](/Demonstrations/Native-App#developingtesting-locally). The NativeApp will run and wait for commands of the plattform.
 
+#### Adding your demo to the CI
+Just place a `container.json` file in your demo folder containing the following content:
+```json
+[
+  {
+    "name": "<name of your container>",
+    "dockerfile": "<relative path of your dockerfile>"
+  },
+  {
+    "name": "<name of your second container>",
+    "dockerfile": "<relative path of your dockerfile>"
+  }
+]
+
+```
+
 ### 2. Add demo to demo portal (Web platform)
 
 If followed all previous steps you added the demo to the _demonstrations_ ecosystem. Now, in order to let the demos appear in the _portal_ so you can start them from there you have to follow the next steps.

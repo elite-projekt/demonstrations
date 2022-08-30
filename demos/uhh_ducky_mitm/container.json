@@ -1,0 +1,10 @@
+[
+{
+  "name": "web",
+  "dockerfile": "container/nginx/Dockerfile"
+},
+{
+  "name": "proxy",
+  "dockerfile": "container/mitmproxy/Dockerfile"
+}
+]

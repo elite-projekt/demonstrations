@@ -1,10 +1,8 @@
 stages:
+  - generate
   - lint
   - test
-  - build
-  - scan
-  - push
-  - upload
+  - demo
   - release
 
 variables:
@@ -33,48 +31,6 @@ lint:python-code:
     - flake8 .
   needs: []
 
-# Hadolint template
-.lint:dockerfile: &lint-dockerfile
-  stage: lint
-  image:
-    name: registry.gitlab.com/pipeline-components/hadolint:latest
-  script:
-    - echo "Start hadolint for $CI_PROJECT_DIR/$SUB_PROJECT_FOLDER/Dockerfile"
-    - hadolint "$CI_PROJECT_DIR/$SUB_PROJECT_FOLDER/Dockerfile"
-  needs: []
-
-#lint:demo:begin - DO NOT CHANGE THIS LINE. required by 'init_new_demo.sh' script
-lint:fokusrnware-dockerfile:
-  <<: *lint-dockerfile
-  variables:
-    SUB_PROJECT_FOLDER: demos/fokusrnware/
-
-lint:ransomware-dockerfile:
-  <<: *lint-dockerfile
-  variables:
-    SUB_PROJECT_FOLDER: demos/ransomware/
-
-lint:uhh_ducky_mitm-dockerfile-proxy:
-  <<: *lint-dockerfile
-  variables:
-    SUB_PROJECT_FOLDER: demos/uhh_ducky_mitm/container/mitmproxy
-
-lint:uhh_ducky_mitm-dockerfile-web:
-  <<: *lint-dockerfile
-  variables:
-    SUB_PROJECT_FOLDER: demos/uhh_ducky_mitm/container/nginx
-
-lint:phishing-dockerfile:
-  <<: *lint-dockerfile
-  variables:
-    SUB_PROJECT_FOLDER: demos/phishing
-
-lint:hda_password-dockerfile:
-  <<: *lint-dockerfile
-  variables:
-    SUB_PROJECT_FOLDER: demos/hda_password
-
-
 sast:python-code:
   stage: lint
   image:
@@ -95,215 +51,6 @@ test:python:
     - pip install -r nativeapp/requirements.txt
     - python -m unittest
 
-# Build template
-.build:image: &build-image
-  stage: build
-  image:
-    name: gcr.io/kaniko-project/executor:debug
-    entrypoint: [""]
-  script:
-    - echo "starting karniko docker build for $SUB_PROJECT_NAME Image"
-    - image_name="$CI_REGISTRY_IMAGE/$SUB_PROJECT_NAME:$CI_COMMIT_BRANCH"
-    - /kaniko/executor
-      --context "$CI_PROJECT_DIR/$SUB_PROJECT_FOLDER/"
-      --dockerfile "$CI_PROJECT_DIR/$SUB_PROJECT_FOLDER/$SUB_PROJECT_DOCKERFILE"
-      --no-push
-      --destination "$image_name"
-      --tarPath "$SUB_PROJECT_NAME.tar"
-  before_script:
-    - mkdir -p /kaniko/.docker
-    - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
-  artifacts:
-    paths:
-    - $SUB_PROJECT_NAME.tar
-    when: on_success
-  needs:
-    - lint:python-code
-
-#build:demo:begin - DO NOT CHANGE THIS LINE. required by 'init_new_demo.sh' script
-build:fokusrnware-image:
-  <<: *build-image
-  variables:
-    SUB_PROJECT_NAME: fokusrnware
-    SUB_PROJECT_FOLDER: demos/fokusrnware/
-  needs:
-    - lint:fokusrnware-dockerfile
-
-build:ransomware-image:
-  <<: *build-image
-  variables:
-    SUB_PROJECT_NAME: ransomware
-    SUB_PROJECT_FOLDER: demos/ransomware/
-  needs:
-    - lint:ransomware-dockerfile
-
-build:uhh_ducky_mitm-image-proxy:
-  <<: *build-image
-  variables:
-    SUB_PROJECT_NAME: uhh_ducky_mitm_proxy
-    SUB_PROJECT_FOLDER: demos/uhh_ducky_mitm/container/mitmproxy/
-  needs:
-    - lint:uhh_ducky_mitm-dockerfile-proxy
-
-build:uhh_ducky_mitm-image-web:
-  <<: *build-image
-  variables:
-    SUB_PROJECT_NAME: uhh_ducky_mitm_web
-    SUB_PROJECT_FOLDER: demos/uhh_ducky_mitm/container/nginx/
-  needs:
-    - lint:uhh_ducky_mitm-dockerfile-web
-
-
-build:phishing-image:
-  <<: *build-image
-  variables:
-    SUB_PROJECT_NAME: phishing
-    SUB_PROJECT_FOLDER: demos/phishing
-  needs:
-    - lint:phishing-dockerfile
-
-build:hda_password-image:
-  <<: *build-image
-  variables:
-    SUB_PROJECT_NAME: hda_password
-    SUB_PROJECT_FOLDER: demos/hda_password
-  needs:
-    - lint:hda_password-dockerfile
-
-# Scan template
-.scan:image: &scan-image
-  stage: scan
-  image:
-    name: aquasec/trivy:latest
-    entrypoint: [""]
-  script:
-    - echo "Start trivy Container Scan for $SUB_PROJECT_NAME.tar"
-    # Build report
-    - trivy
-      --cache-dir .trivycache/
-      image
-      --exit-code 0
-      --no-progress
-      --format template
-      --template "@/contrib/gitlab.tpl"
-      -o gl-container-scanning-report.json
-      --ignore-unfixed
-      --input $SUB_PROJECT_NAME.tar
-    # Print report
-    - trivy
-      --cache-dir .trivycache/
-      image
-      --exit-code 0
-      --no-progress
-      --ignore-unfixed
-      --input $SUB_PROJECT_NAME.tar
-    # Fail if High Findings
-    - trivy
-      --cache-dir .trivycache/
-      image
-      --exit-code 1
-      --severity HIGH
-      --no-progress
-      --ignore-unfixed
-      --input $SUB_PROJECT_NAME.tar
-  cache:
-    key: trivy
-    policy: pull-push
-    paths:
-      - .trivycache/
-  artifacts:
-    reports:
-      container_scanning: gl-container-scanning-report.json
-    paths:
-      - $SUB_PROJECT_NAME.tar
-  allow_failure: true
-
-#scan:demo:begin - DO NOT CHANGE THIS LINE. required by 'init_new_demo.sh' script
-scan:fokusrnware-image:
-  <<: *scan-image
-  variables:
-    SUB_PROJECT_NAME: fokusrnware
-    SUB_PROJECT_FOLDER: demos/fokusrnware/
-  needs:
-  - build:fokusrnware-image
-
-scan:ransomware-image:
-  <<: *scan-image
-  variables:
-    SUB_PROJECT_NAME: ransomware
-    SUB_PROJECT_FOLDER: demos/ransomware/
-  needs:
-  - build:ransomware-image
-
-scan:phishing-image:
-  <<: *scan-image
-  variables:
-    SUB_PROJECT_NAME: phishing
-    SUB_PROJECT_FOLDER: demos/phishing
-  needs:
-  - build:phishing-image
-
-scan:hda_password-image:
-  <<: *scan-image
-  variables:
-    SUB_PROJECT_NAME: password
-    SUB_PROJECT_FOLDER: demos/hda_password
-  needs:
-  - build:hda_password-image
-
-# Push template
-.push:image: &push-image
-  stage: push
-  image:
-    name: gcr.io/go-containerregistry/crane:debug
-    entrypoint: [""]
-  script:
-  - echo "Push Container SUB_PROJECT_NAME.tar"
-  - crane auth login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-  - crane push $SUB_PROJECT_NAME.tar $CI_REGISTRY_IMAGE/$SUB_PROJECT_NAME:$CI_COMMIT_BRANCH
-
-#push:demo:begin - DO NOT CHANGE THIS LINE. required by 'init_new_demo.sh' script
-push:fokusrnware-image:
-  <<: *push-image
-  variables:
-    SUB_PROJECT_NAME: fokusrnware
-  needs:
-  - build:fokusrnware-image
-
-push:ransomware-image:
-  <<: *push-image
-  variables:
-    SUB_PROJECT_NAME: ransomware
-  needs:
-  - build:ransomware-image
-
-push:uhh_ducky_mitm-image-web:
-  <<: *push-image
-  variables:
-    SUB_PROJECT_NAME: uhh_ducky_mitm_web
-  needs:
-  - build:uhh_ducky_mitm-image-web
-
-push:uhh_ducky_mitm-image-proxy:
-  <<: *push-image
-  variables:
-    SUB_PROJECT_NAME: uhh_ducky_mitm_proxy
-  needs:
-  - build:uhh_ducky_mitm-image-proxy
-
-push:phishing-image:
-  <<: *push-image
-  variables:
-    SUB_PROJECT_NAME: phishing
-  needs:
-  - build:phishing-image
-
-push:hda_password-image:
-  <<: *push-image
-  variables:
-    SUB_PROJECT_NAME: hda_password
-  needs:
-  - build:hda_password-image
 
 release:
   # Caution, as of 2021-02-02 these assets links require a login, see:
@@ -340,22 +87,29 @@ pages:
     - develop
 
 
-
-generate-license-jobs:
-  stage: lint
+generate-demo-jobs:
+  stage: generate
   image: alpine
   script:
     - apk update && apk add python3
     - python3 generate_ci_jobs.py
-    - cat generated_ci.yml
   artifacts:
     paths:
-      - generated_ci.yml
+      - generated_demo_ci.yml
+      - generated_license_ci.yml
 
-license-child:
+license-jobs:
   stage: test
   trigger:
     include:
-      - artifact: generated_ci.yml
-        job: generate-license-jobs
+      - artifact: generated_license_ci.yml
+        job: generate-demo-jobs
+    strategy: depend
 
+demo-image-jobs:
+  stage: demo
+  trigger:
+    include:
+      - artifact: generated_demo_ci.yml
+        job: generate-demo-jobs
+    strategy: depend
