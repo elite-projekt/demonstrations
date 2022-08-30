@@ -16,6 +16,7 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 """
 import logging
 import traceback
+import pathlib
 
 from nativeapp.controller import demo_controller
 from nativeapp.config import config
@@ -26,7 +27,7 @@ from demos.uhh_ducky_mitm.native import uhh_ducky_mitm_demo
 class DuckyController(demo_controller.DemoController):
     def __init__(self):
         super().__init__("uhh_ducky_mitm",
-                         "uhh_ducky_mitm/native/stacks/docker-compose.yml")
+                        f"{pathlib.Path(uhh_ducky_mitm_demo.__file__).parent}/stacks/docker-compose.yml") # noqa: 501
         self.ducky_service = uhh_ducky_mitm_demo.DuckyDemo()
 
     def stop(self, subpath) -> int:
