@@ -18,5 +18,5 @@ build_demo "${SCRIPT_DIR}/demos/ransomware" ransomware
 
 build_demo "${SCRIPT_DIR}/demos/phishing" phishing
 
-build_demo "${SCRIPT_DIR}/demos/hda_password" hda_password
-build_demo "${SCRIPT_DIR}/demos/hda_password/src/nginx" hda_password_nginx
+build_demo "${SCRIPT_DIR}/demos/hda_password" hda_password_webserver
+build_demo "${SCRIPT_DIR}/demos/hda_password/src/nginx" hda_password_nginx_server
