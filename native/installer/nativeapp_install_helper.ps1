@@ -237,23 +237,42 @@ If(!(Test-Path -path $rootPath)) {
         if($? -eq $false) {
             throw
         } else {
-            WriteOutput "Trying to pull the latest docker images" "DarkGray"
-            run-docker "pull $Env:REGISTRY_URL/$Env:GROUP_NAME/demonstrations/$Env:FOKUSRNWARE_REPO"
-            run-docker "pull $Env:REGISTRY_URL/$Env:GROUP_NAME/demonstrations/$Env:RANSOMWARE_REPO"
-            run-docker "pull $Env:REGISTRY_URL/$Env:GROUP_NAME/demonstrations/$Env:UHH_DUCKY_MITM_REPO_WEB"
-            run-docker "pull $Env:REGISTRY_URL/$Env:GROUP_NAME/demonstrations/$Env:UHH_DUCKY_MITM_REPO_WEB_EN"
-            run-docker "pull $Env:REGISTRY_URL/$Env:GROUP_NAME/demonstrations/$Env:UHH_DUCKY_MITM_REPO_PROXY"
-            run-docker "pull $Env:REGISTRY_URL/$Env:GROUP_NAME/demonstrations/$Env:PHISHING_REPO"
-            run-docker "pull $Env:REGISTRY_URL/$Env:GROUP_NAME/demonstrations/$Env:PASSWORD_REPO"
-            WriteOutput "Succesfully pulled the docker images" "Green"
-        }
+            # For Pulling Images from Repo
+            # WriteOutput "Trying to pull the latest docker images" "DarkGray"
+            # run-docker "pull $Env:REGISTRY_URL/$Env:GROUP_NAME/demonstrations/$Env:FOKUSRNWARE_REPO"
+            # run-docker "pull $Env:REGISTRY_URL/$Env:GROUP_NAME/demonstrations/$Env:RANSOMWARE_REPO"
+            # run-docker "pull $Env:REGISTRY_URL/$Env:GROUP_NAME/demonstrations/$Env:UHH_DUCKY_MITM_REPO_WEB"
+            # run-docker "pull $Env:REGISTRY_URL/$Env:GROUP_NAME/demonstrations/$Env:UHH_DUCKY_MITM_REPO_WEB_EN"
+            # run-docker "pull $Env:REGISTRY_URL/$Env:GROUP_NAME/demonstrations/$Env:UHH_DUCKY_MITM_REPO_PROXY"
+            # run-docker "pull $Env:REGISTRY_URL/$Env:GROUP_NAME/demonstrations/$Env:PHISHING_REPO"
+            # run-docker "pull $Env:REGISTRY_URL/$Env:GROUP_NAME/demonstrations/$Env:HDA_PASSWORD_REPO"
+            # run-docker "pull $Env:REGISTRY_URL/$Env:GROUP_NAME/demonstrations/$Env:HDA_PASSWORD_NGINX_REPO"
+            # WriteOutput "Succesfully pulled the docker images" "Green"
+
+            # when building locally just login successfully" 
+            WriteOutput "Successfully logged in" "Green"
+
     } catch {
-        WriteOutput "Something went wrong while login into docker or pulling the repositories" "Red"
+        # For Pulling Images from Repo
+        # WriteOutput "Something went wrong while login into docker or pulling the repositories" "Red"
+        # Write-Warning $Error[0]
+        # WriteOutput "Resetting all changes" "Red"
+        # Remove-Item -Path $rootPath -Recurse
+        # Set-Content -Path $hostFile -Value (get-content -Path $hostFile | Select-String -Pattern '#MPSE' -NotMatch)
+        # Remove-MpPreference -ExclusionPath $rootPath
+        # Exit 1
+
+        # when building locally
+        WriteOutput "Login failed" "Red"
+    }
+
+    #Build images locally
+    try {
+        WriteOutput "Building Images locally" "DarkGray"
+        wsl --user root bash ../../build_images.sh
+    } catch {
+        WriteOutput "Something went wrong while building the images locally" "Red"
         Write-Warning $Error[0]
-        WriteOutput "Resetting all changes" "Red"
-        Remove-Item -Path $rootPath -Recurse
-        Set-Content -Path $hostFile -Value (get-content -Path $hostFile | Select-String -Pattern '#MPSE' -NotMatch)
-        Remove-MpPreference -ExclusionPath $rootPath
         Exit 1
     }
 
