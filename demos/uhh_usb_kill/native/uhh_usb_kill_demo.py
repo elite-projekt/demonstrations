@@ -96,7 +96,7 @@ class KillDemo:
         self.kill_thread.join()
         logging.info("Stop done")
 
-    def kill(self):
+    def kill(self, usb_info):
         def kill_thread_func():
             self.kill_simulation = simulate_kill.KillSimulation()
             self.kill_simulation.show_glitch()
