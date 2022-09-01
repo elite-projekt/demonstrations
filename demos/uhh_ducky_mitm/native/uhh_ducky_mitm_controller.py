@@ -48,8 +48,7 @@ class DuckyController(demo_controller.DemoController):
             self.ducky_service.add_cert()
             self.ducky_service.show_error_box()
             self.ducky_service.send_second_mail()
-            return 1
-
+            return demo_controller.ErrorCodes.start_success
         else:
             try:
                 if "language" in params:
