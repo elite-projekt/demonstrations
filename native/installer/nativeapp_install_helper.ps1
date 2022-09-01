@@ -249,7 +249,7 @@ If(!(Test-Path -path $rootPath)) {
             # run-docker "pull $Env:REGISTRY_URL/$Env:GROUP_NAME/demonstrations/$Env:HDA_PASSWORD_NGINX_REPO"
             # WriteOutput "Succesfully pulled the docker images" "Green"
 
-            # when building locally just login successfully" 
+            # when building locally just login successfully"
             WriteOutput "Successfully logged in" "Green"
 
     } catch {
@@ -269,7 +269,7 @@ If(!(Test-Path -path $rootPath)) {
     #Build images locally
     try {
         WriteOutput "Building Images locally" "DarkGray"
-        wsl --user root bash ../../build_images.sh
+        wsl --user root ../../build_images.py
     } catch {
         WriteOutput "Something went wrong while building the images locally" "Red"
         Write-Warning $Error[0]
