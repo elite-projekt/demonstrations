@@ -123,7 +123,8 @@ class DemoManager():
         subpath = escape(subpath)
         if demo_name in DemoManager.demos:
             ret_val = DemoManager.demos[demo_name].\
-                    start(subpath=subpath, params=flask.request.json)
+                start(subpath=subpath,
+                      params=flask.request.get_json(silent=True))
             return DemoManager.get_flask_response(ret_val)
         return DemoManager.get_flask_response(ErrorCodes.generic_error)
 
