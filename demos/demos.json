@@ -94,7 +94,7 @@
                     },
                     {
                         "title": "Starten der Demo",
-                        "content": "<p>&nbsp;<\/p>\r\n\r\n<p>Um die Demo zu starten dr&uuml;cken Sie <a href=\"http:\/\/localhost:5001\/\" target=\"_blank\">hier<\/a>. Folgen Sie anschlie&szlig;end den Anweisungen der Demo.<\/p>\r\n\r\n<p><strong>Bitte denken Sie daran in keiner Demo Ihre pers&ouml;nlichen Passw&ouml;rter zu verwenden!<\/strong><\/p>"
+                        "content": "<p>&nbsp;<\/p>\r\n\r\n<p>Um die Demo zu starten dr&uuml;cken Sie den Start-Button. Folgen Sie anschlie&szlig;end den Anweisungen der Demo.<\/p>\r\n\r\n<p><strong>Bitte denken Sie daran in keiner Demo Ihre pers&ouml;nlichen Passw&ouml;rter zu verwenden!<\/strong><\/p>\r\n\r\n<p>&nbsp;<\/p>\r\n\r\n<p style=\"text-align: center;\"><a href=\"https:\/\/nimbus.de\" style=\"border: none;\r\n  color: white;\r\n  padding: 11px 21px;\r\n  text-align: center;\r\n  text-decoration: none;\r\n  display: inline-block;\r\n  font-size: 16px;\r\n  margin: 4px 2px;\r\n  cursor: pointer;\r\n  border-radius: 5px;\r\n  background-color: #7367F0\" target=\"_blank\">Zur Demo<\/a><\/p>\r\n\r\n<p>&nbsp;<\/p>"
                     }
                 ]
             }
