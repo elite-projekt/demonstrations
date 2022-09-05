@@ -1,10 +1,14 @@
 {% extends "base.html" %}
 {% block content %}
+<div class="preload">
+  <img src="{{url_for('static', filename='images/noun-eye-opened.png')}}"/>
+  <img src="{{url_for('static', filename='images/noun-eye-closed.png')}}"/>
+</div>
 <div class="content">
   <div class="container">
     <div class="row">
       <div class="col-md-6">
-        <img src="{{url_for('static', filename='signup-form/images/undraw_remotely_2j6y.svg')}}" alt="Image"
+        <img src="{{url_for('static', filename='images/undraw_remotely_2j6y.svg')}}" alt="Image"
           class="img-fluid">
       </div>
       <div class="col-md-6 contents">
@@ -55,8 +59,8 @@
     </div>
   </div>
 </div>
-<script src="{{url_for('static', filename='signup-form/js/jquery-3.3.1.min.js')}}"></script>
-<script src="{{url_for('static', filename='signup-form/js/popper.min.js')}}"></script>
-<script src="{{url_for('static', filename='signup-form/js/bootstrap.min.js')}}"></script>
-<script src="{{url_for('static', filename='signup-form/js/main.js')}}"></script>
+<script src="{{url_for('static', filename='js/jquery-3.3.1.min.js')}}"></script>
+<script src="{{url_for('static', filename='js/popper.min.js')}}"></script>
+<script src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
+<script src="{{url_for('static', filename='js/main.js')}}"></script>
 {% endblock %}

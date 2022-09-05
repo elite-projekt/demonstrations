@@ -1,16 +1,19 @@
-import os
 import threading
 
 import flask
+import pathlib
 import pyotp
 import qrcode
 
 HOST = "0.0.0.0"  # nosec No Issue in a Docker Container
 LANGUAGE = "de"
 random_id = pyotp.random_hex()
-d_path = os.path.abspath(os.path.dirname(__file__))
-html_folder_path = os.path.join(d_path, "template")
-static_folder_path = os.path.join(d_path, "static")
+# d_path = os.path.abspath(os.path.dirname(__file__))
+# html_folder_path = os.path.join(d_path, "template")
+# static_folder_path = os.path.join(d_path, "static")
+d_path = pathlib.Path(__file__).parent.absolute()
+html_folder_path = pathlib.Path(d_path) / "template"
+static_folder_path = pathlib.Path(d_path) / "static"
 
 
 app = flask.Flask(__name__)
@@ -62,7 +65,7 @@ def run_flask_app():
 
 def create_qr(user_name, otp):
     url = pyotp.totp.TOTP(otp).provisioning_uri(
-        name=user_name, issuer_name="Secure App"
+        name=user_name, issuer_name="Nimbus 2FA Service"
     )
     qr = qrcode.QRCode(
         version=1,
@@ -77,6 +80,12 @@ def create_qr(user_name, otp):
 
 
 """-------------------BEGINN SAFE MODE-------------------"""
+
+
+@app.route("/favicon.ico")
+def get_favicon():
+    file_path = pathlib.Path(static_folder_path) / "favicon.ico"
+    return flask.send_file(file_path)
 
 
 @app.route("/")
@@ -96,11 +105,11 @@ def registration_kontodienste_sm():
         resp = flask.make_response(flask.redirect(
             "/init_2fa_account_services"))
         user = create_user(user_name, user_password, "sm_kd")
-        qr_code = create_qr(user_name + "_qr_account_services", user.otp)
+        qr_code = create_qr(user_name, user.otp)
         if LANGUAGE == "de":
-            qr_code.save(static_folder_path + "/" + "qrcode3.jpg")
+            qr_code.save(pathlib.Path(static_folder_path) / "qrcode3.jpg")
         else:
-            qr_code.save(static_folder_path + "/" + "qrcode1.jpg")
+            qr_code.save(pathlib.Path(static_folder_path) / "qrcode1.jpg")
         return resp
     else:
         if LANGUAGE == "de":

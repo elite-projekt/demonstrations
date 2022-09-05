@@ -16,7 +16,7 @@ services:
 #   password:
 #     build:
 #       context: ./demos/hda_password/
-#     container_name: password_webserver
+#     container_name: hda_password_webserver
 #     ports:
 #       - "5001:5001"
 #   redis:
@@ -24,6 +24,6 @@ services:
 #   nginx:
 #     build:
 #       context: ./demos/hda_password/src/nginx/
-#     container_name: password_nginx_server
+#     container_name: hda_password_nginx_server
 #     ports:
 #       - "443:443"
