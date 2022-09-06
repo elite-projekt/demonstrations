@@ -84,9 +84,9 @@ class RansomwareDemo:
     def send_mail_files(self, use_secured_client=True):
 
         if (config.EnvironmentConfig.LANGUAGE == "de"):
-            import demos.ransomware.native.emails.de as mails
+            import demos.iao_ransomware_email.native.emails.de as mails
         else:
-            import demos.ransomware.native.emails.en as mails
+            import demos.iao_ransomware_email.native.emails.en as mails
 
         email_files = [
             "mail.yml"

@@ -151,7 +151,7 @@ def run():
     original_wallpaper = bytes(original_wallpaper, 'utf-8')
 
     # change wallpaper
-    file_name = r"demos/ransomware/native/ransomware_wp.jpg"
+    file_name = r"demos/iao_ransomware_email/native/ransomware_wp.jpg"
     full_path = os.path.abspath(file_name)
 
     wallpaper = bytes(full_path, 'utf-8')
@@ -169,7 +169,7 @@ def run():
 def prep():
     global desktop_files
 
-    dirName = "demos\\ransomware\\native\\desktop_files"
+    dirName = "demos\\iao_ransomware_email\\native\\desktop_files"
     desktop_files = getListOfFiles(dirName)
 
     # desktop path of current user
