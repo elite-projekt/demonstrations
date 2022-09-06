@@ -101,7 +101,7 @@
         }
     },
     {
-        "id": "ransomware",
+        "id": "iao_ransomware_email",
         "categories": [
             "phishing",
             "email",
