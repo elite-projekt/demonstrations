@@ -31,7 +31,7 @@
                 "guide": [
                     {
                         "title": "Einleitung",
-                        "content": "&nbsp;<p>Die Phishing Demo gibt es als sichere und unsichere Variante. Am besten starten Sie mit der unsicheren und starten danach die sichere Variante.<\/p>\r\n\r\n<p>Sowohl bei der sicheren als auch der unsicheren Variante wird sich automaitsch ein Fenster von Thunderbird &ouml;ffnen.<\/p>\r\n\r\n<p>Thunderbird ist ein kostenloses E-Mail Programm und wird f&uuml;r beide Varianten Ihre E-Mails innerhalb der Demos anzeigen.<\/p>"
+                        "content": "&nbsp;<p>Die Phishing Demo gibt es als sichere und unsichere Variante. Am besten starten Sie mit der unsicheren und starten danach die sichere Variante.<\/p>\r\n\r\n<p>Sowohl bei der sicheren als auch der unsicheren Variante wird sich automatisch ein Fenster von Thunderbird &ouml;ffnen.<\/p>\r\n\r\n<p>Thunderbird ist ein kostenloses E-Mail Programm und wird f&uuml;r beide Varianten Ihre E-Mails innerhalb der Demos anzeigen.<\/p>"
                     },
                     {
                         "title": "Aufgabenstellung",
@@ -139,7 +139,7 @@
                 "guide": [
                     {
                         "title": "Einleitung",
-                        "content": "<p>&nbsp;<\/p>\r\n\r\n<p>Zu Beginn der Demo wird sich automaitsch ein Fenster von Thunderbird &ouml;ffnen.<\/p>\r\n\r\n<p>Thunderbird ist ein kostenloses E-Mail Programm und wird Ihre E-Mails innerhalb der Demos anzeigen.<\/p>\r\n\r\n<p>&nbsp;<\/p>\r\n\r\n<p>&nbsp;<\/p>\r\n"
+                        "content": "<p>&nbsp;<\/p>\r\n\r\n<p>Zu Beginn der Demo wird sich automatisch ein Fenster von Thunderbird &ouml;ffnen.<\/p>\r\n\r\n<p>Thunderbird ist ein kostenloses E-Mail Programm und wird Ihre E-Mails innerhalb der Demos anzeigen.<\/p>\r\n\r\n<p>&nbsp;<\/p>\r\n\r\n<p>&nbsp;<\/p>\r\n"
                     },
                     {
                         "title": "Aufgabenstellung",
@@ -154,7 +154,7 @@
         }
     },
     {
-        "id": "fokusrnware",
+        "id": "fokus_ransomware_driveby",
         "categories": [
             "phishing",
             "email",
