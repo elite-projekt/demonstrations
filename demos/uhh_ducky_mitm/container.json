@@ -1,10 +1,10 @@
 [
 {
-  "name": "web",
+  "name": "uhh_ducky_mitm_web",
   "dockerfile": "container/nginx/Dockerfile"
 },
 {
-  "name": "proxy",
+  "name": "uhh_ducky_mitm_proxy",
   "dockerfile": "container/mitmproxy/Dockerfile"
 }
 ]
