@@ -82,13 +82,12 @@ class KillSimulation():
                     self.glitch.hide()
                     self.crash.show()
                     self.crash.show_button()
+                    keyboard.unhook_all()
             self.app.processEvents()
             time.sleep(0.1)
 
     def stop(self):
         self.running = False
-        for key in KEYS_TO_BLOCK:
-            keyboard.unblock_key(key)
         self.gui_thread.join()
 
 
