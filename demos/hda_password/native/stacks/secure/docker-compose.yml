@@ -6,6 +6,8 @@ services:
     container_name: hda_password_webserver
     ports:
       - "5001:5001"
+    environment:
+     - ELITE_LANG=${ELITE_LANG:-de}
   nginx:
     image: ${REGISTRY_URL}/${GROUP_NAME}/demonstrations/${HDA_PASSWORD_NGINX_REPO}
     container_name: hda_password_nginx_server
@@ -19,6 +21,8 @@ services:
 #     container_name: hda_password_webserver
 #     ports:
 #       - "5001:5001"
+#     environment:
+#       - ELITE_LANG=${ELITE_LANG:-de}
 #   redis:
 #     image: "redis:alpine"
 #   nginx:

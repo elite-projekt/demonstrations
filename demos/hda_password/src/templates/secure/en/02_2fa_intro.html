@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <div>
+        <h1 style="padding-bottom: 0.5em; padding-top: 1em; margin-top: 8px;">2FA Introduction</h1>
+        <p>We will use the app <b>Google Authenticator</b> in this example.</p>
+        <p>The Google Authenticator is available for both Android and iOS.</p>
+    </div>
+    <div class="row">
+        <div class="qr-code qr-code-1">
+            <img src="{{url_for('static', filename='images/playstore_google_auth.png')}}" width="60%"
+                style="border: 1px solid #DEE2E6; border-radius: 5px;" alt="Image" class="img-fluid">
+            <p style="padding-top: 1em;">Google Play Store</p>
+        </div>
+        <div class="qr-code qr-code-1">
+            <img src="{{url_for('static', filename='images/appstore_google_auth.png')}}" width="60%"
+                style="border: 1px solid #DEE2E6; border-radius: 5px;" alt="Image" class="img-fluid">
+            <p style="padding-top: 1em;">App Store</p>
+        </div>
+    </div>
+    <div>
+        <p style="float: left">There are other free 2FA apps. If you want to use another app, find out about the app's security beforehand. 
+            A good basic requirement is if the app has an open source licence.
+            You can find more 2FA apps by searching for <b>authentication</b> in the <b>Play Store</b> or the <b>Apple App Store</b>.</p>
+        <p></p>
+
+        <ol style="float: left">
+            <li style="padding-bottom:1em">Open your Google Authenticator app on your smartphone.</li>
+            <li style="padding-bottom:1em">When you first start up, you will see a welcome screen. Click on
+                <b>Start now</b>.</li>
+            <img width="40%" style="border: 1px solid #DEE2E6; border-radius: 5px;" src="{{url_for('static', filename='screen0.png')}}"
+                alt="Figure1" class="rounded mx-auto d-block" />
+            <li style="padding-bottom:1em; padding-top:1em; ">Now click on <b>scan QR-Code</b>.</li>
+            <img width="40%" style="border: 1px solid #DEE2E6; border-radius: 5px;" src="{{url_for('static', filename='screen1.png')}}"
+                alt="Figure2" class="rounded mx-auto d-block" />
+            <li style="padding-bottom:1em; padding-top:1em;">The app asks for access to your camera. Confirm this permission. 
+                Now the app opens your camera..</li>
+            <li style="padding-bottom:1em">Now scan the QR code displayed on the monitor.</li>
+            <img width="40%" style="border: 1px solid #DEE2E6; border-radius: 5px;" src="{{url_for('static', filename='screen2.png')}}"
+                alt="Figure3" class="rounded mx-auto d-block" />
+            <li style="padding-bottom:1em; padding-top:1em;">A new account is created and you see a 6-digit number - the Security Token<br>
+                Each token is valid for 60 seconds.</li>
+            <img width="40%" style="border: 1px solid #DEE2E6; border-radius: 5px;" src="{{url_for('static', filename='screen3.png')}}"
+                alt="Figure3" class="rounded mx-auto d-block" />
+            <li style="padding-bottom:1em; padding-top:1em;">Enter the code in the input field and confirm the entry.
+            </li>
+            <img width="40%" style="border: 1px solid #DEE2E6; border-radius: 5px;" src="{{url_for('static', filename='screen4.png')}}"
+                alt="Figure3" class="rounded mx-auto d-block" />
+        </ol>
+    </div>
+</div>
+
+<script src="{{url_for('static', filename='js/jquery-3.3.1.min.js')}}"></script>
+<script src="{{url_for('static', filename='js/popper.min.js')}}"></script>
+<script src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
+<script src="{{url_for('static', filename='js/main.js')}}"></script>
+<script src="{{url_for('static', filename='link-router/router.js')}}"></script>
+<script data-main="{{url_for('static', filename='js/indicator.js')}}"
+    src="{{url_for('static', filename='js/require.js')}}">
+    </script>
+<script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="indicator"
+    src="{{url_for('static', filename='js/indicator.js')}}"></script>
+{% endblock %}

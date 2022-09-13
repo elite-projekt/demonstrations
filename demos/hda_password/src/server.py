@@ -4,20 +4,32 @@ import flask
 import pathlib
 import pyotp
 import qrcode
+import sys
 
 HOST = "0.0.0.0"  # nosec No Issue in a Docker Container
 LANGUAGE = "de"
 random_id = pyotp.random_hex()
-# d_path = os.path.abspath(os.path.dirname(__file__))
-# html_folder_path = os.path.join(d_path, "template")
-# static_folder_path = os.path.join(d_path, "static")
 d_path = pathlib.Path(__file__).parent.absolute()
-html_folder_path = pathlib.Path(d_path) / "template"
+html_folder_path = pathlib.Path(d_path) / "templates"
 static_folder_path = pathlib.Path(d_path) / "static"
+websites_folder_path = pathlib.Path(html_folder_path) / "secure"
+template_prefix = pathlib.Path("secure/")
 
 
 app = flask.Flask(__name__)
+localized_websites = []
 users = {}
+
+
+LOGIN_WEBSITE = 0
+PASSWORD_REGISTRATION_WEBSITE = 1
+TWO_FA_INTRO_WEBSITE = 2
+TWO_FA_REGISTRATION_WEBISTE = 3
+LOGIN_INFO_WEBISTE = 4
+PASSWORD_LOGIN_WEBSITE = 5
+TWO_FA_LOGIN_WEBSITE = 6
+SUCCESS_WEBSITE = 7
+
 
 """-------------------UTILS-------------------"""
 
@@ -58,7 +70,7 @@ def run_flask_app():
     Creates Flask server 2.
     :return:
     """
-    print("- Start Server 2")
+    print("- Start Server")
     app.config.from_pyfile("config.py", silent=True)
     app.run(host=HOST, port="5001", threaded=True)
 
@@ -85,16 +97,14 @@ def create_qr(user_name, otp):
 @app.route("/favicon.ico")
 def get_favicon():
     file_path = pathlib.Path(static_folder_path) / "favicon.ico"
-    return flask.send_file(file_path)
+    return flask.send_file(str(file_path))
 
 
 @app.route("/")
 @app.route("/story_intro")
 def story_intro_sm():
-    if LANGUAGE == "de":
-        return flask.render_template("secure/sm1_geschichten_intro.html")
-    else:
-        return flask.render_template("secure/sm1_story_intro.html")
+    return flask.render_template(str(pathlib.Path(template_prefix) /
+                                 localized_websites[LOGIN_WEBSITE].name))
 
 
 @app.route("/register_account_services", methods=["POST", "GET"])
@@ -106,31 +116,21 @@ def registration_kontodienste_sm():
             "/init_2fa_account_services"))
         user = create_user(user_name, user_password, "sm_kd")
         qr_code = create_qr(user_name, user.otp)
-        if LANGUAGE == "de":
-            qr_code.save(pathlib.Path(static_folder_path) / "qrcode3.jpg")
-        else:
-            qr_code.save(pathlib.Path(static_folder_path) / "qrcode1.jpg")
+        qr_code.save(pathlib.Path(static_folder_path) / "qrcode3.jpg")
         return resp
     else:
-        if LANGUAGE == "de":
-            return flask.render_template(
-                "secure/sm2_registrierung_kontodienste.html")
-        else:
-            return flask.render_template(
-                "secure/sm2_registration_kontodienste.html")
+        return flask.render_template(str(pathlib.Path(template_prefix) /
+                                     localized_websites
+                                     [PASSWORD_REGISTRATION_WEBSITE]
+                                     .name))
 
 
 @app.route("/story_2fa")
 def story_2fa_sm():
-    if LANGUAGE == "de":
-        return flask.render_template(
-            "secure/sm3_geschichte_2fa.html",
-            flash="Erfolgreiche Registrierung!")
-
-    else:
-        return flask.render_template(
-            "secure/sm3_story_2fa.html",
-            flash="Registration succesfull!")
+    return flask.render_template(str(pathlib.Path(template_prefix) /
+                                 localized_websites
+                                 [TWO_FA_INTRO_WEBSITE].name),
+                                 flash="Registration succesfull!")
 
 
 @app.route("/init_2fa_account_services", methods=["POST", "GET"])
@@ -144,37 +144,23 @@ def initial_2fa_kontodienste_sm():
             return resp
         else:
             print("wrong validation")
-            if LANGUAGE == "de":
-                return flask.render_template(
-                    "secure/sm4_anfaenglich_2fa_kontodienste.html",
-                    flash="validation failed!",
-                    classes="fade show display",
-                )
-            else:
-                return flask.render_template(
-                    "secure/sm4_initial_2fa_kontodienste.html",
-                    flash="validation failed!",
-                    classes="fade show display",
-                )
+            return flask.render_template(str(pathlib.Path(template_prefix) /
+                                         localized_websites
+                                         [TWO_FA_REGISTRATION_WEBISTE].name),
+                                         flash="validation failed!",
+                                         classes="fade show display",)
     else:
-        if LANGUAGE == "de":
-            return flask.render_template(
-                "secure/sm4_anfaenglich_2fa_kontodienste.html")
-        else:
-            return flask.render_template(
-                "secure/sm4_initial_2fa_kontodienste.html")
+        return flask.render_template(str(pathlib.Path(template_prefix) /
+                                     localized_websites
+                                     [TWO_FA_REGISTRATION_WEBISTE].name))
 
 
 @app.route("/story_login")
 def story_login():
-    if LANGUAGE == "de":
-        return flask.render_template(
-            "secure/sm8_geschichte_anmeldung.html",
-            flash="Validation succesfull!")
-    else:
-        return flask.render_template(
-            "secure/sm8_story_login.html",
-            flash="Validation succesfull!")
+    return flask.render_template(str(pathlib.Path(template_prefix) /
+                                 localized_websites
+                                 [LOGIN_INFO_WEBISTE].name),
+                                 flash="Validation succesfull!")
 
 
 @app.route("/login", methods=["POST", "GET"])
@@ -187,23 +173,15 @@ def login():
             resp = flask.make_response(flask.redirect("/login_2fa"))
             return resp
         else:
-            if LANGUAGE == "de":
-                return flask.render_template(
-                    "secure/sm9_anmeldung.html",
-                    flash="Falsche Anmeldedaten!",
-                    classes="fade show display",
-                )
-            else:
-                return flask.render_template(
-                    "secure/sm9_login.html",
-                    flash="Wrong credentials!",
-                    classes="fade show display",
-                )
+            return flask.render_template(str(pathlib.Path(template_prefix) /
+                                         localized_websites
+                                         [PASSWORD_LOGIN_WEBSITE].name),
+                                         flash="Wrong credentials!",
+                                         classes="fade show display",)
     else:
-        if LANGUAGE == "de":
-            return flask.render_template("secure/sm9_anmeldung.html")
-        else:
-            return flask.render_template("secure/sm9_login.html")
+        return flask.render_template(str(pathlib.Path(template_prefix) /
+                                     localized_websites
+                                     [PASSWORD_LOGIN_WEBSITE].name))
 
 
 @app.route("/login_2fa", methods=["POST", "GET"])
@@ -215,43 +193,43 @@ def login_2fa():
             resp = flask.make_response(flask.redirect("/end"))
             return resp
         else:
-            if LANGUAGE == "de":
-                return flask.render_template(
-                    "secure/sm10_anmeldung_2fa.html",
-                    flash="Validierung fehlgeschlagen",
-                    classes="fade show display",
-                )
-            else:
-                return flask.render_template(
-                    "secure/sm10_login_2fa.html",
-                    flash="Validation failed",
-                    classes="fade show display",
-                )
+            return flask.render_template(str(pathlib.Path(template_prefix) /
+                                         localized_websites
+                                         [TWO_FA_LOGIN_WEBSITE].name),
+                                         flash="Validation failed",
+                                         classes="fade show display")
     else:
-        if LANGUAGE == "de":
-            return flask.render_template(
-                "secure/sm10_anmeldung_2fa.html",
-                flash="Succesfully logged in!")
-        else:
-            return flask.render_template(
-                "secure/sm10_login_2fa.html",
-                flash="Succesfully logged in!")
+        return flask.render_template(str(pathlib.Path(template_prefix) /
+                                     localized_websites
+                                     [TWO_FA_LOGIN_WEBSITE].name),
+                                     flash="Succesfully logged in!")
 
 
 @app.route("/end")
 def end():
-    if LANGUAGE == "de":
-        return flask.render_template(
-            "secure/sm11_geschichte_ende.html",
-            flash="Validation succesfull!")
-    else:
-        return flask.render_template(
-            "secure/sm11_story_end.html",
-            flash="Validation succesfull!")
+    return flask.render_template(str(pathlib.Path(template_prefix) /
+                                 localized_websites[SUCCESS_WEBSITE].name),
+                                 flash="Validation succesfull!")
 
 
 """-------------------END SAFE MODE-------------------"""
 
 if __name__ == "__main__":
+    LANGUAGE = sys.argv[1]
+    try:
+        localized_websites_folder_path = pathlib.Path(websites_folder_path) /\
+                                         LANGUAGE
+        if localized_websites_folder_path.exists():
+            template_prefix = pathlib.Path("secure/") / LANGUAGE
+        else:
+            localized_websites_folder_path = pathlib.Path(
+                                             websites_folder_path) / "de"
+            template_prefix = pathlib.Path("secure/de/")
+        for entry in sorted(localized_websites_folder_path.iterdir()):
+            # check if it a file
+            if entry.is_file():
+                localized_websites.append(entry)
+    except Exception as e:
+        print(e)
     threading.Thread(target=run_flask_app).start()
     # webbrowser.open('http://127.0.0.1:5001/story_intro')
