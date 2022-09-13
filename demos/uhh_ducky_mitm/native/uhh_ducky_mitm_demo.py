@@ -78,6 +78,17 @@ class DuckyDemo:
         localedir = pathlib.Path(__file__).parent.parent / "locales"
         self.locale = locale.Locale(localedir)
 
+    def prepare(self):
+        # get wsl ip
+        ip = _get_ipv4("eth0")
+
+        self.admin_client.send_command(
+                admin_app.NativeappCommands.DISABLE_USB, b"1")
+        self.admin_client.send_command(
+                admin_app.NativeappCommands.SET_REDIRECT,
+                admin_app.create_host_payload(
+                    True, "elite-projekt.de", f"{ip}"))
+
     def start(self):
         if self.running:
             self.stop()
@@ -88,16 +99,6 @@ class DuckyDemo:
         self.email_program.copy_profile()
         self.browser_program.copy_profile()
         self.usb_monitor = usb_monitor.USBMonitor(on_connect=self.get_script)
-
-        # get wsl ip
-        ip = _get_ipv4("eth0")
-
-        self.admin_client.send_command(
-                admin_app.NativeappCommands.DISABLE_USB, b"1")
-        self.admin_client.send_command(
-                admin_app.NativeappCommands.SET_REDIRECT,
-                admin_app.create_host_payload(
-                    True, "elite-projekt.de", f"{ip}"))
 
         while not self.email_client.wait_for_smtp_server(20):
             pass

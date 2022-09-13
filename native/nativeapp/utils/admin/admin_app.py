@@ -45,9 +45,11 @@ else:
 IP_REGEX = re.compile(r"((^\s*((([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]))\s*$)|(^\s*((([0-9A-Fa-f]{1,4}:){7}([0-9A-Fa-f]{1,4}|:))|(([0-9A-Fa-f]{1,4}:){6}(:[0-9A-Fa-f]{1,4}|((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){5}(((:[0-9A-Fa-f]{1,4}){1,2})|:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){4}(((:[0-9A-Fa-f]{1,4}){1,3})|((:[0-9A-Fa-f]{1,4})?:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){3}(((:[0-9A-Fa-f]{1,4}){1,4})|((:[0-9A-Fa-f]{1,4}){0,2}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){2}(((:[0-9A-Fa-f]{1,4}){1,5})|((:[0-9A-Fa-f]{1,4}){0,3}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){1}(((:[0-9A-Fa-f]{1,4}){1,6})|((:[0-9A-Fa-f]{1,4}){0,4}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(:(((:[0-9A-Fa-f]{1,4}){1,7})|((:[0-9A-Fa-f]{1,4}){0,5}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:)))(%.+)?\s*$))")  # noqa: E501
 
 
-def call_cmd(command_list: List[str], workdir: pathlib.Path = None):
+def call_cmd(command_list: List[str],
+             workdir: pathlib.Path = None,
+             shell=False):
     with Popen(  # nosec
-            command_list, stdout=PIPE, cwd=workdir) as process:
+            command_list, stdout=PIPE, cwd=workdir, shell=shell) as process:
         process.communicate()
 
 
@@ -76,6 +78,17 @@ class NativeappAdmin(network_control_protocol.NativeappControlServer):
             call_cmd(cmd.split(" "))
         elif command == NativeappCommands.SET_REDIRECT:
             mode, target_ip, target_host = payload.decode().split(";")
+            # WSL
+            cmd = ["wsl", "--user", "root", "bash", "-c",
+                   f"sed -i\"\" '/{target_host}/d' /etc/hosts"]
+            call_cmd(cmd)
+
+            if mode == "1":
+                cmd = ["wsl", "--user", "root", "bash", "-c",
+                       f"echo '{target_ip} {target_host}' >> /etc/hosts"]
+                call_cmd(cmd)
+
+            # native
             with open(HOSTS_PATH, "r+") as host_file:
                 hosts_dict = {}
                 for line in host_file:
