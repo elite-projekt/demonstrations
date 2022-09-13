@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="content">
+    <div class=container>
+        <p>You are now fully registered with Nimbus! You will now be redirected to Nimbus Account Services 
+            to log in to your new account for the first time. 
+            When you are ready, click "Continue".
+        </p>
+        <br>
+        <a href="login"><button class="btn btn-block btn-primary">Continue</button></a>
+    </div>
+</div>
+<script src="{{url_for('static', filename='js/jquery-3.3.1.min.js')}}"></script>
+<script src="{{url_for('static', filename='link-router/router.js')}}"></script>
+{% endblock %}

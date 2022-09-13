@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <img src="{{url_for('static', filename='images/undraw_remotely_2j6y.svg')}}" alt="Image"
+          class="img-fluid">
+      </div>
+      <div class="col-md-6 contents">
+        <div class="row justify-content-center">
+          <div class="col-md-8 card-body card">
+            <div class="mb-4">
+              <h4>Two-factor authentication for Nimbus Account Services</h3>
+              <p class="small">Please scan the code with your 2FA app and then enter the code displayed in your app.</p>
+            </div>
+            <form method="post">
+
+              <img src="{{url_for('static', filename='qrcode3.jpg')}}" class="img-fluid" />
+
+              <div class="form-group last mb-4 border">
+                <label for="validation">Enter confirmation code</label>
+                <div class="input-group">
+                  <input class="form-control" name="validation" id="validation">
+                </div>
+              </div>
+              <div role="alert" aria-live="assertive" aria-atomic="true" class="toast {{classes}} dont-display mt-3"
+                data-autohide="false" id=toast>
+                <div class="toast-header">
+                  <strong class="mr-auto">Nimbus</strong>
+                  <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="toast-body">
+                  The code you entered is invalid. Please try again.
+                </div>
+              </div>
+              <input type="submit" value="Submit" class="btn btn-block btn-primary mb-4">
+            </form>
+              <a id="2FA-info-de"><button class="btn btn-secondary btn-block">2FA Help</button> </a>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+<script src="{{url_for('static', filename='js/jquery-3.3.1.min.js')}}"></script>
+<script src="{{url_for('static', filename='js/popper.min.js')}}"></script>
+<script src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
+<script src="{{url_for('static', filename='js/main.js')}}"></script>
+<script src="{{url_for('static', filename='link-router/router.js')}}"></script>
+{% endblock %}

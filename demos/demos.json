@@ -55,24 +55,16 @@
         "disableSecureMode": true,
         "messages": {
             "en": {
-                "title": "Password",
+                "title": "Password Security",
                 "description": "This demo shows how secure passwords should be and how to use a second factor to make your login more secure.",
                 "guide": [
                     {
-                        "title": "Preparing for the Demo",
-                        "content": "To get started, please go to the new browser tab that should have opened after you started the demo. If this is not the case, go to the following page in a new tab: <a href='http://localhost:5001/'>http://localhost:5001</a>. Then follow the instructions of the demo."
+                        "title": "Introduction",
+                        "content": "<p>&nbsp;<\/p>\r\n\r\n<p>In this demo, the system will check your password during registration for current security recommendations and will also use <strong>two-factor authentication (2FA)<\/strong> to provide more security for digital logins.<\/p>\r\n\r\n<p>Two-factor authentication is a process that uses an additional factor (e.g. mobile phone, fingerprint) to verify a login attempt. You will receive a short briefing on this in the demo, if required, and for more detailed information you can view our learning content on the topic of passwords or also specifically for two-factor authentication.<\/p>\r\n\r\n<p><strong>Please remember not to use your personal passwords in any demo!<\/strong><\/p>"
                     },
                     {
-                        "title": "Dummy",
-                        "content": "Dummy"
-                    },
-                    {
-                        "title": "Dummy",
-                        "content": "Dummy"
-                    },
-                    {
-                        "title": "Dummy",
-                        "content": "Dummy"
+                        "title": "Entering the Demo",
+                        "content": "<p>&nbsp;<\/p>\r\n\r\n<p>To access the actual demo, press the <strong>To Demo<\/strong>-button. Then follow the instructions of the demo.<\/p>\r\n\r\n<p><strong>Please remember not to use your personal passwords in any demo!<\/strong><\/p>\r\n\r\n<p>&nbsp;<\/p>\r\n\r\n<p style=\"text-align:center\"><a href=\"https:\/\/nimbus.de\" style=\"border: none;\r\n  color: white;\r\n  padding: 11px 21px;\r\n  text-align: center;\r\n  text-decoration: none;\r\n  display: inline-block;\r\n  font-size: 16px;\r\n  margin: 4px 2px;\r\n  cursor: pointer;\r\n  border-radius: 5px;\r\n  background-color: #7367F0\" target=\"_blank\">To Demo<\/a><\/p>\r\n\r\n<p>&nbsp;<\/p>"
                     }
                 ]
             },
@@ -81,20 +73,12 @@
                 "description": "Diese Demo zeigt, wie sicher Passwörter sein sollten und wie Sie einen zweiten Faktor verwenden können, um Ihre Anmeldung sicherer zu machen.",
                 "guide": [
                     {
-                        "title": "Einleitung",
-                        "content": "<p>&nbsp;<\/p>\r\n\r\n<p>Die Passwort Demo gibt es als unsichere und sichere Variante. Am besten starten Sie mit der unsichere Variante.<br \/>\r\nLesen Sie sich die entsprechende Einleitung f&uuml;r ihre gew&auml;hlte Variante, die Sie starten wollen, durch.<br \/>\r\nDanach k&ouml;nnen Sie die jeweilige Demo in dem Reiter <strong>Starten der Demo<\/strong> starten.<\/p>\r\n\r\n<p><strong>Bitte denken Sie daran in keiner Demo Ihre pers&ouml;nlichen Passw&ouml;rter zu verwenden!<\/strong><\/p>"
+                        "title": "Einführung",
+                        "content": "<p>&nbsp;<\/p>\r\n\r\n<p>Bei dieser Demo wird das System ihr Passwort bei der Registrierung auf aktuelle Sicherheitsempfehlungen pr&uuml;fen und au&szlig;erdem wird <strong>Zwei-Faktor-Authentisierung (2FA)<\/strong> eingesetzt, um mehr Sicherheit bei digitalen Anmeldungen zu gew&auml;hrleisten.<\/p>\r\n\r\n<p>Zwei-Faktor-Authentisierung ist ein Verfahren, das einen weiteren Faktor (z.B. Mobiltelefon, Fingerabdruck) einsetzt, um ein Loginversuch zu verifizieren. Sie werden, bei Bedarf, in der Demo eine kurze Einweisung dazu erhalten und f&uuml;r genauere Informationen k&ouml;nnen Sie unsere Lerninhalte zu dem Thema Passw&ouml;rter oder auch gezielt f&uuml;r Zwei-Faktor-Authentisierung anschauen.<\/p>\r\n\r\n<p><strong>Bitte denken Sie daran in keiner Demo Ihre pers&ouml;nlichen Passw&ouml;rter zu verwenden!<\/strong><\/p>"
                     },
                     {
-                        "title": "Unsichere Demo",
-                        "content": "<p>&nbsp;<\/p>\r\n\r\n<p>Bei der unsicheren Demo wird das System ihr Passwort nicht auf Sicherheit oder &auml;hnliches &uuml;berpr&uuml;fen. Halten Sie sich an die Anweisungen innerhalb der Demo.<\/p>\r\n\r\n<p><strong>Bitte denken Sie daran in keiner Demo Ihre pers&ouml;nlichen Passw&ouml;rter zu verwenden!<\/strong><\/p>"
-                    },
-                    {
-                        "title": "Sichere Demo",
-                        "content": "<p>&nbsp;<\/p>\r\n\r\n<p>Bei der sicheren Demo wird das System ihr Passwort bei der Registrierung auf aktuelle Sicherheitsempfehlungen pr&uuml;fen und au&szlig;erdem wird <strong>Zwei-Faktor-Authentisierung (2FA)<\/strong> eingesetzt, um noch mehr Sicherheit zu gew&auml;hrleisten.<\/p>\r\n\r\n<p>Zwei-Faktor-Authentisierung ist ein Verfahren, das einen weiteren Faktor (z.B. Mobiltelefon, Fingerabdruck) einsetzt, um ein Loginversuch zu verifizieren. Sie werden in der Demo eine kurze Einweisung dazu erhalten und f&uuml;r genauere Informationen k&ouml;nnen Sie unsere Lerninhalte zu dem Thema Passw&ouml;rter oder auch gezielt f&uuml;r Zwei-Faktor-Authentisierung anschauen.<\/p>\r\n\r\n<p><strong>Bitte denken Sie daran in keiner Demo Ihre pers&ouml;nlichen Passw&ouml;rter zu verwenden!<\/strong><\/p>"
-                    },
-                    {
-                        "title": "Starten der Demo",
-                        "content": "<p>&nbsp;<\/p>\r\n\r\n<p>Um die Demo zu starten dr&uuml;cken Sie den Start-Button. Folgen Sie anschlie&szlig;end den Anweisungen der Demo.<\/p>\r\n\r\n<p><strong>Bitte denken Sie daran in keiner Demo Ihre pers&ouml;nlichen Passw&ouml;rter zu verwenden!<\/strong><\/p>\r\n\r\n<p>&nbsp;<\/p>\r\n\r\n<p style=\"text-align: center;\"><a href=\"https:\/\/nimbus.de\" style=\"border: none;\r\n  color: white;\r\n  padding: 11px 21px;\r\n  text-align: center;\r\n  text-decoration: none;\r\n  display: inline-block;\r\n  font-size: 16px;\r\n  margin: 4px 2px;\r\n  cursor: pointer;\r\n  border-radius: 5px;\r\n  background-color: #7367F0\" target=\"_blank\">Zur Demo<\/a><\/p>\r\n\r\n<p>&nbsp;<\/p>"
+                        "title": "Einstieg in die Demo",
+                        "content": "<p>&nbsp;<\/p>\r\n\r\n<p>Um zur eigentlichen Demo zu gelangen, dr&uuml;cken Sie den <em>Zur Demo-Button<\/em>. Folgen Sie anschlie&szlig;end den Anweisungen der Demo.<\/p>\r\n\r\n<p><strong>Bitte denken Sie daran in keiner Demo Ihre pers&ouml;nlichen Passw&ouml;rter zu verwenden!<\/strong><\/p>\r\n\r\n<p>&nbsp;<\/p>\r\n\r\n<p style=\"text-align: center;\"><a href=\"https:\/\/nimbus.de\" style=\"border: none;\r\n  color: white;\r\n  padding: 11px 21px;\r\n  text-align: center;\r\n  text-decoration: none;\r\n  display: inline-block;\r\n  font-size: 16px;\r\n  margin: 4px 2px;\r\n  cursor: pointer;\r\n  border-radius: 5px;\r\n  background-color: #7367F0\" target=\"_blank\">Zur Demo<\/a><\/p>\r\n\r\n<p>&nbsp;<\/p>"
                     }
                 ]
             }

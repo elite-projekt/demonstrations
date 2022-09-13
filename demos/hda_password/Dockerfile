@@ -6,6 +6,8 @@ RUN pip3 install --upgrade --no-cache-dir pip
 
 ENV APP_DIR /password/src
 
+ARG ELITE_LANG
+
 RUN mkdir -p ${APP_DIR}
 WORKDIR ${APP_DIR}
 
@@ -19,4 +21,4 @@ RUN apk --no-cache update\
 COPY . /password
 COPY requirements.txt /password/requirements.txt
 RUN pip3 install --no-cache-dir -r /password/requirements.txt
-CMD [ "python", "./server.py" ]
+CMD [ "sh", "-c", "python ./server.py ${ELITE_LANG:-de}"]

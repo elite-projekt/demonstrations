@@ -2,6 +2,7 @@ import logging
 
 from nativeapp.controller import demo_controller
 from nativeapp.utils.admin import admin_app
+from nativeapp.config import config
 
 
 class PasswordController(demo_controller.DemoController):
@@ -32,8 +33,11 @@ class PasswordController(demo_controller.DemoController):
                     True, "nimbus.de", f"{ip}"))
 
         try:
+            if "language" in params:
+                config.EnvironmentConfig.LANGUAGE = params["language"]
             logging.info("Starting password demo stack")
-            self.start_container()
+            lang_env = {"ELITE_LANG": config.EnvironmentConfig.LANGUAGE}
+            self.start_container(lang_env)
         except Exception as e:
             logging.error(e)
             self.set_state("offline")
