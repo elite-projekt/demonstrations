@@ -17,12 +17,15 @@
             <div class="mb-4">
               <h4>Registration<br>Nimbus Account Services</h4>
               <p class="small">Please register and use a secure and unique password.<br>To do so, follow the password requirements below the input fields.</p>
+              <div>
+                <p class="small username-info">Your username should be at least 5 characters long</p>
+              </div>
             </div>
-            <form method="post">
+            <form method="post" id="login">
 
               <div class="form-group first" id="name_field">
                 <label for="name">Username</label>
-                <input type="text" class="form-control" id="name" name="name">
+                <input type="text" class="password form-control" id="name" name="name">
 
               </div>
               <div class="form-group" id="password_field">
@@ -32,6 +35,14 @@
                   <input type="password" class="password form-control" id="password" name="password">
                   <i toggle="#password" class="icon-eye toggle-passwort input-group-addon" data-toggle="tooltip"
                     data-placement="right" title="Click on the eye to see your password."></i>
+                </div>
+
+              </div>
+              <div class="form-group" id="password_field">
+
+                <label for="re-password">Repeat Password</label>
+                <div class="input-group">
+                  <input type="password" class="password form-control" id="re-password" name="re-password">
                 </div>
 
               </div>
@@ -53,8 +64,8 @@
                 <div class="number-char card-text icon-remove small"> At least 1 number</div>
                 <div class="special-char card-text icon-remove small"> At least 1 special character</div>
                 <div class="lenght-check card-text icon-remove small"> At least 10 charackters long</div>
-                <div class="guessable card-text icon-remove small"> Difficult to guess
-                </div>
+                <div class="guessable card-text icon-remove small"> Difficult to guess</div>
+                <div class="re-enter-password card-text icon-remove small"> Passwords do match</div>
               </div>
             </div>
 
