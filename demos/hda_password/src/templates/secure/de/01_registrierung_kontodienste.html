@@ -17,12 +17,15 @@
             <div class="mb-4">
               <h4>Registrierung<br>Nimbus Account-Services</h4>
               <p class="small">Bitte registrieren Sie sich und verwenden Sie dabei ein sicheres Passwort.<br>Halten Sie sich dafür an die Passwort-Anforderungen unter den Eingabefeldern.</p>
+              <div>
+                <p class="small username-info">Ihr Benutzername sollte mindestens 5 Zeichen lang sein.</p>
+              </div>
             </div>
-            <form method="post">
+            <form method="post" id="login">
 
               <div class="form-group first" id="name_field">
                 <label for="name">Benutzername</label>
-                <input type="text" class="form-control" id="name" name="name">
+                <input type="text" class="password form-control" id="name" name="name">
 
               </div>
               <div class="form-group" id="password_field">
@@ -35,6 +38,14 @@
                 </div>
 
               </div>
+              <div class="form-group" id="password_field">
+
+                <label for="re-password">Passwort wiederholen</label>
+                <div class="input-group">
+                  <input type="password" class="password form-control" id="re-password" name="re-password">
+                </div>
+
+              </div>
               <div class="indicator">
                 <span class="weak"></span>
                 <span class="medium"></span>
@@ -43,18 +54,19 @@
               <input type="submit" value="Registrieren" class="btn btn-block btn-primary register-button" disabled>
             </form>
 
+            <div class="card text-dark bg-light mb-3 mt-3 border"></div>
 
             <div class="card text-dark bg-light mb-3 mt-3 border">
               <div class="card-header small">Passwort-Anforderungen
               </div>
-              <div class="card-body" id="pwd-req-body">
-                <div class="small-letter card-text icon-remove small"> mindestens 1 Kleinbuchstabe.</div>
-                <div class="capital-letter card-text icon-remove small"> mindestens 1 Großbuchstabe.</div>
-                <div class="number-char card-text icon-remove small"> mindestens 1 Nummer.</div>
-                <div class="special-char card-text icon-remove small"> mindestens 1 Sonderzeichen.</div>
-                <div class="lenght-check card-text icon-remove small"> mindestens eine Länge von 10 Zeichen haben.</div>
-                <div class="guessable card-text icon-remove small"> nicht leicht zu erraten.
-                </div>
+              <div class="card-body" id="pwd-req-body" style="padding: 10px 20px">
+                <div class="small-letter card-text icon-remove small"> Mindestens 1 Kleinbuchstabe</div>
+                <div class="capital-letter card-text icon-remove small"> Mindestens 1 Großbuchstabe</div>
+                <div class="number-char card-text icon-remove small"> Mindestens 1 Zahl</div>
+                <div class="special-char card-text icon-remove small"> Mindestens 1 Sonderzeichen</div>
+                <div class="lenght-check card-text icon-remove small"> Eine Mindestlänge von 10 Zeichen</div>
+                <div class="guessable card-text icon-remove small"> Schwierig zu erraten</div>
+                <div class="re-enter-password card-text icon-remove small"> Passwörter stimmen überein</div>
               </div>
             </div>
 
@@ -62,7 +74,7 @@
               <div class="card-header small">Tipp 
               </div>
               <div class="card-body" id="tipp-body">
-                <p class="password-info small">Es ist am besten, eine Phrase als Passwort zu verwenden: <i><strong>Die Sonne
+                <p class="password-info small" style="margin: 0; padding: 10px 20px">Es ist am besten, eine Phrase als Passwort zu verwenden: <i><strong>Die Sonne
                       geht immer um 12 Uhr auf!</strong></i><br> Mehr Informationen finden Sie in den Lernmateralien.
                 </p>
               </div>
