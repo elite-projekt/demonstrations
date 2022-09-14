@@ -321,11 +321,8 @@ If(!(Test-Path -path $rootPath)) {
             try {
                 # Kill process if exists
                 WriteOutput "Trying to kill the nativeapp process if exists" "DarkGray"
-                $NativeApp = Get-Process app -ErrorAction SilentlyContinue
-                if ($NativeApp) {
-                    $NativeApp | Stop-Process -ErrorAction Stop
-                    WriteOutput "Killed the process" "Green"
-                }
+                Stop-ScheduledTask -TaskName "ELITE nativeapp"
+                Stop-ScheduledTask -TaskName "ELITE nativeapp admin"
             }
             catch {
                 WriteOutput "Something went wrong while killing the native app process" "Red"
