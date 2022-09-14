@@ -58,6 +58,7 @@ class DuckyController(demo_controller.DemoController):
                     return demo_controller.ErrorCodes.invalid_state
                 self.set_state("starting")
                 lang_env = {"ELITE_LANG": config.EnvironmentConfig.LANGUAGE}
+                self.ducky_service.prepare()
                 self.start_container(lang_env)
                 self.ducky_service.start()
                 self.set_state("running")
