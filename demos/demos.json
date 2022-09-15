@@ -9,7 +9,7 @@
         "time": 30,
         "status": 0,
         "secureMode": true,
-        "isAvailable": true,
+        "isAvailable": false,
         "messages": {
             "en": {
                 "title": "Phishing",
