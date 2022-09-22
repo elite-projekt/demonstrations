@@ -1,3 +1,5 @@
+# Introduction
+
 We live in a time of increasing digitalization which results in an increased dependency on IT systems. This again leads to an increased potential of harm, especially for small and medium-sized enterprises (SMEs) - "kleine und mittlere Unternehmen (KMU)".  In most cases, these companies do not have a sufficient understanding of IT security and clear competencies to act in the event of a an attack.
 
 The aim of the project is to develop a platform that uses interactive demonstrators in order to teach scenarios of common IT security attacks and appropriate countermeasures. Additionally, it is supposed to provide an easy-to-understand and accessible background knowledge i.e. with posters, brochures and videos.

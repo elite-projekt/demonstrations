@@ -67,13 +67,12 @@ release:
 
 pages:
   stage: release
-  image: alpine:edge
+  image: alpine
   script:
-    - echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> "/etc/apk/repositories"
-    - apk update && apk add mdbook
-    - mkdir -p public/$CI_COMMIT_REF_NAME
-    - sh -c "[ $CI_COMMIT_REF_NAME == 'develop' ] && mdbook build mdbook -d ../public || true"
-    - mdbook build mdbook -d ../public/$CI_COMMIT_REF_NAME
+    - apk update && apk add py-pip make
+    - pip install -r sphinx/requirements.txt
+    - cd sphinx && make html
+    - cp -r build/html/ ../public/
   artifacts:
     name: "demonstrations"
     paths:

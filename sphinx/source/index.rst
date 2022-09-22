@@ -1,0 +1,19 @@
+.. ELITE Demonstrations documentation master file, created by
+   sphinx-quickstart on Thu Sep 22 15:24:46 2022.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+Welcome to ELITE Demonstrations's documentation!
+================================================
+
+.. toctree::
+   :maxdepth: 4
+
+   docs/home.md
+   docs/setup/vm_setup.md
+   docs/setup/client_setup.md
+   :caption: Native App:
+   docs/add_demo.md
+   docs/nativeapp.md
+   docs/issues.md
+   docs/cert.md

@@ -1,3 +1,5 @@
+# Add a demo
+
 ## Requirements
 
 1. First of all you should make a concept of the demo you want to add. Create diagrams to visualize the components and see the dependencies. If possible, everything should run within docker. For native actions (like opening applications) you can use the NativeApp controller of your demo.  
