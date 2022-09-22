@@ -61,8 +61,24 @@ class PipelineTemplate:
 
 
 def get_demos():
-    demos = (pathlib.Path(__file__).parent / "demos").glob("*")
-    demos = [x for x in demos if x.is_dir() and "__pycache__" not in x.name]
+    demo_dir = pathlib.Path(__file__).parent / "demos"
+    demo_dirs = demo_dir.glob("*")
+    demo_settings = {}
+    with open(demo_dir / "demos.json", "r") as json_file:
+        json_data = json.loads(json_file.read())
+        for json_info in json_data:
+            demo_settings[json_info["id"]] = json_info
+
+    demos = []
+    for demo in demo_dirs:
+        if demo.name == "__pycache__":
+            continue
+        if not demo.is_dir():
+            continue
+        if not demo_settings[demo.name]["isAvailable"]:
+            continue
+        demos.append(demo)
+
     return demos
 
 
