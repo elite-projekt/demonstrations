@@ -1,3 +1,5 @@
+# Native App
+
 The NativeApp component encapsulates all operations that need native access to the workstation. It must be installed on every workstation. It is required to run the whole time during usage.
 
 A rough overview of the build process of the native app can be seen [here](/Demonstrations/Tech-Stack#overview-of-build-process).
@@ -154,3 +156,65 @@ All demos can use any number of containers. Each demo must be specified by a [Co
 
 The postman collection within the root directory of the demonstrations repo includes some endpoints: (`/Demonstration.postman_collection.json`) You can find a Documentation of the whole Native API in [API Documentation](https://code.fbi.h-da.de/groups/elite-projekt/-/wikis/Demonstrations/Native%20API%20Documentation)
 
+## Native API
+### 1. Start Password Demo - Secure Mode
+
+Starts password Demo in secure mode on local Client.
+
+Example return:
+
+{  
+"message": "Successfully started the Demo.",  
+"success": true  
+}
+
+***Endpoint:***
+
+```bash
+Method: POST
+Type: RAW
+URL: http://localhost:5000/orchestration/start/demo/password
+```
+
+***Body:***
+
+```js
+{"secureMode":true, "language": "en"}
+```
+
+### 7. Status Password Demo
+
+Returns actual status of the password demonstration.
+
+Ether
+
+{ "password_webserver": "running"}
+
+or
+
+{ "password_webserver": "not found"}
+
+***Endpoint:***
+
+```bash
+Method: GET
+Type: 
+URL: http://localhost:5000/orchestration/status/demo/password
+```
+
+
+### 13. Stop Password Demo
+
+Stops password Demonstration on local Client
+
+Example return:
+
+{ "message": "Stopped all remaining Demos.", "success": **true**}
+
+***Endpoint:***
+
+```bash
+Method: POST
+Type: RAW
+URL: http://localhost:5000/orchestration/stop/demo/password
+```

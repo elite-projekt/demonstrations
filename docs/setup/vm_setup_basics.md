@@ -1,3 +1,4 @@
+# Setup VM
 This page describes on how to setup a VM for running a client.
 
 Running the system inside a VM has the advantage of being able to quickly fix any problem which might hinder the presentation of the demos.

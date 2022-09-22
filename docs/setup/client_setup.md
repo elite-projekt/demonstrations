@@ -1,3 +1,5 @@
+# Client Setup
+
 All setup steps in this guide need to be done on a Windows workstation to have a compatible client for the ELITE platform. 
 
 The client specification is as follows:
