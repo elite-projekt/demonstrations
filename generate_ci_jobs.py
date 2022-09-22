@@ -89,7 +89,6 @@ def generate_license_ci():
         template = PipelineTemplate(demo.name, "license-check")
         template.add_command("apk update && apk add python3")
         template.add_command(f"python3 check_license.py -f demos/{demo.name}")
-        template.allow_failure = True
         output_data += template.generate()
     with open("generated_license_ci.yml", "w") as f:
         f.write(output_data)
@@ -128,7 +127,6 @@ def generate_docker_lint_ci():
                 template = PipelineTemplate(name, "scan:image", image="aquasec/trivy:latest") # noqa: 501
                 template.entrypoint = ""
                 template.add_command(f"trivy --cache-dir .trivycache/ image -s HIGH,CRITICAL --security-checks vuln --exit-code 1 --no-progress --ignore-unfixed --input {name}.tar") # noqa: 501
-                template.allow_failure = True
                 template.add_dependency(f"build:image-{name}")
                 template.stage = "scan"
                 demo_data += template.generate()
