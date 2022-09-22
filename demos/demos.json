@@ -51,7 +51,7 @@
         "time": 20,
         "status": 0,
         "secureMode": true,
-        "isAvailable": true,
+        "isAvailable": false,
         "disableSecureMode": true,
         "messages": {
             "en": {
@@ -151,7 +151,7 @@
         "secureMode": false,
         "disableSecureMode": true,
         "isRunning": false,
-        "isAvailable": true,
+        "isAvailable": false,
         "messages": {
             "en": {
                 "title": "Ransomware (Malicious Website)",
