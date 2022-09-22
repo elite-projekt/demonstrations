@@ -72,7 +72,7 @@ pages:
     - apk update && apk add py-pip make
     - pip install -r sphinx/requirements.txt
     - cd sphinx && make html
-    - cp -r build/html/ ../public/
+    - cp -r build/html ../public
   artifacts:
     name: "demonstrations"
     paths:
