@@ -72,16 +72,16 @@ pages:
     - apk update && apk add py-pip make
     - pip install -r sphinx/requirements.txt
     - cd sphinx && make html
-    - cp -r build/html ../public
+    - mkdir -p ../public ; cp -r build/html/* ../public/
   artifacts:
     name: "demonstrations"
     paths:
       - public
   # Cache pages to enable
-  cache:
-    key: "doc"
-    paths:
-      - public
+  #cache:
+  #  key: "doc"
+  #  paths:
+  #    - public
   only:
     - develop
 
