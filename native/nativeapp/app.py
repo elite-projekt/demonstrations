@@ -15,6 +15,9 @@ import demos
 
 
 def main():
+    """
+    Main func
+    """
     # argument parser
     parser = argparse.ArgumentParser(
             formatter_class=argparse.ArgumentDefaultsHelpFormatter)

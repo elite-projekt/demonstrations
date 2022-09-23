@@ -37,6 +37,9 @@ import time
 
 
 class MailClient:
+    """
+    IMAP and SMTP client
+    """
     def __init__(self, hostname, imap_port, smtp_port, username, password):
         self.hostname = hostname
         self.imap_port = imap_port
@@ -57,6 +60,9 @@ class MailClient:
         return False
 
     def wait_for_smtp_server(self, max_timeout_s: float = 10) -> bool:
+        """
+        Blocks until [max_timeout_s] or the server is online
+        """
         start_time = time.time()
         logging.info("Waiting for SMTP server")
         while time.time() - start_time < max_timeout_s:
