@@ -4,7 +4,7 @@ The NativeApp component encapsulates all operations that need native access to t
 
 A rough overview of the build process of the native app can be seen [here](/Demonstrations/Tech-Stack#overview-of-build-process).
 
-### What it covers
+## What it covers
 
 NativeApp:
 
@@ -20,7 +20,7 @@ NativeApp Installer:
 - Changes permissions on directory
 - Places link into autostart
 
-### Technologies
+## Technologies
 
 The implementation uses a flask app that utilizes [python-on-whales](https://pypi.org/project/python-on-whales/) to access the docker daemon running on the workstation. The orchestration uses `python_on_whales` to start the docker stack via the provided `docker-compose.yml` files.
 
@@ -68,7 +68,7 @@ PHISHING_REPO='phishing:master'
 (...)
 ```
 
-#### Using non-master container images
+### Using non-master container images
 
 By default the stack files for docker-compose use the containers of the demos that were pushed on the  `master` branch. If you want to test or use the containers (demos) that you just developed, run the `build_images.sh` script.
 
