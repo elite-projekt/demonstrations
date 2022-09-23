@@ -11,8 +11,8 @@ p = pathlib.Path(__file__).parent.parent.parent
 sys.path.insert(0, str(p))
 
 project = 'ELITE Demonstrations'
-copyright = '2022, Kevin'
-author = 'Kevin'
+copyright = '2022, ELITE'
+author = 'ELITE'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
