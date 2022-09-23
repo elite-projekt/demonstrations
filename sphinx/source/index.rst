@@ -7,13 +7,14 @@ Welcome to ELITE Demonstrations's documentation!
 ================================================
 
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 10
 
    docs/home.md
    docs/setup/vm_setup.md
    docs/setup/client_setup.md
-   :caption: Native App:
    docs/add_demo.md
    docs/nativeapp.md
    docs/issues.md
    docs/cert.md
+   modules
+
