@@ -8,7 +8,7 @@ The client specification is as follows:
 - The *NativeApp* component is installed and running
 - Each demo can require further software (like an e-mail client) which must then be installed natively on the host machine. These should be covered in the *Initial OS setup* steps below.
 
-### Initial OS setup
+## Initial OS setup
 After the installation of a fresh Windows 10 instance we need to install some basic tools and configure the OS to allow us to use the platform.
 You can either install and setup everything manually or use powershell commands for (almost) everything.
 
@@ -71,7 +71,7 @@ Restart-Computer
 ```
 
 
-### Installation of Native Access Component
+## Installation of Native Access Component
 The full installation process can be found under the [Native App page](https://code.fbi.h-da.de/groups/esc-mpse20/-/wikis/Demonstrations/Native-App#install)
 
 Further the `rootCA.crt` has to be imported into the browser of your choice (accept identification of websites), it can be found in the program directory of the nativeapp (created through the installation) `C:\Program Files(x86)\hda\nativeapp\stacks`.
@@ -81,12 +81,12 @@ Further the `rootCA.crt` has to be imported into the browser of your choice (acc
 - Problem: "Error: "This installation package could not be opened. Contact the application vendor to verify that this is a valid Windows Installer package."
 - Solution: If opened within the WSL environment you need to copy it into the local filesystem and run it from there.
 
-### Execution of Native Access Component
+## Execution of Native Access Component
 
 Will be launched on every login of the user automatically. If you wan't to start it manually you have to go to the installation folder `C:\Program Files(x86)\hda\nativeapp` and run `./venv/Scripts/nativeapp -p .`. This client handles start/stop of docker containers for demos and provides functionalities that can't be covered through docker containers alone.
 
 
-### Pulling the latest docker images
+## Pulling the latest docker images
 The native app installer is pulling automatically the newest images. If an error appears you have to download manually.
 
 To locally build the containers run the `build_images.sh` script in a Linux environment (this includes WSL).

@@ -6,11 +6,11 @@ Several messages occurred when checking the Python code with the [Bandit tool](h
 
 How to use the `subprocess` package correctly at the moment is described in [a guideline](https://security.openstack.org/guidelines/dg_use-subprocess-securely.html).
 
-#### Blacklisted import
+### Blacklisted import
 
 One of these error messages is [B404: import_subprocess](https://bandit.readthedocs.io/en/latest/blacklists/blacklist_imports.html#b404-import-subprocess). This means that it should be avoided to use the package `subprocess` at all, as the package has possible security implications. At the moment, however, the package is used because we need a package with which external programmes can be started from the Python source code and no other suitable package that can be used has been found so far.
 
-#### Subprocess without shell equals true
+### Subprocess without shell equals true
 
 Another error message that occurred is [B603: subprocess_without_shell_equals_true](https://bandit.readthedocs.io/en/latest/plugins/b603_subprocess_without_shell_equals_true.html). This error occurs e.g. here:
 
@@ -43,11 +43,11 @@ For the demos, `subprocess.Popen()` is used because, unlike `subprocess.check_ou
 
 If it is decided that only `subprocess.check_output()` should be used, the package [`multiprocessing`](https://docs.python.org/3/library/multiprocessing.html) can be helpful. 
 
-#### Start process with a shell
+### Start process with a shell
 
 Tests were also made to see if Bandit also gives error messages when, for example, `os.popen()` is used. The error message [B605: start_process_with_a_shell](https://bandit.readthedocs.io/en/latest/plugins/b605_start_process_with_a_shell.html) was thrown, which simply informs that while starting a process with a shell currently looks safe, this may change in the future, so consider rewriting this to not use a shell.
 
-#### Conclusion
+### Conclusion
 
 In conclusion, the current use of `subprocess` is fine, but still needs to be kept in mind. It should also be investigated whether there is an alternative package that can be used instead of `subprocess` or whether there is another way to start external programmes within the Python code. For the problem that the main process with the demo should not be stopped, the package `multiprocessing` can help.
 
