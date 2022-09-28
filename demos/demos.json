@@ -51,7 +51,7 @@
         "time": 20,
         "status": 0,
         "secureMode": true,
-        "isAvailable": false,
+        "isAvailable": true,
         "disableSecureMode": true,
         "messages": {
             "en": {

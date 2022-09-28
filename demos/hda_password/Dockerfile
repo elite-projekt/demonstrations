@@ -1,5 +1,7 @@
 FROM python:3.10-alpine
 
+RUN apk --no-cache update && apk --no-cache upgrade
+
 # No Version Pining necessary
 # hadolint ignore=DL3013
 RUN pip3 install --upgrade --no-cache-dir pip

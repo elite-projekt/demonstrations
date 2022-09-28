@@ -44,7 +44,7 @@ class User:
 def validate_otp(otp, temp_code):
     totp = pyotp.TOTP(otp)
     print(totp.now())
-    if totp.now() == temp_code:
+    if totp.verify(otp=temp_code, valid_window=10):
         return True
     return False
 
@@ -81,7 +81,7 @@ def create_qr(user_name, otp):
     )
     qr = qrcode.QRCode(
         version=1,
-        error_correction=qrcode.constants.ERROR_CORRECT_L,
+        error_correction=qrcode.constants.ERROR_CORRECT_H,
         box_size=10,
         border=4,
     )

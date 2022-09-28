@@ -14,7 +14,7 @@
               <h4>Zwei-Faktor-Authentifizierung für Nimbus Account-Services</h3>
               <p class="small">Bitte scannen Sie den Code mit Ihrer 2FA App und geben Sie anschließend den Code aus Ihrer App ein.</p>
             </div>
-            <form method="post">
+            <form autocomplete="off" method="post">
 
               <img src="{{url_for('static', filename='qrcode3.jpg')}}" class="img-fluid" />
 
