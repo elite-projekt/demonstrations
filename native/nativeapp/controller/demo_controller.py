@@ -5,6 +5,7 @@ import flask
 from markupsafe import escape
 
 from nativeapp.service import orchestration_service
+from nativeapp.utils.time import sync_wsl
 
 from typing import Dict
 
@@ -121,6 +122,7 @@ class DemoManager():
     def demo_start(demo_name, subpath=""):
         demo_name = escape(demo_name)
         subpath = escape(subpath)
+        sync_wsl()
         if demo_name in DemoManager.demos:
             ret_val = DemoManager.demos[demo_name].\
                 start(subpath=subpath,
