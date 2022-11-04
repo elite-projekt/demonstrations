@@ -16,6 +16,7 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 """
 import logging
 import traceback
+import pathlib
 
 from nativeapp.controller import demo_controller
 from nativeapp.config import config
@@ -28,14 +29,19 @@ class DuckyController(demo_controller.DemoController):
         super().__init__("uhh_ducky_mitm",
                          "uhh_ducky_mitm/native/stacks/docker-compose.yml")
         self.ducky_service = uhh_ducky_mitm_demo.DuckyDemo()
+        self.locale.add_locale_dir(
+                pathlib.Path(__file__).parent.parent / "locales")
 
     def stop(self, subpath) -> int:
         """
         Stops the demo
         """
         self.set_state("stopping")
-        self.stop_container()
-        self.ducky_service.stop()
+        try:
+            self.stop_container()
+            self.ducky_service.stop()
+        except Exception:
+            pass
         self.set_state("offline")
         return demo_controller.ErrorCodes.stop_success
 
@@ -65,6 +71,7 @@ class DuckyController(demo_controller.DemoController):
             except Exception as e:
                 logging.error(traceback.format_exc())
                 logging.error(e)
+                self.set_state("error")
                 return demo_controller.ErrorCodes.no_docker_error
             return demo_controller.ErrorCodes.start_success
 
