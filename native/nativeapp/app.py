@@ -112,6 +112,8 @@ def main():
             except ModuleNotFoundError:
                 print(f"ERROR while importing controller for: {name} demo")
                 print(f"Please check the existence of: {controller_path}")
+            except Exception:
+                print(f"Unknown ERROR while importing controller for: {name}")
 
     # Only for debugging while developing
     if args.dev:
