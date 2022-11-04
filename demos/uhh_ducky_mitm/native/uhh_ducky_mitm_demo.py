@@ -76,7 +76,8 @@ class DuckyDemo:
         self.running = False
         self.admin_client = admin_app.NativeappAdminClient()
         localedir = pathlib.Path(__file__).parent.parent / "locales"
-        self.locale = locale.Locale(localedir)
+        self.locale = locale.Locale()
+        self.locale.add_locale_dir(localedir)
 
     def prepare(self):
         # get wsl ip

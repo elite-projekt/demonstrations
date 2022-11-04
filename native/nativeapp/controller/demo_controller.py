@@ -6,6 +6,7 @@ from markupsafe import escape
 
 from nativeapp.service import orchestration_service
 from nativeapp.utils.time import sync_wsl
+from nativeapp.utils.locale import locale
 
 from typing import Dict
 
@@ -35,6 +36,8 @@ class DemoController(ABC):
         self.name = name
         self.state = "offline"
         self.orchestration = orchestration_service.OrchestrationService()
+
+        self.locale = locale.Locale()
 
     def set_state(self, state: str) -> None:
         """
