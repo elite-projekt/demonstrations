@@ -5,6 +5,7 @@ import pathlib
 import pkgutil
 import subprocess  # nosec
 from datetime import datetime
+import sys
 
 import flask
 import flask_cors
@@ -118,10 +119,11 @@ def main():
     else:
         app.config.from_object(config.ProductionConfig)
 
-    # ensure dockerd is running. it won't start if it is already running
-    subprocess.Popen(["wsl", "--user", "root", "dockerd"],  # nosec
-                     stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
-                     cwd=pathlib.Path().home())
+    if sys.platform == "win32":
+        # ensure dockerd is running. it won't start if it is already running
+        subprocess.Popen(["wsl", "--user", "root", "dockerd"],  # nosec
+                         stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+                         cwd=pathlib.Path().home())
 
     # start flask
     app.run(host=app.config["HOST"], debug=app.config["DEBUG"],
