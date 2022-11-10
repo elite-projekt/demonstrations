@@ -3,6 +3,8 @@ from abc import ABC
 import logging
 import flask
 from markupsafe import escape
+import queue
+import json
 
 from nativeapp.service import orchestration_service
 from nativeapp.utils.time import sync_wsl
@@ -36,6 +38,7 @@ class DemoController(ABC):
         self.name = name
         self.state = "offline"
         self.orchestration = orchestration_service.OrchestrationService()
+        self.state_changed_callback = None
 
         self.locale = locale.Locale()
 
@@ -46,6 +49,8 @@ class DemoController(ABC):
         :param sate: The current state. Possible states:
             "offline", "starting", "running", "stopping", "error"
         """
+        if self.state_changed_callback is not None:
+            self.state_changed_callback(self.name, self.state, state)
         self.state = state
 
     def get_state(self) -> str:
@@ -95,16 +100,53 @@ class DemoManager():
     orchestration = flask.Blueprint(
             "DemoManager", __name__, url_prefix="/orchestration/")
     demos = {}
+    status_event_queues = []
+
+    @staticmethod
+    def on_state_changed(name, old_state, new_state):
+        status_dict = {"name": name,
+                       "old_state": old_state,
+                       "new_state": new_state}
+        print(f"State changed for demo {name} from {old_state} to {new_state}")
+        for q in DemoManager.status_event_queues:
+            q.put(status_dict)
 
     @staticmethod
     def register_demo(demo: DemoController):
         logging.info(f"Registering demo {demo.name}")
+        demo.state_changed_callback = DemoManager.on_state_changed
         DemoManager.demos[demo.name] = demo
 
     @staticmethod
     def get_flask_response(status: DemoStatus):
         return flask.helpers.make_response(
                     flask.json.jsonify(status.message), status.status_code)
+
+    @staticmethod
+    @orchestration.route("/status/stream", methods=["GET", "POST"])
+    def demo_status_stream():
+        logging.info("Got new stream client")
+
+        def eventStream():
+            q = queue.Queue()
+            for demo in DemoManager.demos.values():
+                state = demo.get_state()
+                status_dict = {"name": demo.name,
+                               "old_state": state,
+                               "new_state": state}
+                q.put(status_dict)
+
+            DemoManager.status_event_queues.append(q)
+            try:
+                while True:
+                    item = q.get()
+                    item_json = json.dumps(item)
+                    q.task_done()
+                    yield f"data: {item_json}\n\n"
+            finally:
+                DemoManager.status_event_queues.remove(q)
+                logging.info("Client disconnected")
+        return flask.Response(eventStream(), mimetype="text/event-stream")
 
     @staticmethod
     @orchestration.route("/status/demo/<demo_name>", methods=["GET", "POST"])
