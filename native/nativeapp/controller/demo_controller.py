@@ -127,9 +127,11 @@ class DemoManager():
         subpath = escape(subpath)
         sync_wsl()
         if demo_name in DemoManager.demos:
+            params = flask.request.get_json(silent=True)
+            if params is None:
+                params = []
             ret_val = DemoManager.demos[demo_name].\
-                start(subpath=subpath,
-                      params=flask.request.get_json(silent=True))
+                start(subpath=subpath, params=params)
             return DemoManager.get_flask_response(ret_val)
         return DemoManager.get_flask_response(ErrorCodes.generic_error)
 
