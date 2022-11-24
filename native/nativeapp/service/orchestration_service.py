@@ -69,7 +69,7 @@ class OrchestrationService:
                 client_call=DOCKER_CMD_LIST,
                 compose_files=[file_path.as_posix()],
                 compose_project_name=demo_name)
-            docker.compose.down()
+            docker.compose.down(timeout=0)
         except Exception as e:
             logging.error(e)
             raise
