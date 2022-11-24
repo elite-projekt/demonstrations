@@ -156,6 +156,14 @@ class DemoController(ABC):
         self.start_container()
         return ErrorCodes.start_success
 
+    def enter(self, subpath: str) -> Dict[str, object]:
+        """
+        Enter the demo
+
+        :param subpath: The subpath the request might have had
+        """
+        return ErrorCodes.enter_success
+
     def get_status(self, subpath: str) -> Dict[str, str]:
         """
         Get the status of the demo
@@ -314,6 +322,18 @@ class DemoManager():
                 params = []
             ret_val = DemoManager.demos[demo_name].\
                 start(subpath=subpath, params=params)
+            return DemoManager.get_flask_response(ret_val)
+        return DemoManager.get_flask_response(ErrorCodes.generic_error)
+
+    @staticmethod
+    @orchestration.route("/enter/demo/<demo_name>", methods=["GET", "POST"])
+    @orchestration.route("/enter/demo/<demo_name>/<path:subpath>",
+                         methods=["GET", "POST"])
+    def demo_enter(demo_name, subpath=""):
+        demo_name = escape(demo_name)
+        subpath = escape(subpath)
+        if demo_name in DemoManager.demos:
+            ret_val = DemoManager.demos[demo_name].enter(subpath=subpath)
             return DemoManager.get_flask_response(ret_val)
         return DemoManager.get_flask_response(ErrorCodes.generic_error)
 
