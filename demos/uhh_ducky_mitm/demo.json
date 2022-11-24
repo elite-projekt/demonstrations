@@ -1,0 +1,25 @@
+{
+  "id": "uhh_ducky_mitm",
+  "categories": [
+    "phishing",
+    "email",
+    "badusb"
+  ],
+  "hardware": [
+    "usb-stick"
+  ],
+  "level": "intermediate",
+  "time": 10,
+  "isAvailable": false,
+  "container":
+  [
+    {
+      "name": "uhh_ducky_mitm_web",
+      "dockerfile": "container/nginx/Dockerfile"
+    },
+    {
+      "name": "uhh_ducky_mitm_proxy",
+      "dockerfile": "container/mitmproxy/Dockerfile"
+    }
+  ]
+}

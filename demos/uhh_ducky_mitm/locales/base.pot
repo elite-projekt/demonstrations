@@ -1,0 +1,56 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2022-07-08 11:01+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+
+
+#: uhh_ducky_mitm_demo.py:183
+msgid "uhh_usb_error_title"
+msgstr ""
+
+#: uhh_ducky_mitm_demo.py:184
+msgid "uhh_usb_error_msg"
+msgstr ""
+
+msgid "uhh_picture_mail_subject"
+msgstr ""
+
+msgid "uhh_picture_mail_content"
+msgstr ""
+
+msgid "uhh_wrong_stick_mail_subject"
+msgstr ""
+
+msgid "uhh_wrong_stick_mail_content"
+msgstr ""
+
+msgid "uhh_ducky_mitm_title"
+msgstr ""
+
+msgid "uhh_ducky_mitm_description"
+msgstr ""
+
+msgid "uhh_ducky_mitm_guide_intro"
+msgstr ""
+
+msgid "uhh_ducky_mitm_guide_goal"
+msgstr ""
+
+msgid "uhh_ducky_mitm_guide_req"
+msgstr ""
+
+msgid "uhh_ducky_mitm_guide_task"
+msgstr ""
+
+

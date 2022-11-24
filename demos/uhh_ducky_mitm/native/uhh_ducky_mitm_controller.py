@@ -16,44 +16,48 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 """
 import logging
 import traceback
-import pathlib
 
-from nativeapp.controller import demo_controller
+from nativeapp.controller.demo_controller import (
+        DemoController,
+        DemoStates,
+        ErrorCodes
+        )
 from nativeapp.config import config
 
 from demos.uhh_ducky_mitm.native import uhh_ducky_mitm_demo
 
 
-class DuckyController(demo_controller.DemoController):
+class DuckyController(DemoController):
     def __init__(self):
         super().__init__("uhh_ducky_mitm",
                          "uhh_ducky_mitm/native/stacks/docker-compose.yml")
         self.ducky_service = uhh_ducky_mitm_demo.DuckyDemo()
-        self.locale.add_locale_dir(
-                pathlib.Path(__file__).parent.parent / "locales")
 
     def stop(self, subpath) -> int:
         """
         Stops the demo
         """
-        self.set_state("stopping")
         try:
+            self.set_state(DemoStates.STOPPING, DemoStates.STOPPING_CONTAINER)
             self.stop_container()
+            self.set_state(DemoStates.STOPPING,
+                           DemoStates.STOPPING_APPLICATIONS)
             self.ducky_service.stop()
         except Exception:
             pass
         self.set_state("offline")
-        return demo_controller.ErrorCodes.stop_success
+        return ErrorCodes.stop_success
 
     def start(self, subpath, params) -> int:
         """
         Start the demo
         """
+
         if subpath == "script_downloaded":
             self.ducky_service.add_cert()
             self.ducky_service.show_error_box()
             self.ducky_service.send_second_mail()
-            return demo_controller.ErrorCodes.start_success
+            return ErrorCodes.start_success
         else:
             try:
                 if "language" in params:
@@ -61,19 +65,22 @@ class DuckyController(demo_controller.DemoController):
 
                 logging.info("Starting uhh_ducky_mitm demo stack")
                 if self.get_state() != "offline":
-                    return demo_controller.ErrorCodes.invalid_state
-                self.set_state("starting")
+                    return ErrorCodes.invalid_state
+                self.set_state(DemoStates.STARTING,
+                               DemoStates.STARTING_CONTAINER)
                 lang_env = {"ELITE_LANG": config.EnvironmentConfig.LANGUAGE}
                 self.ducky_service.prepare()
                 self.start_container(lang_env)
+                self.set_state(DemoStates.STARTING,
+                               DemoStates.STARTING_APPLICATIONS)
                 self.ducky_service.start()
-                self.set_state("running")
+                self.set_state(DemoStates.RUNNING)
             except Exception as e:
                 logging.error(traceback.format_exc())
                 logging.error(e)
-                self.set_state("error")
-                return demo_controller.ErrorCodes.no_docker_error
-            return demo_controller.ErrorCodes.start_success
+                self.set_state(DemoStates.ERROR)
+                return ErrorCodes.no_docker_error
+            return ErrorCodes.start_success
 
 
 def get_controller():

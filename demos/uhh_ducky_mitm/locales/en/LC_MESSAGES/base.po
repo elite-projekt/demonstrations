@@ -74,3 +74,9 @@ msgstr ""
 "\n"
 "Yours sincerely\n"
 "Christina"
+
+msgid "uhh_ducky_mitm_title"
+msgstr "USB-Attack"
+
+msgid "uhh_ducky_mitm_description"
+msgstr "This demo demonstrates the dangers of attacks with manipulated USB-Sticks."
