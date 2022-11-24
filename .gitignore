@@ -60,7 +60,6 @@ pytestdebug.log
 
 # Translations
 *.mo
-*.pot
 
 # Django stuff:
 *.log
