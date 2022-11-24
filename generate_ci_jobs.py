@@ -61,29 +61,27 @@ class PipelineTemplate:
 
 
 def get_demos():
-    demo_dir = pathlib.Path(__file__).parent / "demos"
-    demo_dirs = demo_dir.glob("*")
+    demo_dirs = pathlib.Path(__file__).parent / "demos"
+    demo_dirs = demo_dirs.glob("*")
     demo_settings = {}
-    with open(demo_dir / "demos.json", "r") as json_file:
-        json_data = json.loads(json_file.read())
-        for json_info in json_data:
-            demo_settings[json_info["id"]] = json_info
-
     demos = []
-    for demo in demo_dirs:
-        if demo.name == "__pycache__":
-            continue
-        if not demo.is_dir():
-            continue
-        if not demo_settings[demo.name]["isAvailable"]:
-            continue
-        demos.append(demo)
-
+    for demo_dir in demo_dirs:
+        demo_json_path = demo_dir / "demo.json"
+        if demo_json_path.exists():
+            with open(demo_json_path, "r") as json_file:
+                json_data = json.loads(json_file.read())
+                demo_settings[demo_dir.name] = {}
+                if "isAvailable" in json_data:
+                    # Skip if it is not available
+                    if not json_data["isAvailable"]:
+                        continue
+            demos.append(demo_dir)
     return demos
 
 
 def generate_license_ci():
     demos = get_demos()
+    print(f"{demos}")
     output_data = ""
     for demo in demos:
         template = PipelineTemplate(demo.name, "license-check")
@@ -98,11 +96,13 @@ def generate_docker_lint_ci():
     demos = get_demos()
     demo_data = ""
     for demo in demos:
-        container_info_file = demo / "container.json"
+        container_info_file = demo / "demo.json"
         if container_info_file.exists():
             with open(container_info_file, "r") as container_info_file:
                 json_data = json.loads(container_info_file.read())
-            for container in json_data:
+            if "container" not in json_data:
+                continue
+            for container in json_data["container"]:
                 # lint job
                 name = container["name"]
                 template = PipelineTemplate(name, "lint:dockerfile", image="registry.gitlab.com/pipeline-components/hadolint") # noqa: 501
@@ -143,12 +143,17 @@ def generate_docker_lint_ci():
                 print(container)
 
     with open("generated_demo_ci.yml", "w") as f:
-        f.write("stages:\n")
-        f.write("  - lint\n")
-        f.write("  - build\n")
-        f.write("  - scan\n")
-        f.write("  - push\n")
-        f.write(demo_data)
+        if demo_data == "":
+            f.write("dummy-job:\n")
+            f.write("  script:\n")
+            f.write("  - echo 'dummy'\n")
+        else:
+            f.write("stages:\n")
+            f.write("  - lint\n")
+            f.write("  - build\n")
+            f.write("  - scan\n")
+            f.write("  - push\n")
+            f.write(demo_data)
 
 
 if __name__ == "__main__":

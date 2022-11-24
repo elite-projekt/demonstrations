@@ -5,6 +5,7 @@ import flask
 from markupsafe import escape
 import queue
 import json
+import pathlib
 
 from nativeapp.service import orchestration_service
 from nativeapp.utils.time import sync_wsl
@@ -31,18 +32,87 @@ class ErrorCodes():
     generic_error = DemoStatus("Unknown error", 500)
 
 
+class DemoStates():
+    OFFLINE = "offline"
+    STARTING = "starting"
+    RUNNING = "running"
+    READY = "ready"
+    ERROR = "error"
+    STOPPING = "stopping"
+    STARTING_CONTAINER = "container_start_state"
+    STARTING_APPLICATIONS = "application_start_state"
+    STOPPING_CONTAINER = "container_stop_state"
+    STOPPING_APPLICATIONS = "application_stop_state"
+
+
 class DemoController(ABC):
 
     def __init__(self, name: str, compose_file: str):
         self.compose_file = compose_file
         self.name = name
         self.state = "offline"
+        self.extra_state = ""
         self.orchestration = orchestration_service.OrchestrationService()
         self.state_changed_callback = None
 
+        self.title = f"{name}_title"
+        self.description = f"{name}_description"
+        self.guide_dict = {"guide_intro": f"{name}_guide_intro",
+                           "guide_task": f"{name}_guide_task",
+                           "guide_goal": f"{name}_guide_goal",
+                           "guide_req": f"{name}_guide_req"}
+        self.level = "beginner"
+        self.time = 0
+        self.hardware = []
+        self.instructor_id = 3
+        self.is_available = False
+
         self.locale = locale.Locale()
 
-    def set_state(self, state: str) -> None:
+        demo_path = (pathlib.Path(__file__)
+                     .parent
+                     .parent
+                     .parent / "demos" / name / "demo.json").absolute()
+        self.load_from_json(demo_path)
+        locale_path = (pathlib.Path(__file__)
+                       .parent
+                       .parent
+                       .parent / "demos" / name / "locales").absolute()
+        if locale_path.is_dir():
+            self.locale.add_locale_dir(locale_path)
+
+    def load_from_json(self, json_path: pathlib.Path):
+        json_path = pathlib.Path(json_path)
+        if json_path.exists():
+            json_data = ""
+            with open(json_path, "r") as json_file:
+                json_data = json.loads(json_file.read())
+
+            if "title" in json_data:
+                self.title = json_data["title"]
+
+            if "description" in json_data:
+                self.description = json_data["description"]
+
+            if "time" in json_data:
+                self.time = int(json_data["time"])
+
+            if "level" in json_data:
+                self.level = json_data["level"]
+
+            if "guide" in json_data:
+                self.guide_dict = json_data["guide"]
+
+            if "hardware" in json_data:
+                self.hardware = json_data["hardware"]
+
+            if "instructor_id" in json_data:
+                self.instructor_id = json_data["instructor_id"]
+
+            if "isAvailable" in json_data:
+                self.is_available = json_data["isAvailable"]
+
+    def set_state(self, state: str, extra_state: str = "") -> None:
         """
         Sets the current state of the demo
 
@@ -50,8 +120,13 @@ class DemoController(ABC):
             "offline", "starting", "running", "stopping", "error"
         """
         if self.state_changed_callback is not None:
-            self.state_changed_callback(self.name, self.state, state)
+            self.state_changed_callback(self.name,
+                                        self.state,
+                                        state,
+                                        self.locale.translate(state),
+                                        self.locale.translate(extra_state))
         self.state = state
+        self.extra_state = extra_state
 
     def get_state(self) -> str:
         """
@@ -95,6 +170,25 @@ class DemoController(ABC):
     def stop_container(self):
         self.orchestration.docker_compose_stop_file(self.compose_file)
 
+    def get_property_dict(self, lang="en") -> Dict[str, any]:
+        self.locale.update_locale(lang)
+        data_dict = {}
+        data_dict["name"] = self.name
+        data_dict["description"] = self.locale.translate(self.description)
+        data_dict["state"] = self.state
+        data_dict["state_text"] = self.locale.translate(self.state)
+        data_dict["title"] = self.locale.translate(self.title)
+        data_dict["time"] = self.time
+        data_dict["level"] = self.locale.translate(self.level)
+        data_dict["guide"] = dict(
+            map(lambda tup: (tup[0],
+                             self.locale.translate(tup[1])),
+                self.guide_dict.items()))
+        data_dict["hardware"] = self.hardware
+        data_dict["instructor_id"] = self.instructor_id
+        data_dict["isAvailable"] = self.is_available
+        return data_dict
+
 
 class DemoManager():
     orchestration = flask.Blueprint(
@@ -103,10 +197,16 @@ class DemoManager():
     status_event_queues = []
 
     @staticmethod
-    def on_state_changed(name, old_state, new_state):
+    def on_state_changed(name,
+                         old_state,
+                         new_state,
+                         new_state_translation,
+                         extra_state=""):
         status_dict = {"name": name,
-                       "old_state": old_state,
-                       "new_state": new_state}
+                       "old_state_id": old_state,
+                       "state_id": new_state,
+                       "state": new_state_translation,
+                       "extra_state": extra_state}
         print(f"State changed for demo {name} from {old_state} to {new_state}")
         for q in DemoManager.status_event_queues:
             q.put(status_dict)
@@ -120,7 +220,44 @@ class DemoManager():
     @staticmethod
     def get_flask_response(status: DemoStatus):
         return flask.helpers.make_response(
-                    flask.json.jsonify(status.message), status.status_code)
+                flask.json.jsonify(status.message), status.status_code)
+
+    @staticmethod
+    @orchestration.route("/getdemos", methods=["GET", "POST"])
+    def getDemos():
+        params = flask.request.get_json(silent=True)
+        lang = "en"
+        if params is not None and "language" in params:
+            lang = params["language"]
+        send_dict = {}
+        local_locale = locale.Locale()
+        local_locale.update_locale(lang)
+        common_translation_ids = [
+                "start_button",
+                "stop_button",
+                "learn_button",
+                "usb-stick",
+                "wifi-stick",
+                "phone",
+                "tooltip_time",
+                "tooltip_difficulty",
+                "tooltip_hardware",
+                "guide_intro",
+                "guide_task",
+                "guide_goal",
+                "guide_req"
+                ]
+        common_translations = {}
+        for x in common_translation_ids:
+            common_translations[x] = local_locale.translate(x)
+        demo_list = []
+        for demo in DemoManager.demos.values():
+            new_demo = demo.get_property_dict(lang)
+            if new_demo["isAvailable"]:
+                demo_list.append(new_demo)
+        send_dict = {"demos": demo_list,
+                     "common_translations": common_translations}
+        return flask.jsonify(send_dict)
 
     @staticmethod
     @orchestration.route("/status/stream", methods=["GET", "POST"])
@@ -131,9 +268,12 @@ class DemoManager():
             q = queue.Queue()
             for demo in DemoManager.demos.values():
                 state = demo.get_state()
+                extra_state = demo.locale.translate(demo.extra_state)
                 status_dict = {"name": demo.name,
-                               "old_state": state,
-                               "new_state": state}
+                               "old_state_id": state,
+                               "state_id": state,
+                               "state": demo.locale.translate(state),
+                               "extra_state": extra_state}
                 q.put(status_dict)
 
             DemoManager.status_event_queues.append(q)

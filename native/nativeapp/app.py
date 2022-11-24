@@ -10,7 +10,7 @@ import sys
 import flask
 import flask_cors
 from nativeapp.config import config
-from nativeapp.controller import native_controller, demo_controller
+from nativeapp.controller import demo_controller
 
 import demos
 
@@ -87,7 +87,6 @@ def main():
 
     flask_cors.CORS(app)
 
-    app.register_blueprint(native_controller.native)
     app.register_blueprint(demo_controller.DemoManager.orchestration)
     for _, name, ispkg in pkgutil.iter_modules(demos.__path__):
         if ispkg:
@@ -102,18 +101,14 @@ def main():
                     demo_controller.DemoManager.register_demo(c)
                     continue
                 except AttributeError:
-                    logging.warning(f"Loading {name} as a legacy module")
-                # register bluepints using legacy code
-                try:
-                    app.register_blueprint(controller.orchestration)
-                except NameError:
-                    logging.warning(f"Failed to load legacy module {name}")
-
+                    logging.error(f"Unable to load module {name}")
             except ModuleNotFoundError:
-                print(f"ERROR while importing controller for: {name} demo")
-                print(f"Please check the existence of: {controller_path}")
+                logging.error(f"ERROR while importing controller for: {name} demo")  # noqa: 501
+                logging.error(f"Please check the existence of: {controller_path}")  # noqa: 501
             except Exception:
-                print(f"Unknown ERROR while importing controller for: {name}")
+                logging.error(f"Unknown ERROR while importing controller for: {name}")  # noqa: 501
+        else:
+            logging.error(f"{name} is not a package!")
 
     # Only for debugging while developing
     if args.dev:

@@ -20,14 +20,15 @@ def build_image(path, dockerfile, name):
     p.communicate()
 
 
-container_jsons = (script_dir / "demos").glob("**/container.json")
+container_jsons = (script_dir / "demos").glob("**/demo.json")
 
 for container_json in container_jsons:
     print(container_json)
     with open(container_json, "r") as json_file:
         json_data = json.loads(json_file.read())
-        for demo in json_data:
-            dockerfile = pathlib.Path(demo["dockerfile"])
-            p = container_json.parent / dockerfile.parent
-            name = demo["name"]
-            build_image(p, dockerfile.name, name)
+        if "container" in json_data:
+            for demo in json_data["container"]:
+                dockerfile = pathlib.Path(demo["dockerfile"])
+                p = container_json.parent / dockerfile.parent
+                name = demo["name"]
+                build_image(p, dockerfile.name, name)

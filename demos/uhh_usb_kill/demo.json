@@ -1,0 +1,13 @@
+{
+  "categories": [
+    "phishing",
+    "email",
+    "badusb"
+  ],
+  "hardware": [
+    "usb-stick"
+  ],
+  "level": "beginner",
+  "time": 5,
+  "isAvailable": true
+}
