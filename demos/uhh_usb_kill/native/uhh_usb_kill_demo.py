@@ -79,7 +79,6 @@ class KillDemo:
 
         while not self.email_client.wait_for_smtp_server(20):
             pass
-        self.send_mails()
 
         while not self.email_client.wait_for_imap_server(20):
             pass
