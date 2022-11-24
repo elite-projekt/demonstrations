@@ -16,13 +16,16 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 """
 import logging
 
-from nativeapp.controller import demo_controller
 from nativeapp.config import config
+from nativeapp.controller.demo_controller import (
+    DemoController,
+    DemoStates,
+    ErrorCodes)
 
 from demos.uhh_usb_kill.native import uhh_usb_kill_demo
 
 
-class KillController(demo_controller.DemoController):
+class KillController(DemoController):
     def __init__(self):
         super().__init__("uhh_usb_kill",
                          "uhh_usb_kill/native/stacks/docker-compose.yml")
@@ -32,13 +35,13 @@ class KillController(demo_controller.DemoController):
         """
         Stops the demo
         """
-        self.set_state("stopping")
+        self.set_state(DemoStates.STOPPING)
         self.stop_container()
         self.kill_service.stop()
-        self.set_state("offline")
-        return demo_controller.ErrorCodes.stop_success
+        self.set_state(DemoStates.OFFLINE)
+        return ErrorCodes.stop_success
 
-    def start(self, subpath, params) -> int:
+    def start(self, subpath, params):
         """
         Start the demo
         """
@@ -48,16 +51,23 @@ class KillController(demo_controller.DemoController):
 
             logging.info("Starting uhh_usb_kill demo stack")
             if self.get_state() != "offline":
-                return demo_controller.ErrorCodes.invalid_state
-            self.set_state("starting")
+                return ErrorCodes.invalid_state
+            self.set_state(DemoStates.STARTING, DemoStates.STARTING_CONTAINER)
             lang_env = {"ELITE_LANG": config.EnvironmentConfig.LANGUAGE}
             self.start_container(lang_env)
+            self.set_state(DemoStates.STARTING,
+                           DemoStates.STARTING_APPLICATIONS)
             self.kill_service.start()
-            self.set_state("running")
+            self.set_state(DemoStates.READY)
         except Exception as e:
             logging.error(e)
-            return demo_controller.ErrorCodes.no_docker_error
-        return demo_controller.ErrorCodes.start_success
+            return ErrorCodes.no_docker_error
+        return ErrorCodes.start_success
+
+    def enter(self, subpath):
+        self.kill_service.send_mails()
+        self.set_state(DemoStates.RUNNING)
+        return ErrorCodes.start_success
 
 
 def get_controller():
