@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2022-07-08 11:01+0200\n"
-"PO-Revision-Date: 2022-11-04 15:12+0100\n"
+"PO-Revision-Date: 2022-11-23 15:04+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -15,19 +15,88 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: pygettext.py 1.5\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.2.1\n"
 
 msgid "offline"
 msgstr "Offline"
 
 msgid "running"
-msgstr "Läuft"
+msgstr "Demo läuft"
 
 msgid "starting"
-msgstr "Starte"
+msgstr "Demo startet"
+
+msgid "ready"
+msgstr "Bereit"
+
+msgid "error"
+msgstr "Fehler"
 
 msgid "Start Demo"
 msgstr "Demo starten"
 
 msgid "Stop Demo"
 msgstr "Demo stoppen"
+
+msgid "beginner"
+msgstr "Leicht"
+
+msgid "intermediate"
+msgstr "Mittel"
+
+msgid "container_start_state"
+msgstr "Erstelle Container"
+
+msgid "container_stop_state"
+msgstr "Stoppe Container"
+
+msgid "application_start_state"
+msgstr "Starte Programme"
+
+msgid "application_stop_state"
+msgstr "Stoppe Programme"
+
+msgid "stopping"
+msgstr "Demo stoppt"
+
+msgid "start_button"
+msgstr "Demo starten"
+
+msgid "stop_button"
+msgstr "Demo stoppen"
+
+msgid "learn_button"
+msgstr "Lernmaterial"
+
+msgid "ready_button"
+msgstr "Demo bereit"
+
+msgid "tooltip_time"
+msgstr "Benötigte Zeit für die Demo"
+
+msgid "tooltip_difficulty"
+msgstr "Schwierigkeit der Demo"
+
+msgid "tooltip_hardware"
+msgstr "Benötigte Hardware"
+
+msgid "usb-stick"
+msgstr "USB-Stick"
+
+msgid "wifi-stick"
+msgstr "WLAN-Stick"
+
+msgid "phone"
+msgstr "Smarphone"
+
+msgid "guide_intro"
+msgstr "Einführung"
+
+msgid "guide_task"
+msgstr "Aufgabenstellung"
+
+msgid "guide_goal"
+msgstr "Ziel der Demo"
+
+msgid "guide_req"
+msgstr "Besondere Anforderungen der Demo"

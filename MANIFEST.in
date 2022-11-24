@@ -4,3 +4,4 @@ graft demos/**/resources/*
 graft demos/**/locales/*
 graft native/**/native/*
 graft native/nativeapp/utils/locale/locales/*
+include demos/**/demo.json

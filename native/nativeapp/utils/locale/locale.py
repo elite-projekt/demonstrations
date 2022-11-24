@@ -10,12 +10,14 @@ class Locale():
         self.locale_dirs = []
         self.translation = None
         self.add_locale_dir(pathlib.Path(__file__).parent / "locales")
-        self.update_locale("en")
+        self.update_locale("de")
 
     def add_locale_dir(self, locale_dir: pathlib.Path):
         self.locale_dirs.append(pathlib.Path(locale_dir))
 
     def update_locale(self, language: str):
+        logging.debug(f"Setting language to {language}")
+        self.translation = None
         for locale_dir in self.locale_dirs:
             try:
                 translation = gettext.translation("base",
@@ -30,10 +32,13 @@ class Locale():
 
         if self.translation is None:
             self.translation = gettext.NullTranslations()
-        self.translation.install()
 
     def get_translator(self) -> Callable[[str], str]:
         return self.translation.gettext
 
     def translate(self, text: str) -> str:
-        return self.translation.gettext(text)
+        if text == "":
+            return ""
+        data = self.translation.gettext(text)
+        logging.debug(f"Translating {text} to {data}")
+        return data

@@ -191,7 +191,8 @@ class Crash(QWidget):
         self.width = width
         self.height = height
         localedir = pathlib.Path(__file__).parent.parent / "locales"
-        self.elite_locale = locale.Locale(localedir)
+        self.elite_locale = locale.Locale()
+        self.elite_locale.add_locale_dir(localedir)
         self.elite_locale.update_locale(config.EnvironmentConfig.LANGUAGE)
 
         self.initUI()
