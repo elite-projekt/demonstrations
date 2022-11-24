@@ -62,6 +62,7 @@ class KillDemo:
 
         self.running = False
         self.admin_client = admin_app.NativeappAdminClient()
+        self.kill_thread = None
 
     def start(self):
         if self.running:
@@ -93,7 +94,8 @@ class KillDemo:
         self.admin_client.send_command(
                 admin_app.NativeappCommands.DISABLE_USB, b"0")
         self.usb_monitor.stop()
-        self.kill_thread.join()
+        if self.kill_thread:
+            self.kill_thread.join()
         logging.info("Stop done")
 
     def kill(self, usb_info):
