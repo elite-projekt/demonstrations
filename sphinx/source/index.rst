@@ -12,7 +12,7 @@ Welcome to ELITE Demonstrations's documentation!
    docs/home.md
    docs/setup/vm_setup.md
    docs/setup/client_setup.md
-   docs/add_demo.md
+   docs/add_demo.rst
    docs/nativeapp.md
    docs/issues.md
    docs/cert.md
