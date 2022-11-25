@@ -78,6 +78,7 @@ class DuckyDemo:
         localedir = pathlib.Path(__file__).parent.parent / "locales"
         self.locale = locale.Locale()
         self.locale.add_locale_dir(localedir)
+        self.usb_monitor = None
 
     def prepare(self):
         # get wsl ip
@@ -103,7 +104,6 @@ class DuckyDemo:
 
         while not self.email_client.wait_for_smtp_server(20):
             pass
-        self.send_mails()
 
         while not self.email_client.wait_for_imap_server(20):
             pass
@@ -125,7 +125,8 @@ class DuckyDemo:
                 admin_app.NativeappCommands.SET_REDIRECT,
                 admin_app.create_host_payload(
                     False, "elite-projekt.de"))
-        self.usb_monitor.stop()
+        if self.usb_monitor:
+            self.usb_monitor.stop()
         logging.info("Stop done")
 
     def _send_mail(self, mail_files: List[str]) -> None:

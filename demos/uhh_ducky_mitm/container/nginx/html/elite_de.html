@@ -10,6 +10,18 @@
 
 <script>
 
+function stop_demo () {
+  const xhr = new XMLHttpRequest();
+  xhr.open('GET', `http://127.0.0.1:5000/orchestration/stop/demo/uhh_ducky_mitm`);
+  xhr.send();
+}
+
+let end_button = `
+<button type="button" onclick="stop_demo()" style="width: 20%;">
+  <span class="align-middle start-button-text">Demo stoppen</span>
+</button>
+`
+
 function submit_form(theForm) {
 	let info_string_elite= `
   <h1>
@@ -30,6 +42,7 @@ Einige Tipps: <br>
  <br>
 <li> Die vertrauten Zertifikate und Einstellungen im Betriebsystem sollten regelmäßig überprüft werden. </li>
 </ul>
+  ${end_button}
 		`;
 	let info_string_evil= `
   <h1>
@@ -40,8 +53,12 @@ Ihre Daten wurden gestohlen!
 Username: ${theForm.uname.value} <br>
 Passwort: ${theForm.psw.value} <br>
 <br>
-Falls Sie es nicht gesehen haben: Beim Einstecken des "defekten" USB-Sticks konnten wir beliebige Befehle ausführen.
-Dies haben wir genutzt, um die Proxy-Einstellungen des Betriebssystems zu ändern und ein falsches Zertifikat zu installieren.<br>
+Falls Sie es nicht gesehen haben: Beim Einstecken des "defekten" USB-Sticks konnten wir beliebige Befehle ausführen und haben so ihren PC infiziert.
+Sie können die Demo jetzt beenden, oder sich auf dieser Seite die technischen Hintergründe des Angriffes anschauen.
+<br>
+${end_button}
+<br>
+Wir haben den Angriff genutzt, um die Proxy-Einstellungen des Betriebssystems zu ändern und ein falsches Zertifikat zu installieren.<br>
 Wenn Sie auf die Adressleiste schauen, sehen Sie, dass es sich um die korrekte URL handelt. Schaut man sich jedoch das Zertifikat an, erkennt man, dass dieses nicht legitim und auf "mitmproxy" ausgestellt ist.
  <br>
  <br>

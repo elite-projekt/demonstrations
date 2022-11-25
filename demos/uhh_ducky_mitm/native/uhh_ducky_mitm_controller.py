@@ -18,10 +18,9 @@ import logging
 import traceback
 
 from nativeapp.controller.demo_controller import (
-        DemoController,
-        DemoStates,
-        ErrorCodes
-        )
+    DemoController,
+    DemoStates,
+    ErrorCodes)
 from nativeapp.config import config
 
 from demos.uhh_ducky_mitm.native import uhh_ducky_mitm_demo
@@ -38,14 +37,14 @@ class DuckyController(DemoController):
         Stops the demo
         """
         try:
-            self.set_state(DemoStates.STOPPING, DemoStates.STOPPING_CONTAINER)
-            self.stop_container()
             self.set_state(DemoStates.STOPPING,
                            DemoStates.STOPPING_APPLICATIONS)
             self.ducky_service.stop()
+            self.set_state(DemoStates.STOPPING, DemoStates.STOPPING_CONTAINER)
+            self.stop_container()
         except Exception:
             pass
-        self.set_state("offline")
+        self.set_state(DemoStates.OFFLINE)
         return ErrorCodes.stop_success
 
     def start(self, subpath, params) -> int:
@@ -64,7 +63,8 @@ class DuckyController(DemoController):
                     config.EnvironmentConfig.LANGUAGE = params["language"]
 
                 logging.info("Starting uhh_ducky_mitm demo stack")
-                if self.get_state() != "offline":
+                if self.get_state() != DemoStates.OFFLINE:
+                    self.set_state(DemoStates.ERROR)
                     return ErrorCodes.invalid_state
                 self.set_state(DemoStates.STARTING,
                                DemoStates.STARTING_CONTAINER)
@@ -74,13 +74,19 @@ class DuckyController(DemoController):
                 self.set_state(DemoStates.STARTING,
                                DemoStates.STARTING_APPLICATIONS)
                 self.ducky_service.start()
-                self.set_state(DemoStates.RUNNING)
+                self.set_state(DemoStates.READY)
             except Exception as e:
                 logging.error(traceback.format_exc())
                 logging.error(e)
                 self.set_state(DemoStates.ERROR)
                 return ErrorCodes.no_docker_error
             return ErrorCodes.start_success
+
+    def enter(self, subpath):
+        if self.get_state() == DemoStates.READY:
+            self.set_state(DemoStates.RUNNING)
+            self.ducky_service.send_mails()
+        return ErrorCodes.start_success
 
 
 def get_controller():
