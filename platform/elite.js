@@ -241,7 +241,10 @@ class DemoCard {
 		start_button.onclick = e => {
 			const xhr = new XMLHttpRequest();
 			xhr.open('GET', `http://127.0.0.1:5000/orchestration/start/demo/${this.name}`);
-      const lang = get_lang().split('_')[0];
+      let lang = "de";
+      if(typeof(get_lang) == "function") {
+        lang = get_lang().split('_')[0];
+      }
       const json_data = JSON.stringify({ "language": lang });
       xhr.send(json_data);
 		};
@@ -253,9 +256,11 @@ class DemoCard {
 
 	set_instructor(id) {
 		let author_div = this.card.querySelector('.masteriyo-course-author');
-    let author_data = get_instructor(id);
-    author_div.querySelector("img").src = author_data[1];
-    author_div.querySelector(".masteriyo-course-author--name").innerText = author_data[0];
+    if(typeof(get_instructor) == "function") {
+      let author_data = get_instructor(id);
+      author_div.querySelector("img").src = author_data[1];
+      author_div.querySelector(".masteriyo-course-author--name").innerText = author_data[0];
+    }
 	}
 
 	set_description(desc) {
@@ -353,7 +358,10 @@ create_loading_page();
 const xhr = new XMLHttpRequest();
 xhr.open('POST', 'http://127.0.0.1:5000/orchestration/getdemos');
 xhr.setRequestHeader("Content-Type", "application/json");
-const lang = get_lang().split('_')[0];
+let lang = "de";
+if(typeof(get_lang) == "function") {
+  lang = get_lang().split('_')[0];
+}
 const json_data = JSON.stringify({ "language": lang });
 xhr.send(json_data);
 xhr.addEventListener('load', () => {
