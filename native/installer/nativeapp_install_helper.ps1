@@ -350,17 +350,6 @@ If(!(Test-Path -path $rootPath)) {
                 WriteOutput "Something went wrong removing the exclusion from Windows Defender" "Red"
                 Write-Warning $Error[0]
             }
-
-            try {
-                # Remove autostart
-                WriteOutput "Trying to remove the autostart entry" "DarkGray"
-                Remove-Item -Path "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup\nativeapp.lnk" -ErrorAction Stop
-                WriteOutput "Removed the autostart entry" "Green"
-            }
-            catch {
-                WriteOutput "Something went wrong while removing the autostart entry" "Red"
-                Write-Warning $Error[0]
-            }
               try {
                 # Remove task
                 WriteOutput "Trying to remove the task entry" "DarkGray"
