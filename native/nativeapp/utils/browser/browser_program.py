@@ -83,8 +83,8 @@ class BrowserProgramEdge(BrowserProgram):
                             dirs_exist_ok=True)
 
     def stop(self):
-        """Close mail application"""
-        logging.info("Try closing running thunderbird process...")
+        """Close edge browser"""
+        logging.info("Try closing running edge browser process...")
         try:
             if self.process:
                 self.process.kill()
@@ -102,7 +102,7 @@ class BrowserProgramEdge(BrowserProgram):
             logging.error(e)
 
     def start(self):
-        """Start mail application"""
+        """Start edge browser"""
         logging.info(f"Try starting edge process \
                 with profile {self.profile_name}...")
         try:
