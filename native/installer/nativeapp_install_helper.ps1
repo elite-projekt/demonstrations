@@ -93,9 +93,10 @@ function WriteOutput {
 $ErrorActionPreference = "Stop"
 # Check folder
 $directoryPath="C:\Program Files (x86)\hda\nativeapp"
+$rootCAPath="$directoryPath\demoCA\rootCA.crt"
 $rootPath="C:\Program Files (x86)\hda\"
-$shortcutPath = "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup\nativeapp.lnk"
-$hostFile = "C:\Windows\System32\drivers\etc\hosts"
+$shortcutPath ="$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup\nativeapp.lnk"
+$hostFile ="C:\Windows\System32\drivers\etc\hosts"
 
 WriteOutput "This installer will install the NativeApp" "DarkGray"
 
@@ -307,6 +308,14 @@ If(!(Test-Path -path $rootPath)) {
         Exit 1
     }
 
+    try {
+        Import-Certificate -FilePath $rootCAPath -CertStoreLocation Cert:\LocalMachine\Root
+    }
+    catch{
+        WriteOutput "Something went wrong while adding rootCa" "Red"
+        Write-Warning $Error[0]
+    }
+
     # Finisch message
     WriteOutput "The installation was succesfully" "Green"
 
@@ -350,6 +359,7 @@ If(!(Test-Path -path $rootPath)) {
                 WriteOutput "Something went wrong removing the exclusion from Windows Defender" "Red"
                 Write-Warning $Error[0]
             }
+            
               try {
                 # Remove task
                 WriteOutput "Trying to remove the task entry" "DarkGray"
