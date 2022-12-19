@@ -9,6 +9,7 @@ from nativeapp.config import config
 from nativeapp.controller.demo_controller import (
     DemoStates,
     ErrorCodes)
+from nativeapp.utils.time import sync_wsl
 
 
 class PasswordController(demo_controller.DemoController):
@@ -22,6 +23,7 @@ class PasswordController(demo_controller.DemoController):
     def start(self, subpath, params):
         secure_mode = True
         self.set_state("starting")
+        sync_wsl()
         if "secureMode" in params:
             secure_mode = params["secureMode"]
         if secure_mode is True:
