@@ -36,6 +36,8 @@ class NativeappControlClient:
 
     def send_command(self, command: int, payload: bytes):
         self.connect()
+        if isinstance(payload, int):
+            payload = payload.to_bytes(8, "big")
         data_len = len(payload)
         header_data = struct.pack(
                 "<HII", self.header, command, data_len)
