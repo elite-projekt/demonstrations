@@ -8,7 +8,6 @@ import json
 import pathlib
 
 from nativeapp.service import orchestration_service
-from nativeapp.utils.time import sync_wsl
 from nativeapp.utils.locale import locale
 from nativeapp.utils.web import web_view
 
@@ -318,7 +317,6 @@ class DemoManager():
     def demo_start(demo_name, subpath=""):
         demo_name = escape(demo_name)
         subpath = escape(subpath)
-        sync_wsl()
         skip_enter = False
         try:
             web_view.RemoteControlClient().set_on_top(True)
