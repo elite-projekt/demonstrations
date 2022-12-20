@@ -10,6 +10,7 @@ import pathlib
 from nativeapp.service import orchestration_service
 from nativeapp.utils.time import sync_wsl
 from nativeapp.utils.locale import locale
+from nativeapp.utils.web import web_view
 
 from typing import Dict
 
@@ -23,6 +24,8 @@ class DemoStatus:
 class ErrorCodes():
     start_success = DemoStatus("Successfully started the Demo.", 200)
     invalid_state = DemoStatus("Demo is in an invalid state", 500)
+    enter_success = DemoStatus("Successfully entered the Demo.", 200)
+    stop_success = DemoStatus("Stopped all remaining Demos.", 200)
     stop_success = DemoStatus("Stopped all remaining Demos.", 200)
     stop_failed = DemoStatus("Failed to stop containers.", 500)
     no_docker_error = DemoStatus(
@@ -316,12 +319,21 @@ class DemoManager():
         demo_name = escape(demo_name)
         subpath = escape(subpath)
         sync_wsl()
+        skip_enter = False
+        try:
+            web_view.RemoteControlClient().set_on_top(True)
+        except Exception:
+            # No web view client -> skip enter phase
+            skip_enter = True
         if demo_name in DemoManager.demos:
             params = flask.request.get_json(silent=True)
             if params is None:
                 params = []
             ret_val = DemoManager.demos[demo_name].\
                 start(subpath=subpath, params=params)
+            if skip_enter:
+                ret_val = DemoManager.demos[demo_name].\
+                          enter(subpath=subpath)
             return DemoManager.get_flask_response(ret_val)
         return DemoManager.get_flask_response(ErrorCodes.generic_error)
 
@@ -330,6 +342,13 @@ class DemoManager():
     @orchestration.route("/enter/demo/<demo_name>/<path:subpath>",
                          methods=["GET", "POST"])
     def demo_enter(demo_name, subpath=""):
+        try:
+            client = web_view.RemoteControlClient()
+            client.minimize()
+            client.set_on_top(False)
+        except Exception:
+            pass
+
         demo_name = escape(demo_name)
         subpath = escape(subpath)
         if demo_name in DemoManager.demos:
