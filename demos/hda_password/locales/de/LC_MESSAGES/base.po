@@ -1,0 +1,36 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2022-07-08 11:01+0200\n"
+"PO-Revision-Date: 2022-11-22 17:11+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: pygettext.py 1.5\n"
+"X-Generator: Poedit 3.2.1\n"
+
+msgid "hda_password_title"
+msgstr "Passwortsicherheit"
+
+msgid "hda_password_description"
+msgstr "Die Passwortsicherheit-Demo zeigt, wie sichere Passwörter gestaltet sein sollten und wie einfach es ist einen zweiten Faktor zur Registrierung und Anmeldung zu verwenden, um Ihre Anmeldungen so sicher wie möglich zu machen."
+
+msgid "hda_password_guide_intro"
+msgstr "Innerhalb der Passwortsicherheit-Demo schlüpfen Sie in die Rolle einer Person, die gerade anfängt in der Firma <strong>Nimbus</strong> zu arbeiten. Dazu müssen Sie sich einen neuen Account für die internen System anlegen.<br><strong>Nimbus</strong> legt viel Wert auf Sichhert und hat deshalb hohe Anforderungen an das neu zu vergebenede Passwort und schreibt eine <strong>Zwei-Faktor-Authentisierung (2FA)</strong> vor."
+
+msgid "hda_password_guide_task"
+msgstr "Registrieren Sie sich innerhalb der Passwortsicherheit-Demo. Folgen Sie dafür den Anweisungen innerhalb der Demo.<br>Sie benötigen außerdem eine 2FA-App, falls Sie noch keine installiert haben, ist innerhalb der Demo eine Anleitung, wie Sie eine solche App installieren können, enthalten."
+
+msgid "hda_password_guide_goal"
+msgstr "Folgen Sie den Anweisungen innerhalb der Demo, schließen Sie das 2FA-Verfahren ab und registrieren Sie sich erfolgreich."
+
+msgid "hda_password_guide_req"
+msgstr "Sie benötigen ein Smartphone (mit Internetzugang, falls Sie eine 2FA App installieren müssen), um die Passwortsicherheit-Demo durchzuführen.<br>Falls Sie keins besitzen, Sie aktuell kein Internetzugang haben oder einfach nicht Ihr eigenes Gerät verwenden möchten, sprechen Sie eine Person an der Standbetreuung an. Wir haben einige vorbereitete Geräte."
