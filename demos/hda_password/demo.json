@@ -1,0 +1,24 @@
+{
+  "categories": [
+    "2FA",
+    "passoword"
+  ],
+  "hardware": [
+    "phone"
+  ],
+  "level": "beginner",
+  "time": 5,
+  "isAvailable": true,
+  "instructor_id": 4,
+  "container":
+  [
+    {
+      "name": "hda_password_webserver",
+      "dockerfile": "Dockerfile"
+    },
+    {
+      "name": "hda_password_nginx_server",
+      "dockerfile": "src/nginx/Dockerfile"
+    }
+  ]
+}

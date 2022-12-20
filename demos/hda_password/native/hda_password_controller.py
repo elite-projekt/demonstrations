@@ -1,8 +1,14 @@
 import logging
+import webbrowser
+import importlib.resources
 
 from nativeapp.controller import demo_controller
+from nativeapp.utils.browser import browser_program
 from nativeapp.utils.admin import admin_app
 from nativeapp.config import config
+from nativeapp.controller.demo_controller import (
+    DemoStates,
+    ErrorCodes)
 
 
 class PasswordController(demo_controller.DemoController):
@@ -32,28 +38,53 @@ class PasswordController(demo_controller.DemoController):
                 admin_app.create_host_payload(
                     True, "nimbus.de", f"{ip}"))
 
+        browser_profile = importlib.resources.path(
+                "demos.hda_password.resources.edge", "profile_uhh.zip")
+        self.browser_program = browser_program.BrowserProgramEdge(
+                "elite.uhh_mitm", browser_profile)
+
         try:
             if "language" in params:
                 config.EnvironmentConfig.LANGUAGE = params["language"]
             logging.info("Starting password demo stack")
             lang_env = {"ELITE_LANG": config.EnvironmentConfig.LANGUAGE}
             self.start_container(lang_env)
+            self.browser_program.copy_profile()
         except Exception as e:
             logging.error(e)
-            self.set_state("offline")
+            self.set_state(DemoStates.ERROR)
             return demo_controller.ErrorCodes.no_docker_error
-        self.set_state("running")
+        self.set_state(DemoStates.READY)
         logging.info("Sucess")
         return demo_controller.ErrorCodes.start_success
 
     def stop(self, subpath):
-        logging.info("Stopping Container")
-        self.set_state("stopping")
-        self.stop_container()
-        logging.info("Stop done")
-        self.set_state("offline")
-        return demo_controller.ErrorCodes.stop_success
+        """
+        Stops the demo
+        """
+        try:
+            self.set_state(DemoStates.STOPPING,
+                           DemoStates.STOPPING_CONTAINER)
+            logging.info("Stopping Container")
+            self.stop_container()
+            self.set_state(DemoStates.STOPPING,
+                           DemoStates.STOPPING_APPLICATIONS)
+            logging.info("Stopping Applications")
+            self.browser_program.stop()
+        except Exception:
+            pass
+        logging.info("Container stopped")
+        self.set_state(DemoStates.OFFLINE)
+        return ErrorCodes.stop_success
+
+    def enter(self, subpath):
+        if self.get_state() == DemoStates.READY:
+            self.set_state(DemoStates.RUNNING)
+            # Start Browser
+            webbrowser.open('https://nimbus.de', new=1)
+        return ErrorCodes.start_success
 
 
 def get_controller():
+
     return PasswordController()
