@@ -297,7 +297,7 @@ class DemoCard {
 
 		const start_button = this.card.querySelector('.start-demo-button');
 		const button_text = start_button.querySelector('.start-button-text');
-		const possible_classes = ['button-starting', 'button-ready', 'button-running', 'button-offline', 'button-stopping'];
+		const possible_classes = ['button-starting', 'button-ready', 'button-running', 'button-offline', 'button-stopping', 'button-error'];
 
 		let i = 0;
 		for (i in possible_classes) {
@@ -305,6 +305,11 @@ class DemoCard {
 		}
 
 		start_button.classList.add(`button-${state}`);
+    if (state === 'error') {
+      button_text.innerText = translation;
+      start_button.onclick = "";
+    }
+
 
 		// Change start button in these states
 		if (state === 'starting' || state === 'ready' || state === 'running' || state === 'stopping') {

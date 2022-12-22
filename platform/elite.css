@@ -1,6 +1,7 @@
 :root {
 	--main-color: #7367f0;
 	--stop-color: #F07676;
+	--error-color: #F07676;
 	--starting-color: #666666;
 	--ready-color: #41F89C;
 	--running-color: #00CC99;
@@ -179,6 +180,10 @@
 	align-items: center;
 }
 
+.large-card > .card-body > .card-text {
+	padding-bottom: 2rem;
+}
+
 .large-card > .card-footer > .card-status {
 	width: 70%;
 	height: 100%;
@@ -209,6 +214,13 @@
 .masteriyo-course--content__description {
 	border-bottom: 2px solid rgba(34,41,47,.125);
 	padding-bottom: 1rem;
+	height: 200px;
+	overflow: scroll;
+}
+
+.masteriyo-course--content__description > p {
+		overflow: hidden;
+	  text-overflow: ellipsis;
 }
 
 .stop-demo-button {
@@ -226,6 +238,10 @@
 
 .button-stopping {
 	background-color: var(--stopping-color) !important;
+}
+
+.button-error {
+	background-color: var(--error-color) !important;
 }
 
 .button-running {
