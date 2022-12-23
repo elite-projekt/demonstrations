@@ -321,6 +321,7 @@ class DemoManager():
         try:
             web_view.RemoteControlClient().set_on_top(True)
         except Exception:
+            print("Unable to connect to client in start. Skipping enter phase")
             # No web view client -> skip enter phase
             skip_enter = True
         if demo_name in DemoManager.demos:
@@ -342,10 +343,11 @@ class DemoManager():
     def demo_enter(demo_name, subpath=""):
         try:
             client = web_view.RemoteControlClient()
-            client.minimize()
             client.set_on_top(False)
+            client.set_fullscreen(False)
+            client.set_minimize(True)
         except Exception:
-            pass
+            print("Unable to connect to client in enter")
 
         demo_name = escape(demo_name)
         subpath = escape(subpath)
@@ -361,6 +363,13 @@ class DemoManager():
     def demo_stop(demo_name, subpath=""):
         demo_name = escape(demo_name)
         subpath = escape(subpath)
+        try:
+            client = web_view.RemoteControlClient()
+            client.set_minimize(False)
+            client.set_fullscreen(True)
+            client.set_on_top(True)
+        except Exception:
+            print("Unable to connect to client in stop")
         if demo_name in DemoManager.demos:
             ret_val = DemoManager.demos[demo_name].stop(subpath)
             return DemoManager.get_flask_response(ret_val)
