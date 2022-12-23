@@ -30,9 +30,10 @@ class NativeappControlClient:
         self.port = port
 
     def connect(self):
-        self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-        self.socket.connect(("127.0.0.1", self.port))
+        self.socket = socket.create_connection(("127.0.0.1", self.port))
+        # self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        # self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        # self.socket.connect(("127.0.0.1", self.port))
 
     def send_command(self, command: int, payload: bytes):
         self.connect()
@@ -45,7 +46,8 @@ class NativeappControlClient:
         header_data = struct.pack(
                 "<HIII", self.header, command, data_len, header_crc)
         payload_crc = struct.pack("<I", binascii.crc32(payload))
-        self.socket.send(header_data + payload + payload_crc)
+        complete_packet = header_data + payload + payload_crc
+        self.socket.send(complete_packet)
 
 
 class NativeappControlServer(ABC):
