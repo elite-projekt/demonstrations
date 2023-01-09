@@ -49,14 +49,14 @@ openssl req -x509 -new -nodes -key rootCA.key -sha256 -days 1024 -out rootCA.crt
 
 In `demoCA` run
 ```
-./sign_cert.py --domains <domain> --ca-cert eliteCA.crt --ca-key eliteCA.key
+./sign_cert.py --domains <domain> --ca-cert intermediateCA.crt --ca-key intermediateCA.key
 ```
 to generate a new certificate.
 
 ### Create a cert chain
 Just concat the certs:
 ```
-cat <your cert> eliteCA.crt rootCA.crt > cert_chain.pem
+cat <your cert> intermediateCA.crt rootCA.crt > cert_chain.pem
 ```
 
 
@@ -72,7 +72,7 @@ openssl genrsa -aes256 -out smime_nina_hardt.key 4096
 openssl req -new -key smime_nina_hardt.key -out smime_nina_hardt.csr -subj "/C=DE/ST=Hessen/L=Darmstadt/O=mpseinternational/CN=mpseinternational.com/emailAddress=nina.hardt@mpseinternational.com"
 
 # sign the certificate
-openssl x509 -req -days 2440 -in smime_nina_hardt.csr -CA rootCA.crt -CAkey rootCA.key -set_serial 1337 -out smime_nina_hardt.crt -addtrust emailProtection -addreject clientAuth -addreject serverAuth -trustout
+openssl x509 -req -days 2440 -in smime_nina_hardt.csr -CA intermediateCA.crt -CAkey intermediateCA.key -set_serial 1337 -out smime_nina_hardt.crt -addtrust emailProtection -addreject clientAuth -addreject serverAuth -trustout
 
 # optional export key and cert for thunderbird import
 openssl pkcs12 -export -in smime_nina_hardt.crt -inkey smime_user.key -out smime_nina_hardt.p12
