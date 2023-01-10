@@ -1,5 +1,5 @@
 # hadolint ignore=DL3007
-from alpine:latest
+FROM alpine:latest
 
 # hadolint ignore=DL3018
 RUN apk update --no-cache && apk add --no-cache nginx
