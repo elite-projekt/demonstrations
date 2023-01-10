@@ -64,6 +64,10 @@ class PasswordController(demo_controller.DemoController):
         """
         Stops the demo
         """
+        self.admin_client.send_command(
+                admin_app.NativeappCommands.SET_REDIRECT,
+                admin_app.create_host_payload(
+                    False, "nimbus.de"))
         try:
             self.set_state(DemoStates.STOPPING,
                            DemoStates.STOPPING_CONTAINER)
