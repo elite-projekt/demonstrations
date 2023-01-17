@@ -1,17 +1,17 @@
 from abc import ABC
 
 import logging
-import flask
-from markupsafe import escape
 import queue
 import json
 import pathlib
+from typing import Dict
 
 from nativeapp.service import orchestration_service
 from nativeapp.utils.locale import locale
 from nativeapp.utils.web import web_view
 
-from typing import Dict
+import flask
+from markupsafe import escape
 
 
 class DemoStatus:
@@ -138,7 +138,7 @@ class DemoController(ABC):
         """
         return self.state
 
-    def stop(self, subpath: str) -> Dict[str, object]:
+    def stop(self, subpath: str) -> DemoStatus:
         """
         Stops the demo
 
@@ -147,7 +147,7 @@ class DemoController(ABC):
         self.stop_container()
         return ErrorCodes.stop_success
 
-    def start(self, subpath: str, params: Dict[str, str]) -> Dict[str, object]:
+    def start(self, subpath: str, params: Dict[str, str]) -> DemoStatus:
         """
         Start the demo
 
@@ -158,7 +158,7 @@ class DemoController(ABC):
         self.start_container()
         return ErrorCodes.start_success
 
-    def enter(self, subpath: str) -> Dict[str, object]:
+    def enter(self, subpath: str) -> DemoStatus:
         """
         Enter the demo
 
@@ -166,7 +166,7 @@ class DemoController(ABC):
         """
         return ErrorCodes.enter_success
 
-    def get_status(self, subpath: str) -> Dict[str, str]:
+    def get_status(self, subpath: str) -> DemoStatus:
         """
         Get the status of the demo
         """

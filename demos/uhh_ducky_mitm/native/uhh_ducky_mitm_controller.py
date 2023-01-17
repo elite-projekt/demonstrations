@@ -62,7 +62,9 @@ class DuckyController(DemoController):
                 if "language" in params:
                     config.EnvironmentConfig.LANGUAGE = params["language"]
 
-                logging.info("Starting uhh_ducky_mitm demo stack")
+                logging.info("Starting uhh_ducky_mitm demo stack"
+                             f"with {params} and language "
+                             f"{config.EnvironmentConfig.LANGUAGE}")
                 if self.get_state() != DemoStates.OFFLINE:
                     self.set_state(DemoStates.ERROR)
                     return ErrorCodes.invalid_state

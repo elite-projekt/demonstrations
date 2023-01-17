@@ -1,7 +1,8 @@
 #!/usr/bin/python
 
-from nativeapp.utils.net import network_control_protocol
 import struct
+
+from nativeapp.utils.net import network_control_protocol
 
 REMOTE_PORT = 5486
 REMOTE_HEADER = 0xFABD

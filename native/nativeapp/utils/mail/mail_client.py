@@ -32,8 +32,8 @@ import logging
 import datetime
 import random
 import pathlib
-import yaml
 import time
+import yaml
 
 
 class MailClient:
@@ -48,6 +48,10 @@ class MailClient:
         self.password = password
 
     def wait_for_imap_server(self, max_timeout_s: float = 10) -> bool:
+        """
+        Tests if the imap server is reachable.
+        Blocks until the server is reachable or [max_timeout_s] is reached
+        """
         start_time = time.time()
         logging.info("Waiting for IMAP server")
         while time.time() - start_time < max_timeout_s:
@@ -76,6 +80,10 @@ class MailClient:
 
     @contextmanager
     def imap_connect(self, show_error=True):
+        """
+        Connect to the imap server
+        :param bool show_error: If false no errors are printes
+        """
         imap_connection = None
         try:
             imap_connection = imaplib.IMAP4_SSL(
@@ -96,6 +104,10 @@ class MailClient:
 
     @contextmanager
     def smtp_connect(self, show_error=True):
+        """
+        Connect to the smtp server
+        :param bool show_error: If false no errors are printes
+        """
         smtp_connection = None
         try:
             smtp_connection = smtplib.SMTP_SSL(
