@@ -18,11 +18,15 @@
     <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
     <title>Passwort Demo</title>
 </head>
-<body>
-    <nav class="navbar navbar-dark" style="background-color: #6c63ff;">
-        <img src="{{url_for('static', filename='Nimbus Logo.svg')}}" height="80" class="logo" alt="">
+<body> 
+    <div id="wrapper"></div>
+    <nav class="navbar navbar-dark purple-color">
+        <nav class="navbar navbar-dark purple-color header">
+            <img src="{{url_for('static', filename='Nimbus Logo.svg')}}" class="logo" alt="">
+        </nav>
     </nav>
-    {% block content %}{% endblock %}
+        {% block content %}{% endblock %}
+    </div>
     <script src="{{url_for('static', filename='js/jquery-3.3.1.min.js')}}"></script>
     <script src="{{url_for('static', filename='link-router/router.js')}}"></script>
 </body>
