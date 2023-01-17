@@ -21,9 +21,12 @@ class InstallWithCompile(install):
         compiler = compile_catalog(self.distribution)
 
         for demo in pathlib.Path("demos").glob("*"):
-            print(f"Compiling locale for {demo}")
-            locale_dir = demo / "locales"
-            compile_locale(locale_dir, compiler)
+            try:
+                print(f"Compiling locale for {demo}")
+                locale_dir = demo / "locales"
+                compile_locale(locale_dir, compiler)
+            except Exception:
+                print(f"Failed to compile locale for {demo}")
 
         compile_locale(pathlib.Path("native/nativeapp/utils/locale/locales"),
                        compiler)

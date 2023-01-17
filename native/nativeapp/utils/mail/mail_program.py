@@ -34,7 +34,7 @@ class MailProgram(ABC):
 
 
 class MailProgramThunderbird(MailProgram):
-    def __init__(self, name, profile_zip_path):
+    def __init__(self, name: str, profile_zip_path: str):
         self.profile_name = name
         self.profile_zip_path = profile_zip_path
         self.profile_dir_name = f"elite.{self.profile_name}"
@@ -59,7 +59,7 @@ class MailProgramThunderbird(MailProgram):
                     stdout=subprocess.PIPE, shell=False
                 )
             else:
-                subprocess.Popen("pkill", "thunderbird",  # nosec
+                subprocess.Popen(["pkill", "thunderbird"],  # nosec
                                  stdout=subprocess.PIPE)
             logging.info("Success")
         except Exception as e:
@@ -78,8 +78,8 @@ class MailProgramThunderbird(MailProgram):
                      "-P", self.profile_name], shell=False
                 )
             else:
-                subprocess.Popen("thunderbird", "-P",  # nosec
-                                 self.profile_name,
+                subprocess.Popen(["thunderbird", "-P",  # nosec
+                                 self.profile_name],
                                  stdout=subprocess.PIPE)
             logging.info("Success")
         except Exception as e:

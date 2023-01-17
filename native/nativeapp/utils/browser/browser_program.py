@@ -74,9 +74,11 @@ class BrowserProgramEdge(BrowserProgram):
                     {temp_dir}")
             shutil.unpack_archive(self.profile_zip_path, temp_dir)
             logging.info("Importing reg")
-            p = subprocess.Popen(  # nosec
-                    ["reg", "import", temp_dir / "edge.reg"])
-            p.communicate()
+            # nosec
+            with subprocess.Popen(["reg",
+                                   "import",
+                                   temp_dir / "edge.reg"]) as reg_proc:
+                reg_proc.communicate()
             logging.info(f"Copying {temp_dir / self.profile_name} to \
                     {self.profile_dir} exists {self.profile_dir.exists()}")
             shutil.copytree(temp_dir / self.profile_name, self.profile_dir,
