@@ -62,7 +62,7 @@ class DuckyDemo:
                 "127.0.0.1",
                 993,
                 465,
-                "max.mustermann@mpseinternational.com",
+                "max.mustermann@nimbus.de",
                 "123")
         mail_profile = importlib.resources.path(
                 "demos.uhh_ducky_mitm.resources.mail", "mpse_profile.zip")
@@ -89,7 +89,11 @@ class DuckyDemo:
         self.admin_client.send_command(
                 admin_app.NativeappCommands.SET_REDIRECT,
                 admin_app.create_host_payload(
-                    True, "elite-projekt.de", f"{ip}"))
+                    True, "mail.nimbus.de", "127.0.0.1"))
+        self.admin_client.send_command(
+                admin_app.NativeappCommands.SET_REDIRECT,
+                admin_app.create_host_payload(
+                    True, "nimbus.de", f"{ip}"))
 
     def start(self):
         if self.running:
@@ -124,7 +128,7 @@ class DuckyDemo:
         self.admin_client.send_command(
                 admin_app.NativeappCommands.SET_REDIRECT,
                 admin_app.create_host_payload(
-                    False, "elite-projekt.de"))
+                    False, "nimbus.de"))
         if self.usb_monitor:
             self.usb_monitor.stop()
         logging.info("Stop done")

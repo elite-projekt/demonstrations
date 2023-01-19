@@ -18,30 +18,33 @@ services:
     network_mode: host
     volumes:
       - /etc/hosts:/etc/hosts
+
   mail:
-    image: mailserver/docker-mailserver:10.5.0
-    hostname: mail
-    domainname: domain.com
+    image: docker.io/mailserver/docker-mailserver:latest
     container_name: uhh_ducky_mitm_mailserver
+    # If the FQDN for your mail-server is only two labels (eg: example.com),
+    # you can assign this entirely to `hostname` and remove `domainname`.
+    hostname: mail
+    domainname: nimbus.de
+    env_file: mailserver.env
+    extra_hosts:
+      - "nimbus.de:127.0.0.1"
+      - "mail.nimbus.de:127.0.0.1"
+    # More information about the mail-server ports:
+    # https://docker-mailserver.github.io/docker-mailserver/edge/config/security/understanding-the-ports/
+    # To avoid conflicts with yaml base-60 float, DO NOT remove the quotation marks.
     ports:
-      - "25:25"
-      - "143:143"
-      - "465:465"
-      - "587:587"
-      - "993:993"
+      - "25:25"    # SMTP  (explicit TLS => STARTTLS)
+      - "465:465"  # ESMTP (implicit TLS)
+      - "993:993"  # IMAP4 (implicit TLS)
     volumes:
-      - ./mailserver/config/ssl:/tmp/ssl:ro
-      # we want to comment this out. otherwise the mail storage is persistent and not "fresh" after restaring the demo
-      #- maildata:/var/mail
-      #- mailstate:/var/mail-state
-      #- maillogs:/var/log/mail
-      - ./mailserver/config/:/tmp/docker-mailserver/
-    env_file:
-      - ./mailserver/mailserver.env
-    cap_add:
-      - NET_ADMIN
-      - SYS_PTRACE
+      # - ./docker-data/dms/mail-data/:/var/mail/
+      # - ./docker-data/dms/mail-state/:/var/mail-state/
+      # - ./docker-data/dms/mail-logs/:/var/log/mail/
+      - ./docker-data/dms/config/:/tmp/docker-mailserver/
+      - /etc/localtime:/etc/localtime:ro
+      - ./docker-data/dms/custom-certs/:/tmp/dms/custom-certs/:ro
     environment:
       - SSL_TYPE=manual
-      - SSL_CERT_PATH=/tmp/ssl/mail.domain.com.crt
-      - SSL_KEY_PATH=/tmp/ssl/mail.domain.com.key
+      - SSL_CERT_PATH=/tmp/dms/custom-certs/mail.nimbus.de.crt
+      - SSL_KEY_PATH=/tmp/dms/custom-certs/mail.nimbus.de.key
