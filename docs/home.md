@@ -25,9 +25,12 @@ The sidebar has an overview of the wiki entries. For a good starting point read 
 ### Projekt ELITE
 
 - Active development:
-  - Ugurcan Albayrak (h_da)
+  - Patrick Renkel (h_da)
   - Kevin Köster (UHH)
   - Mohamed Budagow (FOKUS)
+
+- Inactive develpment:
+  - Ugurcan Albayrak (h_da)
 
 ### MPSE Course "Experience Cyber Security"
 
