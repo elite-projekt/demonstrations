@@ -53,7 +53,7 @@ class KillDemo:
                 "127.0.0.1",
                 993,
                 465,
-                "max.mustermann@mpseinternational.com",
+                "max.mustermann@nimbus.de",
                 "123")
         mail_profile = importlib.resources.path(
                 "demos.uhh_usb_kill.resources.mail", "mpse_profile.zip")
@@ -76,6 +76,10 @@ class KillDemo:
 
         self.admin_client.send_command(
                 admin_app.NativeappCommands.DISABLE_USB, b"1")
+        self.admin_client.send_command(
+                admin_app.NativeappCommands.SET_REDIRECT,
+                admin_app.create_host_payload(
+                    True, "mail.nimbus.de", "127.0.0.1"))
 
         while not self.email_client.wait_for_smtp_server(20):
             pass
