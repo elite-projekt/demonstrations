@@ -1,12 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1", charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="style.css">
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="images/favicon.ico" rel="icon"/>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <!-- Style -->
+    <link rel="stylesheet" href="css/style.css">
+    <title>MITM Demo</title>
 </head>
 <body>
-
-<h2>Nimbus GmbH Login</h2>
 
 <script>
 
@@ -17,8 +23,8 @@ function stop_demo () {
 }
 
 let end_button = `
-<button type="button" onclick="stop_demo()" style="width: 20%;">
-  <span class="align-middle start-button-text">Demo stoppen</span>
+<button type="button" onclick="stop_demo()" style="width: 20%;" class="btn">
+  <span class="align-middle btn btn-block btn-primary mt-3">Demo stoppen</span>
 </button>
 `
 
@@ -65,10 +71,10 @@ Wenn Sie auf die Adressleiste schauen, sehen Sie, dass es sich um die korrekte U
 Um dies anzuzeigen, können Sie auf das Schloss neben der Adressleiste klicken und sich dann den Verbindungsstatus anzeigen lassen. Hier auf das Zertifikatssymbol (neben dem "X") klicken.
 
  <br>
-<img src="about_connection_secure.png" alt="Secure connection">
- <img src="open_cert.png" alt="Secure connection">
+<img src="images/about_connection_secure.png" alt="Secure connection">
+ <img src="images/open_cert.png" alt="Secure connection">
  <br>
- <img src="cert.png" alt="Secure connection">
+ <img src="images/cert.png" alt="Secure connection">
  <br>
 
 Dieses Zertifikat ist offensichtlich kein legitimes und mit diesem sind wir in der Lage allen verschlüsselten Datenverkehr zu lesen und zu manipulieren.
@@ -83,7 +89,7 @@ Wenn Sie in diesem Fenster nach unten Scrollen sehen Sie, dass wir die Proxyeins
 Löschen Sie den Proxy, indem Sie den Schalter von "Ein" auf "Aus" stellen.
 <br>
 
-<img src="proxy_settings.png" alt="Windows proxy settings">
+<img src="images/proxy_settings.png" alt="Windows proxy settings">
  <br>
 Dann die "STRG" und "Shift"-Taste gedrückt halten und dann "R" drücken. Hiermit wird der Browser gezwungen neue Daten vom Serveranzufordern und es wird keine lokal gespeicherte Version genutzt.
 
@@ -99,30 +105,77 @@ Dann die "STRG" und "Shift"-Taste gedrückt halten und dann "R" drücken. Hiermi
 	return false;
 }
 
-
-
 </script>
 
-<form action="#" onsubmit="return submit_form(this);">
 
-  <div class="container">
-    <label for="uname"><b>Username</b></label>
-    <input type="text" autocomplete="off" placeholder="Enter Username" name="uname" required>
+<nav class="navbar navbar-dark" style="background-color: #6c63ff;">
+  <img src="images/Nimbus Logo.svg" height="80" class="logo" alt="">
+</nav>
 
-    <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="psw" required>
 
-    <button type="submit">Login</button>
-    <label>
-      <input type="checkbox" checked="checked" name="remember"> Remember me
-    </label>
-  </div>
+	<div class="preload">
+		<img src="images/noun-eye-opened.png"/>
+		<img src="images/noun-eye-closed.png"/>
+	</div>
+		<div class="content">
+		<div class="container">
+			<div class="row">
+			<div class="col-md-6">
+				<img src="images/undraw_remotely_2j6y.svg" alt="Image"
+				class="img-fluid">
+			</div>
+			<div class="col-md-6 contents">
+				<div class="row justify-content-center">
+				<div class="col-md-8">
+					<div class="mb-4">
+					<h4>Anmeldung<br>Nimbus Account-Services</h3>
+					<p class="mb-4 small">Bitte melden Sie sich mit Ihren Zugangsdaten für Nimbus Account-Services an</p>
+					</div>
+					<form autocomplete="off" action="#" onsubmit="return submit_form(this)">
 
-  <div class="container" style="background-color:#f1f1f1">
-    <button type="button" class="cancelbtn">Cancel</button>
-    <span class="psw">Forgot <a href="#">password?</a></span>
-  </div>
-</form>
+					<div class="form-group first" id="name_field">
+						<label for="name">Benutzername</label>
+						<input type="text" class="form-control" id="name" name="uname">
+
+					</div>
+					<div class="form-group" id="password_field">
+
+						<label for="password">Passwort</label>
+						<div class="input-group">
+						<input type="password" class="form-control" id="password" name="psw">
+						<i toggle="#password" class="icon-eye toggle-passwort input-group-addon" data-toggle="tooltip"
+							data-placement="right" title="Klicken Sie auf das Auge, um das Passwort anzuzeigen."
+							id="pw-eye"></i>
+						</div>
+
+					</div>
+					<div role="alert" aria-live="assertive" aria-atomic="true" class="toast {{classes}} dont-display mt-3"
+						data-autohide="false" id=toast>
+						<div class="toast-header">
+						<strong class="mr-auto">Nimbus</strong>
+						<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						</div>
+						<div class="toast-body">
+						Der Benutzername oder das Passwort ist nicht korrekt. Bitte versuchen Sie es erneut.
+						</div>
+					</div>
+					<input type="submit" value="Anmelden" class="btn btn-block btn-primary mt-3">
+          </form>
+				</div>
+				</div>
+
+			</div>
+
+			</div>
+		</div>
+	</div>
+
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/main.js"></script>
+
+
 
 <!-- <div id="overlay" onclick="off()"> -->
 <div id="overlay">

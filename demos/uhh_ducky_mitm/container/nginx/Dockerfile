@@ -5,7 +5,7 @@ from alpine:latest
 RUN apk update --no-cache && apk upgrade --no-cache && apk add --no-cache nginx gettext
 
 COPY nginx.conf.tmpl /etc/nginx/nginx.conf.tmpl
-COPY html/* /var/lib/nginx/html/
+COPY html /var/lib/nginx/html
 COPY a.py /var/lib/nginx/html/a.py
 
 COPY nimbus.pem /etc/nginx/nimbus.pem

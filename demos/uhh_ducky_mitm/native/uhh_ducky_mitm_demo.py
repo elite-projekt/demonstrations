@@ -104,6 +104,7 @@ class DuckyDemo:
         self.running = True
         self.email_program.copy_profile()
         self.browser_program.copy_profile()
+        self.browser_program.set_default()
         self.usb_monitor = usb_monitor.USBMonitor(on_connect=self.get_script)
 
         while not self.email_client.wait_for_smtp_server(20):
