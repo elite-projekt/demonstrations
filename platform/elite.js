@@ -230,6 +230,7 @@ class DemoCard {
 		this.add_start_button_listener();
 
 		stop_button.addEventListener('click', e => {
+			this.set_demo_state("unknown", "waiting", common_translations["start_waiting"], "");
 			const xhr_req = new XMLHttpRequest();
 			xhr_req.open('GET', `http://127.0.0.1:5000/orchestration/stop/demo/${this.name}`);
       xhr_req.send();
@@ -239,6 +240,7 @@ class DemoCard {
 	add_start_button_listener() {
 		const start_button = this.card.querySelector('.start-demo-button');
 		start_button.onclick = e => {
+			this.set_demo_state("unknown", "waiting", common_translations["start_waiting"], "");
 			const xhr = new XMLHttpRequest();
 			xhr.open('POST', `http://127.0.0.1:5000/orchestration/start/demo/${this.name}`);
       xhr.setRequestHeader("Content-Type", "application/json");
@@ -298,7 +300,7 @@ class DemoCard {
 
 		const start_button = this.card.querySelector('.start-demo-button');
 		const button_text = start_button.querySelector('.start-button-text');
-		const possible_classes = ['button-starting', 'button-ready', 'button-running', 'button-offline', 'button-stopping', 'button-error'];
+		const possible_classes = ['button-waiting', 'button-starting', 'button-ready', 'button-running', 'button-offline', 'button-stopping', 'button-error'];
 
 		let i = 0;
 		for (i in possible_classes) {
@@ -313,10 +315,9 @@ class DemoCard {
 
 
 		// Change start button in these states
-		if (state === 'starting' || state === 'ready' || state === 'running' || state === 'stopping') {
+		if (state === 'waiting' || state === 'starting' || state === 'ready' || state === 'running' || state === 'stopping') {
 			this.card.classList.add('large-card');
 			this.card.parentNode.classList.add('hide-small');
-			this.card.scrollIntoView();
 			this.set_guide(this.guide);
 			const button_image = start_button.querySelector('.start-button-icon');
 			button_text.innerText = translation;
@@ -341,7 +342,6 @@ class DemoCard {
 			this.card.classList.remove('large-card');
 			if (this.card.parentNode.querySelector('.large-card') === null) {
 				this.card.parentNode.classList.remove('hide-small');
-				this.card.scrollIntoView();
 			}
 
 			this.add_start_button_listener();

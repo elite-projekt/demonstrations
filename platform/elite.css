@@ -2,6 +2,7 @@
 	--main-color: #7367f0;
 	--stop-color: #F07676;
 	--error-color: #F07676;
+	--waiting-color: #666666;
 	--starting-color: #666666;
 	--ready-color: #41F89C;
 	--running-color: #00CC99;
@@ -251,6 +252,10 @@
 	background-color: var(--ready-color) !important;
 }
 
+.button-waiting {
+	background-color: var(--waiting-color) !important;
+}
+
 
 .start-button-loading {
 	display: none;
@@ -270,6 +275,14 @@
 
 .button-stopping > .start-button-loading {
 	display: inline;
+}
+
+.button-waiting > .start-button-loading {
+	display: inline;
+}
+
+.button-waiting > .start-button-icon {
+	display: none;
 }
 
 

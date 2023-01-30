@@ -244,6 +244,7 @@ class DemoManager():
         local_locale.update_locale(lang)
         common_translation_ids = [
                 "start_button",
+                "start_waiting",
                 "stop_button",
                 "learn_button",
                 "usb-stick",
