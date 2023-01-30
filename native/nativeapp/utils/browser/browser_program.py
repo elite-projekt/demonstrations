@@ -29,6 +29,12 @@ class BrowserProgram(ABC):
         Copy the profile to the corresponsing dir
         """
 
+    @abstractmethod
+    def set_default(self):
+        """
+        Sets this browser as the default browser for urls
+        """
+
 
 class BrowserProgramEdge(BrowserProgram):
     def __init__(self, name, profile_zip_path):
@@ -119,6 +125,16 @@ class BrowserProgramEdge(BrowserProgram):
             logging.info("Success")
         except Exception as e:
             logging.error(e)
+
+    def set_default(self):
+        cmd = ["powershell",
+               r"Set-ItemProperty -Path 'HKCU:\SOFTWARE\Microsoft\Windows\Shell\Associations\UrlAssociations\https\UserChoice' -Name ProgId -Value 'MSEdgeHTM'"]  # noqa: E501
+        with subprocess.Popen(cmd) as p:
+            p.communicate()
+        cmd = ["powershell",
+               r"Set-ItemProperty -Path 'HKCU:\SOFTWARE\Microsoft\Windows\Shell\Associations\UrlAssociations\http\UserChoice' -Name ProgId -Value 'MSEdgeHTM'"]  # noqa: E501
+        with subprocess.Popen(cmd) as p:
+            p.communicate()
 
 
 if __name__ == "__main__":
