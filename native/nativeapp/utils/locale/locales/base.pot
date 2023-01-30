@@ -60,6 +60,9 @@ msgstr ""
 msgid "start_button"
 msgstr "Start Demo"
 
+msgid "start_waiting"
+msgstr "Waiting for data"
+
 msgid "stop_button"
 msgstr "Stop Demo"
 
