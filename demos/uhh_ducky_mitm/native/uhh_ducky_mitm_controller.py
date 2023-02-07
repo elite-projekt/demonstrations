@@ -80,7 +80,7 @@ class DuckyController(DemoController):
             except Exception as e:
                 logging.error(traceback.format_exc())
                 logging.error(e)
-                self.set_state(DemoStates.ERROR)
+                self.set_state(DemoStates.ERROR, str(e))
                 return ErrorCodes.no_docker_error
             return ErrorCodes.start_success
 

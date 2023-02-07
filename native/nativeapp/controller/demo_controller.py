@@ -326,15 +326,24 @@ class DemoManager():
             # No web view client -> skip enter phase
             skip_enter = True
         if demo_name in DemoManager.demos:
-            params = flask.request.get_json(silent=True)
-            if params is None:
-                params = []
-            ret_val = DemoManager.demos[demo_name].\
-                start(subpath=subpath, params=params)
-            if skip_enter:
-                ret_val = DemoManager.demos[demo_name].\
-                          enter(subpath=subpath)
-            return DemoManager.get_flask_response(ret_val)
+            demo = DemoManager.demos[demo_name]
+            try:
+                params = flask.request.get_json(silent=True)
+                if params is None:
+                    params = []
+                ret_val = demo.\
+                    start(subpath=subpath, params=params)
+                if skip_enter:
+                    DemoManager.demo_enter(demo_name, subpath)
+                return DemoManager.get_flask_response(ret_val)
+            except Exception as e:
+                # Try to stop the demo and ignore any errors
+                try:
+                    demo.stop()
+                except Exception:
+                    pass
+                demo.set_state(DemoStates.ERROR, str(e))
+
         return DemoManager.get_flask_response(ErrorCodes.generic_error)
 
     @staticmethod
@@ -353,8 +362,18 @@ class DemoManager():
         demo_name = escape(demo_name)
         subpath = escape(subpath)
         if demo_name in DemoManager.demos:
-            ret_val = DemoManager.demos[demo_name].enter(subpath=subpath)
-            return DemoManager.get_flask_response(ret_val)
+            demo = DemoManager.demos[demo_name]
+            # FIXME: remove duplicate code
+            try:
+                ret_val = demo.enter(subpath=subpath)
+                return DemoManager.get_flask_response(ret_val)
+            except Exception as e:
+                # Try to stop the demo and ignore any errors
+                try:
+                    demo.stop()
+                except Exception:
+                    pass
+                demo.set_state(DemoStates.ERROR, str(e))
         return DemoManager.get_flask_response(ErrorCodes.generic_error)
 
     @staticmethod
@@ -372,6 +391,15 @@ class DemoManager():
         except Exception:
             print("Unable to connect to client in stop")
         if demo_name in DemoManager.demos:
-            ret_val = DemoManager.demos[demo_name].stop(subpath)
-            return DemoManager.get_flask_response(ret_val)
+            demo = DemoManager.demos[demo_name]
+            try:
+                ret_val = demo.stop(subpath)
+                return DemoManager.get_flask_response(ret_val)
+            except Exception as e:
+                # Try to stop the demo and ignore any errors
+                try:
+                    demo.stop()
+                except Exception:
+                    pass
+                demo.set_state(DemoStates.ERROR, str(e))
         return DemoManager.get_flask_response(ErrorCodes.generic_error)
