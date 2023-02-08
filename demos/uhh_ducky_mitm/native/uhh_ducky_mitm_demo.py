@@ -64,10 +64,14 @@ class DuckyDemo:
                 465,
                 "max.mustermann@nimbus.de",
                 "123")
-        mail_profile = importlib.resources.path(
-                "demos.uhh_ducky_mitm.resources.mail", "mpse_profile.zip")
-        browser_profile = importlib.resources.path(
-                "demos.uhh_ducky_mitm.resources.edge", "profile_uhh.zip")
+        with importlib.resources.path(
+                "demos.uhh_ducky_mitm.resources.mail",
+                "mpse_profile.zip") as p:
+            mail_profile = p
+        with importlib.resources.path(
+                "demos.uhh_ducky_mitm.resources.edge",
+                "profile_uhh.zip") as p:
+            browser_profile = p
         self.email_program = mail_program.MailProgramThunderbird(
                 "MPSE", mail_profile)
         self.browser_program = browser_program.BrowserProgramEdge(
@@ -137,11 +141,12 @@ class DuckyDemo:
     def _send_mail(self, mail_files: List[str]) -> None:
         print(config.EnvironmentConfig.LANGUAGE)
         for mail_file in mail_files:
-            mail_path = (importlib.resources.path(
-                "demos.uhh_ducky_mitm.resources.mail", mail_file))
-            logging.info(f"Getting path for file {mail_file}: {mail_path}")
-            self.email_client.send_mail_from_file(mail_path, (0, 0),
-                                                  self.locale.translate)
+            with importlib.resources.path(
+                    "demos.uhh_ducky_mitm.resources.mail",
+                    mail_file) as mail_path:
+                logging.info(f"Getting path for file {mail_file}: {mail_path}")
+                self.email_client.send_mail_from_file(mail_path, (0, 0),
+                                                      self.locale.translate)
 
     def send_mails(self) -> None:
         self._send_mail(["pictures.yml"])
