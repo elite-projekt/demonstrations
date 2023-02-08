@@ -233,6 +233,38 @@
 	display: flex;
 }
 
+.card-error .error-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-error > .card-body svg {
+	height: 0%;
+	width: 50%;
+	margin-bottom: 1em;
+}
+
+.card-error .error-details {
+	height: 30px;
+  overflow-y: scroll;
+}
+
+.card-error .error-code {
+	font-weight: bold;
+}
+
+
+.card-error {
+    background-color: white;
+    opacity: 1;
+    z-index: 20;
+    height: 100%;
+    width: 100%;
+    background-repeat:no-repeat;
+    background-position:center;
+}
+
 .button-starting {
 	background-color: var(--starting-color) !important;
 }
@@ -243,6 +275,10 @@
 
 .button-error {
 	background-color: var(--error-color) !important;
+}
+
+.button-error > .start-button-icon {
+  display: none;
 }
 
 .button-running {

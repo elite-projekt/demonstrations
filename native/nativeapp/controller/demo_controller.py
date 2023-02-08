@@ -256,7 +256,9 @@ class DemoManager():
                 "guide_intro",
                 "guide_task",
                 "guide_goal",
-                "guide_req"
+                "guide_req",
+                "demo_error",
+                "error_code"
                 ]
         common_translations = {}
         for x in common_translation_ids:
