@@ -55,10 +55,11 @@ class KillDemo:
                 465,
                 "max.mustermann@nimbus.de",
                 "123")
-        mail_profile = importlib.resources.path(
-                "demos.uhh_usb_kill.resources.mail", "mpse_profile.zip")
-        self.email_program = mail_program.MailProgramThunderbird(
-                "MPSE", mail_profile)
+        with importlib.resources.path(
+                "demos.uhh_usb_kill.resources.mail",
+                "mpse_profile.zip") as mail_profile:
+            self.email_program = mail_program.MailProgramThunderbird(
+                    "MPSE", str(mail_profile))
 
         self.running = False
         self.admin_client = admin_app.NativeappAdminClient()
