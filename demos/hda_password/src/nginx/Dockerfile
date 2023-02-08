@@ -2,7 +2,7 @@
 FROM alpine:latest
 
 # hadolint ignore=DL3018
-RUN apk update --no-cache && apk add --no-cache nginx
+RUN apk update --no-cache && apk upgrade --no-cache && apk add --no-cache nginx
 
 COPY nginx.conf /etc/nginx/http.d/nginx.conf
 
