@@ -101,3 +101,9 @@ msgstr ""
 
 msgid "guide_req"
 msgstr ""
+
+msgid "demo_error"
+msgstr ""
+
+msgid "error_code"
+msgstr ""
