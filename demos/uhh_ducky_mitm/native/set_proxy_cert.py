@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+
 from subprocess import Popen  # nosec
 from pynput.keyboard import Listener as Listener_kb
 from pynput.keyboard import Controller as Controller_kb

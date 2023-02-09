@@ -1,5 +1,7 @@
 #!/usr/bin/python
 
+# SPDX-License-Identifier: AGPL-3.0-only
+
 import struct
 
 from nativeapp.utils.net import network_control_protocol
