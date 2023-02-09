@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-only
+
 const demo_dict = {};
 var common_translations = {};
 

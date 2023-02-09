@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+
 from nativeapp.service import orchestration_service
 
 orchestration_service = orchestration_service.OrchestrationService()

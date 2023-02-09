@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+
 import argparse
 import importlib
 import logging
@@ -45,12 +47,15 @@ def main():
     logging_path = pathlib.Path(config.EnvironmentConfig.WORKINGDIR) / \
         "nativeapp.log"
     # initiate logging
+    loglevel = logging.INFO
+    if args.dev:
+        loglevel = logging.DEBUG
     logging.basicConfig(
         filename=logging_path,
         datefmt="%y-%m-%d %H:%M:%S",
         format="%(asctime)s %(levelname)-8s - [%(module)s:%(funcName)s] : "
                "%(message)s",
-        level=logging.DEBUG,
+        level=loglevel,
     )
     logging.info("Starting service: native app")
 
