@@ -40,8 +40,11 @@ class PasswordController(demo_controller.DemoController):
                 admin_app.create_host_payload(
                     True, "nimbus.de", f"{ip}"))
 
-        browser_profile = importlib.resources.path(
-                "demos.hda_password.resources.edge", "profile_uhh.zip")
+        with importlib.resources.path(
+                "demos.hda_password.resources.edge",
+                "profile_uhh.zip") as p:
+            browser_profile = p
+
         self.browser_program = browser_program.BrowserProgramEdge(
                 "elite.uhh_mitm", browser_profile)
 
