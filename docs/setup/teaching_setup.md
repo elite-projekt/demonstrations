@@ -19,4 +19,22 @@ ansible-playbook h_da.yml -i inventory.cfg
 
 Afterwards head to `https://<your url>/wp-admin` and login. Head to `Tools -> Better Search Replace`, search for `dev.elite.fbi.h-da.de`, and replace it with your url.
 
+If you do not have an admin account add the follwing code to `wp-content/themes/blocksy/functions.php`, adjust the values and restart the platform.
+
+```php
+add_action('init', 'add_custom_admin');
+unction add_custom_admin() {
+  $username = 'elite';
+  $password = 'olLPkYdnutvuIuyYFsbqfVEwlHY5ycZNbOBFRxrOExzj7WaIM51HX98bmDgAKKdFTa5lKMTDmM5loBdkN0MYlkT4U4GI4aMprHP9m4t7lm80IZlGjWhjNbyEJeggAoUx';
+  $email = 'mail@example.com';
+
+  if (username_exists($username) == null && email_exists($email) == false) {
+    $user_id = wp_create_user($username, $password, $email);
+    $user = get_user_by('id', $user_id);
+    $user->remove_role('subscriber');
+    $user->add_role('administrator');
+  }
+}
+```
+
 Now the platform should be running.
