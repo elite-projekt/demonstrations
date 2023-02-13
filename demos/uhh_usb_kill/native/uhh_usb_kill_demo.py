@@ -125,10 +125,11 @@ class KillDemo:
     def _send_mail(self, mail_files: List[str]) -> None:
         print(config.EnvironmentConfig.LANGUAGE)
         for mail_file in mail_files:
-            mail_path = (importlib.resources.path(
-                "demos.uhh_usb_kill.resources.mail", mail_file))
-            logging.info(f"Getting path for file {mail_file}: {mail_path}")
-            self.email_client.send_mail_from_file(mail_path, (0, 0), _)
+            with importlib.resources.path(
+                    "demos.uhh_usb_kill.resources.mail",
+                    mail_file) as mail_path:
+                logging.info(f"Getting path for file {mail_file}: {mail_path}")
+                self.email_client.send_mail_from_file(mail_path, (0, 0), _)
 
     def send_mails(self) -> None:
         self._send_mail(["pictures.yml"])
