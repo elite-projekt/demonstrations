@@ -11,10 +11,18 @@
                 <p class="card-text">Wir wünschen Ihnen viel Spaß bei uns!</p>
                 <br><br>
                 <p class="card-text">Weitere Informationen und andere Demos finden Sie auf der ELITE-Lernplattform.</p>
+                <button onclick="stop_demo()" class="btn btn-primary btn-block">Demo stoppen</button>
             </div>
         </div>
         </p>
         <br>
     </div>
 </div>
+<script>
+    function stop_demo () {
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', `http://127.0.0.1:5000/orchestration/stop/demo/hda_password`);
+        xhr.send();
+    }
+</script>
 {% endblock %}
