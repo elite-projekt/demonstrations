@@ -6,6 +6,7 @@ import logging
 import queue
 import json
 import pathlib
+import threading
 from typing import Dict
 
 from nativeapp.service import orchestration_service
@@ -213,6 +214,9 @@ class DemoManager():
             "DemoManager", __name__, url_prefix="/orchestration/")
     demos = {}
     status_event_queues = []
+    demo_lock_start = threading.Lock()
+    demo_lock_stop = threading.Lock()
+    demo_lock_enter = threading.Lock()
 
     @staticmethod
     def on_state_changed(name,
@@ -326,33 +330,34 @@ class DemoManager():
     @orchestration.route("/start/demo/<demo_name>/<path:subpath>",
                          methods=["GET", "POST"])
     def demo_start(demo_name, subpath=""):
-        demo_name = escape(demo_name)
-        subpath = escape(subpath)
-        skip_enter = False
-        try:
-            web_view.RemoteControlClient().set_on_top(True)
-        except Exception:
-            print("Unable to connect to client in start. Skipping enter phase")
-            # No web view client -> skip enter phase
-            skip_enter = True
-        if demo_name in DemoManager.demos:
-            demo = DemoManager.demos[demo_name]
+        with DemoManager.demo_lock_start:
+            demo_name = escape(demo_name)
+            subpath = escape(subpath)
+            skip_enter = False
             try:
-                params = flask.request.get_json(silent=True)
-                if params is None:
-                    params = []
-                ret_val = demo.\
-                    start(subpath=subpath, params=params)
-                if skip_enter:
-                    DemoManager.demo_enter(demo_name, subpath)
-                return DemoManager.get_flask_response(ret_val)
-            except Exception as e:
-                # Try to stop the demo and ignore any errors
+                web_view.RemoteControlClient().set_on_top(True)
+            except Exception:
+                print("Unable to connect to client in start. Skipping enter phase") # noqa: 501
+                # No web view client -> skip enter phase
+                skip_enter = True
+            if demo_name in DemoManager.demos:
+                demo = DemoManager.demos[demo_name]
                 try:
-                    demo.stop()
-                except Exception:
-                    pass
-                demo.set_state(DemoStates.ERROR, str(e))
+                    params = flask.request.get_json(silent=True)
+                    if params is None:
+                        params = []
+                    ret_val = demo.\
+                        start(subpath=subpath, params=params)
+                    if skip_enter:
+                        DemoManager.demo_enter(demo_name, subpath)
+                    return DemoManager.get_flask_response(ret_val)
+                except Exception as e:
+                    # Try to stop the demo and ignore any errors
+                    try:
+                        demo.stop()
+                    except Exception:
+                        pass
+                    demo.set_state(DemoStates.ERROR, str(e))
 
         return DemoManager.get_flask_response(ErrorCodes.generic_error)
 
@@ -361,29 +366,30 @@ class DemoManager():
     @orchestration.route("/enter/demo/<demo_name>/<path:subpath>",
                          methods=["GET", "POST"])
     def demo_enter(demo_name, subpath=""):
-        try:
-            client = web_view.RemoteControlClient()
-            client.set_on_top(False)
-            client.set_fullscreen(False)
-            client.set_minimize(True)
-        except Exception:
-            print("Unable to connect to client in enter")
-
-        demo_name = escape(demo_name)
-        subpath = escape(subpath)
-        if demo_name in DemoManager.demos:
-            demo = DemoManager.demos[demo_name]
-            # FIXME: remove duplicate code
+        with DemoManager.demo_lock_enter:
             try:
-                ret_val = demo.enter(subpath=subpath)
-                return DemoManager.get_flask_response(ret_val)
-            except Exception as e:
-                # Try to stop the demo and ignore any errors
+                client = web_view.RemoteControlClient()
+                client.set_on_top(False)
+                client.set_fullscreen(False)
+                client.set_minimize(True)
+            except Exception:
+                print("Unable to connect to client in enter")
+
+            demo_name = escape(demo_name)
+            subpath = escape(subpath)
+            if demo_name in DemoManager.demos:
+                demo = DemoManager.demos[demo_name]
+                # FIXME: remove duplicate code
                 try:
-                    demo.stop()
-                except Exception:
-                    pass
-                demo.set_state(DemoStates.ERROR, str(e))
+                    ret_val = demo.enter(subpath=subpath)
+                    return DemoManager.get_flask_response(ret_val)
+                except Exception as e:
+                    # Try to stop the demo and ignore any errors
+                    try:
+                        demo.stop()
+                    except Exception:
+                        pass
+                    demo.set_state(DemoStates.ERROR, str(e))
         return DemoManager.get_flask_response(ErrorCodes.generic_error)
 
     @staticmethod
@@ -391,25 +397,26 @@ class DemoManager():
     @orchestration.route("/stop/demo/<demo_name>/<path:subpath>",
                          methods=["GET", "POST"])
     def demo_stop(demo_name, subpath=""):
-        demo_name = escape(demo_name)
-        subpath = escape(subpath)
-        try:
-            client = web_view.RemoteControlClient()
-            client.set_minimize(False)
-            client.set_fullscreen(True)
-            client.set_on_top(True)
-        except Exception:
-            print("Unable to connect to client in stop")
-        if demo_name in DemoManager.demos:
-            demo = DemoManager.demos[demo_name]
+        with DemoManager.demo_lock_stop:
+            demo_name = escape(demo_name)
+            subpath = escape(subpath)
             try:
-                ret_val = demo.stop(subpath)
-                return DemoManager.get_flask_response(ret_val)
-            except Exception as e:
-                # Try to stop the demo and ignore any errors
+                client = web_view.RemoteControlClient()
+                client.set_minimize(False)
+                client.set_fullscreen(True)
+                client.set_on_top(True)
+            except Exception:
+                print("Unable to connect to client in stop")
+            if demo_name in DemoManager.demos:
+                demo = DemoManager.demos[demo_name]
                 try:
-                    demo.stop()
-                except Exception:
-                    pass
-                demo.set_state(DemoStates.ERROR, str(e))
+                    ret_val = demo.stop(subpath)
+                    return DemoManager.get_flask_response(ret_val)
+                except Exception as e:
+                    # Try to stop the demo and ignore any errors
+                    try:
+                        demo.stop()
+                    except Exception:
+                        pass
+                    demo.set_state(DemoStates.ERROR, str(e))
         return DemoManager.get_flask_response(ErrorCodes.generic_error)
