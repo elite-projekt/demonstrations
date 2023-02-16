@@ -72,7 +72,6 @@ class KillSimulation():
                     self.glitch.show()
                     self.crash.hide()
                 elif next_state == KillState.CRASH:
-                    self.glitch.hide()
                     self.crash.show()
                     # Block specific keys (f.e. alt-tabbing)
                     for key in KEYS_TO_BLOCK:

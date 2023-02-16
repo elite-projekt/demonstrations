@@ -28,7 +28,7 @@ msgstr ""
 "Dieser Stick entlädt kontinuierlich -220V auf die Datenleitungen und "
 "zerstört so den PC.\n"
 "\n"
-"Da es sich nur um eine Simulation handelt, ist der PC natürlich nicht defekt "
+"Da es sich nur um eine Simulation handelt, ist der PC selbstverständlich nicht defekt "
 "und Sie können die Demo beenden."
 
 msgid "uhh_picture_mail_subject"
