@@ -25,6 +25,7 @@ from nativeapp.controller.demo_controller import (
     ErrorCodes)
 
 from demos.uhh_usb_kill.native import uhh_usb_kill_demo
+from nativeapp.utils.thread_helper import lock_function
 
 
 class KillController(DemoController):
@@ -33,42 +34,50 @@ class KillController(DemoController):
                          "uhh_usb_kill/native/stacks/docker-compose.yml")
         self.kill_service = uhh_usb_kill_demo.KillDemo()
 
+    @lock_function
     def stop(self, subpath) -> int:
         """
         Stops the demo
         """
-        self.set_state(DemoStates.STOPPING)
-        self.stop_container()
-        self.kill_service.stop()
-        self.set_state(DemoStates.OFFLINE)
+        if (self.get_state() != DemoStates.STOPPING and
+           self.get_state() != DemoStates.OFFLINE):
+            self.set_state(DemoStates.STOPPING)
+            self.stop_container()
+            self.kill_service.stop()
+            self.set_state(DemoStates.OFFLINE)
         return ErrorCodes.stop_success
 
+    @lock_function
     def start(self, subpath, params):
         """
         Start the demo
         """
-        try:
-            if "language" in params:
-                config.EnvironmentConfig.LANGUAGE = params["language"]
+        if self.get_state() == DemoStates.OFFLINE:
+            try:
+                if "language" in params:
+                    config.EnvironmentConfig.LANGUAGE = params["language"]
 
-            logging.info("Starting uhh_usb_kill demo stack")
-            if self.get_state() != "offline":
-                return ErrorCodes.invalid_state
-            self.set_state(DemoStates.STARTING, DemoStates.STARTING_CONTAINER)
-            lang_env = {"ELITE_LANG": config.EnvironmentConfig.LANGUAGE}
-            self.start_container(lang_env)
-            self.set_state(DemoStates.STARTING,
-                           DemoStates.STARTING_APPLICATIONS)
-            self.kill_service.start()
-            self.set_state(DemoStates.READY)
-        except Exception as e:
-            logging.error(e)
-            return ErrorCodes.no_docker_error
+                logging.info("Starting uhh_usb_kill demo stack")
+                if self.get_state() != "offline":
+                    return ErrorCodes.invalid_state
+                self.set_state(DemoStates.STARTING,
+                               DemoStates.STARTING_CONTAINER)
+                lang_env = {"ELITE_LANG": config.EnvironmentConfig.LANGUAGE}
+                self.start_container(lang_env)
+                self.set_state(DemoStates.STARTING,
+                               DemoStates.STARTING_APPLICATIONS)
+                self.kill_service.start()
+                self.set_state(DemoStates.READY)
+            except Exception as e:
+                logging.error(e)
+                return ErrorCodes.no_docker_error
         return ErrorCodes.start_success
 
+    @lock_function
     def enter(self, subpath):
-        self.kill_service.send_mails()
-        self.set_state(DemoStates.RUNNING)
+        if self.get_state() == DemoStates.READY:
+            self.kill_service.send_mails()
+            self.set_state(DemoStates.RUNNING)
         return ErrorCodes.start_success
 
 
