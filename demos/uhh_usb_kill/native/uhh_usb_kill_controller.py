@@ -25,7 +25,6 @@ from nativeapp.controller.demo_controller import (
     ErrorCodes)
 
 from demos.uhh_usb_kill.native import uhh_usb_kill_demo
-from nativeapp.utils.thread_helper import lock_function
 
 
 class KillController(DemoController):
@@ -34,7 +33,6 @@ class KillController(DemoController):
                          "uhh_usb_kill/native/stacks/docker-compose.yml")
         self.kill_service = uhh_usb_kill_demo.KillDemo()
 
-    @lock_function
     def stop(self, subpath) -> int:
         """
         Stops the demo
@@ -47,7 +45,6 @@ class KillController(DemoController):
             self.set_state(DemoStates.OFFLINE)
         return ErrorCodes.stop_success
 
-    @lock_function
     def start(self, subpath, params):
         """
         Start the demo
@@ -73,7 +70,6 @@ class KillController(DemoController):
                 return ErrorCodes.no_docker_error
         return ErrorCodes.start_success
 
-    @lock_function
     def enter(self, subpath):
         if self.get_state() == DemoStates.READY:
             self.kill_service.send_mails()
