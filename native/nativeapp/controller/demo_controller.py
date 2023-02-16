@@ -192,10 +192,16 @@ class DemoController(ABC):
         data_dict["title"] = self.locale.translate(self.title)
         data_dict["time"] = self.time
         data_dict["level"] = self.locale.translate(self.level)
+
+        def translate_guide(tup):
+            translation = self.locale.translate(tup[1])
+            if tup[1] == translation:
+                # No translation -> Should not be displayed
+                translation = ""
+            return (tup[0], translation)
+
         data_dict["guide"] = dict(
-            map(lambda tup: (tup[0],
-                             self.locale.translate(tup[1])),
-                self.guide_dict.items()))
+            map(translate_guide, self.guide_dict.items()))
         data_dict["hardware"] = self.hardware
         data_dict["instructor_id"] = self.instructor_id
         data_dict["isAvailable"] = self.is_available
