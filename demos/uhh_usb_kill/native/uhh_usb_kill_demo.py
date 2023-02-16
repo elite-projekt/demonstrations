@@ -67,6 +67,7 @@ class KillDemo:
         self.running = False
         self.admin_client = admin_app.NativeappAdminClient()
         self.kill_thread = None
+        self.usb_monitor = None
 
     def start(self):
         if self.running:
@@ -100,7 +101,8 @@ class KillDemo:
         logging.info("reverting admin settings")
         self.admin_client.send_command(
                 admin_app.NativeappCommands.DISABLE_USB, b"0")
-        self.usb_monitor.stop()
+        if self.usb_monitor:
+            self.usb_monitor.stop()
         if self.kill_thread:
             self.kill_thread.join()
         logging.info("Stop done")
