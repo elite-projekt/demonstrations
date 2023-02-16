@@ -343,14 +343,15 @@ class DemoManager():
             if demo_name in DemoManager.demos:
                 demo = DemoManager.demos[demo_name]
                 try:
-                    params = flask.request.get_json(silent=True)
-                    if params is None:
-                        params = []
-                    ret_val = demo.\
-                        start(subpath=subpath, params=params)
-                    if skip_enter:
-                        DemoManager.demo_enter(demo_name, subpath)
-                    return DemoManager.get_flask_response(ret_val)
+                    if demo.get_state() == DemoStates.OFFLINE:
+                        params = flask.request.get_json(silent=True)
+                        if params is None:
+                            params = []
+                        ret_val = demo.\
+                            start(subpath=subpath, params=params)
+                        if skip_enter:
+                            DemoManager.demo_enter(demo_name, subpath)
+                        return DemoManager.get_flask_response(ret_val)
                 except Exception as e:
                     # Try to stop the demo and ignore any errors
                     try:
@@ -381,8 +382,9 @@ class DemoManager():
                 demo = DemoManager.demos[demo_name]
                 # FIXME: remove duplicate code
                 try:
-                    ret_val = demo.enter(subpath=subpath)
-                    return DemoManager.get_flask_response(ret_val)
+                    if demo.get_state() == DemoStates.READY:
+                        ret_val = demo.enter(subpath=subpath)
+                        return DemoManager.get_flask_response(ret_val)
                 except Exception as e:
                     # Try to stop the demo and ignore any errors
                     try:
@@ -410,13 +412,10 @@ class DemoManager():
             if demo_name in DemoManager.demos:
                 demo = DemoManager.demos[demo_name]
                 try:
-                    ret_val = demo.stop(subpath)
-                    return DemoManager.get_flask_response(ret_val)
+                    if (demo.get_state() != DemoStates.STOPPING and
+                       demo.get_state() != DemoStates.OFFLINE):
+                        ret_val = demo.stop(subpath)
+                        return DemoManager.get_flask_response(ret_val)
                 except Exception as e:
-                    # Try to stop the demo and ignore any errors
-                    try:
-                        demo.stop()
-                    except Exception:
-                        pass
                     demo.set_state(DemoStates.ERROR, str(e))
         return DemoManager.get_flask_response(ErrorCodes.generic_error)
