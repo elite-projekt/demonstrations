@@ -344,17 +344,16 @@ class DemoManager():
             if demo_name in DemoManager.demos:
                 demo = DemoManager.demos[demo_name]
                 try:
-                    if demo.get_state() == DemoStates.OFFLINE:
-                        params = flask.request.get_json(silent=True)
-                        if params is None:
-                            params = []
-                        if "language" in params:
-                            config.EnvironmentConfig.LANGUAGE = params["language"] # noqa: 501
-                        ret_val = demo.\
-                            start(subpath=subpath, params=params)
-                        if skip_enter:
-                            DemoManager.demo_enter(demo_name, subpath)
-                        return DemoManager.get_flask_response(ret_val)
+                    params = flask.request.get_json(silent=True)
+                    if params is None:
+                        params = []
+                    if "language" in params:
+                        config.EnvironmentConfig.LANGUAGE = params["language"] # noqa: 501
+                    ret_val = demo.\
+                        start(subpath=subpath, params=params)
+                    if skip_enter:
+                        DemoManager.demo_enter(demo_name, subpath)
+                    return DemoManager.get_flask_response(ret_val)
                 except Exception as e:
                     # Try to stop the demo and ignore any errors
                     try:
