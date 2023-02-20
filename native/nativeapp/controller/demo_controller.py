@@ -12,6 +12,7 @@ from typing import Dict
 from nativeapp.service import orchestration_service
 from nativeapp.utils.locale import locale
 from nativeapp.utils.web import web_view
+from nativeapp.config import config
 
 import flask
 from markupsafe import escape
@@ -347,6 +348,8 @@ class DemoManager():
                         params = flask.request.get_json(silent=True)
                         if params is None:
                             params = []
+                        if "language" in params:
+                            config.EnvironmentConfig.LANGUAGE = params["language"] # noqa: 501
                         ret_val = demo.\
                             start(subpath=subpath, params=params)
                         if skip_enter:
