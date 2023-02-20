@@ -43,7 +43,7 @@ class BrowserProgramEdge(BrowserProgram):
         self.profile_name = name
         self.profile_zip_path = profile_zip_path
         self.process = None
-        self.profile_dir = pathlib.Path.home() / f"AppData/Local/Microsoft/Edge/User Data/{self.profile_name}"  # noqa: E501
+        self.profile_dir = pathlib.Path.home() / "AppData/Local/Microsoft/Edge/User Data"  # noqa: E501
 
     def kill_edge(self):
         subprocess.Popen(  # nosec
@@ -89,7 +89,7 @@ class BrowserProgramEdge(BrowserProgram):
                 reg_proc.communicate()
             logging.info(f"Copying {temp_dir / self.profile_name} to \
                     {self.profile_dir} exists {self.profile_dir.exists()}")
-            shutil.copytree(temp_dir / self.profile_name, self.profile_dir,
+            shutil.copytree(temp_dir, self.profile_dir,
                             dirs_exist_ok=True)
 
     def stop(self):
