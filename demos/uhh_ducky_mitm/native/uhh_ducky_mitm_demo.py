@@ -120,7 +120,6 @@ class DuckyDemo:
         while not self.email_client.wait_for_imap_server(20):
             pass
 
-        self.browser_program.start()
         self.email_program.start()
 
     def stop(self):
