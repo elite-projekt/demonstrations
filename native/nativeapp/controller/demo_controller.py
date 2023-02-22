@@ -7,6 +7,7 @@ import queue
 import json
 import pathlib
 import threading
+import traceback
 from typing import Dict
 
 from nativeapp.service import orchestration_service
@@ -361,6 +362,7 @@ class DemoManager():
                     except Exception:
                         pass
                     demo.set_state(DemoStates.ERROR, str(e))
+                    logging.error(traceback.format_exc())
 
         return DemoManager.get_flask_response(ErrorCodes.generic_error)
 
@@ -394,6 +396,7 @@ class DemoManager():
                     except Exception:
                         pass
                     demo.set_state(DemoStates.ERROR, str(e))
+                    logging.error(traceback.format_exc())
         return DemoManager.get_flask_response(ErrorCodes.generic_error)
 
     @staticmethod
@@ -420,4 +423,5 @@ class DemoManager():
                         return DemoManager.get_flask_response(ret_val)
                 except Exception as e:
                     demo.set_state(DemoStates.ERROR, str(e))
+                    logging.error(traceback.format_exc())
         return DemoManager.get_flask_response(ErrorCodes.generic_error)
