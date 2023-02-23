@@ -134,6 +134,17 @@ class MailClient:
                               email_file,
                               random_date_interval=(1, 3),
                               _=None):
+        """
+        This constructs a mail from the given file
+
+
+        :param email_file: The file which contains the content of the mail.
+        This can be a .yml or .txt file
+        :param random_date_interval: Changes the sending day randomly by the
+        given offset
+        :param _: A locale object to translate string in the given file.
+        Pass None to do nothing
+        """
         if _ is None:
             def identity(x):
                 return x
@@ -183,6 +194,8 @@ class MailClient:
         elif email_file.suffix == ".txt":
             with open(email_file, 'rb') as fp:
                 msg = BytesParser(policy=policy.default).parse(fp)
+        else:
+            raise NotImplementedError(f"We don't support {email_file.suffix} files as input yet!") # noqa: 501
 
         # Substract "random_date_interval" days from today
         # we don't use random for crypto. no sec issue
