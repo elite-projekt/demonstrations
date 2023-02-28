@@ -1,0 +1,6 @@
+[
+{
+  "name": "uhh_keylogger_web",
+  "dockerfile": "container/nginx/Dockerfile"
+}
+]
