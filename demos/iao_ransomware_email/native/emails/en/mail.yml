@@ -1,22 +1,22 @@
 to:
     display_name: Max Mustermann
-    email: max.mustermann@mpseinternational.com
+    email: max.mustermann@nimbus.de
 from:
     display_name: "Andrea Berger"
-    email: andrea.berger@mpseinternational.com
-subject: "EILIG: Prüfung Projektkalkulation"
+    email: andrea.berger@nimbus.de
+subject: "URGENT: evaluation projectcalculation"
 content: |
-    Hallo Herr Mustermann,
+    Hello Mr. Mustermann,
 
-    anbei sende ich Ihnen die Projektkalkulation zur Prüfung.
-    Stimmt das Diagramm so?
+    the project costing for your review is attached.
+    Is the diagram correct?
 
-    Der Kunde hat es ziemlich eilig. Könnten Sie mir hierzu bis morgen Rückmeldung geben?
+    The customer is in quite a hurry. Could you give me feedback on this by tomorrow?
 
-    Vielen Dank!
+    Thank you very much!
 
-    Freundliche Grüße,
+    Kind regards,
 
     Andrea Berger
 
-attachment: "Projektkalkulation.xlsm"
+attachment: "Projectcalculation.xlsm"

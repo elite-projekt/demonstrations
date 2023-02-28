@@ -29,8 +29,7 @@ services:
     cap_add:
       - NET_ADMIN
       - SYS_PTRACE
-    restart: always
     environment:
       - SSL_TYPE=manual
-      - SSL_CERT_PATH=/tmp/ssl/mail.domain.com.crt
-      - SSL_KEY_PATH=/tmp/ssl/mail.domain.com.key
+      - SSL_CERT_PATH=/tmp/ssl/mail.nimbus.de.crt
+      - SSL_KEY_PATH=/tmp/ssl/mail.nimbus.de.key

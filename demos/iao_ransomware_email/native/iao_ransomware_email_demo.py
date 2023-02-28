@@ -1,4 +1,3 @@
-from nativeapp.utils.mail import mail_client
 import configparser
 import imaplib
 import logging
@@ -17,12 +16,21 @@ import python_on_whales
 
 from nativeapp.config import config
 from importlib_resources import files
+from nativeapp.utils.mail import mail_client, mail_program
+from nativeapp.utils.locale import locale
+import importlib.resources
 
 
 class RansomwareDemo:
+    email_client = mail_client.MailClient(
+        "127.0.0.1",
+        993,
+        465,
+        "max.mustermann@nimbus.de",
+        "123")
     default_email_profile = "jzou4lhc.MPSE"  # name of custom profile
     default_email_server = "localhost"  # online vm server
-    default_email_account = "max.mustermann@mpseinternational.com"
+    default_email_account = "max.mustermann@nimbus.de"
     default_email_account_password = "123"  # nosec This Password is only used
     # for the local Mail Server and is needed for the communication with
     # this Server
@@ -35,15 +43,18 @@ class RansomwareDemo:
     profile_dir = pathlib.Path(os.getenv("APPDATA")) / \
         "Thunderbird/Profiles"
 
+    with importlib.resources.path(
+        "demos.iao_ransomware_email.native.profiles",
+            "mpse_profile.zip") as mail_profile:
+        email_program = mail_program.MailProgramThunderbird(
+            "MPSE", mail_profile)
+
+    localedir = pathlib.Path(__file__).parent.parent / "locales"
+    locale = locale.Locale()
+    locale.add_locale_dir(localedir)
+
     email_client_config_location = profile_dir / \
         f"{default_email_profile}/prefs.js"
-
-    email_client = mail_client.MailClient(
-        default_email_server,
-        secure_server_imap_port,
-        secure_server_smtp_port,
-        default_email_account,
-        default_email_account_password)
 
     # deletes all mail in a mail box
     def delete_mailbox(
@@ -78,6 +89,15 @@ class RansomwareDemo:
         except Exception as e:
             logging.error(e)
         server.close()
+
+    def copy_client_profile(self):
+        self.email_program.copy_profile()
+
+        while not self.email_client.wait_for_smtp_server(20):
+            pass
+
+        while not self.email_client.wait_for_imap_server(20):
+            pass
 
     # sends mails based on *.txt files specified in the
     # email_files_location-path
@@ -378,3 +398,13 @@ class RansomwareDemo:
             logging.info("Success")
         except Exception as e:
             logging.error(e)
+
+    def kill_processes_restore(self):
+        process_list = ["notepad.exe", "winword.exe",
+                        "excel.exe", "powerpnt.exe"]
+        for process in process_list:
+            subprocess.Popen(  # nosec
+                ['C:\\Windows\\System32\\taskkill.exe', '/f', '/im',
+                 process], shell=False
+            )
+        time.sleep(1)

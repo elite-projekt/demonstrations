@@ -1,9 +1,9 @@
 to:
     display_name: Max Mustermann
-    email: max.mustermann@mpseinternational.com
+    email: max.mustermann@nimbus.de
 from:
     display_name: "Andrea Berger"
-    email: andrea.berger@mpseinternational.com
+    email: andrea.berger@nimbus.de
 subject: "EILIG: Prüfung Projektkalkulation"
 content: |
     Hallo Herr Mustermann,
