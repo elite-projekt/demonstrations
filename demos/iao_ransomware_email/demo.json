@@ -1,0 +1,12 @@
+{
+  "id": "fokus_ransomware_driveby",
+  "categories": [
+    "phishing",
+    "email",
+    "ransomware"
+  ],
+  "level": "beginner",
+  "instructor_id": 5,
+  "time": 5,
+  "isAvailable": true
+}

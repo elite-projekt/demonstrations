@@ -1,0 +1,37 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2022-07-08 11:01+0200\n"
+"PO-Revision-Date: 2022-11-17 15:11+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: pygettext.py 1.5\n"
+"X-Generator: Poedit 3.2.1\n"
+
+
+msgid "iao_ransomware_email_title"
+msgstr "Ransomware (Malicious attachment)"
+
+msgid "iao_ransomware_email_description"
+msgstr "The ransomware-demo shows the threats of encryption-trojans using an everyday work scenario."
+
+msgid "iao_ransomware_email_guide_task"
+msgstr "At the beginning of the demo, a Thunderbird window will open automatically.<br>Thunderbird is a free email program and will display your emails within the demos."
+
+msgid "iao_ransomware_email_guide_intro"
+msgstr "Within the demo, your name is Max Mustermann. Please read and work through all emails. Open the attached file.<br> The demo is completed, after you worked through the emails."
+
+msgid "iao_ransomware_email_guide_goal"
+msgstr ""
+
+msgid "iao_ransomware_email_guide_req"
+msgstr ""

@@ -1,0 +1,37 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2022-07-08 11:01+0200\n"
+"PO-Revision-Date: 2022-11-22 17:11+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: pygettext.py 1.5\n"
+"X-Generator: Poedit 3.2.1\n"
+
+
+msgid "iao_ransomware_email_title"
+msgstr "Ransomware (Schadhafter Anhang)"
+
+msgid "iao_ransomware_email_description"
+msgstr "Die Ransomware-Demo macht die Gefahren von Verschlüsselungs-Trojanern anhand eines alltäglichen Szenarios aus der Arbeitswelt erlebbar."
+
+msgid "iao_ransomware_email_guide_intro"
+msgstr "Zu Beginn der Demo wird sich automaitsch ein Fenster von Thunderbird öffnen.<br>Thunderbird ist ein kostenloses E-Mail Programm und wird Ihre E-Mails innerhalb der Demos anzeigen."
+
+msgid "iao_ransomware_email_guide_task"
+msgstr "Innerhalb der Demo ist Ihr Name Max Mustermann.Bitte lesen und bearbeiten Sie alle E-Mails. Öffnen Sie die angehängten Dateien.<br>Wenn Sie alle E-Mails bearbeitet haben, ist die Demo abgeschlossen."
+
+msgid "iao_ransomware_email_guide_goal"
+msgstr ""
+
+msgid "iao_ransomware_email_guide_req"
+msgstr ""
