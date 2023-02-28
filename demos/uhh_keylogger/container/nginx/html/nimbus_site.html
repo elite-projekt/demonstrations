@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="images/favicon.ico" rel="icon"/>
+    <link href="css/google.css" rel="stylesheet">
+
+    <!-- <link rel="stylesheet" href="{{url_for('static', filename='fonts/icomoon/style.css')}}"> -->
+
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <!-- Style -->
+    <link rel="stylesheet" href="css/style.css">
+    <title>Keylogger Demo</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-dark" style="background-color: #6c63ff;">
+        <img src="images/Nimbus Logo.svg" height="80" class="logo" alt="">
+    </nav>
+
+	<div class="content">
+		<div class="container">
+			<div class="card">
+				<div class="card-body">
+				  <div class="table-wrapper">
+					<table class="fl-table">
+						<tr>
+							<th>ID</th>
+							<th>Name</th>
+							<th>Salary</th>
+						</tr>
+						<tr>
+							<td id="1">1</td>
+							<td id="11">Müller</td>
+							<td id="21">450</td>
+						</tr>
+						<tr>
+							<td id="2">2</td>
+							<td id="12">Mustermann</td>
+							<td id="22">300</td>
+						</tr>
+            <tr>
+							<td id="3">3</td>
+							<td id="13">Fischer</td>
+							<td id="23">400</td>
+						</tr>
+            <tr>
+							<td id="4">4</td>
+							<td id="14">Meier</td>
+							<td id="24">200</td>
+						</tr>
+            <tr>
+							<td id="5">5</td>
+							<td id="15">Schmidt</td>
+							<td id="25">500</td>
+						</tr>
+            <tr>
+							<td id="6">6</td>
+							<td id="16">Weber</td>
+							<td id="26">250</td>
+						</tr>
+            <tr>
+							<td id="7">7</td>
+							<td id="17">Wagner</td>
+							<td id="27">600</td>
+						</tr>
+            <tr>
+							<td id="8">8</td>
+							<td id="18">Becker</td>
+							<td id="28">300</td>
+						</tr>
+            <tr>
+							<td id="9">9</td>
+							<td id="19">Schulz</td>
+							<td id="29">450</td>
+						</tr>
+            <tr>
+							<td id="10">10</td>
+							<td id="20">Hoffmann</td>
+							<td id="30">300</td>
+						</tr>
+						<tr>
+							<td id="31"></td>
+							<td id="32"></td>
+							<td id="33"></td>
+						</tr>
+					</table>
+				</div>
+
+				<div>
+					<h1 id="34" style="opacity: 0;">Your logged Keystrokes</h1>
+					<textarea id="35" style="opacity: 0;" spellcheck="false"></textarea>
+					<h1 id="36" style="opacity: 0;">Injected Keystrokes</h1>
+					<textarea id="37" style="opacity: 0;" spellcheck="false"></textarea>
+					<textarea id="38" style="opacity: 0;" spellcheck="false"></textarea>
+					<button id="39" type="button" onclick="stop_demo()" style="opacity: 0;" class="btn">
+  						<span class="align-middle btn btn-block btn-primary mt-3">Demo stoppen</span>
+					</button>
+				</div>
+				</div>
+			</div>
+			</p>
+			<br>
+		</div>
+	  </div>
+
+
+	<script>
+		function Hack() {
+      for (let i = 1; i < 31; i++)
+      {
+        document.getElementById(i.toString()).textContent = '';
+      }
+		}
+		function Now() {
+			document.getElementById("31").textContent = '99';
+      document.getElementById("32").textContent = 'HACKER';
+      document.getElementById("33").textContent = '999';
+		}
+
+		//Last function for showing keylog and end demo text
+		function Complete() {
+			document.getElementById("34").style = "opacity: 1;"
+			document.getElementById("35").style = "opacity: 1; width: 100%; height: 200px; font-size: 200%; border: none; font-weight: bold; color: green;";
+      document.getElementById("36").style = "opacity: 1;"
+			document.getElementById("37").style = "opacity: 1; width: 100%; height: 200px; font-size: 200%; border: none; font-weight: bold; color: red";
+      document.getElementById("38").style = "opacity: 1; width: 100%; height: 400px; font-size: 200%; border: none; font-weight: bold";
+      document.getElementById("39").style = "width: 30%; opacity: 1;";
+		}
+
+		//Function for stopping demo
+		function stop_demo() {
+  			const xhr = new XMLHttpRequest();
+  			xhr.open('GET', `http://127.0.0.1:5000/orchestration/stop/demo/uhh_keylogger`);
+  			xhr.send();
+		}
+
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', `http://127.0.0.1:5000/orchestration/start/demo/uhh_keylogger/open`);
+    xhr.send();
+	</script>
+
+
+  </body>
+  </html>

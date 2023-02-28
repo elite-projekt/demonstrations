@@ -1,0 +1,20 @@
+{
+  "id": "uhh_keylogger",
+  "categories": [
+    "phishing",
+    "email"
+  ],
+  "hardware": [
+    "usb-stick"
+  ],
+  "level": "intermediate",
+  "time": 10,
+  "isAvailable": true,
+  "container":
+  [
+    {
+      "name": "uhh_keylogger_web",
+      "dockerfile": "container/nginx/Dockerfile"
+    }
+  ]
+}

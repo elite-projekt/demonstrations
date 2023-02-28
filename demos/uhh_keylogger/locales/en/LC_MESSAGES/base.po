@@ -1,0 +1,111 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2022-07-08 11:01+0200\n"
+"PO-Revision-Date: 2022-08-11 11:28+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: pygettext.py 1.5\n"
+"X-Generator: Poedit 3.1\n"
+
+#: uhh_keylogger_demo.py:136
+msgid "uhh_keylogger_end_text"
+msgstr ""
+"What just happened ?\n"
+"Your login data were stolen and the data you were meant to read through was manipulated !\n"
+"This attack was possible due to a hardware keylogger.\n"
+"In the field your logged keystrokes you can see the keys you pressed.\n"
+"In the field injected keystrokes you can see the keystrokes the attacker simulated.\n"
+"Click the end demo button below to end this demonstration."
+
+msgid "uhh_keylogger_email_subject"
+msgstr "Please proofread our employee data"
+
+msgid "uhh_keylogger_email_content"
+msgstr ""
+"Hello Max,\n"
+"\n"
+"I recently updated the data about our new employees to our server. It would be great if you could proofread that to confirm it. \n"
+"The webadress to our server is: https://nimbus.de \n"
+"The username you use is irrelevant for the moment, the password should be 'test'. \n"
+"\n"
+"Yours Sincerely \n"
+"Christina"
+
+msgid "end_demo_text"
+msgstr "End demo"
+
+msgid "key_tab"
+msgstr " |tab| "
+
+msgid "key_enter"
+msgstr " |enter| "
+
+msgid "key_shift"
+msgstr " |shift| "
+
+msgid "key_ctrl"
+msgstr " |control| "
+
+msgid "key_cmd"
+msgstr " |windows| "
+
+msgid "key_space"
+msgstr " "
+
+msgid "key_esc"
+msgstr " |escape| "
+
+msgid "key_shift"
+msgstr " |shift| "
+
+msgid "key_alt"
+msgstr " |alt| "
+
+msgid "key_home"
+msgstr " |home| "
+
+msgid "key_caps_lock"
+msgstr " |caps| "
+
+msgid "uhh_keylogger_title"
+msgstr "Keylogger"
+
+msgid "uhh_keylogger_description"
+msgstr ""
+"This demo shows you the dangers of a hardware keylogger keyboard "
+"and how this can be used to extract sensible data, as well as simulate keystrokes itself. "
+
+msgid "uhh_keylogger_guide_intro"
+msgstr ""
+"In this demo you will be taught the dangers of hardware keyloggers. "
+"In that manner, you will be asked to read through personal data of employees "
+"on a platform of your company."
+
+msgid "uhh_keylogger_guide_goal"
+msgstr ""
+"At the end of this demo your login data for the login portal of your company "
+"will be compromised. Additionally, the personal data you were supposed to "
+"read through will also be compromised and even altered. "
+"Furthermore, your keystrokes will be recorded and shown to you as well as "
+"the keystrokes the attacker simulated. "
+"The demo ends when you see all of this data on your site. "
+
+msgid "uhh_keylogger_guide_req"
+msgstr ""
+
+msgid "uhh_keylogger_guide_task"
+msgstr ""
+"Your job in this demo will be to follow the orders of Christina Sauer. "
+"She will send you an E-Mail containing your login data for the online portal "
+"of your company so that you can then login there and read through personal "
+"data of new employees. "
