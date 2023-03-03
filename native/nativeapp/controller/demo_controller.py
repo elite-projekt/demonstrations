@@ -177,6 +177,13 @@ class DemoController(ABC):
         """
         return DemoStatus({"state": self.get_state()}, 200)
 
+    def get_data(self, subpath: str):
+        """
+        Get additional data for the demo. This could be anything. For example
+        runtime data
+        """
+        return []
+
     def start_container(self, additional_env={}):
         self.orchestration.docker_compose_start_file(
                 self.compose_file,
@@ -424,4 +431,16 @@ class DemoManager():
                 except Exception as e:
                     demo.set_state(DemoStates.ERROR, str(e))
                     logging.error(traceback.format_exc())
+        return DemoManager.get_flask_response(ErrorCodes.generic_error)
+
+    @staticmethod
+    @orchestration.route("/data/demo/<demo_name>", methods=["GET", "POST"])
+    @orchestration.route("/data/demo/<demo_name>/<path:subpath>",
+                         methods=["GET", "POST"])
+    def demo_data(demo_name, subpath=""):
+        demo_name = escape(demo_name)
+        subpath = escape(subpath)
+        if demo_name in DemoManager.demos:
+            ret_val = DemoManager.demos[demo_name].get_data(subpath)
+            return flask.jsonify(ret_val)
         return DemoManager.get_flask_response(ErrorCodes.generic_error)
