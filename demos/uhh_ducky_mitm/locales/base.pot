@@ -53,4 +53,32 @@ msgstr ""
 msgid "uhh_ducky_mitm_guide_task"
 msgstr ""
 
+msgid "uhh_project_mail_subject"
+msgstr ""
 
+msgid "uhh_project_mail_content"
+msgstr ""
+
+msgid "uhh_backup_mail_subject"
+msgstr ""
+
+msgid "uhh_backup_mail_content"
+msgstr ""
+
+msgid "uhh_admin_mail_subject"
+msgstr ""
+
+msgid "uhh_admin_mail_content"
+msgstr ""
+
+msgid "uhh_internal_mail_subject"
+msgstr ""
+
+msgid "uhh_internal_mail_content"
+msgstr ""
+
+msgid "uhh_it_test_mail_subject"
+msgstr ""
+
+msgid "uhh_it_test_mail_content"
+msgstr ""

@@ -33,6 +33,7 @@ class DuckyController(DemoController):
         super().__init__("uhh_ducky_mitm",
                          "uhh_ducky_mitm/native/stacks/docker-compose.yml")
         self.ducky_service = uhh_ducky_mitm_demo.DuckyDemo()
+        self.logged_in = False
 
     def stop(self, subpath) -> int:
         """
@@ -41,6 +42,7 @@ class DuckyController(DemoController):
         try:
             self.set_state(DemoStates.STOPPING,
                            DemoStates.STOPPING_APPLICATIONS)
+            self.logged_in = False
             self.ducky_service.stop()
             self.set_state(DemoStates.STOPPING, DemoStates.STOPPING_CONTAINER)
             self.stop_container()
@@ -53,11 +55,18 @@ class DuckyController(DemoController):
         """
         Start the demo
         """
+        logging.info(f"Ducky start with {subpath=} and {params=}")
 
         if subpath == "script_downloaded":
             self.ducky_service.add_cert()
             self.ducky_service.show_error_box()
             self.ducky_service.send_second_mail()
+            return ErrorCodes.start_success
+        elif subpath == "login":
+            self.ducky_service.add_credentials(params["user"], params["pw"])
+            if not self.logged_in:
+                self.logged_in = True
+                self.ducky_service.send_attacked_mails()
             return ErrorCodes.start_success
         else:
             try:
@@ -91,6 +100,9 @@ class DuckyController(DemoController):
             self.set_state(DemoStates.RUNNING)
             self.ducky_service.send_mails()
         return ErrorCodes.start_success
+
+    def get_data(self, subpath):
+        return self.ducky_service.logged_credentials
 
 
 def get_controller():

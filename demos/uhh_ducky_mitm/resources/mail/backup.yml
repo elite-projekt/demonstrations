@@ -1,0 +1,8 @@
+to:
+    display_name: Max Mustermann
+    email: max.mustermann@nimbus.de
+from:
+    display_name: "Emma Becker"
+    email: emma.becker@nimbus.de
+subject: "uhh_backup_mail_subject"
+content: "uhh_backup_mail_content"

