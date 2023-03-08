@@ -1,0 +1,8 @@
+to:
+    display_name: Max Mustermann
+    email: max.mustermann@nimbus.de
+from:
+    display_name: "Mia Hofmann"
+    email: mia.hofmann@nimbus.de
+subject: "uhh_internal_mail_subject"
+content: "uhh_internal_mail_content"

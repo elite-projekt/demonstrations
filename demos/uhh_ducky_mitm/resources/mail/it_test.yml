@@ -1,0 +1,8 @@
+to:
+    display_name: Max Mustermann
+    email: max.mustermann@nimbus.de
+from:
+    display_name: "IT-Sicherheitstest"
+    email: sicherheitstest@it-security.de
+subject: "uhh_it_test_mail_subject"
+content: "uhh_it_test_mail_content"

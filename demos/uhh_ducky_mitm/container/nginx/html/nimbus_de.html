@@ -10,98 +10,64 @@
 
     <!-- Style -->
     <link rel="stylesheet" href="css/style.css">
+    <style>
+      /* Style the loading screen */
+      #loading-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 9999;
+        display: none;
+      }
+
+      /* Style the loading text */
+      #loading-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 48px;
+        font-weight: bold;
+        color: #000;
+      }
+    </style>
     <title>MITM Demo</title>
 </head>
 <body>
 
 <script>
 
-function stop_demo () {
-  const xhr = new XMLHttpRequest();
-  xhr.open('GET', `http://127.0.0.1:5000/orchestration/stop/demo/uhh_ducky_mitm`);
-  xhr.send();
-}
-
-let end_button = `
-<button type="button" onclick="stop_demo()" style="width: 20%;" class="btn">
-  <span class="align-middle btn btn-block btn-primary mt-3">Demo stoppen</span>
-</button>
-`
 
 function submit_form(theForm) {
-	let info_string_elite= `
-  <h1>
-  Login erfolgreich!
-</h1>
-<br>
-Sie haben es geschafft die Proxy-Einstellungen zurückzusetzen und auf die korrekte Seite zu gelangen. Herzlichen Glückwunsch.
-<br>
-Einige Tipps: <br>
-<ul>
-<li>Immer darauf achten, dass die besuchte Domain korrekt ist, über eine Verschlüsselung verfügt und das genutzte Zertifikat vertrauenswürdig ist.</li>
-<br>
- <li> Einen sicheren Browser verwenden. Browser wie zum Beispiel Firefox blockieren den Zugriff auf Domains, wenn sich plötzlich das Zertifikat ändert. Dieser Demonstrator wäre unter Firefox nicht möglich gewesen.</li>
- <br>
-<li> E-Mails sollten immer mit einer digitalen Signatur versehen werden (S/MIME oder OpenPGP). </li>
- <br>
-<li> USB-Geräten sollte nie blind vertraut werden. </li>
- <br>
-<li> Die vertrauten Zertifikate und Einstellungen im Betriebsystem sollten regelmäßig überprüft werden. </li>
-</ul>
-  ${end_button}
-		`;
-	let info_string_evil= `
-  <h1>
-Ihre Daten wurden gestohlen!
-</h1>
-<br>
-
-Username: ${theForm.uname.value} <br>
-Passwort: ${theForm.psw.value} <br>
-<br>
-Falls Sie es nicht gesehen haben: Beim Einstecken des "defekten" USB-Sticks konnten wir beliebige Befehle ausführen und haben so ihren PC infiziert.
-Sie können die Demo jetzt beenden, oder sich auf dieser Seite die technischen Hintergründe des Angriffes anschauen.
-<br>
-${end_button}
-<br>
-Wir haben den Angriff genutzt, um die Proxy-Einstellungen des Betriebssystems zu ändern und ein falsches Zertifikat zu installieren.<br>
-Wenn Sie auf die Adressleiste schauen, sehen Sie, dass es sich um die korrekte URL handelt. Schaut man sich jedoch das Zertifikat an, erkennt man, dass dieses nicht legitim und auf "mitmproxy" ausgestellt ist.
- <br>
- <br>
-Um dies anzuzeigen, können Sie auf das Schloss neben der Adressleiste klicken und sich dann den Verbindungsstatus anzeigen lassen. Hier auf das Zertifikatssymbol (neben dem "X") klicken.
-
- <br>
-<img src="images/about_connection_secure.png" alt="Secure connection">
- <img src="images/open_cert.png" alt="Secure connection">
- <br>
- <img src="images/cert.png" alt="Secure connection">
- <br>
-
-Dieses Zertifikat ist offensichtlich kein legitimes und mit diesem sind wir in der Lage allen verschlüsselten Datenverkehr zu lesen und zu manipulieren.
-
-
-<br><br>
-
-Zusätzlich haben wir die Proxy-Einstellungen geändert, wodurch der Datenverkehr über einen Server vom Angreifer geleitet wird.
-
-Suchen Sie in der Leiste am unteren Bildschirmrand mit dem Text "Suchbegriff hier eingeben" nach "Proxy" und klicken Sie auf den Eintrag "Proxy Einstellungen".
-Wenn Sie in diesem Fenster nach unten Scrollen sehen Sie, dass wir die Proxyeinstellungen ihres Rechners verändert haben.
-Löschen Sie den Proxy, indem Sie den Schalter von "Ein" auf "Aus" stellen.
-<br>
-
-<img src="images/proxy_settings.png" alt="Windows proxy settings">
- <br>
-Dann die "STRG" und "Shift"-Taste gedrückt halten und dann "R" drücken. Hiermit wird der Browser gezwungen neue Daten vom Serveranzufordern und es wird keine lokal gespeicherte Version genutzt.
-
-		`;
   let attacked = false;
-	let overlay_text_elem = document.getElementById("text");
-	if (attacked) {
-		overlay_text_elem.innerHTML = info_string_evil;
-	} else {
-		overlay_text_elem.innerHTML = info_string_elite;
-	}
-	on();
+  let user = theForm.uname.value;
+  let pw = theForm.psw.value;
+  document.getElementById("loading-screen").style.display = "block";
+  document.getElementById("container").style.display = "none";
+  let loadingText = document.getElementById("loading-text");
+  let count = 0;
+  let timer = setInterval(function() {
+  count++;
+  loadingText.innerHTML = "Loading " + count + "%";
+  if (count >= 100) {
+    clearInterval(timer);
+    loadingText.innerHTML = "Error: Data corrupted!";
+    }
+  }, 500);
+
+  if (attacked) {
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', `http://127.0.0.1:5000/orchestration/start/demo/uhh_ducky_mitm/login`);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    let json_data = JSON.stringify({"user": user, "pw": pw});
+    console.log("Sending");
+    console.log(json_data);
+    xhr.send(json_data);
+  }
+
+
 	return false;
 }
 
@@ -118,7 +84,7 @@ Dann die "STRG" und "Shift"-Taste gedrückt halten und dann "R" drücken. Hiermi
 		<img src="images/noun-eye-closed.png"/>
 	</div>
 		<div class="content">
-		<div class="container">
+		<div class="container" id="container">
 			<div class="row">
 			<div class="col-md-6">
 				<img src="images/undraw_remotely_2j6y.svg" alt="Image"
@@ -171,6 +137,12 @@ Dann die "STRG" und "Shift"-Taste gedrückt halten und dann "R" drücken. Hiermi
 			</div>
 		</div>
 	</div>
+
+    <!-- Create the loading screen -->
+    <div id="loading-screen">
+      <!-- Add the loading text -->
+      <div id="loading-text">Loading 0%</div>
+    </div>
 
 <script src="js/jquery-3.3.1.min.js"></script>
 <script src="js/main.js"></script>
