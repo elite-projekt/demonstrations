@@ -119,6 +119,7 @@ def generate_docker_lint_ci():
                 template.add_before_script_command("mkdir -p /kaniko/.docker")
                 template.add_before_script_command("echo \"{'auths':{'$CI_REGISTRY':{'username':'$CI_REGISTRY_USER','password':'$CI_REGISTRY_PASSWORD'}}}\" > /kaniko/.docker/config.json".replace("'", "\\\"")) # noqa: 501
                 template.add_before_script_command("cat /kaniko/.docker/config.json") # noqa: 501
+                template.add_before_script_command(f"$CI_PROJECT_DIR/demos/{demo.name}/{demo_path}/prepare.sh || true ") # noqa: 501
                 template.add_artifact(f"{name}.tar")
                 template.add_dependency(f"lint:dockerfile-{name}")
                 template.stage = "build"

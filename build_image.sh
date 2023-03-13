@@ -68,6 +68,10 @@ if [ "${IMAGE_PREFIX}" != "" ]; then
 fi
 
 # Build image
+if [ -f "${CONTEXT_DIR}/prepare.sh" ]; then
+  "${CONTEXT_DIR}/prepare.sh"
+fi
+
 if [ "${USE_DOCKER}" == "1" ]; then
   ${DOCKER_CMD} build -t "${IMAGE_NAME}" -f "${CONTEXT_DIR}/${DOCKERFILE_NAME}" "${CONTEXT_DIR}"
 else
