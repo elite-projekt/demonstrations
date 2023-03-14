@@ -82,3 +82,48 @@ msgstr ""
 
 msgid "uhh_it_test_mail_content"
 msgstr ""
+
+msgid "nimbus_login_header"
+msgstr ""
+
+msgid "nimbus_login_text"
+msgstr ""
+
+msgid "nimbus_username"
+msgstr ""
+
+msgid "nimbus_password"
+msgstr ""
+
+msgid "nimbus_login_button"
+msgstr ""
+
+msgid "uhh_web_loading"
+msgstr ""
+
+msgid "uhh_web_loading_error"
+msgstr ""
+
+msgid "uhh_web_stolen_data"
+msgstr ""
+
+msgid "uhh_web_table_before_link"
+msgstr ""
+
+msgid "uhh_web_table_after_link"
+msgstr ""
+
+msgid "uhh_web_table_link"
+msgstr ""
+
+msgid "uhh_web_status_before_button"
+msgstr ""
+
+msgid "uhh_web_status_after_button"
+msgstr ""
+
+msgid "uhh_web_status_button"
+msgstr ""
+
+msgid "uhh_web_status_after_images"
+msgstr ""
