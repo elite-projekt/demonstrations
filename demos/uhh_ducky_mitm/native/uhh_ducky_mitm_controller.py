@@ -102,7 +102,28 @@ class DuckyController(DemoController):
         return ErrorCodes.start_success
 
     def get_data(self, subpath):
-        return self.ducky_service.logged_credentials
+        if subpath == "translations":
+            locale = self.ducky_service.locale
+            locale_strings = ["uhh_web_loading",
+                              "uhh_web_loading_error",
+                              "uhh_web_stolen_data",
+                              "uhh_web_table_link",
+                              "uhh_web_status_button",
+                              "nimbus_login_button",
+                              "nimbus_password",
+                              "nimbus_username",
+                              "nimbus_login_text",
+                              "nimbus_login_header",
+                              "uhh_web_status_after_images",
+                              "uhh_web_status_after_button",
+                              "uhh_web_status_before_button",
+                              "uhh_web_table_after_link",
+                              "uhh_web_table_before_link"]
+            translation_dict = {s: locale.translate(s) for s in locale_strings}
+            ret_val = {"translations": translation_dict}
+        else:
+            ret_val = {"credentials": self.ducky_service.logged_credentials}
+        return ret_val
 
 
 def get_controller():
