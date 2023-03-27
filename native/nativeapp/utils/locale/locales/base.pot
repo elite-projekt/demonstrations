@@ -57,11 +57,23 @@ msgstr ""
 msgid "stopping"
 msgstr ""
 
-msgid "start_button"
+msgid "start_offline"
 msgstr "Start Demo"
 
 msgid "start_waiting"
 msgstr "Waiting for data"
+
+msgid "start_error"
+msgstr "Error in Demo"
+
+msgid "start_ready"
+msgstr "Demo Ready"
+
+msgid "start_running"
+msgstr "Demo Running"
+
+msgid "start_stopping"
+msgstr "Stopping demo"
 
 msgid "stop_button"
 msgstr "Stop Demo"

@@ -264,8 +264,12 @@ class DemoManager():
         local_locale = locale.Locale()
         local_locale.update_locale(lang)
         common_translation_ids = [
-                "start_button",
+                "start_offline",
                 "start_waiting",
+                "start_error",
+                "start_ready",
+                "start_running",
+                "start_stopping",
                 "stop_button",
                 "learn_button",
                 "usb-stick",
