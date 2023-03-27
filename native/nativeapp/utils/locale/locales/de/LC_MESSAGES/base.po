@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2022-07-08 11:01+0200\n"
-"PO-Revision-Date: 2023-02-07 16:04+0100\n"
+"PO-Revision-Date: 2023-03-27 14:10+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -59,11 +59,23 @@ msgstr "Stoppe Programme"
 msgid "stopping"
 msgstr "Demo stoppt"
 
-msgid "start_button"
-msgstr "Demo starten"
+msgid "start_offline"
+msgstr "Starte Demo"
 
 msgid "start_waiting"
 msgstr "Warte auf Antwort"
+
+msgid "start_error"
+msgstr "Fehler in Demo"
+
+msgid "start_ready"
+msgstr "Demo bereit"
+
+msgid "start_running"
+msgstr "Demo läuft"
+
+msgid "start_stopping"
+msgstr "Demo Stoppt"
 
 msgid "stop_button"
 msgstr "Demo stoppen"
@@ -105,7 +117,12 @@ msgid "guide_req"
 msgstr "Besondere Anforderungen der Demo"
 
 msgid "demo_error"
-msgstr "Leider ist bei dieser Demo ein unerwarteter Fehler aufgetreten. Bitten wenden Sie sich an den Support oder starten Sie eine andere Demo"
+msgstr ""
+"Leider ist bei dieser Demo ein unerwarteter Fehler aufgetreten. Bitten "
+"wenden Sie sich an den Support oder starten Sie eine andere Demo"
 
 msgid "error_code"
 msgstr "Fehlermeldung"
+
+#~ msgid "start_button"
+#~ msgstr "Demo starten"
