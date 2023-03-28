@@ -1,6 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-only
 
 from abc import ABC
+from datetime import datetime
 
 import logging
 import queue
@@ -226,6 +227,7 @@ class DemoManager():
     demo_lock_start = threading.Lock()
     demo_lock_stop = threading.Lock()
     demo_lock_enter = threading.Lock()
+    survey_folder = "surveys"
 
     @staticmethod
     def on_state_changed(name,
@@ -263,6 +265,7 @@ class DemoManager():
         send_dict = {}
         local_locale = locale.Locale()
         local_locale.update_locale(lang)
+        survey_questions_id = ["survey_demo_like", "survey_demo_realistic"]
         common_translation_ids = [
                 "start_offline",
                 "start_waiting",
@@ -283,8 +286,12 @@ class DemoManager():
                 "guide_goal",
                 "guide_req",
                 "demo_error",
-                "error_code"
-                ]
+                "error_code",
+                "survey_other",
+                "survey_title",
+                "survey_cancel_button",
+                "survey_send_button",
+                ] + survey_questions_id
         common_translations = {}
         for x in common_translation_ids:
             common_translations[x] = local_locale.translate(x)
@@ -293,9 +300,26 @@ class DemoManager():
             new_demo = demo.get_property_dict(lang)
             if new_demo["isAvailable"]:
                 demo_list.append(new_demo)
+
         send_dict = {"demos": demo_list,
-                     "common_translations": common_translations}
+                     "common_translations": common_translations,
+                     "survey_ids": survey_questions_id
+                     }
         return flask.jsonify(send_dict)
+
+    @staticmethod
+    @orchestration.route("/survey/demo/<demo_name>", methods=["GET", "POST"])
+    def survey_result(demo_name):
+        survey_results = flask.request.get_json(silent=True)
+        logging.info(f"Got survey for {demo_name}: {survey_results}")
+        survey_folder = pathlib.Path(DemoManager.survey_folder)
+        survey_folder.mkdir(exist_ok=True, parents=True)
+        time_str = datetime.now().isoformat()
+        filename = f"{demo_name}-{time_str}.json"
+        with open(survey_folder / filename, "w") as survey_file:
+            json.dump(survey_results, survey_file)
+
+        return DemoManager.get_flask_response(ErrorCodes.start_success)
 
     @staticmethod
     @orchestration.route("/status/stream", methods=["GET", "POST"])

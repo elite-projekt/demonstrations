@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2022-07-08 11:01+0200\n"
-"PO-Revision-Date: 2023-03-15 11:43+0100\n"
+"PO-Revision-Date: 2023-03-27 17:17+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -59,11 +59,31 @@ msgstr "Killing Applications"
 msgid "stopping"
 msgstr "Stopping Demo"
 
-msgid "start_button"
-msgstr "Start Demo"
+#, fuzzy
+#| msgid "offline"
+msgid "start_offline"
+msgstr "Offline"
 
 msgid "start_waiting"
 msgstr "Waiting for data"
+
+#, fuzzy
+#| msgid "error"
+msgid "start_error"
+msgstr "Error"
+
+#, fuzzy
+#| msgid "ready"
+msgid "start_ready"
+msgstr "Demo Ready"
+
+#, fuzzy
+#| msgid "starting"
+msgid "start_running"
+msgstr "Starting Demo"
+
+msgid "start_stopping"
+msgstr "Stopping "
 
 msgid "stop_button"
 msgstr "Stop Demo"
@@ -109,3 +129,24 @@ msgstr "Demo failed"
 
 msgid "error_code"
 msgstr "Error message"
+
+msgid "survey_other"
+msgstr "Other comments"
+
+msgid "survey_cancel_button"
+msgstr "Cancel"
+
+msgid "survey_send_button"
+msgstr "Send Answers"
+
+msgid "survey_title"
+msgstr "Survey for demo"
+
+msgid "survey_demo_like"
+msgstr "How would you rate your experience with the demo?"
+
+msgid "survey_demo_realistic"
+msgstr "How would you rate the realism of the demo?"
+
+#~ msgid "start_button"
+#~ msgstr "Start Demo"

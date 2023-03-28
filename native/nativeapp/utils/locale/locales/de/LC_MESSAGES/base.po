@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2022-07-08 11:01+0200\n"
-"PO-Revision-Date: 2023-03-27 14:10+0200\n"
+"PO-Revision-Date: 2023-03-27 17:17+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -123,6 +123,24 @@ msgstr ""
 
 msgid "error_code"
 msgstr "Fehlermeldung"
+
+msgid "survey_other"
+msgstr "Weitere Kommentare"
+
+msgid "survey_cancel_button"
+msgstr "Abbrechen"
+
+msgid "survey_send_button"
+msgstr "Feedback Senden"
+
+msgid "survey_title"
+msgstr "Feedback für Demo"
+
+msgid "survey_demo_like"
+msgstr "Wie würden Sie die Demo bewerten?"
+
+msgid "survey_demo_realistic"
+msgstr "Wie realistisch empfanden Sie die Demo?"
 
 #~ msgid "start_button"
 #~ msgstr "Demo starten"
