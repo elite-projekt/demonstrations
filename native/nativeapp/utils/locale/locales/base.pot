@@ -119,3 +119,21 @@ msgstr ""
 
 msgid "error_code"
 msgstr ""
+
+msgid "survey_other"
+msgstr "Other comments"
+
+msgid "survey_cancel_button"
+msgstr "Cancel"
+
+msgid "survey_send_button"
+msgstr "Send Answers"
+
+msgid "survey_title"
+msgstr "Survey for demo"
+
+msgid "survey_demo_like"
+msgstr "How would you rate your experience with the demo?"
+
+msgid "survey_demo_realistic"
+msgstr "How would you rate the realism of the demo?"
