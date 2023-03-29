@@ -78,14 +78,42 @@ msgstr " |home| "
 msgid "key_caps_lock"
 msgstr " |caps| "
 
+msgid "key_backspace"
+msgstr " |backspace| "
+
+msgid "logged_keystrokes_title"
+msgstr "Ihre Keystrokes"
+
+msgid "injected_keystrokes_title"
+msgstr "Injizierte Keystrokes"
+
+msgid "combo_select_all"
+msgstr " |tastenkombo alles auswählen| "
+
+msgid "combo_copy"
+msgstr " |tastenkombo kopieren| "
+
+msgid "combo_insert"
+msgstr " |tastenkombo einfügen| "
+
+msgid "combo_undo"
+msgstr " |tastenkombo rückgängig| "
+
 msgid "uhh_keylogger_title"
 msgstr "Keylogger"
 
 msgid "uhh_keylogger_description"
 msgstr ""
 "Diese Demo zeigt die Gefahren einer manipulierten Tastatur "
-"und wie eine solche als Keylogger sensible Daten auf Firmen "
-"entwenden kann, sowie Tastatureingaben simulieren kann."
+"und wie eine solche als Keylogger sensible Daten von Firmen "
+"entwenden kann, sowie Tastatureingaben simulieren kann. "
+"In der Demo werden Angreifer die Kontrolle über Ihren "
+"Computer übernehmen. Sie werden zudem die Daten, die Sie "
+"korrektur lesen sollen korrumpieren. Des Weiteren werden "
+"Ihnen im Zuge dieser Demo Ihre mitgeschnittenen "
+"Tastatureingaben, sowie die durch Angreifer simulierten "
+"Eingaben in Boxen auf der Seite angezeigt. Darauf folgt "
+"Ein kleiner Text, welcher Ihnen zeigt, was gerade passiert. "
 
 msgid "uhh_keylogger_guide_intro"
 msgstr ""

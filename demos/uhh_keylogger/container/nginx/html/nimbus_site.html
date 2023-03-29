@@ -37,17 +37,17 @@
 						<tr>
 							<td id="1">1</td>
 							<td id="11">Müller</td>
-							<td id="21">450</td>
+							<td id="21">999999</td>
 						</tr>
 						<tr>
 							<td id="2">2</td>
-							<td id="12">Mustermann</td>
+							<td id="12">Musteerrmann</td>
 							<td id="22">300</td>
 						</tr>
             <tr>
 							<td id="3">3</td>
 							<td id="13">Fischer</td>
-							<td id="23">400</td>
+							<td id="23">000</td>
 						</tr>
             <tr>
 							<td id="4">4</td>
@@ -55,7 +55,7 @@
 							<td id="24">200</td>
 						</tr>
             <tr>
-							<td id="5">5</td>
+							<td id="5">555</td>
 							<td id="15">Schmidt</td>
 							<td id="25">500</td>
 						</tr>
@@ -66,7 +66,7 @@
 						</tr>
             <tr>
 							<td id="7">7</td>
-							<td id="17">Wagner</td>
+							<td id="17">Wa□ner</td>
 							<td id="27">600</td>
 						</tr>
             <tr>
@@ -94,12 +94,12 @@
 
 				<div>
 					<h1 id="34" style="opacity: 0;">Your logged Keystrokes</h1>
-					<textarea id="35" style="opacity: 0;" spellcheck="false"></textarea>
+					<p id="35" style="opacity: 0;" spellcheck="false"></p>
 					<h1 id="36" style="opacity: 0;">Injected Keystrokes</h1>
-					<textarea id="37" style="opacity: 0;" spellcheck="false"></textarea>
-					<textarea id="38" style="opacity: 0;" spellcheck="false"></textarea>
+					<p id="37" style="opacity: 0;" spellcheck="false"></p>
+					<p id="38" style="opacity: 0;" spellcheck="false"></p>
 					<button id="39" type="button" onclick="stop_demo()" style="opacity: 0;" class="btn">
-  						<span class="align-middle btn btn-block btn-primary mt-3">Demo stoppen</span>
+  						<span class="align-middle btn btn-block btn-primary mt-3" style="margin: 0%;">Demo stoppen</span>
 					</button>
 				</div>
 				</div>
@@ -110,41 +110,62 @@
 	  </div>
 
 
-	<script>
-		function Hack() {
-      for (let i = 1; i < 31; i++)
-      {
-        document.getElementById(i.toString()).textContent = '';
-      }
-		}
-		function Now() {
-			document.getElementById("31").textContent = '99';
-      document.getElementById("32").textContent = 'HACKER';
-      document.getElementById("33").textContent = '999';
-		}
+<script>
+	function Hack() {
+    	for (let i = 21; i < 31; i++)
+    	{
+    		document.getElementById(i.toString()).textContent = '0';
+    	}
+	}
 
-		//Last function for showing keylog and end demo text
-		function Complete() {
-			document.getElementById("34").style = "opacity: 1;"
-			document.getElementById("35").style = "opacity: 1; width: 100%; height: 200px; font-size: 200%; border: none; font-weight: bold; color: green;";
-      document.getElementById("36").style = "opacity: 1;"
-			document.getElementById("37").style = "opacity: 1; width: 100%; height: 200px; font-size: 200%; border: none; font-weight: bold; color: red";
-      document.getElementById("38").style = "opacity: 1; width: 100%; height: 400px; font-size: 200%; border: none; font-weight: bold";
-      document.getElementById("39").style = "width: 30%; opacity: 1;";
-		}
+	function Now() {
+		document.getElementById("31").textContent = '11';
+      	document.getElementById("32").textContent = 'HACKER';
+      	document.getElementById("33").textContent = '999999999';
+	}
 
-		//Function for stopping demo
-		function stop_demo() {
-  			const xhr = new XMLHttpRequest();
-  			xhr.open('GET', `http://127.0.0.1:5000/orchestration/stop/demo/uhh_keylogger`);
-  			xhr.send();
-		}
+	//Last function for showing keylog and end demo text
+	function Complete() {
+		document.getElementById("34").style = "opacity: 1;"
+		document.getElementById("35").style = "opacity: 1; width: 100%; height: 200px; font-size: 200%; border: none; font-weight: bold; color: green;";
+    	document.getElementById("36").style = "opacity: 1;"
+		document.getElementById("37").style = "opacity: 1; width: 100%; height: 400px; font-size: 200%; border: none; font-weight: bold; color: red; overflow: hidden";
+    	document.getElementById("38").style = "opacity: 1; width: 100%; height: 500px; font-size: 150%; border: none; font-weight: bold; overflow: hidden";
+    	document.getElementById("39").style = "width: 30%; padding: 0%; border-width: 0px; opacity: 1;";
+
+    	var xhr = new XMLHttpRequest();
+    	xhr.onreadystatechange = function() {
+    		// check if request is complete and response is OK
+    		if (this.readyState === 4 && this.status === 200) {
+        		// parse response as JSON
+        		var data = JSON.parse(this.responseText);
+            document.getElementById("34").innerText = data.logged_title;
+            document.getElementById("35").innerText = data.logged;
+            document.getElementById("36").innerText = data.injected_title;
+            document.getElementById("37").innerText = data.injected;
+            document.getElementById("38").innerText = data.end_text;
+	    	}
+      	}
+
+		// set request parameters
+		xhr.open("GET", "http://127.0.0.1:5000/orchestration/data/demo/uhh_keylogger", true);
+
+		// send request
+		xhr.send();
+    }
+
+	//Function for stopping demo
+	function stop_demo() {
+		const xhr = new XMLHttpRequest();
+  		xhr.open('GET', `http://127.0.0.1:5000/orchestration/stop/demo/uhh_keylogger`);
+  		xhr.send();
+	}
 
     const xhr = new XMLHttpRequest();
     xhr.open('GET', `http://127.0.0.1:5000/orchestration/start/demo/uhh_keylogger/open`);
     xhr.send();
-	</script>
+</script>
 
 
-  </body>
-  </html>
+</body>
+</html>

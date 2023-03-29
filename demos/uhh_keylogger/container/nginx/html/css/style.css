@@ -89,9 +89,7 @@ h2 {
   text-decoration: underline; }
 
 .content .btn {
-  height: 54px;
-  padding-left: 30px;
-  padding-right: 30px; }
+  height: 54px; }
 
 .content .forgot-pass {
   position: relative;

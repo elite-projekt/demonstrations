@@ -87,6 +87,10 @@ class KeyloggerController(demo_controller.DemoController):
             self.keylog_service.send_mails()
         return ErrorCodes.start_success
 
+    def get_data(self, subpath):
+        keystrokes_dict = {"logged": str(self.keylog_service.keylog_simulation.your_keystrokes), "injected": str(self.keylog_service.keylog_simulation.injected_keystrokes), "logged_title": str(self.keylog_service.locale.translate("logged_keystrokes_title")), "injected_title": str(self.keylog_service.locale.translate("injected_keystrokes_title")), "end_text": str(self.keylog_service.locale.translate("uhh_keylogger_end_text"))} # noqa: 501
+        return keystrokes_dict
+
 
 def get_controller():
     return KeyloggerController()
