@@ -17,7 +17,29 @@ class Keylog_Simulation():
         '''Convert KeyCodes to readable string'''
         try:
             # Try to get the character of the key directly
-            return key.char
+            pressed_key = str(key.char)
+            # Key combos with control
+            if self.last_key == " |ctrl| " or self.last_key == " |steuerung| " or "ombo " in self.last_key: # noqa: 501
+                if self.last_key == " |ctrl| ":
+                    self.log = self.log[:-7]
+                if self.last_key == " |steuerung| ":
+                    self.log = self.log[:-13]
+                # Select all
+                if pressed_key == "\u0001":
+                    return self.locale.translate("combo_select_all")
+                # Copy
+                if pressed_key == "\u0003":
+                    return self.locale.translate("combo_copy")
+                # Insert
+                if pressed_key == "\u0016":
+                    return self.locale.translate("combo_insert")
+                # Undo
+                if pressed_key == "\u001a":
+                    return self.locale.translate("combo_undo")
+            # Uppercase letter, remove shift for easier readability
+            if self.last_key == " |shift| ":
+                self.log = self.log[:-9]
+            return pressed_key
         except AttributeError:
             # Cut out 'Key.' and '_l' or '_r' from KeyCode string
             if "_l" in str(key) or "_r" in str(key):
@@ -35,6 +57,7 @@ class Keylog_Simulation():
     def on_press(self, key):
         '''For Keylogger'''
         c = str(self.get_char(key))
+        self.last_key = c
         self.log = self.log + c
 
     def __init__(self, stop_event, locale):
@@ -47,11 +70,14 @@ class Keylog_Simulation():
         self.inject = False
         self.key_translation_dict = {}
 
+        self.last_key = ""
+
         self.locale = locale
 
         # Add missing keys
-        self.keys = [["tab", "enter", "shift", "steuerung",
-                      "windows", "escape", "alt", "home", "caps"]]
+        self.keys = ["tab", "enter", "shift", "steuerung",
+                     "windows", "escape", "alt", "home", "caps",
+                     "backspace"]
 
     def execute(self):
         self.inject = True
@@ -68,13 +94,38 @@ class Keylog_Simulation():
             "esc": self.locale.translate("key_esc"),
             "alt": self.locale.translate("key_alt"),
             "home": self.locale.translate("key_home"),
-            "caps_lock": self.locale.translate("key_caps_lock")}
+            "caps_lock": self.locale.translate("key_caps_lock"),
+            "backspace": self.locale.translate("key_backspace")}
         self.listener.start()
 
         self.stop_event.wait()
 
         # Insert special characters denoting end of user input
         self.log = self.log + "\n\nINJECTED KEYSTROKES\n\n"
+        self.listener.stop()
+
+        # Add injected keystroke part to log
+
+        self.log = self.log + self.key_translation_dict["ctrl"] + self.key_translation_dict["shift"] + "j " # noqa: 501
+
+        for func in self.js_function_names:
+            self.log = self.log + f"{func}()"
+            self.log = self.log + self.key_translation_dict["enter"] # noqa: 501
+
+        self.log = self.log + self.key_translation_dict["ctrl"] + self.key_translation_dict["shift"] + "j " # noqa: 501
+
+        # Beautify log by substituting multiple presses of same key
+        for k in self.keys:
+            # Old syntax because of regex
+            occurances = len(re.findall(r"( \|%s\| )" % (k), self.log))
+            self.log = re.sub(r"( \|%s\| ){2,}" % (k), " {0}x|{1}| ".format(occurances, k), self.log) # noqa: 501
+
+        # Split log for request from site
+        self.your_keystrokes = self.log.split(
+            "\n\nINJECTED KEYSTROKES\n\n")[0]
+        self.injected_keystrokes = self.log.split(
+            "\n\nINJECTED KEYSTROKES\n\n")[1]
+
         if self.inject:
             # Block characters of the alphabet
             for key in string.ascii_lowercase:
@@ -91,8 +142,6 @@ class Keylog_Simulation():
                 block_key(key.name)
             self.keystroke_injection()
             unhook_all()
-        else:
-            self.listener.stop()
 
     # Simulates key sequences
     def press_keys(self, keys, delay_between_sec, delay_after_sec):
@@ -175,39 +224,10 @@ class Keylog_Simulation():
             self.press_keys([Key.enter], 0, 0.25)
 
         # Close Browser Console
-        self.simultaneous_press_keys([Key.ctrl, Key.shift, "j"], .5)
+        self.simultaneous_press_keys([Key.ctrl, Key.shift, "j"], 2)
 
-        # Stop listening for keystrokes
-        self.listener.stop()
-
-        # Beautify log by substituting multiple presses of same key
-        for k in self.keys:
-            # Old syntax because of regex
-            occurances = len(re.findall(r"( \|%s\| )" % (k), self.log))
-            self.log = re.sub(r"( \|%s\| ){2,}" % (k), " {0}x|{1}| ".format(occurances, k), self.log) # noqa: 501
-
-        self.your_keystrokes = self.log.split(
-            "\n\nINJECTED KEYSTROKES\n\n")[0]
-        self.injected_keystrokes = self.log.split(
-            "\n\nINJECTED KEYSTROKES\n\n")[1]
-
-        # End text
-        self.end_text = self.locale.translate(
-            "uhh_keylogger_end_text").split("\n")
-
-        # Show logged Keys
-        self.press_keys([Key.tab], 0.25, 0.25)
-        pyperclip.copy(self.your_keystrokes)
-        self.simultaneous_press_keys([Key.ctrl, "v"], 0.25)
-        self.press_keys([Key.tab], 0.25, 0.25)
-        pyperclip.copy(self.injected_keystrokes)
-        self.simultaneous_press_keys([Key.ctrl, "v"], 0.25)
-        self.press_keys([Key.tab], 0.25, 0.25)
-
-        for sentence in self.end_text:
-            pyperclip.copy(sentence)
-            self.simultaneous_press_keys([Key.ctrl, "v"], 0.15)
-            self.press_keys([Key.enter], 0, 0.15)
+        # Scroll to end text
+        self.press_keys([Key.space, Key.space], 2, 0.25)
 
 
 if __name__ == "__main__":
