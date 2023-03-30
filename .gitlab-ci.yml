@@ -112,3 +112,17 @@ demo-image-jobs:
       - artifact: generated_demo_ci.yml
         job: generate-demo-jobs
     strategy: depend
+
+release:
+  stage: release
+  image: alpine
+  script:
+    - apk update && apk add zip
+    - zip -r demoCA demos native .env build_image.sh build_images.py setup.py setup.cfg MANIFEST.in
+    - mkdir elite
+    - mv nativeapp-.zip elite/elite.zip && cp installer.bat elite/
+  artifacts:
+    name: "elite"
+    paths:
+      - elite
+
