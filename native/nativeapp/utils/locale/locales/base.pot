@@ -132,8 +132,17 @@ msgstr "Send Answers"
 msgid "survey_title"
 msgstr "Survey for demo"
 
-msgid "survey_demo_like"
+msgid "survey_question_demo_like"
 msgstr "How would you rate your experience with the demo?"
 
-msgid "survey_demo_realistic"
+msgid "survey_question_demo_realistic"
 msgstr "How would you rate the realism of the demo?"
+
+msgid "survey_question_it_knowledge"
+msgstr ""
+
+msgid "survey_question_danger"
+msgstr ""
+
+msgid "survey_question_length"
+msgstr ""

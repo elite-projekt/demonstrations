@@ -264,7 +264,13 @@ class DemoManager():
         send_dict = {}
         local_locale = locale.Locale()
         local_locale.update_locale(lang)
-        survey_questions_id = ["survey_demo_like", "survey_demo_realistic"]
+        survey_questions_id = [
+                "survey_question_it_knowledge",
+                "survey_question_danger",
+                "survey_question_length",
+                "survey_question_demo_realistic",
+                "survey_question_demo_like",
+                ]
         common_translation_ids = [
                 "start_offline",
                 "start_waiting",

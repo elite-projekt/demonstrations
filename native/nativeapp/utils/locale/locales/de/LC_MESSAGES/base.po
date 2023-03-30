@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2022-07-08 11:01+0200\n"
-"PO-Revision-Date: 2023-03-27 17:17+0200\n"
+"PO-Revision-Date: 2023-03-30 14:49+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -136,11 +136,22 @@ msgstr "Feedback Senden"
 msgid "survey_title"
 msgstr "Feedback für Demo"
 
-msgid "survey_demo_like"
+msgid "survey_question_demo_like"
 msgstr "Wie würden Sie die Demo bewerten?"
 
-msgid "survey_demo_realistic"
+msgid "survey_question_demo_realistic"
 msgstr "Wie realistisch empfanden Sie die Demo?"
+
+msgid "survey_question_it_knowledge"
+msgstr "Wie schätzen Sie Ihr eigenes Wissen im Berreich IT-Security ein?"
+
+msgid "survey_question_danger"
+msgstr ""
+"Wie schätzen Sie die Gefahrenlage in der IT-Sicherheit nach der Demo "
+"ein?"
+
+msgid "survey_question_length"
+msgstr "Ist die Länge der Demo angemessen?"
 
 #~ msgid "start_button"
 #~ msgstr "Demo starten"
