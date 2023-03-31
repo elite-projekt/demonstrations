@@ -3,6 +3,8 @@ stages:
   - lint
   - test
   - demo
+  - build
+  - upload
   - release
 
 variables:
@@ -10,7 +12,7 @@ variables:
   # Must be in the format of X.Y.Z, i.e. should match /\A\d+\.\d+\.\d+\z/ regular expresion.
   # See https://docs.gitlab.com/ee/user/packages/generic_packages/#publish-a-package-file
   PACKAGE_REGISTRY_URL: "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/nativeapp/${CI_COMMIT_TAG}"
-  ZIP: "nativeapp-${CI_COMMIT_TAG}.zip"
+  INSTALLER_ZIP: "elite_installer.zip"
   SUB_PROJECT_DOCKERFILE: Dockerfile
 
 lint:shell-code:
@@ -113,16 +115,40 @@ demo-image-jobs:
         job: generate-demo-jobs
     strategy: depend
 
-release:
-  stage: release
+build-release-zip:
+  stage: build
   image: alpine
   script:
     - apk update && apk add zip
-    - zip -r demoCA demos native .env build_image.sh build_images.py setup.py setup.cfg MANIFEST.in
+    - zip -r elite.zip demoCA demos native .env build_image.sh build_images.py setup.py setup.cfg MANIFEST.in
     - mkdir elite
-    - mv nativeapp-.zip elite/elite.zip && cp installer.bat elite/
+    - ls -hal
+    - mv elite.zip elite/elite.zip && cp installer.bat elite/
+    - zip -r elite_installer.zip elite && mkdir elite_installer && mv elite_installer.zip elite_installer
   artifacts:
-    name: "elite"
+    name: "elite_installer"
     paths:
-      - elite
+      - elite_installer
 
+
+upload:
+  stage: upload
+  image: curlimages/curl:latest
+  rules:
+    - if: $CI_COMMIT_TAG
+  needs:
+    - job: build-release-zip
+      artifacts: true
+  script:
+    - ls -hal
+    - |
+      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file elite_installer/${INSTALLER_ZIP} ${PACKAGE_REGISTRY_URL}/${INSTALLER_ZIP}
+
+release:
+  stage: release
+  image: registry.gitlab.com/gitlab-org/release-cli:latest
+  rules:
+    - if: $CI_COMMIT_TAG
+  script:
+    - release-cli create --name "Release $CI_COMMIT_TAG" --tag-name "$CI_COMMIT_TAG" \
+          --assets-link "{\"name\":\"${INSTALLER_ZIP}\",\"url\":\"${PACKAGE_REGISTRY_URL}/${INSTALLER_ZIP}\"}"
