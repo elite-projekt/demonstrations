@@ -105,38 +105,38 @@ def generate_docker_lint_ci():
             for container in json_data["container"]:
                 # lint job
                 name = container["name"]
-                template = PipelineTemplate(name, "lint:dockerfile", image="registry.gitlab.com/pipeline-components/hadolint") # noqa: 501
+                template = PipelineTemplate(name, "lint:dockerfile", image="registry.gitlab.com/pipeline-components/hadolint")  # noqa: 501
                 dockerfile = container["dockerfile"]
                 demo_path = pathlib.Path(dockerfile).parent
-                template.add_command(f"hadolint \"$CI_PROJECT_DIR/demos/{demo.name}/{dockerfile}\"") # noqa: 501
+                template.add_command(f"hadolint \"$CI_PROJECT_DIR/demos/{demo.name}/{dockerfile}\"")  # noqa: 501
                 template.stage = "lint"
                 demo_data += template.generate()
                 # build job
-                template = PipelineTemplate(name, "build:image", image="gcr.io/kaniko-project/executor:debug") # noqa: 501
+                template = PipelineTemplate(name, "build:image", image="gcr.io/kaniko-project/executor:debug")  # noqa: 501
                 template.entrypoint = ""
-                template.add_command(f"image_name=\"$CI_REGISTRY_IMAGE/{name}:$CI_COMMIT_BRANCH\"") # noqa: 501
-                template.add_command(f"/kaniko/executor --context \"$CI_PROJECT_DIR/demos/{demo.name}/{demo_path}\" --dockerfile \"$CI_PROJECT_DIR/demos/{demo.name}/{dockerfile}\" --no-push --destination \"$image_name\" --tarPath {name}.tar") # noqa: 501
+                template.add_command(f"image_name=\"$CI_REGISTRY_IMAGE/{name}:$CI_COMMIT_BRANCH\"")  # noqa: 501
+                template.add_command(f"/kaniko/executor --cache-run-layers --cache-repo \"$CI_REGISTRY_IMAGE\" --context \"$CI_PROJECT_DIR/demos/{demo.name}/{demo_path}\" --dockerfile \"$CI_PROJECT_DIR/demos/{demo.name}/{dockerfile}\" --no-push --destination \"$image_name\" --tarPath {name}.tar")  # noqa: 501
                 template.add_before_script_command("mkdir -p /kaniko/.docker")
-                template.add_before_script_command("echo \"{'auths':{'$CI_REGISTRY':{'username':'$CI_REGISTRY_USER','password':'$CI_REGISTRY_PASSWORD'}}}\" > /kaniko/.docker/config.json".replace("'", "\\\"")) # noqa: 501
-                template.add_before_script_command("cat /kaniko/.docker/config.json") # noqa: 501
-                template.add_before_script_command(f"$CI_PROJECT_DIR/demos/{demo.name}/{demo_path}/prepare.sh || true ") # noqa: 501
+                template.add_before_script_command("echo \"{'auths':{'$CI_REGISTRY':{'username':'$CI_REGISTRY_USER','password':'$CI_REGISTRY_PASSWORD'}}}\" > /kaniko/.docker/config.json".replace("'", "\\\""))  # noqa: 501
+                template.add_before_script_command("cat /kaniko/.docker/config.json")  # noqa: 501
+                template.add_before_script_command(f"$CI_PROJECT_DIR/demos/{demo.name}/{demo_path}/prepare.sh || true ")  # noqa: 501
                 template.add_artifact(f"{name}.tar")
                 template.add_dependency(f"lint:dockerfile-{name}")
                 template.stage = "build"
                 demo_data += template.generate()
                 # scan job
-                template = PipelineTemplate(name, "scan:image", image="aquasec/trivy:latest") # noqa: 501
+                template = PipelineTemplate(name, "scan:image", image="aquasec/trivy:latest")  # noqa: 501
                 template.entrypoint = ""
-                template.add_command(f"trivy --cache-dir .trivycache/ image -s HIGH,CRITICAL --security-checks vuln --exit-code 1 --no-progress --ignore-unfixed --input {name}.tar") # noqa: 501
+                template.add_command(f"trivy --cache-dir .trivycache/ image -s HIGH,CRITICAL --security-checks vuln --exit-code 1 --no-progress --ignore-unfixed --input {name}.tar")  # noqa: 501
                 template.add_dependency(f"build:image-{name}")
                 template.stage = "scan"
                 demo_data += template.generate()
 
                 # push job
-                template = PipelineTemplate(name, "push:image", image="gcr.io/go-containerregistry/crane:debug") # noqa: 501
+                template = PipelineTemplate(name, "push:image", image="gcr.io/go-containerregistry/crane:debug")  # noqa: 501
                 template.entrypoint = ""
-                template.add_command("crane auth login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY") # noqa: 501
-                template.add_command(f"crane push {name}.tar $CI_REGISTRY_IMAGE/{name}:$CI_COMMIT_BRANCH") # noqa: 501
+                template.add_command("crane auth login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY")  # noqa: 501
+                template.add_command(f"crane push {name}.tar $CI_REGISTRY_IMAGE/{name}:$CI_COMMIT_BRANCH")  # noqa: 501
                 template.add_dependency(f"build:image-{name}")
                 template.stage = "push"
                 demo_data += template.generate()
