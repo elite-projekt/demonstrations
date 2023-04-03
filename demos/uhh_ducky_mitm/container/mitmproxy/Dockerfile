@@ -1,8 +1,8 @@
-# hadolint ignore=DL3007
-from alpine:latest AS builder
+# hadolint ignore=DL3006
+from debian
 
-# hadolint ignore=DL3018,DL3013,SC1091
-RUN apk update --no-cache && apk upgrade --no-cache && apk add --no-cache python3-dev py-pip gcc musl-dev libffi-dev rustup openssl-dev g++ && rustup-init -y && source /root/.cargo/env && pip install --no-cache-dir mitmproxy && pip install --no-cache-dir --no-deps "cryptography>=39" && apk del python3-dev gcc musl-dev openssl-dev g++ rustup && rm -rf /root/.cargo && rm -rf /root/.rustup
+# hadolint ignore=DL3008,DL3013
+RUN apt-get update && apt-get upgrade -y && apt-get install -y --no-install-recommends python3-pip && rm -rf /var/lib/apt/lists/* && pip install --no-cache-dir mitmproxy && pip install --no-cache-dir --no-deps "cryptography>=39"
 
 EXPOSE 8080 8081
 
