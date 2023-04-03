@@ -12,6 +12,7 @@ class Locale():
         self.locale_dirs = []
         self.translation = None
         self.add_locale_dir(pathlib.Path(__file__).parent / "locales")
+        self.locale_identifier = "de"
         self.update_locale("de")
 
     def add_locale_dir(self, locale_dir: pathlib.Path):
@@ -19,6 +20,7 @@ class Locale():
 
     def update_locale(self, language: str):
         logging.debug(f"Setting language to {language}")
+        self.locale_identifier = language
         self.translation = None
         for locale_dir in self.locale_dirs:
             try:
