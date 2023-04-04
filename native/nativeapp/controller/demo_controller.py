@@ -72,6 +72,7 @@ class DemoController(ABC):
         self.level = "beginner"
         self.time = 0
         self.hardware = []
+        self.categories = []
         self.instructor_id = 3
         self.is_available = False
 
@@ -119,6 +120,9 @@ class DemoController(ABC):
 
             if "isAvailable" in json_data:
                 self.is_available = json_data["isAvailable"]
+
+            if "categories" in json_data:
+                self.categories = json_data["categories"]
 
     def set_state(self, state: str, extra_state: str = "") -> None:
         """
@@ -216,6 +220,7 @@ class DemoController(ABC):
         data_dict["hardware"] = self.hardware
         data_dict["instructor_id"] = self.instructor_id
         data_dict["isAvailable"] = self.is_available
+        data_dict["categories"] = self.categories
         return data_dict
 
 
