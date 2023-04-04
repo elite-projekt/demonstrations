@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2022-07-08 11:01+0200\n"
-"PO-Revision-Date: 2023-03-27 17:17+0200\n"
+"PO-Revision-Date: 2023-04-03 15:49+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -59,28 +59,20 @@ msgstr "Killing Applications"
 msgid "stopping"
 msgstr "Stopping Demo"
 
-#, fuzzy
-#| msgid "offline"
 msgid "start_offline"
-msgstr "Offline"
+msgstr "Start Demo"
 
 msgid "start_waiting"
 msgstr "Waiting for data"
 
-#, fuzzy
-#| msgid "error"
 msgid "start_error"
 msgstr "Error"
 
-#, fuzzy
-#| msgid "ready"
 msgid "start_ready"
 msgstr "Demo Ready"
 
-#, fuzzy
-#| msgid "starting"
 msgid "start_running"
-msgstr "Starting Demo"
+msgstr "Demo running"
 
 msgid "start_stopping"
 msgstr "Stopping "
@@ -142,11 +134,20 @@ msgstr "Send Answers"
 msgid "survey_title"
 msgstr "Survey for demo"
 
-msgid "survey_demo_like"
+msgid "survey_question_demo_like"
 msgstr "How would you rate your experience with the demo?"
 
-msgid "survey_demo_realistic"
+msgid "survey_question_demo_realistic"
 msgstr "How would you rate the realism of the demo?"
+
+msgid "survey_question_it_knowledge"
+msgstr "How would you rate your own knowledge in the area of IT security?"
+
+msgid "survey_question_danger"
+msgstr "How do you assess the threat situation in IT security after the demo?"
+
+msgid "survey_question_length"
+msgstr "Is the length of the demo appropriate?"
 
 #~ msgid "start_button"
 #~ msgstr "Start Demo"
