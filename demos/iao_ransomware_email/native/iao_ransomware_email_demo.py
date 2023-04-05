@@ -11,6 +11,8 @@ import time
 import zipfile
 import pathlib
 import tempfile
+from nativeapp.utils.admin import admin_app
+
 
 import python_on_whales
 
@@ -52,9 +54,16 @@ class RansomwareDemo:
     localedir = pathlib.Path(__file__).parent.parent / "locales"
     locale = locale.Locale()
     locale.add_locale_dir(localedir)
+    admin_client = admin_app.NativeappAdminClient()
 
     email_client_config_location = profile_dir / \
         f"{default_email_profile}/prefs.js"
+
+    def prep_domainname(self):
+        self.admin_client.send_command(
+            admin_app.NativeappCommands.SET_REDIRECT,
+            admin_app.create_host_payload(
+                True, "mail.nimbus.de", "127.0.0.1"))
 
     # deletes all mail in a mail box
     def delete_mailbox(
@@ -407,4 +416,8 @@ class RansomwareDemo:
                 ['C:\\Windows\\System32\\taskkill.exe', '/f', '/im',
                  process], shell=False
             )
+        self.admin_client.send_command(
+            admin_app.NativeappCommands.SET_REDIRECT,
+            admin_app.create_host_payload(
+                 False, "mail.nimbus.de"))
         time.sleep(1)
