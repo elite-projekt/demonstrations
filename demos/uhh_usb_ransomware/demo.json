@@ -1,0 +1,19 @@
+{
+  "categories": [
+    "phishing",
+    "email",
+    "badusb"
+  ],
+  "hardware": [
+    "usb-stick"
+  ],
+  "level": "beginner",
+  "time": 5,
+  "isAvailable": true,
+  "container": [
+    {
+      "name": "uhh_usb_ransomware_web",
+      "dockerfile": "container/nginx/Dockerfile"
+    }
+  ]
+}
