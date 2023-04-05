@@ -72,9 +72,8 @@ Restart-Computer
 
 
 ## Installation of Native Access Component
-The full installation process can be found under the [Native App page](https://code.fbi.h-da.de/groups/esc-mpse20/-/wikis/Demonstrations/Native-App#install)
-
-Further the `rootCA.crt` has to be imported into the browser of your choice (accept identification of websites), it can be found in the program directory of the nativeapp (created through the installation) `C:\Program Files(x86)\hda\nativeapp\stacks`.
+Download the zip of the `build-release-zip` stage (in the future on the release page as well). Unzip it and run the `installer.bat` and follow the instructions.
+Windows defender will complain, but you can just ignore the message.
 
 **Troubleshooting**
 - There have been issues with 3rd party antivirus programs - Windows Defender not affected (see [Native App - Issues](Demonstrations/Native-App#issues)), it's recommended to use defender.
