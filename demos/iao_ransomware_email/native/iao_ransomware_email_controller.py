@@ -27,6 +27,7 @@ class RansomwareController(demo_controller.DemoController):
                 self.set_state(DemoStates.STARTING)
                 self.start_container(lang_env)
                 iao_ransomware_email_code.prep()
+                self.ransomware_service.prep_domainname()
                 self.ransomware_service.check_mail_server_online()
                 self.ransomware_service.copy_client_profile()
                 self.ransomware_service.delete_mailbox()
