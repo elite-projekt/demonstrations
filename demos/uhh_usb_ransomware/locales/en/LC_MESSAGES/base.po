@@ -1,0 +1,96 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2022-07-08 11:01+0200\n"
+"PO-Revision-Date: 2023-04-03 14:49+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: pygettext.py 1.5\n"
+"X-Generator: Poedit 3.2.2\n"
+
+msgid "end_demo_text"
+msgstr "End demo"
+
+msgid "uhh_crash_text"
+msgstr ""
+"You connected a malicious USB device which destroyed the PC\n"
+"\n"
+"This device puts -220V on the data lines and damages the PC by doing so.\n"
+"\n"
+"Since this is only a simulation you can end the demonstration by using the "
+"button below."
+
+msgid "uhh_picture_mail_subject"
+msgstr "Urgent! I need the current payroll!"
+
+msgid "uhh_picture_mail_content"
+msgstr ""
+"Hello Max,\n"
+"\n"
+"I urgently need the current payroll. Since you proudly claimed that the "
+"current version is currently on your desktop, I hope that you are the "
+"correct person to talk to.\n"
+"\n"
+"Unfortunately, we are not allowed to send sensitive data by e-mail. Could "
+"you copy the file to a USB stick? I left one on at your workstation. Please "
+"excuse the inconvenience.\n"
+"\n"
+"Thank you very much and best regards\n"
+"\n"
+"Christina"
+
+msgid "file_one"
+msgstr "My recommendation would be to renovate the entire place. "
+
+msgid "file_two"
+msgstr ""
+"I do not think it is a good idea to change anything. \n"
+" In my opinion, our office already looks good the way it is. "
+
+msgid "file_three"
+msgstr ""
+"In my opinion we should all gather and make a decision together. \n"
+" Together, we can make the best decision for everyone. "
+
+msgid "end_text"
+msgstr "Your PC was infected with ransomware "
+
+msgid "uhh_usb_ransomware_title"
+msgstr "USB-ransomware"
+
+msgid "uhh_usb_ransomware_description"
+msgstr ""
+"This demo shows the dangers of tampered USB sticks and how they can cause "
+"immediate damage to the PC's filesystem."
+
+msgid "uhh_usb_ransomware_guide_intro"
+msgstr ""
+"In this demo you will learn about the dangers of unknown USB devices and "
+"what damage they can cause. "
+
+msgid "uhh_usb_ransomware_guide_goal"
+msgstr ""
+"At the end of the demo, not everything will run as you expect. However, this "
+"is planned. The demo ends when files on the desktop have been encrypted and "
+"the background picture has changed. "
+
+msgid "uhh_usb_ransomware_guide_req"
+msgstr ""
+"This demo requires a demonstration USB stick, which will be given to you by "
+"our presenters."
+
+msgid "uhh_usb_ransomware_guide_task"
+msgstr ""
+"Your task in this demo is to follow the instructions in the emails from "
+"Christina Sauer. She will ask you to insert a USB stick that she has sent "
+"you into your demonstration computer and with that access, check files on "
+"your desktop. "
