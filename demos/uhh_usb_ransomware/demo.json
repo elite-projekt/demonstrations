@@ -2,7 +2,8 @@
   "categories": [
     "phishing",
     "email",
-    "badusb"
+    "badusb",
+    "ransomware"
   ],
   "hardware": [
     "usb-stick"
