@@ -55,6 +55,7 @@ class PasswordController(demo_controller.DemoController):
             lang_env = {"ELITE_LANG": config.EnvironmentConfig.LANGUAGE}
             self.start_container(lang_env)
             self.browser_program.copy_profile()
+            self.browser_program.set_default()
         except Exception as e:
             logging.error(e)
             self.set_state(DemoStates.ERROR)
