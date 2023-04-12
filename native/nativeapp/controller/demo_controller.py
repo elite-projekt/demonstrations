@@ -279,6 +279,7 @@ class DemoManager():
         common_translation_ids = [
                 "start_offline",
                 "start_waiting",
+                "start_starting",
                 "start_error",
                 "start_ready",
                 "start_running",
