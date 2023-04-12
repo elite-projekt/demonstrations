@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2022-07-08 11:01+0200\n"
-"PO-Revision-Date: 2023-04-11 12:53+0200\n"
+"PO-Revision-Date: 2023-04-12 14:29+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -76,6 +76,9 @@ msgstr "Demo läuft"
 
 msgid "start_stopping"
 msgstr "Demo Stoppt"
+
+msgid "start_starting"
+msgstr "Demo startet"
 
 msgid "stop_button"
 msgstr "Demo stoppen"

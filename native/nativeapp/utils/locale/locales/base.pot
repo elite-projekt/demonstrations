@@ -75,6 +75,9 @@ msgstr "Demo Running"
 msgid "start_stopping"
 msgstr "Stopping demo"
 
+msgid "start_starting"
+msgstr "Starting demo"
+
 msgid "stop_button"
 msgstr "Stop Demo"
 
