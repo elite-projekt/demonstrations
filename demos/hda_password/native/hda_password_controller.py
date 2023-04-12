@@ -53,6 +53,8 @@ class PasswordController(demo_controller.DemoController):
                 config.EnvironmentConfig.LANGUAGE = params["language"]
             logging.info("Starting password demo stack")
             lang_env = {"ELITE_LANG": config.EnvironmentConfig.LANGUAGE}
+            self.set_state(DemoStates.STARTING,
+                           DemoStates.STARTING_CONTAINER)
             self.start_container(lang_env)
             self.browser_program.copy_profile()
             self.browser_program.set_default()
