@@ -15,13 +15,6 @@ variables:
   INSTALLER_ZIP: "elite_installer.zip"
   SUB_PROJECT_DOCKERFILE: Dockerfile
 
-lint:shell-code:
-  stage: lint
-  image: koalaman/shellcheck-alpine:stable
-  script:
-    - shellcheck -x init_new_demo.sh
-  needs: []
-
 lint:python-code:
   stage: lint
   image:
