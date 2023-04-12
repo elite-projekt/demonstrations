@@ -430,3 +430,7 @@ h2 {
   flex-direction: column;
   align-items: left;
 }
+
+::-ms-reveal {
+  display: none;
+}
