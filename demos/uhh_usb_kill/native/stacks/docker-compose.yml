@@ -1,24 +1,6 @@
 version: '3.9'
 
 services:
-  web:
-    image: ${REGISTRY_URL}/${GROUP_NAME}/demonstrations/uhh_ducky_mitm_web
-    container_name: uhh_ducky_web
-    ports:
-      - 443:443
-      - 80:80
-    environment:
-      - ELITE_LANG=${ELITE_LANG}
-  proxy:
-    image: ${REGISTRY_URL}/${GROUP_NAME}/demonstrations/uhh_ducky_mitm_proxy
-    container_name: uhh_ducky_proxy
-    ports:
-      - 8080:8080
-      - 8081:8081
-    network_mode: host
-    volumes:
-      - /etc/hosts:/etc/hosts
-
   mail:
     image: docker.io/mailserver/docker-mailserver:latest
     container_name: uhh_ducky_mitm_mailserver
