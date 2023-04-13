@@ -110,15 +110,20 @@ class KillDemo:
     def kill(self, usb_info):
         def kill_thread_func():
             self.kill_simulation = simulate_kill.KillSimulation()
-            self.kill_simulation.show_glitch()
-            time_waited_ms = 0
-            while time_waited_ms < 5000:
-                time.sleep(0.1)
-                time_waited_ms += 100
-            self.kill_simulation.show_crash()
-            while time_waited_ms < 10000:
-                time.sleep(0.1)
-                time_waited_ms += 100
+            sequences = [
+                    (self.kill_simulation.show_glitch, 5000),
+                    (self.kill_simulation.show_crash, 5000),
+                    (self.kill_simulation.show_glitch, 5000),
+                    (self.kill_simulation.show_crash, 5000),
+                        ]
+            for func, wait_time in sequences:
+                func()
+                time_waited_ms = 0
+                while time_waited_ms < wait_time:
+                    # Use small sleep to be interuptable
+                    time.sleep(0.1)
+                    time_waited_ms += 100
+
             self.kill_simulation.show_crash_text()
 
         self.kill_thread = threading.Thread(target=kill_thread_func)

@@ -141,7 +141,6 @@ class Glitch(QWidget):
         file_dir = pathlib.Path(__file__).parent / "resources"
         for i in range(1, 6):
             glitch_img_path = file_dir / f"glitch_cc_{i}.png"
-            logging.info(f"{glitch_img_path=} {glitch_img_path.exists()=}")
             glitches.append(QPixmap(str(glitch_img_path)))
 
         # Overlapping is allowed,
