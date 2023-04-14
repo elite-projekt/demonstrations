@@ -97,7 +97,10 @@
 					<p id="35" style="opacity: 0;" spellcheck="false"></p>
 					<h1 id="36" style="opacity: 0;">Injected Keystrokes</h1>
 					<p id="37" style="opacity: 0;" spellcheck="false"></p>
-					<p id="38" style="opacity: 0;" spellcheck="false"></p>
+          <div id="38" style="opacity: 0;">
+            <h1 id="end-heading"></h1>
+					  <p id="end-text" spellcheck="false"></p>
+          </div>
 					<button id="39" type="button" onclick="stop_demo()" style="opacity: 0;" class="btn">
   						<span class="align-middle btn btn-block btn-primary mt-3" style="margin: 0%;">Demo stoppen</span>
 					</button>
@@ -111,48 +114,51 @@
 
 
 <script>
-	function Hack() {
-    	for (let i = 21; i < 31; i++)
-    	{
-    		document.getElementById(i.toString()).textContent = '0';
-    	}
-	}
-
-	function Now() {
-		document.getElementById("31").textContent = '11';
-      	document.getElementById("32").textContent = 'HACKER';
-      	document.getElementById("33").textContent = '999999999';
-	}
-
-	//Last function for showing keylog and end demo text
-	function Complete() {
-		document.getElementById("34").style = "opacity: 1;"
-		document.getElementById("35").style = "opacity: 1; width: 100%; height: 200px; font-size: 200%; border: none; font-weight: bold; color: green;";
-    	document.getElementById("36").style = "opacity: 1;"
-		document.getElementById("37").style = "opacity: 1; width: 100%; height: 400px; font-size: 200%; border: none; font-weight: bold; color: red; overflow: hidden";
-    	document.getElementById("38").style = "opacity: 1; width: 100%; height: 500px; font-size: 150%; border: none; font-weight: bold; overflow: hidden";
-    	document.getElementById("39").style = "width: 30%; padding: 0%; border-width: 0px; opacity: 1;";
-
-    	var xhr = new XMLHttpRequest();
-    	xhr.onreadystatechange = function() {
-    		// check if request is complete and response is OK
-    		if (this.readyState === 4 && this.status === 200) {
-        		// parse response as JSON
-        		var data = JSON.parse(this.responseText);
-            document.getElementById("34").innerText = data.logged_title;
-            document.getElementById("35").innerText = data.logged;
-            document.getElementById("36").innerText = data.injected_title;
-            document.getElementById("37").innerText = data.injected;
-            document.getElementById("38").innerText = data.end_text;
-	    	}
-      	}
-
-		// set request parameters
-		xhr.open("GET", "http://127.0.0.1:5000/orchestration/data/demo/uhh_keylogger", true);
-
-		// send request
-		xhr.send();
+  function Hack() {
+    for (let i = 21; i < 31; i++)
+    {
+      document.getElementById(i.toString()).textContent = '0';
     }
+  }
+
+  function Now() {
+    Hack();
+    document.getElementById("31").textContent = '11';
+    document.getElementById("32").textContent = 'HACKER';
+    document.getElementById("33").textContent = '999999999';
+  }
+
+  //Last function for showing keylog and end demo text
+  function Complete() {
+    Now();
+    document.getElementById("34").style = "opacity: 1;"
+    document.getElementById("35").style = "opacity: 1; width: 100%; height: 200px; font-size: 200%; border: none; font-weight: bold; color: green;";
+    document.getElementById("36").style = "opacity: 1;"
+    document.getElementById("37").style = "opacity: 1; width: 100%; height: 400px; font-size: 200%; border: none; font-weight: bold; color: red; overflow: hidden";
+    document.getElementById("38").style = "opacity: 1; width: 100%; height: 500px; font-size: 150%; border: none; font-weight: bold; overflow: hidden";
+    document.getElementById("39").style = "width: 30%; padding: 0%; border-width: 0px; opacity: 1;";
+
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+      // check if request is complete and response is OK
+      if (this.readyState === 4 && this.status === 200) {
+        // parse response as JSON
+        var data = JSON.parse(this.responseText);
+        document.getElementById("34").innerText = data.logged_title;
+        document.getElementById("35").innerText = data.logged;
+        document.getElementById("36").innerText = data.injected_title;
+        document.getElementById("37").innerText = data.injected;
+        document.getElementById("end-heading").innerText = data.end_title;
+        document.getElementById("end-text").innerText = data.end_text;
+      }
+    }
+
+    // set request parameters
+    xhr.open("GET", "http://127.0.0.1:5000/orchestration/data/demo/uhh_keylogger", true);
+
+    // send request
+    xhr.send();
+  }
 
 	//Function for stopping demo
 	function stop_demo() {

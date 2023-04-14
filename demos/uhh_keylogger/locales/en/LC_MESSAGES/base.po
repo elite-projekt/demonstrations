@@ -17,10 +17,12 @@ msgstr ""
 "Generated-By: pygettext.py 1.5\n"
 "X-Generator: Poedit 3.1\n"
 
+msgid "uhh_keylogger_end_title"
+msgstr "What just happened?\n"
+
 #: uhh_keylogger_demo.py:136
 msgid "uhh_keylogger_end_text"
 msgstr ""
-"What just happened ?\n"
 "Your login data were stolen and the data you were meant to read through was manipulated !\n"
 "This attack was possible due to a hardware keylogger.\n"
 "In the field your logged keystrokes you can see the keys you pressed.\n"
