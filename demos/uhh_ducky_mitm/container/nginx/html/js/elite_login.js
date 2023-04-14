@@ -24,12 +24,12 @@ async function getTranslations() {
 					</div>
 					<form autocomplete="off" action="#" onsubmit="return submit_form(this)">
 
-					<div class="form-group first" id="name_field">
+					<div class="form-group first field--not-empty" id="name_field">
             <label for="name">${translation.nimbus_username}</label>
 						<input type="text" class="form-control" id="name" name="uname" value ="internal3495">
 
 					</div>
-					<div class="form-group" id="password_field">
+					<div class="form-group field--not-empty" id="password_field">
 
             <label for="password">${translation.nimbus_password}</label>
 						<div class="input-group">
