@@ -7,6 +7,8 @@ import win32con
 import subprocess  # nosec
 import shutil
 
+pyautogui.FAILSAFE = False
+
 
 global desktop_files
 global original_wallpaper

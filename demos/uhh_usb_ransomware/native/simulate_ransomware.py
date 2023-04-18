@@ -8,6 +8,8 @@ from cryptography.fernet import Fernet
 import pyautogui
 import importlib.resources
 
+pyautogui.FAILSAFE = False
+
 
 def get_encrypted_name(file_path):
     file_path = pathlib.Path(file_path)
