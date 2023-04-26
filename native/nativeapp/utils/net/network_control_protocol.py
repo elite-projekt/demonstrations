@@ -42,10 +42,12 @@ class NativeappControlServer(ABC):
         self.header = header
         self.listen_thread = None
 
+        logging.info("Creating listening socket")
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         self.socket.bind(("127.0.0.1", port))
         self.socket.listen(1)
+        logging.info("created socket")
 
     def run(self, foreground=True):
         if foreground:
@@ -65,6 +67,7 @@ class NativeappControlServer(ABC):
         while self.running:
             try:
                 conn, addr = self.socket.accept()
+                logging.info("Got new connection! Waiting for data")
                 with conn:
                     data = conn.recv(1024)
                     if data:
