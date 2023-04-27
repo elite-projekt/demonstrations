@@ -6,6 +6,8 @@ import re
 import tempfile
 import os
 import signal
+import traceback
+import logging
 
 from subprocess import Popen, PIPE  # nosec
 
@@ -112,6 +114,15 @@ def main():
             Currently only there for test purposes",
                         type=str, required=True, choices=["server", "client"])
     args = parser.parse_args()
+    logging_path = pathlib.Path("admin.log")
+    logging.basicConfig(
+        filename=logging_path,
+        datefmt="%y-%m-%d %H:%M:%S",
+        format="%(asctime)s %(levelname)-8s - [%(module)s:%(funcName)s] : "
+               "%(message)s",
+        level=logging.INFO,
+    )
+    logging.info("Starting service: admin app")
 
     if args.mode == "server":
         temp_dir = pathlib.Path(tempfile.gettempdir())
@@ -122,13 +133,16 @@ def main():
                 try:
                     os.kill(int(pid), signal.SIGKILL)
                 except Exception:
-                    print("Failed to kill old process. Trying to continue")
+                    logging.info("Failed to kill old process. Trying to continue")  # noqa: 501
 
         with open(pid_file_path, "w") as pid_file:
             pid_file.write(str(os.getpid()))
 
-        app = NativeappAdmin()
-        app.run()
+        try:
+            app = NativeappAdmin()
+            app.run()
+        except Exception:
+            logging.info(traceback.format_exc())
 
         pid_file_path.unlink()
 
