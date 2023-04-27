@@ -41,6 +41,7 @@ class NativeappControlServer(ABC):
         self.running = False
         self.header = header
         self.listen_thread = None
+        self.on_packet_lock = threading.Lock()
 
         logging.info("Creating listening socket")
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -62,20 +63,24 @@ class NativeappControlServer(ABC):
         if self.listen_thread:
             self.listen_thread.join()
 
+    def handle_connection(self, conn):
+        data = conn.recv(1024)
+        if data:
+            try:
+                command, payload = self.parse_packet(data)
+                with self.on_packet_lock:
+                    self.on_packet(command, payload)
+            except ValueError as e:
+                logging.warning(f"Ignoring invalid packet: {e}")
+
     def _run(self):
         self.running = True
         while self.running:
             try:
                 conn, addr = self.socket.accept()
                 logging.info("Got new connection! Waiting for data")
-                with conn:
-                    data = conn.recv(1024)
-                    if data:
-                        try:
-                            command, payload = self.parse_packet(data)
-                            self.on_packet(command, payload)
-                        except ValueError as e:
-                            logging.warning(f"Ignoring invalid packet: {e}")
+                threading.Thread(target=self.handle_connection,
+                                 args=(conn,)).start()
             except Exception:
                 pass
 
