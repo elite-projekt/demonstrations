@@ -14,42 +14,20 @@ You can either install and setup everything manually or use powershell commands 
 
 You need to run following command in the powershell. It is split into multiple stages per reboot.
 
-**Stage 1: Update Windows**
+**Stage 1: Update Windows and install WSL**
 
 Run PowerShell as administrator
 
 ```powershell
 # PowerShell as administrator
 Set-ExecutionPolicy Bypass -scope Process -Force
-Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
 Install-Module PSWindowsUpdate -Force
-Get-WindowsUpdate -AcceptAll -Install -AutoReboot
-```
-
-**Stage 2: Install WSL2**
-
-Run PowerShell as user
-
-```powershell
-# Install wsl2 (as user - not admin!)
-# source: https://webinstall.dev/wsl2/
-curl.exe -A "MS" https://webinstall.dev/wsl2 | powershell
-Restart-Computer
-```
-
-**Stage 3: Setup WSL2**
-
-You have to *manually* [install the linux kernel update package for WSL2](https://docs.microsoft.com/en-us/windows/wsl/install-manual#step-4---download-the-linux-kernel-update-package) before running the commands below.
-
-Run PowerShell as user
-
-```powershell
-wsl --set-default-version 2
+Get-WindowsUpdate -AcceptAll -Install
 wsl --install -d Ubuntu-20.04
 Restart-Computer
 ```
 
-**Stage 4: Install dependencies**
+**Stage 2: Install dependencies**
 
 Run PowerShell as administrator
 
@@ -58,14 +36,9 @@ Run PowerShell as administrator
 Set-ExecutionPolicy Bypass -scope Process -Force
 [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
 # install dependencies via chocolatey
-choco install python firefox thunderbird git nssm -y
+choco install python firefox thunderbird -y
 
-wsl --user root apt update
-wsl --user root apt install docker.io
-
-wsl --user root mkdir -p /root/.docker/cli-plugins
-wsl --user root bash -c "curl -SL https://github.com/docker/compose/releases/download/v2.4.1/docker-compose-linux-x86_64 -o /root/.docker/cli-plugins/docker-compose && chmod +x /root/.docker/cli-plugins/docker-compose"
-
+wsl --user root bash -c "apt update && apt install -y docker.io && mkdir -p /root/.docker/cli-plugins && curl -SL https://github.com/docker/compose/releases/download/v2.4.1/docker-compose-linux-x86_64 -o /root/.docker/cli-plugins/docker-compose && chmod +x /root/.docker/cli-plugins/docker-compose"
 
 Restart-Computer
 ```
