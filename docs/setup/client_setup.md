@@ -21,8 +21,9 @@ Run PowerShell as administrator
 ```powershell
 # PowerShell as administrator
 Set-ExecutionPolicy Bypass -scope Process -Force
+Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
 Install-Module PSWindowsUpdate -Force
-Get-WindowsUpdate -AcceptAll -Install
+Get-WindowsUpdate -AcceptAll -Install -IgnoreReboot
 wsl --install -d Ubuntu-20.04
 Restart-Computer
 ```
