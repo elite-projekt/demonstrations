@@ -264,58 +264,70 @@ class DemoManager():
     def getDemos():
         params = flask.request.get_json(silent=True)
         lang = "en"
-        if params is not None and "language" in params:
-            lang = params["language"]
-        send_dict = {}
         local_locale = locale.Locale()
         local_locale.update_locale(lang)
-        survey_questions_id = [
-                "survey_question_it_knowledge",
-                "survey_question_danger",
-                "survey_question_length",
-                "survey_question_demo_realistic",
-                "survey_question_demo_like",
-                ]
-        common_translation_ids = [
-                "start_offline",
-                "start_waiting",
-                "start_starting",
-                "start_error",
-                "start_ready",
-                "start_running",
-                "start_stopping",
-                "stop_button",
-                "learn_button",
-                "usb-stick",
-                "wifi-stick",
-                "phone",
-                "tooltip_time",
-                "tooltip_difficulty",
-                "tooltip_hardware",
-                "guide_intro",
-                "guide_task",
-                "guide_goal",
-                "guide_req",
-                "demo_error",
-                "error_code",
-                "survey_other",
-                "survey_title",
-                "survey_cancel_button",
-                "survey_send_button",
-                ] + survey_questions_id
-        common_translations = {}
-        for x in common_translation_ids:
-            common_translations[x] = local_locale.translate(x)
-        demo_list = []
-        for demo in DemoManager.demos.values():
-            new_demo = demo.get_property_dict(lang)
-            if new_demo["isAvailable"]:
-                demo_list.append(new_demo)
+        send_dict = {}
 
-        send_dict = {"demos": demo_list,
-                     "common_translations": common_translations,
-                     "survey_ids": survey_questions_id
-                     }
+        is_ready = False
+        if params is not None and "language" in params:
+            lang = params["language"]
+        try:
+            web_view.RemoteControlClient().connect()
+            is_ready = True
+        except Exception:
+            pass
+
+        if is_ready:
+            survey_questions_id = [
+                    "survey_question_it_knowledge",
+                    "survey_question_danger",
+                    "survey_question_length",
+                    "survey_question_demo_realistic",
+                    "survey_question_demo_like",
+                    ]
+            common_translation_ids = [
+                    "start_offline",
+                    "start_waiting",
+                    "start_starting",
+                    "start_error",
+                    "start_ready",
+                    "start_running",
+                    "start_stopping",
+                    "stop_button",
+                    "learn_button",
+                    "usb-stick",
+                    "wifi-stick",
+                    "phone",
+                    "tooltip_time",
+                    "tooltip_difficulty",
+                    "tooltip_hardware",
+                    "guide_intro",
+                    "guide_task",
+                    "guide_goal",
+                    "guide_req",
+                    "demo_error",
+                    "error_code",
+                    "survey_other",
+                    "survey_title",
+                    "survey_cancel_button",
+                    "survey_send_button",
+                    ] + survey_questions_id
+            common_translations = {}
+            for x in common_translation_ids:
+                common_translations[x] = local_locale.translate(x)
+            demo_list = []
+            for demo in DemoManager.demos.values():
+                new_demo = demo.get_property_dict(lang)
+                if new_demo["isAvailable"]:
+                    demo_list.append(new_demo)
+
+            send_dict = {"demos": demo_list,
+                         "common_translations": common_translations,
+                         "survey_ids": survey_questions_id,
+                         "status": "ready"
+                         }
+        else:
+            send_dict = {"status": "waiting"}
         return flask.jsonify(send_dict)
 
     @staticmethod
