@@ -15,6 +15,7 @@ from nativeapp.service import orchestration_service
 from nativeapp.utils.locale import locale
 from nativeapp.utils.web import web_view
 from nativeapp.config import config
+from nativeapp.utils.admin import admin_app
 
 import flask
 from markupsafe import escape
@@ -272,7 +273,7 @@ class DemoManager():
         if params is not None and "language" in params:
             lang = params["language"]
         try:
-            web_view.RemoteControlClient().connect()
+            admin_app.NativeappAdminClient().connect()
             is_ready = True
         except Exception:
             pass
