@@ -98,10 +98,40 @@ $rootPath="C:\Program Files (x86)\hda\"
 $shortcutPath ="$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup\nativeapp.lnk"
 $hostFile ="C:\Windows\System32\drivers\etc\hosts"
 
+$disclaimer = @"
+IMPORTANT: Please read this disclaimer carefully before installing the program.
+
+1. Separate System or Virtual Machine Usage:
+The program you are about to install is designed for experimental or testing purposes only and should never be installed or run on production systems. It is strongly advised to use a separate system or a dedicated virtual machine (VM) solely for the purpose of running this program. Installing and executing this program on production systems may lead to unpredictable outcomes, including but not limited to data loss, system instability, and security vulnerabilities.
+
+2. Bugs and Security Related Problems:
+This program is provided "as is" without any warranty or guarantee of any kind. It is important to understand that this program might contain bugs or security-related problems. The developers of this program do not assume any responsibility or liability for any damages, losses, or disruptions caused by the use of this program, including but not limited to data corruption, unauthorized access, or system compromise.
+
+3. Experimental Nature:
+This program is intended for experimental purposes and should be treated as such. It may include features, functionalities, or modifications that are still in development, untested, or subject to change without notice. By installing and using this program, you acknowledge and accept the inherent risks associated with its experimental nature.
+
+4. Backup and Precautions:
+Prior to installing the program, it is strongly recommended to perform a complete backup of all important data and system configurations. In addition, exercise caution and ensure appropriate security measures are in place to protect against potential risks associated with running experimental software.
+
+5. Use at Your Own Risk:
+Installing and using this program is entirely at your own risk. The developers and distributors of this program shall not be held responsible for any direct or indirect damages, losses, or consequences arising from its installation, execution, or use.
+
+By proceeding with the installation, you indicate that you have read, understood, and agreed to the terms of this disclaimer. If you do not agree with any part of this disclaimer, do not proceed with the installation and remove any installed components related to this program immediately.
+
+Please note that the above disclaimer is provided as a general guideline and may need to be customized or expanded upon based on the specific characteristics and risks associated with the program in question.
+
+Type (y)es or (n)o
+"@
+
 WriteOutput "This installer will install the NativeApp" "DarkGray"
 
 # If rootPath folder doesn't exists start install routine
 If(!(Test-Path -path $rootPath)) {
+    $Answer = Read-Host -Prompt $disclaimer -ErrorAction Stop
+    if ($Answer -eq "y" -or $Answer -eq "yes") {
+    } else {
+        Exit 1
+    }
 
     # Read env file
     if($isReleaseDirectory) {
