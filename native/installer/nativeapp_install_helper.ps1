@@ -281,8 +281,8 @@ If(!(Test-Path -path $rootPath)) {
     # Create Shortcut and autostart entry
     try {
         WriteOutput "Try to create a new autostart entry" "DarkGray"
-
-        $action = New-ScheduledTaskAction -Execute "powershell " -Argument "-Windowstyle hidden ./.venv/Scripts/nativeapp.exe -p ." -WorkingDirectory "$directoryPath"
+        #XXX: It works but Windows adds some error. It works and I can't be bothered to decode Windows' shitty Powershell syntax!
+        $action = New-ScheduledTaskAction -Execute "powershell " -Argument "-Windowstyle hidden ./.venv/Scripts/nativeapp.exe -p . *> nativeapp_main.log" -WorkingDirectory "$directoryPath"
         $trigger = New-ScheduledTaskTrigger -AtLogon
         $principal = New-ScheduledTaskPrincipal -UserId $(whoami) -RunLevel Limited
         $settings = New-ScheduledTaskSettingsSet
