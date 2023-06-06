@@ -25,6 +25,8 @@ def main():
 
     files_without_license = []
     for media_file in all_files:
+        if (pathlib.Path(media_file.parent) / ".ignorelicense").exists():
+            continue
         license_path = pathlib.Path(media_file.parent / "LICENSE")
         if license_path.exists():
             with open(media_file.parent / "LICENSE", "r") as license_file:
