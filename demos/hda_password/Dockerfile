@@ -1,6 +1,6 @@
 FROM python:alpine
 
-RUN apk --no-cache update && apk --no-cache upgrade
+RUN apk --no-cache update && apk --no-cache upgrade && apk upgrade --no-cache
 
 # No Version Pining necessary
 # hadolint ignore=DL3013
