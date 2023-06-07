@@ -1,0 +1,11 @@
+version: '3.9'
+
+services:
+  web:
+    image: ${REGISTRY_URL}/${GROUP_NAME}/demonstrations/uhh_evil_twin_web
+    container_name: uhh_evil_twin_web
+    ports:
+      - 443:443
+      - 80:80
+    environment:
+      - ELITE_LANG=${ELITE_LANG}

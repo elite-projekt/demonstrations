@@ -1,0 +1,126 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2022-07-08 11:01+0200\n"
+"PO-Revision-Date: 2023-06-07 12:56+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: pygettext.py 1.5\n"
+"X-Generator: Poedit 3.3.1\n"
+
+msgid "uhh_evil_twin_step_one_heading"
+msgstr "1. Öffnen Sie die WiFi-Einstellungen Ihres Handys"
+
+msgid "uhh_evil_twin_step_one_text"
+msgstr "Sie sollten zwei Zugangspunkte mit dem Namen \"Nimbus Gast\" sehen"
+
+msgid "uhh_evil_twin_step_two_heading"
+msgstr "2. Datenschutzeinstellungen deaktivieren"
+
+msgid "uhh_evil_twin_step_two_text"
+msgstr ""
+"Um diese Demo zu nutzen, müssen Sie die Datenschutzeinstellungen für beide "
+"\"Nimbus Gast\"-Zugangspunkte deaktivieren.\n"
+"Dies ist erforderlich, um Ihr Gerät zu identifizieren und zu verhindern, "
+"dass andere ahnungslose Benutzer, Opfer des demonstrierten Angriffs werden."
+
+msgid "uhh_evil_twin_step_three_heading"
+msgstr "3. Verbinden Sie sich mit dem AP"
+
+msgid "uhh_evil_twin_step_three_text"
+msgstr ""
+"Verbinden Sie sich mit \"Nimbus Gast\" mit dem Schloss neben dem Namen. Das "
+"Passwort lautet \"ELITEDEMO\"."
+
+msgid "uhh_evil_twin_step_four_heading"
+msgstr "4. Öffnen Sie die Anmeldeseite"
+
+msgid "uhh_evil_twin_step_four_text"
+msgstr ""
+"Es sollte sich automatisch eine Website öffnen. Ist dies nicht der Fall, "
+"sehen Sie sich Ihre Benachrichtigungen an und suchen Sie nach derjenigen, "
+"die Sie auffordert, sich beim WiFi-Netzwerk anzumelden."
+
+msgid "uhh_evil_twin_step_five_heading"
+msgstr "5. Akzeptieren Sie die Bedingungen und Konditionen"
+
+msgid "uhh_evil_twin_step_five_text"
+msgstr ""
+"Lesen Sie die Bedingungen zum Nutzen der Demo durch. Wenn Sie mit ihnen "
+"einverstanden sind, aktivieren Sie das Kontrollkästchen und klicken Sie auf "
+"die Schaltfläche. Ihr Gerät ist nun in unserem System registriert und kann "
+"die Demo nutzen."
+
+msgid "uhh_evil_manual_button"
+msgstr "Zur Demo-Anleitung"
+
+msgid "uhh_evil_twin_heading"
+msgstr "Geräteauswahl"
+
+msgid "uhh_evil_twin_text"
+msgstr ""
+"Sie können entweder Ihr eigenes Gerät verwenden, um diese Demo zu nutzen.\n"
+"Dazu müssen Sie ein paar Schritte befolgen.\n"
+"Alternativ können Sie auch einen Moderator bitten, Ihnen ein Gerät zur "
+"Verfügung zu stellen."
+
+msgid "uhh_evil_own_device_button"
+msgstr "Eigenes Gerät"
+
+msgid "uhh_evil_provided_device_button"
+msgstr "Bereitgestelltes Gerät"
+
+msgid "uhh_evil_twin_begin_heading"
+msgstr "Willkommen zur \"Evil Twin\" Demo!"
+
+msgid "uhh_evil_twin_begin_text"
+msgstr ""
+"Sie sind Gast bei Nimbus und möchten sich mit dem Gäste-WiFi verbinden.\n"
+"Man hat Ihnen das Passwort \"ELITEDEMO\" für das Netzwerk \"Nimbus Gast\" "
+"gegeben.\n"
+"Ihre Aufgabe ist es, sich erfolgreich in das Netzwerk einzuloggen."
+
+msgid "uhh_evil_twin_title"
+msgstr "Evil Twin Angriff"
+
+msgid "uhh_evil_twin_description"
+msgstr ""
+"Bei diesem Angriff wird gezeigt wie leicht ein Angreifer WLAN-Passwörter "
+"stehlen kann"
+
+msgid "uhh_evil_twin_guide_intro"
+msgstr ""
+"In dieser Demo wird Ihnen gezeigt, wie ein Angreifer einen Bösartiges WLAN "
+"erstellen und so Zugangsdaten stehlen kann."
+
+msgid "uhh_evil_twin_guide_goal"
+msgstr ""
+"Ihr Ziel ist es, sich erfolgreich mit dem Gast WLAN \"Nimbus Gast\" zu "
+"verbinden"
+
+msgid "uhh_evil_twin_guide_req"
+msgstr ""
+"Für diese Demo wird ein WLAN-Fähiges Gerät (z.B. Smartphone) benötigt. \n"
+"Sie können entweder ein von uns vorbereitetes Gerät, oder auch Ihr eigenes "
+"Gerät nutzen. \n"
+"Wenn Sie ihr eigenes Gerät nutzen wollen, sind möglicherweise weitere "
+"Einstellungen auf Ihrem Gerät notwendig.\n"
+"\n"
+"Während echte Angriffe gezeigt werden, können wir weder Schadsoftware auf "
+"Ihrem Gerät ausführen, noch sensible Daten stehlen."
+
+msgid "uhh_evil_twin_guide_task"
+msgstr ""
+"Diese Demo ist etwas besonders, da diese auch ausschließlich mit einem "
+"externen Gerät durchgeführt werden kann.\n"
+"Sobald Sie die Demo starten, öffnet sich eine Webseite mit den genauen "
+"Anweisungen zum Durchführen der Demo."

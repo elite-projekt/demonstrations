@@ -1,0 +1,118 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2022-07-08 11:01+0200\n"
+"PO-Revision-Date: 2023-06-07 12:57+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: pygettext.py 1.5\n"
+"X-Generator: Poedit 3.3.1\n"
+
+msgid "uhh_evil_twin_step_one_heading"
+msgstr "1. Open the WiFi settings of your phone"
+
+msgid "uhh_evil_twin_step_one_text"
+msgstr "You should see two access points named \"Nimbus Gast\""
+
+msgid "uhh_evil_twin_step_two_heading"
+msgstr "2. Disable privacy settings"
+
+msgid "uhh_evil_twin_step_two_text"
+msgstr ""
+"To use this demo you need to disable the privacy settings for both \"Nimbus "
+"Gast\" access points.\n"
+"This is needed to identify your device and prevent other unsuspecting users "
+"to fall victim to the demonstrated attack."
+
+msgid "uhh_evil_twin_step_three_heading"
+msgstr "3. Connect to the AP"
+
+msgid "uhh_evil_twin_step_three_text"
+msgstr ""
+"Connect to \"Nimbus Gast\" with the lock next to the Name. The password is "
+"\"ELITEDEMO\"."
+
+msgid "uhh_evil_twin_step_four_heading"
+msgstr "4. Open the login page"
+
+msgid "uhh_evil_twin_step_four_text"
+msgstr ""
+"A website should open automatically. If this is not the case take a look at "
+"your notifications and search for the one that prompt you to login to the "
+"WiFi network."
+
+msgid "uhh_evil_twin_step_five_heading"
+msgstr "5. Accept the terms and conditions"
+
+msgid "uhh_evil_twin_step_five_text"
+msgstr ""
+"Read the terms and conditions. If you agree with them check the checkbox and "
+"click the button. Your device is now registered with our system and is "
+"allowed to use the demo."
+
+msgid "uhh_evil_manual_button"
+msgstr "To the demo instructions"
+
+msgid "uhh_evil_twin_heading"
+msgstr "Device selection"
+
+msgid "uhh_evil_twin_text"
+msgstr ""
+"You can either use your own device to use this demo.\n"
+"This requires you to follow a few steps.\n"
+"Alternatively you can ask a moderator to provide a device for you."
+
+msgid "uhh_evil_own_device_button"
+msgstr "My own device"
+
+msgid "uhh_evil_provided_device_button"
+msgstr "Provided device"
+
+msgid "uhh_evil_twin_begin_heading"
+msgstr "Welcome to the \"Evil Twin\" demo!"
+
+msgid "uhh_evil_twin_begin_text"
+msgstr ""
+"You are guest at Nimbus and want to connect to their guest WiFi.\n"
+"They gave you the password \"ELITEDEMO\" for the network \"Nimbus Gast\".\n"
+"Your task is to successfully connect to the network."
+
+msgid "uhh_evil_twin_title"
+msgstr "Evil Twin attack"
+
+msgid "uhh_evil_twin_description"
+msgstr "This attack shows how easily an attacker can steal WiFi passwords"
+
+msgid "uhh_evil_twin_guide_intro"
+msgstr ""
+"This demo will show you how an attacker can create a malicious WiFi access "
+"point and steal credentials."
+
+msgid "uhh_evil_twin_guide_goal"
+msgstr "Your goal is to successfully connect to the guest network"
+
+msgid "uhh_evil_twin_guide_req"
+msgstr ""
+"For this demo a WiFi-enabled device (e.g. smartphone) is required\n"
+"You can either use a device prepared by us or your own device. \n"
+"If you want to use your own device, additional settings on your device may "
+"be required.\n"
+"\n"
+"While real attacks are shown, we cannot run malware on your device, nor "
+"steal sensitive data."
+
+msgid "uhh_evil_twin_guide_task"
+msgstr ""
+"This demo is a special because it can also be run exclusively with an "
+"external device.\n"
+"Once you start the demo, a web page will open with the detailed instructions "
+"on how to run the demo."

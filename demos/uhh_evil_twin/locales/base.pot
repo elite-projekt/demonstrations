@@ -1,0 +1,85 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2022-07-08 11:01+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+
+
+msgid "uhh_evil_twin_step_one_heading"
+msgstr ""
+
+msgid "uhh_evil_twin_step_one_text"
+msgstr ""
+
+msgid "uhh_evil_twin_step_two_heading"
+msgstr ""
+
+msgid "uhh_evil_twin_step_two_text"
+msgstr ""
+
+msgid "uhh_evil_twin_step_three_heading"
+msgstr ""
+
+msgid "uhh_evil_twin_step_three_text"
+msgstr ""
+
+msgid "uhh_evil_twin_step_four_heading"
+msgstr ""
+
+msgid "uhh_evil_twin_step_four_text"
+msgstr ""
+
+msgid "uhh_evil_twin_step_five_heading"
+msgstr ""
+
+msgid "uhh_evil_twin_step_five_text"
+msgstr ""
+
+msgid "uhh_evil_manual_button"
+msgstr ""
+
+msgid "uhh_evil_twin_heading"
+msgstr ""
+
+msgid "uhh_evil_twin_text"
+msgstr ""
+
+msgid "uhh_evil_own_device_button"
+msgstr ""
+
+msgid "uhh_evil_provided_device_button"
+msgstr ""
+
+msgid "uhh_evil_twin_begin_heading"
+msgstr ""
+
+msgid "uhh_evil_twin_begin_text"
+msgstr ""
+
+msgid "uhh_evil_twin_title"
+msgstr ""
+
+msgid "uhh_evil_twin_description"
+msgstr ""
+
+msgid "uhh_evil_twin_guide_intro"
+msgstr ""
+
+msgid "uhh_evil_twin_guide_goal"
+msgstr ""
+
+msgid "uhh_evil_twin_guide_req"
+msgstr ""
+
+msgid "uhh_evil_twin_guide_task"
+msgstr ""
