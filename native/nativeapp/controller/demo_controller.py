@@ -266,12 +266,13 @@ class DemoManager():
         params = flask.request.get_json(silent=True)
         lang = "en"
         local_locale = locale.Locale()
-        local_locale.update_locale(lang)
         send_dict = {}
 
         is_ready = False
         if params is not None and "language" in params:
             lang = params["language"]
+        local_locale.update_locale(lang)
+
         try:
             admin_app.NativeappAdminClient().connect()
             is_ready = True
