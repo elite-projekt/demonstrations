@@ -1,0 +1,20 @@
+{
+  "id": "uhh_evil_twin",
+  "categories": [
+    "phishing",
+    "wifi"
+  ],
+  "hardware": [
+    "phone"
+  ],
+  "level": "intermediate",
+  "time": 10,
+  "isAvailable": true,
+  "container":
+  [
+    {
+      "name": "uhh_evil_twin_web",
+      "dockerfile": "container/nginx/Dockerfile"
+    }
+  ]
+}
