@@ -19,5 +19,6 @@ Welcome to ELITE Demonstrations's documentation!
    docs/cert.md
    docs/teaching/teaching_material.md
    docs/teaching/add_teaching_material.md
+   docs/elite_app.md
    modules
 
