@@ -20,5 +20,6 @@ Welcome to ELITE Demonstrations's documentation!
    docs/teaching/teaching_material.md
    docs/teaching/add_teaching_material.md
    docs/elite_app.md
+   docs/wifi_demo.md
    modules
 
