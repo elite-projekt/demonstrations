@@ -21,9 +21,16 @@ function run-docker {
     param(
         [string] $param
     )
-    Write-Host $param
     $cmd = -join($dockerCMD, " ", $param)
     iex $cmd
+    $exitcode = $LASTEXITCODE
+
+    if ($exitcode -eq 0) {
+        return $exitcode
+    } else {
+        # FUCK exceptions though. They are just bad design
+        throw
+    }
 }
 <#
 .Synopsis
@@ -263,37 +270,29 @@ If(!(Test-Path -path $rootPath)) {
     try {
         WriteOutput "Login with your username and password for the $Env:REGISTRY_URL repository" "DarkGray"
         run-docker "login --username WorkstationToken  --password SAHRbswUazao1W_EyuYW $Env:REGISTRY_URL"
-        if($? -eq $false) {
-            throw
-        } else {
-            # For Pulling Images from Repo
-            # WriteOutput "Trying to pull the latest docker images" "DarkGray"
-            # run-docker "pull $Env:REGISTRY_URL/$Env:GROUP_NAME/demonstrations/$Env:FOKUSRNWARE_REPO"
-            # run-docker "pull $Env:REGISTRY_URL/$Env:GROUP_NAME/demonstrations/$Env:RANSOMWARE_REPO"
-            # run-docker "pull $Env:REGISTRY_URL/$Env:GROUP_NAME/demonstrations/$Env:UHH_DUCKY_MITM_REPO_WEB"
-            # run-docker "pull $Env:REGISTRY_URL/$Env:GROUP_NAME/demonstrations/$Env:UHH_DUCKY_MITM_REPO_WEB_EN"
-            # run-docker "pull $Env:REGISTRY_URL/$Env:GROUP_NAME/demonstrations/$Env:UHH_DUCKY_MITM_REPO_PROXY"
-            # run-docker "pull $Env:REGISTRY_URL/$Env:GROUP_NAME/demonstrations/$Env:PHISHING_REPO"
-            # run-docker "pull $Env:REGISTRY_URL/$Env:GROUP_NAME/demonstrations/$Env:HDA_PASSWORD_REPO"
-            # run-docker "pull $Env:REGISTRY_URL/$Env:GROUP_NAME/demonstrations/$Env:HDA_PASSWORD_NGINX_REPO"
-            # WriteOutput "Succesfully pulled the docker images" "Green"
-            run-docker "pull mailserver/docker-mailserver:10.5.0"
+        # For Pulling Images from Repo
+        # WriteOutput "Trying to pull the latest docker images" "DarkGray"
+        # run-docker "pull $Env:REGISTRY_URL/$Env:GROUP_NAME/demonstrations/$Env:FOKUSRNWARE_REPO"
+        # run-docker "pull $Env:REGISTRY_URL/$Env:GROUP_NAME/demonstrations/$Env:RANSOMWARE_REPO"
+        # run-docker "pull $Env:REGISTRY_URL/$Env:GROUP_NAME/demonstrations/$Env:UHH_DUCKY_MITM_REPO_WEB"
+        # run-docker "pull $Env:REGISTRY_URL/$Env:GROUP_NAME/demonstrations/$Env:UHH_DUCKY_MITM_REPO_WEB_EN"
+        # run-docker "pull $Env:REGISTRY_URL/$Env:GROUP_NAME/demonstrations/$Env:UHH_DUCKY_MITM_REPO_PROXY"
+        # run-docker "pull $Env:REGISTRY_URL/$Env:GROUP_NAME/demonstrations/$Env:PHISHING_REPO"
+        # run-docker "pull $Env:REGISTRY_URL/$Env:GROUP_NAME/demonstrations/$Env:HDA_PASSWORD_REPO"
+        # run-docker "pull $Env:REGISTRY_URL/$Env:GROUP_NAME/demonstrations/$Env:HDA_PASSWORD_NGINX_REPO"
+        # WriteOutput "Succesfully pulled the docker images" "Green"
+        run-docker "pull mailserver/docker-mailserver"
 
-            # when building locally just login successfully"
-            WriteOutput "Successfully logged in" "Green"
-        }
+        # when building locally just login successfully"
+        WriteOutput "Successfully logged in" "Green"
     } catch {
         # For Pulling Images from Repo
-        # WriteOutput "Something went wrong while login into docker or pulling the repositories" "Red"
-        # Write-Warning $Error[0]
-        # WriteOutput "Resetting all changes" "Red"
-        # Remove-Item -Path $rootPath -Recurse
-        # Set-Content -Path $hostFile -Value (get-content -Path $hostFile | Select-String -Pattern '#MPSE' -NotMatch)
-        # Remove-MpPreference -ExclusionPath $rootPath
-        # Exit 1
-
-        # when building locally
-        WriteOutput "Login failed" "Red"
+         WriteOutput "Something went wrong while login into docker or pulling the repositories" "Red"
+         Write-Warning $Error[0]
+         WriteOutput "Resetting all changes" "Red"
+         Remove-Item -Path $rootPath -Recurse
+         Remove-MpPreference -ExclusionPath $rootPath
+         Exit 1
     }
 
     #Build images locally
@@ -387,7 +386,7 @@ If(!(Test-Path -path $rootPath)) {
                 WriteOutput "Something went wrong removing the exclusion from Windows Defender" "Red"
                 Write-Warning $Error[0]
             }
-            
+
               try {
                 # Remove task
                 WriteOutput "Trying to remove the task entry" "DarkGray"
