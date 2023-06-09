@@ -118,8 +118,6 @@ Installing and using this program is entirely at your own risk. The developers a
 
 By proceeding with the installation, you indicate that you have read, understood, and agreed to the terms of this disclaimer. If you do not agree with any part of this disclaimer, do not proceed with the installation and remove any installed components related to this program immediately.
 
-Please note that the above disclaimer is provided as a general guideline and may need to be customized or expanded upon based on the specific characteristics and risks associated with the program in question.
-
 Type (y)es or (n)o
 "@
 
