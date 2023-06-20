@@ -269,7 +269,7 @@ If(!(Test-Path -path $rootPath)) {
     # Pull docker images
     try {
         WriteOutput "Login with your username and password for the $Env:REGISTRY_URL repository" "DarkGray"
-        run-docker "login --username WorkstationToken  --password SAHRbswUazao1W_EyuYW $Env:REGISTRY_URL"
+        # run-docker "login --username WorkstationToken  --password SAHRbswUazao1W_EyuYW $Env:REGISTRY_URL"
         # For Pulling Images from Repo
         # WriteOutput "Trying to pull the latest docker images" "DarkGray"
         # run-docker "pull $Env:REGISTRY_URL/$Env:GROUP_NAME/demonstrations/$Env:FOKUSRNWARE_REPO"
