@@ -57,6 +57,42 @@ class NativeappAdmin(network_control_protocol.NativeappControlServer):
         super().__init__(NATIVEAPP_ADMIN_HEADER, NATIVEAPP_ADMIN_PORT)
         self.running = False
 
+    def set_host_entry(self, target_host: str, target_ip: str, mode: str):
+        # WSL
+        cmd = ["wsl", "--user", "root", "bash", "-c",
+               f"sed -i\"\" '/{target_host}/d' /etc/hosts"]
+        call_cmd(cmd)
+
+        if mode == "1":
+            cmd = ["wsl", "--user", "root", "bash", "-c",
+                   f"echo '{target_ip} {target_host}' >> /etc/hosts"]
+            call_cmd(cmd)
+
+        # native
+        with open(HOSTS_PATH, "r+") as host_file:
+            hosts_dict = {}
+            for line in host_file:
+                split = line.split(maxsplit=1)
+                if len(split) > 1:
+                    m = IP_REGEX.match(split[0])
+                    if m:
+                        print(split)
+                        all_hosts = split[1].strip().split()
+                        for h in all_hosts:
+                            hosts_dict[h] = split[0].strip()
+            if mode == "0":
+                try:
+                    del hosts_dict[target_host]
+                except KeyError:
+                    pass
+            elif mode == "1":
+                hosts_dict[target_host] = target_ip
+            print(hosts_dict)
+            host_file.seek(0)
+            for h, i in hosts_dict.items():
+                host_file.write(f"{i} {h}\n")
+            host_file.truncate()
+
     def on_packet(self, command, payload):
         if command == NativeappCommands.DISABLE_USB:
             val = 4
@@ -66,40 +102,7 @@ class NativeappAdmin(network_control_protocol.NativeappControlServer):
             call_cmd(cmd.split(" "))
         elif command == NativeappCommands.SET_REDIRECT:
             mode, target_ip, target_host = payload.decode().split(";")
-            # WSL
-            cmd = ["wsl", "--user", "root", "bash", "-c",
-                   f"sed -i\"\" '/{target_host}/d' /etc/hosts"]
-            call_cmd(cmd)
-
-            if mode == "1":
-                cmd = ["wsl", "--user", "root", "bash", "-c",
-                       f"echo '{target_ip} {target_host}' >> /etc/hosts"]
-                call_cmd(cmd)
-
-            # native
-            with open(HOSTS_PATH, "r+") as host_file:
-                hosts_dict = {}
-                for line in host_file:
-                    split = line.split(maxsplit=1)
-                    if len(split) > 1:
-                        m = IP_REGEX.match(split[0])
-                        if m:
-                            print(split)
-                            all_hosts = split[1].strip().split()
-                            for h in all_hosts:
-                                hosts_dict[h] = split[0].strip()
-                if mode == "0":
-                    try:
-                        del hosts_dict[target_host]
-                    except KeyError:
-                        pass
-                elif mode == "1":
-                    hosts_dict[target_host] = target_ip
-                print(hosts_dict)
-                host_file.seek(0)
-                for h, i in hosts_dict.items():
-                    host_file.write(f"{i} {h}\n")
-                host_file.truncate()
+            self.set_host_entry(target_host, target_ip, mode)
 
 
 class NativeappAdminClient(network_control_protocol.NativeappControlClient):
