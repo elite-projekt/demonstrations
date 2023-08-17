@@ -146,7 +146,7 @@ class Keylog_Simulation():
     # Simulates key sequences
     def press_keys(self, keys, delay_between_sec, delay_after_sec):
         for key in keys:
-            if type(key) != str:
+            if type(key) is not str: # noqa: 721
                 key_name = key.name
             else:
                 # Replace special keys
@@ -171,7 +171,7 @@ class Keylog_Simulation():
     # Simulates pressing keys at once
     def simultaneous_press_keys(self, keys, delay_after_sec):
         for key in keys:
-            if type(key) != str:
+            if type(key) is not str: # noqa: 721
                 key_name = key.name
             else:
                 # Replace special keys
@@ -187,7 +187,7 @@ class Keylog_Simulation():
             unblock_key(key_name)
             self.kb.press(key)
         for key in keys:
-            if type(key) != str:
+            if type(key) is not str: # noqa: 721
                 key_name = key.name
             else:
                 # Replace special characters

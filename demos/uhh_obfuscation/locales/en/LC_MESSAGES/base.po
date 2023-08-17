@@ -1,0 +1,148 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2022-07-08 11:01+0200\n"
+"PO-Revision-Date: 2023-04-03 14:49+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: pygettext.py 1.5\n"
+"X-Generator: Poedit 3.2.2\n"
+
+msgid "end_demo_text"
+msgstr "End demo"
+
+msgid "mail_subject"
+msgstr "It's finally time for our cyberattack on the competitor company !"
+
+msgid "mail_content"
+msgstr ""
+"Hi Max,\n\n"
+"For our planned cyberattack on the competitor company i prepared a little Ransomware script for you.\n"
+"This Ransomware will, once executed on a computer of the competitor company, encrypt as many files as possible and effectively take their files hostage.\n"
+"At the moment we need to face the problem that the Windows Defender, which is the antivirus program the competitor company uses, currently detects our Ransomware as a virus.\n"
+"Because of that if we would deploy the Ransomware now, the attack would probably fail because their antivirus would block the program.\n"
+"To tackle that problem, I uploaded the Ransomware, an obfuscation program and a testscan program to your desktop.\n"
+"The obfuscation program has the purpose of obfuscating the Ransomware to a state so that the Windows Defender does not detect is as a virus anymore.\n"
+"The testscan program is just a simple script that automatically scans the Ransomware with Windows Defender and then outputs if the antivirus found a virus inside of the Ransomware.\n"
+"Here is your To-Do list:\n\n"
+"    1. Please run the testscan program first. This will scan the normal Ransomware. You will find that it will get detected.\n"
+"    2. After that, use our obfuscation program at https://nimbus.de/obfuscation to obfuscate the Ransomware. Further instructions are given in the obfuscation program itself.\n"
+"    3. Once you completed the obfuscation process, please run the testscan program once again.\n\n"
+"After completing all of the above, you will hopefully find that the Ransomware will not be detected anymore. Good luck !\n\n"
+"Yours sincerely\n"
+"Christina"
+
+msgid "end_text"
+msgstr "Your PC was infected with ransomware "
+
+msgid "uhh_obfuscation_title"
+msgstr "Malware Obfuscation"
+
+msgid "uhh_obfuscation_description"
+msgstr ""
+"This demo shows the dangers of techniques malware authors can use to "
+"obfuscate malware so that antivirus programs cannot detect them. "
+
+msgid "uhh_obfuscation_guide_intro"
+msgstr ""
+"In this demo you will explore how techniques of malware obfuscation can be "
+"used to fool antivirus programs. "
+
+msgid "uhh_obfuscation_guide_goal"
+msgstr ""
+"At the end of the demo, you will have successfully obfuscated a ransomware "
+"sample so that the Windows Defender is not capable of detecting the "
+"malware anymore. "
+
+msgid "uhh_obfuscation_guide_req"
+msgstr ""
+
+msgid "uhh_obfuscation_guide_task"
+msgstr ""
+"Your task in this demo is to follow the instructions in the emails from "
+"Christina Sauer. She will ask you to use an obfuscation program to "
+"obfuscate a ransomware sample she placed on your desktop. "
+
+msgid "scan_virus_detected"
+msgstr "Virus detected in file"
+
+msgid "scan_no_virus_detected"
+msgstr "No detection of virus in file"
+
+msgid "scan_error"
+msgstr "There was an error while scanning"
+
+msgid "scan_end_demo"
+msgstr "Press any key to end the demo"
+
+msgid "scan_end_wait"
+msgstr "Demonstrator is being shut down"
+
+msgid "scan_end_scan"
+msgstr "Press any key to end the program"
+
+msgid "obf_title"
+msgstr "Obfuscation Program"
+
+msgid "obf_desc"
+msgstr "You can use this program to obfuscate programs to avoid detection by antivirus software.<br>To do this, drag the needed obfuscation methods over to the program and drop them.<br>When the progress bar below that is full, meaning no more antivirus programs will detect the program, you can click the obfuscate-button that lights up to obfuscate the program."
+
+msgid "obf_obf_btn"
+msgstr "Obfuscate"
+
+msgid "obf_scan_btn"
+msgstr "Scan"
+
+msgid "obf_theme_btn"
+msgstr "Toggle Theme"
+
+msgid "obf_success_header"
+msgstr "Program Obfuscated Successfully!"
+
+msgid "obf_success_txt"
+msgstr "Please scan the ransomware again."
+
+msgid "dead_code_insertion"
+msgstr "Dead Code Insertion is the process of inserting empty lines of code. That means the program is artificially changed, even though nothing is really changed."
+
+msgid "instruction_substitution"
+msgstr "Instruction Substitution means replacing instructions in the program with other, equivalent instructions that do almost or exactly the same thing."
+
+msgid "subroutine_reordering"
+msgstr "Subroutine Reordering means swapping subroutines in the program. To achieve this, randomly selected functions of the program will be swapped, without changing the flow of the program."
+
+msgid "conditional_obfuscation"
+msgstr "Conditional Obfuscation means that the program may act differently based on assessing the given system on which it is ran."
+
+msgid "ai_assisted"
+msgstr "AI assisted Malware Obfuscation can mean letting AI decide on which obfuscation methods shall be used."
+
+msgid "environmental_awareness"
+msgstr "Environmental Awareness means the program will detect in which environment it is ran. Because of that, it may be able to detect if it is currently being analyzed by an antivirus program."
+
+msgid "packing"
+msgstr "Packing means embedding the original program into another one. This packer loads the original program when it is run and executes it. This process can also include encoding the original program and the packer decoding it before executing the program."
+
+msgid "decrypting"
+msgstr "Decrypting means at first encrypting the original program and then embedding it into another one. This decrypter decrypts the program when it is ran and executes it."
+
+msgid "obf_progress_1"
+msgstr "Detected by "
+
+msgid "obf_progress_2"
+msgstr " antivirus programs !"
+
+msgid "obf_starting_scan"
+msgstr "Starting Scan"
+
+msgid "obf_scan"
+msgstr "Scan"

@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Obfuscation Programm</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="../static/style.css">
+  <link rel="stylesheet" href="../static/dragula.css">
+  <style>
+    .progress-bar {
+      width: 50%;
+      height: 20px;
+      background-color: #585858;
+      margin-top: 30%;
+      position: absolute;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background-color: #0f0;
+    }
+
+    .progress-bar-name {
+      position: absolute;
+      top: 25px;
+      left: 0;
+    }
+
+    .normal-theme {
+      background-color: #fff;
+      color: #000;
+      border-color: #000000;
+    }
+
+    .normal-theme #obf_theme_btn {
+      background-color: #9f9f9f;
+      color: #ffffffac;
+      border-color: #000000;
+    }
+
+    #obf_theme_btn {
+      width: 10%;
+      height: 50px;
+      margin-top: 17%;
+      border: 2px solid;
+      border-radius: 8px;
+      position: absolute;
+      background-color: #9f9f9fcb;
+    }
+
+    #obf_theme_btn:hover {
+      font-size: larger;
+    }
+
+    #obf_scan_btn {
+      width: 10%;
+      height: 50px;
+      margin-top: 23%;
+      background-color: #0f0;
+      border: 2px solid;
+      border-radius: 8px;
+      transition-duration: 0.6s;
+      position: absolute;
+    }
+
+    #obf_scan_btn:hover {
+      color: rgb(0, 0, 0);
+      font-size: larger;
+    }
+
+    #obf_obf_btn {
+      width: 10%;
+      height: 50px;
+      margin-top: 20%;
+      background-color: #585858;
+      border: 2px solid;
+      border-radius: 8px;
+      transition-duration: 0.6s;
+      position: absolute;
+    }
+
+    #obf_obf_btn:hover {
+      background-color: #ffffff;
+      color: rgb(0, 0, 0);
+      font-size: larger;
+    }
+
+    #obf_obf_btn.light-up {
+      background-color: #0f0;
+      color: rgb(0, 0, 0);
+      font-weight: bolder;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="header-container">
+    <h2 id="obf_title"></h2>
+    <p id="obf_desc"></p>
+  </div>
+
+  <div class="container-wrapper">
+    <div id="obfuscation-container" class="unselectable">
+      <h3 id="container-header" class="unselectable">Obfuscation</h3>
+      <div id="Dead Code Insertion" class="puzzle-piece">Dead Code Insertion</div>
+      <div id="Instruction Substitution" class="puzzle-piece">Instruction Substitution</div>
+      <div id="Subroutine Reordering" class="puzzle-piece">Subroutine Reordering</div>
+      <div id="Conditional Obfuscation" class="puzzle-piece">Conditional Obfuscation</div>
+      <div id="AI assisted" class="puzzle-piece" draggable="true">AI assisted</div>
+      <div id="Environmental Awareness" class="puzzle-piece" draggable="true">Environmental Awareness</div>
+      <div id="Packing" class="puzzle-piece" draggable="true">Packing</div>
+      <div id="Decrypting" class="puzzle-piece" draggable="true">Decrypting</div>
+    </div>
+    <div id="program-container" class="unselectable">
+      <h3 id="container-header" class="unselectable">Program</h3>
+    </div>
+  </div>
+
+  <div id="progress-bar" class="progress-bar">
+    <div id="progress-fill" class="progress-fill"></div>
+    <div id="progress-text" class="progress-bar-name"></div>
+  </div>
+
+
+  <div id="info-card"></div>
+
+  <div class="container-wrapper">
+    <button id="obf_obf_btn" onclick="copy_ransomware()"></button>
+  </div>
+
+  <div class="container-wrapper">
+    <button id="obf_scan_btn" onclick="scan_ransomware()"></button>
+  </div>
+
+  <div class="container-wrapper">
+    <button id="obf_theme_btn"></button>
+  </div>
+
+  <div id="result-container" style="display: none;">
+    <h2 id="obf_success_header"></h2>
+    <p id="obf_success_txt"></p>
+  </div>
+
+  <script src="../static/dragula.js" type="text/javascript"></script>
+
+  <script>
+
+    var puzzlePieceProgressMapping = {
+      // Adjust these values so they are realistic
+      'Dead Code Insertion': 5,
+      'Instruction Substitution': 10,
+      'Subroutine Reordering': 5,
+      'Conditional Obfuscation': 5,
+      'AI assisted': 20,
+      'Environmental Awareness': 5,
+      'Packing': 25,
+      'Decrypting': 25,
+      // Add more puzzle pieces and their respective progress values here
+    };
+
+    var puzzlePieceInfoMapping = {
+      'Dead Code Insertion': '',
+      'Instruction Substitution': '',
+      'Subroutine Reordering': '',
+      'Conditional Obfuscation': '',
+      'AI assisted': '',
+      'Environmental Awareness': '',
+      'Packing': '',
+      'Decrypting': '',
+      // Add more puzzle pieces and their respective progress values here
+    };
+
+    var infoCard = document.getElementById('info-card');
+    var obfuscationContainer = document.getElementById('obfuscation-container');
+
+    function updateProgressBar() {
+      let obfuscationContainer = document.getElementById('program-container');
+      let puzzlePieces = obfuscationContainer.getElementsByClassName('puzzle-piece');
+      let progressFill = document.getElementById('progress-fill');
+      let progressText = document.getElementById('progress-text');
+
+      let totalPuzzlePieces = document.getElementsByClassName('puzzle-piece').length;
+      let totalProgress = 0;
+
+      // Calculate the total progress based on the names of the puzzle pieces in the program container
+      for (let i = 0; i < puzzlePieces.length; i++) {
+        let puzzlePiece = puzzlePieces[i];
+        let puzzlePieceName = puzzlePiece.innerText;
+
+        // Check if the puzzle piece name exists in the mapping object
+        if (puzzlePieceName in puzzlePieceProgressMapping) {
+          totalProgress += puzzlePieceProgressMapping[puzzlePieceName];
+        }
+      }
+      let progress = totalProgress;
+      progress = Math.min(progress, 100);
+      progressFill.style.width = progress + '%';
+      progressText.innerText = translation.obf_progress_1 + (100 - Math.round(progress)) + translation.obf_progress_2;
+    }
+
+    function showInfoCard(text) {
+      infoCard.innerText = text;
+      infoCard.style.display = 'block';
+    }
+
+    function hideInfoCard() {
+      infoCard.style.display = 'none';
+    }
+
+    var puzzlePieces = document.getElementsByClassName('puzzle-piece');
+    for (var i = 0; i < puzzlePieces.length; i++) {
+      var puzzlePiece = puzzlePieces[i];
+
+      puzzlePiece.addEventListener('mouseover', function () {
+        var puzzlePieceName = this.innerText;
+
+        if (puzzlePieceName in puzzlePieceInfoMapping) {
+          var infoText = puzzlePieceInfoMapping[puzzlePieceName];
+          var obfuscationContainerRect = obfuscationContainer.getBoundingClientRect();
+          var obfuscationContainerTop = obfuscationContainerRect.top + window.pageYOffset;
+          var obfuscationContainerRight = obfuscationContainerRect.right + window.pageXOffset;
+
+          infoCard.style.top = obfuscationContainerTop + 'px';
+          infoCard.style.right = obfuscationContainerRight + 'px';
+          showInfoCard(infoText);
+        }
+      });
+
+      puzzlePiece.addEventListener('mouseout', function () {
+        hideInfoCard();
+      });
+    }
+
+    // Move puzzle pieces to the program container on page load
+    window.onload = function () {
+      var puzzlePieces = document.getElementsByClassName('puzzle-piece');
+      var obfuscationContainer = document.getElementById('obfuscation-container');
+
+      var totalPuzzlePieces = document.getElementsByClassName('puzzle-piece').length;
+      var progressFill = document.getElementById('progress-fill');
+      var progressBar = document.getElementById('progress-bar');
+      var progressText = document.createElement('div');
+      progressText.id = 'progress-text';
+      progressText.className = 'progress-bar-name';
+
+      progressFill.style.width = '0%';
+      progressFill.style.maxWidth = '100%'; // Set the maximum width to 100%
+      progressBar.appendChild(progressText);
+
+
+      // Light up obfuscate button if progress at 100 percent
+      function updateButtonStyle() {
+        let progressFill = document.getElementById('progress-fill');
+        let progressFillWidth = parseFloat(progressFill.style.width);
+        let progressFillMaxWidth = parseFloat(progressFill.style.maxWidth);
+
+        if (progressFillWidth === progressFillMaxWidth) {
+          obfuscateButton.classList.add('light-up');
+          obfuscateButton.disabled = false;
+        } else {
+          obfuscateButton.classList.remove('light-up');
+          obfuscateButton.disabled = true;
+        }
+      }
+
+      setInterval(updateButtonStyle, 100);
+
+      var obfuscateButton = document.getElementById('obf_obf_btn');
+      var obfuscateButton = document.getElementById('obf_obf_btn');
+      obfuscateButton.disabled = true;
+      var resultContainer = document.getElementById('result-container');
+
+      obfuscateButton.addEventListener('click', function () {
+        var progressFill = document.getElementById('progress-fill');
+        var progressFillWidth = parseFloat(progressFill.style.width);
+        var progressFillMaxWidth = parseFloat(progressFill.style.maxWidth);
+
+        if (progressFillWidth === progressFillMaxWidth) {
+          resultContainer.style.display = 'block';
+          obfuscateButton.classList.add('light-up');
+        }
+      });
+
+      var obfuscationContainer = document.getElementById('obfuscation-container');
+      var programContainer = document.getElementById('program-container');
+
+      // Initialize dragula
+      var drake = dragula([obfuscationContainer, programContainer], {
+        invalid: function (element) {
+          return element.id === "container-header";
+        }
+      });
+
+      // Update progressbar everytime an element is dropped
+      drake.on('drop', updateProgressBar);
+
+    };
+
+
+
+    var toggleThemeButton = document.getElementById('obf_theme_btn');
+
+    toggleThemeButton.addEventListener('click', function () {
+      let body = document.body;
+      body.classList.toggle('normal-theme');
+    });
+
+
+    function copy_ransomware() {
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', `http://127.0.0.1:5000/orchestration/start/demo/uhh_obfuscation/copy_ransomware`);
+      xhr.send();
+    };
+
+    function scan_ransomware() {
+      let scanButton = document.getElementById('obf_scan_btn');
+      if (!scanButton.disabled) {
+        scanButton.disabled = true;
+        scanButton.innerText = translation.obf_starting_scan;
+        setTimeout(function () {
+          scanButton.disabled = false;
+          scanButton.innerText = translation.obf_scan;
+        }, 5000); // 5000 milliseconds = 5 seconds, maybe adjust
+      }
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', `http://127.0.0.1:5000/orchestration/start/demo/uhh_obfuscation/scan_ransomware`);
+      xhr.send();
+    };
+
+
+
+    // Set translations accoarding to locale
+    var translation = undefined;
+
+    async function getTranslations() {
+      const response = await fetch('http://127.0.0.1:5000/orchestration/data/demo/uhh_obfuscation/translations');
+      const json = await response.json();
+      console.log(json);
+      return json.translations;
+    }
+    getTranslations().then(t => {
+      translation = t;
+      console.log(translation);
+      console.log(translation.obf_title);
+
+
+      // Set text
+      document.getElementById('obf_title').innerText = translation.obf_title;
+      document.getElementById('obf_desc').innerText = translation.obf_desc;
+      document.getElementById('obf_obf_btn').innerText = translation.obf_obf_btn;
+      document.getElementById('obf_scan_btn').innerText = translation.obf_scan_btn;
+      document.getElementById('obf_theme_btn').innerText = translation.obf_theme_btn;
+      document.getElementById('obf_success_header').innerText = translation.obf_success_header;
+      document.getElementById('obf_success_txt').innerText = translation.obf_success_txt;
+
+      puzzlePieceInfoMapping["Dead Code Insertion"] = translation.dead_code_insertion;
+      puzzlePieceInfoMapping["Instruction Substitution"] = translation.instruction_substitution;
+      puzzlePieceInfoMapping["Subroutine Reordering"] = translation.subroutine_reordering;
+      puzzlePieceInfoMapping["Conditional Obfuscation"] = translation.conditional_obfuscation;
+      puzzlePieceInfoMapping["AI assisted"] = translation.ai_assisted;
+      puzzlePieceInfoMapping["Environmental Awareness"] = translation.environmental_awareness;
+      puzzlePieceInfoMapping["Packing"] = translation.packing;
+      puzzlePieceInfoMapping["Decrypting"] = translation.decrypting;
+
+      updateProgressBar();
+
+    });
+
+  </script>
+
+</body>
+
+</html>

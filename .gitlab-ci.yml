@@ -23,7 +23,7 @@ lint:python-code:
     - /usr/local/bin/python -m pip install --upgrade pip
     - python -m pip install flake8
   script:
-    - flake8 .
+    - flake8 --exclude=demos/uhh_obfuscation/native/resources/RansomWare.py,demos/uhh_obfuscation/native/resources/RansomWare_obfuscated.py,native/nativeapp/utils/admin/admin_app.py
   needs: []
 
 sast:python-code:
@@ -34,7 +34,7 @@ sast:python-code:
     - /usr/local/bin/python -m pip install --upgrade pip
     - python -m pip install bandit
   script:
-    - bandit -r . -ll
+    - bandit -c bandit.yaml -r . -ll
   allow_failure: true
   needs: []
 
