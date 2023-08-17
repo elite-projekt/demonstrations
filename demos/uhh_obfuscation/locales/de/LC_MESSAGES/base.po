@@ -1,0 +1,149 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2022-07-08 11:01+0200\n"
+"PO-Revision-Date: 2023-04-03 14:47+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: pygettext.py 1.5\n"
+"X-Generator: Poedit 3.2.2\n"
+
+msgid "end_demo_text"
+msgstr "Demo beenden"
+
+msgid "mail_subject"
+msgstr "Zeit für unseren Angriff auf die Konkurrenzfirma !"
+
+msgid "mail_content"
+msgstr ""
+"Hi Max,\n\n"
+"Für unseren geplanten Angriff auf unsere Konkurrenzfirma habe ich dir mal ein kleines Ransomware-Programm zusammengebastelt.\n"
+"Die Ransomware wird, wenn sie auf einem Firmenrechner der Konkurrenzfirma ausgeführt wird, alle Dateien dort verschlüsseln und als Geisel nehmen.\n"
+"Das Problem ist momentan aber noch, dass die Ransomware von dem Antivirenprogramm Windows Defender, was sie in der Konkurrenzfirma benutzen, als Virus erkannt wird.\n"
+"Dadurch wird die Ransomware nicht korrekt ausgeführt und unser Angriff würde fehlschlagen.\n"
+"Ich habe mir die Freiheit erlaubt, dir die Ransomware, ein kleines Obfuscation-Script und ein Testscan-Programm auf den Desktop zu legen.\n"
+"Das Obfuscation-Script ist dafür da, die Ransomware so vor dem Antivirenprogramm zu tarnen, dass es die Schadsoftware nicht mehr erkennt.\n"
+"Das Testscan-Programm ist ein kleines Script, welches die Ransomware mit dem Windows Defender auf Viren scannt und dann ausgibt, ob das Antivirenprogramm einen Virus darin erkannt hat oder nicht.\n"
+"Hier ist deine To-Do Liste:\n\n"
+"    1. Starte das Testscan-Programm, damit du verifizieren kannst, ob die normale Ransomware erkannt wird.\n"
+"    2. Nutze nun für die Obfuscation der Ransomware unser Obfuscation-Programm unter der Webadresse https://nimbus.de/obfuscation . Eine Anleitung zur Nutzung findest du auf der Seite.\n"
+"    3. Starte darauf da Testscan-Programm noch einmal. Diesmal wird die obfuscatete Ransomware gescannt.\n\n"
+"Wenn du das alles getan hast, sollte die Ransomware nicht mehr erkannt werden. Viel Erfolg !\n\n"
+"Grüße\n"
+"Christina"
+
+msgid "end_text"
+msgstr "Ihr PC ist einem Ransomware Angriff zum Opfer gefallen "
+
+msgid "uhh_obfuscation_title"
+msgstr "Malware Obfuscation"
+
+msgid "uhh_obfuscation_description"
+msgstr ""
+"In dieser Demo werden Ihnen die Möglichkeiten, die Malware-Autoren durch Methoden der "
+"Malware Obfuscation haben, aufgezeigt. "
+
+msgid "uhh_obfuscation_guide_intro"
+msgstr ""
+"In dieser Demo wird die beispielhafte Obfuscation einer Malware dargestellt und "
+"gezeigt, wie sich diese so vor Antivirenprogrammen verstecken kann."
+
+msgid "uhh_obfuscation_guide_goal"
+msgstr ""
+"Am Ende der Demo werden Sie eine Ransomware so obfuscatet haben, dass der Windows "
+"Defender dieses nicht mehr als Malware erkennen kann. Die Demo endet, wenn Sie "
+"die Ransomware so bearbeitet haben, dass diese nicht mehr erkannt wird. "
+
+msgid "uhh_obfuscation_guide_req"
+msgstr ""
+
+msgid "uhh_obfuscation_guide_task"
+msgstr ""
+"Ihre Aufgabe in dieser Demo besteht darin, der Anleitung in den E-Mails von Christina "
+"Sauer zu folgen. Sie wird Sie auffordern, eine Ransomware, die Sie Ihnen hat "
+"zukommen lassen, mit einem Obfuscation-Programm so zu bearbeiten, dass der Windows "
+"Defender diese nicht mehr als Schadsoftware erkennt. "
+
+msgid "scan_virus_detected"
+msgstr "Virus erkannt in Datei"
+
+msgid "scan_no_virus_detected"
+msgstr "Kein Virus in Datei erkannt"
+
+msgid "scan_error"
+msgstr "Es gab ein Problem beim Scannen"
+
+msgid "scan_end_demo"
+msgstr "Ein beliebiger Tastendruck beendet den Demonstrator"
+
+msgid "scan_end_wait"
+msgstr "Demonstrator wird beendet"
+
+msgid "scan_end_scan"
+msgstr "Ein beliebiger Tastendruck beendet das Programm"
+
+msgid "obf_title"
+msgstr "Obfuscation Programm"
+
+msgid "obf_desc"
+msgstr "Mit diesem Programm können Sie Programme obfuscaten, also vor Antivirenprogrammen tarnen.<br>Ziehen Sie hierfür die gewünschten Obfuscation-Methoden zu dem Programm.<br>Wenn der Balken darunter voll ist, also keine Antivirenprogramme das Programm mehr erkennen, könnnen Sie mit einem Klick auf den Obfuscate-Button das Programm obfuscaten."
+
+msgid "obf_obf_btn"
+msgstr "Obfuscaten"
+
+msgid "obf_scan_btn"
+msgstr "Scannen"
+
+msgid "obf_theme_btn"
+msgstr "Farben ändern"
+
+msgid "obf_success_header"
+msgstr "Das Programm wurde erfolgreich obfuscated!"
+
+msgid "obf_success_txt"
+msgstr "Scannen Sie nun erneut die Ransomware."
+
+msgid "dead_code_insertion"
+msgstr "Bei Dead Code Insertion werden leere Codezeilen in die Malware eingefügt. Das bedeutet, dass das Programm künstlich verändert wird, ohne es zu verändern."
+
+msgid "instruction_substitution"
+msgstr "Bei einer Instruction Substitution werden Funktionen eines Programms mit anderen ausgetauscht, die genau dasselbe tun."
+
+msgid "subroutine_reordering"
+msgstr "Subroutine Reordering ist das Tauschen von Funktionen in dem Programm. Dabei werden zufällig ausgewählte Teile des Programms miteinander getauscht, ohne den Programmfluss zu verändern."
+
+msgid "conditional_obfuscation"
+msgstr "Conditional Obfuscation bedeutet, dass ein Programm basierend auf verschiedenen Bedingungen seiner Umgebung unterschiedliche Methoden nutzt."
+
+msgid "ai_assisted"
+msgstr "AI assisted (KI-gestützte) Malware Obfuscation bedeutet, dass künstliche Intelligenz genutzt wird, um zu entscheiden, welche Methoden der Obfuscation genutzt werden."
+
+msgid "environmental_awareness"
+msgstr "Environmental Awareness bedeutet, dass das Programm erkennt, in welcher Umgebung es ausgeführt wird. So kann es beispielsweise erkennen, ob es gerade von einem Antivirenprogramm gescannt wird."
+
+msgid "packing"
+msgstr "Beim Packing wird das eigentliche Programm in ein anderes Programm gesteckt. Dieser Packer lädt das eigentliche Programm dann wenn er ausgeführt wird und führt es aus. Das eigentliche Programm kann dabei auch kodiert sein, der Packer dekodiert dieses dann bevor er es ausführt."
+
+msgid "decrypting"
+msgstr "Beim Decrypting wird das eigentliche Programm erst verschlüsselt und dann in ein anderes Programm gesteckt. Dieser Decrypter entschlüsselt dann, wenn er ausgeführt wird, das eigentliche Programm und führt dieses aus."
+
+msgid "obf_progress_1"
+msgstr "Erkannt von "
+
+msgid "obf_progress_2"
+msgstr " Antivirenprogrammen !"
+
+msgid "obf_starting_scan"
+msgstr "Starte Scan"
+
+msgid "obf_scan"
+msgstr "Scannen"

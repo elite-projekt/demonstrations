@@ -44,6 +44,11 @@ def call_cmd(command_list: List[str],
 class NativeappCommands:
     DISABLE_USB = 1
     SET_REDIRECT = 2
+    DISABLE_REAL_TIME_MONITORING = 3
+    ENABLE_REAL_TIME_MONITORING = 4
+    CLEAR_DEFENDER_HISTORY = 5
+    DISABLE_AUTOMATIC_SAMPLE_SUBMISSION = 6
+    ENABLE_AUTOMATIC_SAMPLE_SUBMISSION = 7
 
 
 def create_host_payload(
@@ -94,7 +99,37 @@ class NativeappAdmin(network_control_protocol.NativeappControlServer):
             host_file.truncate()
 
     def on_packet(self, command, payload):
-        if command == NativeappCommands.DISABLE_USB:
+        if command == NativeappCommands.DISABLE_REAL_TIME_MONITORING:
+            # Disable Defender Real Time Monitoring for ransomware
+            call_cmd(["powershell",
+                      "Set-MpPreference",
+                      "-DisableRealTimeMonitoring",
+                      "$true"])
+        elif command == NativeappCommands.ENABLE_REAL_TIME_MONITORING:
+            # Enable Defender Real Time Monitoring for ransomware
+            call_cmd(["powershell",
+                      "Set-MpPreference",
+                      "-DisableRealTimeMonitoring",
+                      "$false"])
+        elif command == NativeappCommands.DISABLE_AUTOMATIC_SAMPLE_SUBMISSION:
+            # Disable Defender automatic sample submission for ransomware
+            call_cmd(["powershell",
+                      "Set-MpPreference",
+                      "-SubmitSamplesConsent",
+                      "2"])
+        elif command == NativeappCommands.ENABLE_AUTOMATIC_SAMPLE_SUBMISSION:
+            # Enable Defender automatic sample submission for ransomware
+            call_cmd(["powershell",
+                      "Set-MpPreference",
+                      "-SubmitSamplesConsent",
+                      "1"])
+        elif command == NativeappCommands.CLEAR_DEFENDER_HISTORY:
+            # Clear Defender History after Demo so scan results do not stay
+            call_cmd(["powershell",
+                      "Remove-Item",
+                      "-recurse",
+                      "'C:\ProgramData\Microsoft\Windows Defender\Scans\History\Service'"])
+        elif command == NativeappCommands.DISABLE_USB:
             val = 4
             if payload == b"0":
                 val = 3

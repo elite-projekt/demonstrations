@@ -1,0 +1,16 @@
+{
+  "categories": [
+    "email"
+  ],
+  "hardware": [
+  ],
+  "level": "intermediate",
+  "time": 5,
+  "isAvailable": true,
+  "container": [
+    {
+      "name": "uhh_obfuscation",
+      "dockerfile": "container/nginx/Dockerfile"
+    }
+  ]
+}

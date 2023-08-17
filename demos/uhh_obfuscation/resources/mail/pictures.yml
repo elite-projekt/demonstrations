@@ -1,0 +1,8 @@
+to:
+    display_name: Max Mustermann
+    email: max.mustermann@nimbus.de
+from:
+    display_name: "Christina Sauer"
+    email: christina.sauer@nimbus.de
+subject: "mail_subject"
+content: "mail_content"
