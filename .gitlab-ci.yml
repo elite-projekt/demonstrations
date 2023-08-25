@@ -116,7 +116,7 @@ build-release-zip:
     - zip -r elite.zip demoCA demos native .env build_image.sh build_images.py setup.py setup.cfg MANIFEST.in
     - mkdir elite
     - ls -hal
-    - mv elite.zip elite/elite.zip && cp installer.bat elite/
+    - mv elite.zip elite/elite.zip && cp installer.bat elite/ && cp native/installer/install_dependencies.ps1 native/installer/nativeapp_dependencies.bat elite/
     - zip -r elite_installer.zip elite && mkdir elite_installer && mv elite_installer.zip elite_installer
   artifacts:
     name: "elite_installer"
