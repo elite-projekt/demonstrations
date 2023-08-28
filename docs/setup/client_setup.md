@@ -9,6 +9,13 @@ The client specification is as follows:
 - Each demo can require further software (like an e-mail client) which must then be installed natively on the host machine. These should be covered in the *Initial OS setup* steps below.
 
 ## Initial OS setup
+Download the zip of the `build-release-zip` stage (in the future on the release page as well). Unzip it and run the `nativeapp_dependencies.bat` file. Your PC will download and install all dependencies, and restart automatically. After the reboot the rest of the installation runs. After that you can continue with the installation of the "Native App".
+
+The password for WSL will be `elite`.
+
+<details>
+<summary> Alternative manual Setup </summary>
+
 After the installation of a fresh Windows 10 instance we need to install some basic tools and configure the OS to allow us to use the platform.
 You can either install and setup everything manually or use powershell commands for (almost) everything.
 
@@ -44,10 +51,13 @@ wsl --user root bash -c "apt update && apt install -y docker.io && mkdir -p /roo
 Restart-Computer
 ```
 
+</details>
+
 
 ## Installation of Native Access Component
-Download the zip of the `build-release-zip` stage (in the future on the release page as well). Unzip it and run the `installer.bat` and follow the instructions.
+Run the `installer.bat` of the archive and follow the instructions.
 Windows defender will complain, but you can just ignore the message.
+
 
 **Troubleshooting**
 - There have been issues with 3rd party antivirus programs - Windows Defender not affected (see [Native App - Issues](Demonstrations/Native-App#issues)), it's recommended to use defender.
