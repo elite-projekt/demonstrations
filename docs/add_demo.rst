@@ -7,7 +7,7 @@ Requirements
 
 
 #. First of all you should make a concept of the demo you want to add. Create diagrams to visualize the components and see the dependencies. If possible, everything should run within Docker. For native actions (like opening applications) you can use the NativeApp controller of your demo.
-#. To add a new demo to the ecosystem you need to have a fully set up workstation as described in the `Setup of a Workstation guide <setup/client_setup.md>`_
+#. To add a new demo to the ecosystem you need to have a fully set up workstation as described in the `Setup of a Workstation guide <setup/client_setup.html>`_
 #. All code that is used by the NativeApp needs to be Python 3.9 compatible! We use setuptools to build our application which requires python >3.9.
 
 Procedure
@@ -24,7 +24,7 @@ Procedure
 #. If you use any text please use :class:`~native.nativeapp.utils.locale.locale.Locale` and save your ``po`` files in ``<demo ID>/locales/<locale>/LC_MESSAGES/base.po``.
 #. After you successfully created and tested your Docker container. You need to make adjustments to your ``docker-compose.yml``.
 #. In case you have to interact with the native host you can describe your procedures in the NativeApp files. Have a look on the existing demos for small guidance.
-#. Now you can install and run the NativeApp as described in `NativeApp (Section Developing/Testing Locally) </Demonstrations/Native-App#developingtesting-locally>`_. The NativeApp will run and wait for commands of the plattform.
+#. Now you can install and run the NativeApp as described in `NativeApp (Section Developing/Testing Locally) <nativeapp.html#debugging-and-testing-locally>`_. The NativeApp will run and wait for commands of the plattform.
 
 demo.json file
 ~~~~~~~~~~~~~~
@@ -59,11 +59,6 @@ This file provides additional information about your demo and is picked up by th
        }
      ]
    }
-
-3. Add teaching material
-^^^^^^^^^^^^^^^^^^^^^^^^
-
-`Look into the LMS documentation for steps to add teaching content to the platform <Platform/Concept#editing-teaching-content-via-the-learning-management-system-lms>`_
 
 Further Information
 -------------------
