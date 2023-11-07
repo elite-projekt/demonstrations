@@ -1,5 +1,3 @@
-import threading
-
 import flask
 import pathlib
 import pyotp
@@ -231,5 +229,5 @@ if __name__ == "__main__":
                 localized_websites.append(entry)
     except Exception as e:
         print(e)
-    threading.Thread(target=run_flask_app).start()
+    run_flask_app()
     # webbrowser.open('http://127.0.0.1:5001/story_intro')
