@@ -246,6 +246,8 @@ If(!(Test-Path -path $rootPath)) {
         python -m venv $directoryPath/.venv
         . $directoryPath/.venv/Scripts/Activate.ps1
         pip install -I $directoryPath
+        # FIXME: When only running it once the .mo files are missing on Windows. No clue why
+        pip install -I $directoryPath
         WriteOutput "Installed nativeapp into venv" "Green"
     } catch {
         WriteOutput "Something went wrong while installing native app from wheel" "Red"
