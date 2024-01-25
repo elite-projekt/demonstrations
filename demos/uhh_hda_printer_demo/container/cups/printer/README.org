@@ -1,0 +1,252 @@
+* cups-email                                                          :TOC_4:
+  - [[#introduction][Introduction]]
+  - [[#breaking-changes-after-version-01][Breaking changes after version 0.1]]
+  - [[#installation][Installation]]
+  - [[#configuration][Configuration]]
+    - [[#adding-a-printer][Adding a printer]]
+      - [[#adding-through-cli][Adding through CLI]]
+      - [[#adding-through-the-web-interface][Adding through the web interface]]
+    - [[#example-configuration-for-gmail][Example configuration for gmail]]
+  - [[#printing][Printing]]
+    - [[#from-cli][From CLI]]
+    - [[#from-gtk-ui][From GTK UI]]
+    - [[#from-qt-ui][From Qt UI]]
+- [[#references][References]]
+
+** Introduction
+This is a fork of the old [[https://sourceforge.net/projects/cupsemailptr/][cupsemailptr]], which is a variant of [[http://vigna.di.unimi.it/fax4CUPS/][fax4CUPS]]. Improvements include:
+
+- configuration options through the cups server, allowing easy queue-specific configurations
+- using a SMTP server instead of local sendmail
+- free-form parameters (like to address) through the graphical print dialogue
+- significantly better error handling and reporting
+
+Note that this expects [[http://heirloom.sourceforge.net/mailx.html][heirloom mailx]] (formerly known as =nail=) as mailx. At least Ubuntu is no longer shipping this mailx variant as default. Supporting Ubuntu is possible if a Ubuntu user steps up, see [[https://github.com/aardsoft/cups-email/issues/5][this issue]] and [[https://github.com/aardsoft/cups-email/pull/7#issuecomment-762018394][this comment for details.]]
+
+** Breaking changes after version 0.1
+
+Improvements after release 0.1 introduced many breaking changes. Please go through the configuration guide below again when upgrading. The breaking changes are mainly:
+
+- installation sanity checking now happens at the time of printing, not at the time of adding a printer.
+- global and queue specific configuration files in the cups root are no longer read.
+- only a subset of mailx variables can be directly configured, and no variables can be added. This means that for complex configurations a mailxrc is now mandatory.
+- the option names have changed. Existing wrappers around lpr will need to be adjusted.
+- source for email address is no longer a user changeable option
+- email address source no longer allows option overrides when set to a specific source
+
+** Installation
+
+This printer drivers consists of two files, the post script printer definition (email.ppd) and the backend script (email). The PPD needs to be installed to the cups model directory (usually =/usr/share/cups/model=), the script to the cups backend directory (usually =/usr/lib/cups/backend=).
+
+The easiest way to install is using the included Makefile. The following variables can be overridden:
+
+- CUPS_PPD_DIR (/usr/share/cups/model)
+- CUPS_BACKEND_DIR (/usr/lib/cups/backend)
+- PS2PDF (/usr/bin/epstopdf)
+- MAILX (/usr/bin/mailx)
+- TMPDIR (/tmp)
+
+Overrides to =PS2PDF=, =MAILX= and =TMPDIR= also adjust the default path in the installed PPD.
+
+** Configuration
+
+The CUPS web UI has a problem handling custom values containing a slash (/). Such values will be either fully omitted or only partially displayed in the form, and overwrite the old configuration value on form submit. Setting options with lpadmin does not have this issue.
+
+To avoid accidentally losing configuration settings custom strings containing a slash should only be used when exclusively using lpadmin for printer configuration.
+
+The following settings may contain a path name: =EpsToPdf=, =Mailx=, =TempDirectory= and =mailx_MAILRC=. The first three should be adjusted to site requirements during installation, and only be changed for a queue during development/testing. =mailx_MAILRC= will commonly need to be set, and is read from =CUPS_SERVERROOT= when not starting with a slash. Placing mailrc files somewhere else is therefore strongly discouraged.
+
+Errors during printing will cause the queue to be halted per default. The behaviour can be changed by setting =ErrorPolicy= for the queue. Of the available options only =retry-job= is recommended, as others might cause loss of jobs without user notification, or triggering mail server rate limits.
+
+Note that if the error is due to an incorrect recipient or sender address it'll have to be cancelled and resubmitted. Changing this option will protect against transient mail server problems, though.
+
+*** Adding a printer
+**** Adding through CLI
+
+First the installation should be verified using =lpinfo=:
+
+#+BEGIN_SRC sh
+# lpinfo -m|grep -i email
+email.ppd Generic PDF to e-mail printer
+#+END_SRC
+
+Now a printer can be added using =lpadmin=:
+
+#+BEGIN_SRC sh
+# lpadmin -p email-sample -E -v email:/sample -D 'Sample email printer' -L 'Printer location' -m email.ppd
+#+END_SRC
+
+Finally printer options can be set. A complete list of available options can be listed through =lpoptions=:
+
+#+BEGIN_SRC sh
+lpoptions -p email-sample -l
+PageSize/Media Size: *A4 Letter Legal
+MailTo/E-Mail Address: *None Custom.STRING
+MailSubject/Mail subject: *Default Custom.STRING
+MailBody/Mail text: *Default Custom.STRING
+MailFrom/Mail sender: Unset *Custom.STRING
+MailToSource/E-Mail Address source: *Auto JobName UserName BillingInfo
+EpsToPdf/Path to epstopdf: *Default Custom.STRING
+Mailx/Path to mailx: *Default Custom.STRING
+mailx_MAILRC/Path to mailrc: Default *Custom.STRING
+mailx_smtp/SMTP server: Unset *Custom.STRING
+mailx_replyto/Mail reply-to: *Unset Custom.STRING
+mailx_sender/Mail sender: *Unset Custom.STRING
+MailDefaultDomain/Default mail domain: Unset *Custom.STRING
+PdfFilePattern/Pattern for attached file (must have multiple X): *Default Custom.STRING
+TempDirectory/Path to temporary directory: *Default Custom.STRING
+#+END_SRC
+
+At least the =MailFrom= needs to be configured. Values for custom strings need to be prefixed with =Custom.= when set through =lpadmin=:
+
+#+BEGIN_SRC sh
+# lpadmin -p email-sample -E -o MailFrom=Custom.printer@example.com
+#+END_SRC
+
+Most installations also will need to set the =mailx_smtp= option for the SMTP server. A more complicated example using SMTP-AUTH is below.
+
+Only the variables prefixed with =mailx_= will be exported as the matching mailx settings. Additional mailx configuration will need to happen through a mailxrc file. If the value of =mailx_MAILRC= does not start with a slash it is assumed the configuration is relative to =CUPS_SERVERROOT= (usually /etc/cups). Generally mailrc files should be placed there.
+
+**** Adding through the web interface
+After successful installation a new printer called =E-Mail Device= should be available when adding new printers:
+
+#+CAPTION: Selecting printer
+[[./img/backend_select.png]]
+
+The connection URI for the printer should be =email:/<queue>=:
+
+#+CAPTION: Configure printer URI
+[[./img/connection_select.png]]
+
+The add printer page should be self-explanatory:
+
+#+CAPTION: Add printer page
+[[./img/add_printer.png]]
+
+The printer make is =Generic=:
+
+#+CAPTION: Configure printer driver, manufacturer selection
+[[./img/driver_select_1.png]]
+
+The printer driver =Generic PDF to e-mail printer=:
+
+#+CAPTION: Configure printer driver, model selection
+[[./img/driver_select_2.png]]
+
+Adding the printer will open the =General= options page:
+
+#+CAPTION: Configure printer driver, general options
+[[./img/general_options.png]]
+
+Here usually the mail sender should be configured. Options in that page can be overridden when scheduling a print job.
+
+The =Options Installed= page offers configuration not visible and not changeable by the users:
+
+#+CAPTION: Configure printer driver, installable options
+[[./img/installed_options.png]]
+
+Here usually the smtp server and default mail domain should be set. For more complicated setups (like requiring smtp-auth) the mailrc path should be set, and a mailrc file be created on the server.
+
+*** Example configuration for gmail
+
+To use gmail as mail server [[https://myaccount.google.com/lesssecureapps]["less secure app access"]] needs to be enabled on the gmail account. After that a mailrc (with secure permissions!) can be added, for example to =/etc/cups/mailrc.gmail=:
+
+#+BEGIN_SRC sh
+set smtp-use-starttls
+set ssl-verify=ignore
+set smtp=smtp://smtp.gmail.com:587
+set smtp-auth=login
+set smtp-auth-user=your-mail-address
+set smtp-auth-password=your-password
+#+END_SRC
+
+Now the queue needs to be configured to use that mailrc file:
+
+#+BEGIN_SRC sh
+lpadmin -p email-printer -E -o mailx_MAILRC=Custom.mailrc.gmail
+#+END_SRC
+
+** Printing
+
+If the address source setting is =Auto= the backend will go through the following steps to obtain a valid address, and exit at the first positive match:
+
+1. Check if a mail address was provided through the MailTo option
+2. Check if the user name contains an '@'
+3. Check if the job name contains an '@'
+4. Check if billing information was provided and contains an '@'
+5. Use the user name
+
+If the chosen address does not contain an '@' and =MailDefaultDomain= is configured it'll be appended to the address. Otherwise the mail server is expected to correctly handle those addresses. Note that an invalid configuration here will cause the print queue to be halted when trying to print in default configuration.
+
+*** From CLI
+
+With the local user known to the mailserver printing is as simple as =lpr -P email-sample /path/to/document=. If the local user is not known by the mail server it can be specified with the =-U= parameter:
+
+#+BEGIN_SRC sh
+lpr -P email-sample /path/to/document -U valid-user
+lpr -P email-sample /path/to/document -U valid-user@example.com
+#+END_SRC
+
+The job name can be selected with the =-J= parameter:
+
+#+BEGIN_SRC sh
+lpr -P email-sample /path/to/document -J valid-user@example.com
+#+END_SRC
+
+Note that the job name needs to contain an @ unless it is selected as only address source.
+
+Finally, the address can be specified using job options, either with the =MailTo= option (recommended), or the generic =job-billing=:
+
+#+BEGIN_SRC sh
+lpr -P email-sample /path/to/document -oMailTo=user@example.com
+lpr -P email-sample /path/to/document -ojob-billing=user@example.com
+#+END_SRC
+
+The print status can be checked with =lpstat=. In this case the configuration was incomplete:
+
+#+BEGIN_SRC sh
+# lpstat -p email-sample
+printer email-sample disabled since Sat May  9 10:54:20 2020 -
+	MailFrom is not defined
+#+END_SRC
+
+After fixing the issue the printer can be resumed:
+
+#+BEGIN_SRC sh
+# cupsenable --release email-sample
+#+END_SRC
+
+*** From GTK UI
+
+Some applications like Chrome use a simplified print dialogue, which does not offer advanced options required for specifying the recipients address. To print from those applications printing using the system dialogue needs to be selected.
+
+GTK print dialogues nowadays offer the ability to enter custom strings:
+
+#+CAPTION: Advanced options in Gtk
+[[./img/gtk_recipient_option.png]]
+
+Printing from GTK entering an address there is the recommended way of printing. In case the queue is configured to only accept addresses from billing info doing so is also possible from GTK:
+
+#+CAPTION: Job billing in GTK
+[[./img/gtk_billing.png]]
+
+*** From Qt UI
+
+The Qt print dialogue does not allow entering a custom string when selecting Custom options:
+
+#+CAPTION: Advanced options in Qt
+[[./img/qt_recipient_option.png]]
+
+To still make it possible to print from a Qt application it is possible to enter the address in the =Billing information= field:
+
+#+CAPTION: Job billing in Qt
+[[./img/qt_billing.png]]
+
+This only works if the recipient selection is either =Auto= or =BillingInfo=. When set to =Auto= a full email address needs to be specified.
+
+Subject, text and sender address can't be overridden when using Qt to print.
+
+* References
+- [[https://www.cups.org/doc/api-filter.html][CUPS backend documentation]]
+- [[https://wiki.linuxfoundation.org/en/OpenPrinting/PPDExtensions#Custom_Options][OpenPrinting about custom PPD extensions]]
+- [[https://www.cups.org/doc/spec-ppd.html#OPTIONS][CUPS specific PPD extensions]]

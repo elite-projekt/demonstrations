@@ -1,0 +1,71 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2022-07-08 11:01+0200\n"
+"PO-Revision-Date: 2023-04-03 14:49+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: pygettext.py 1.5\n"
+"X-Generator: Poedit 3.2.2\n"
+
+
+msgid "uhh_hda_printer_demo_title"
+msgstr "Printer Mitm"
+
+msgid "uhh_hda_printer_demo_description"
+msgstr "The printer demo shows what can happen if a device is placed in front of your network printer by attackers."
+
+
+msgid "uhh_hda_printer_demo_guide_intro"
+msgstr "Within the phishing demo, you take on the role of a person working for the company <strong>Nimbus</strong>."
+
+
+msgid "uhh_hda_printer_demo_guide_goal"
+msgstr "Fill out and print the Forumlar and then check it for errors."
+
+
+msgid "uhh_hda_printer_demo_guide_req"
+msgstr ""
+
+
+msgid "uhh_hda_printer_demo_guide_task"
+msgstr "Am Anfang der Phishing-Demo wird sich automatisch Thunderbird, ein E-Mail-Client, öffnen. Darin ist eine E-Mail Ihrer Kollegen enthalten. Die E-Mail enthält ein Rechnungsformular, das Sie bearbeiten und drucken sollen."
+
+
+msgid "uhh_hda_first_mail_subject"
+msgstr "Invoice template"
+
+msgid "uhh_hda_first_mail_content"
+msgstr ""
+"Hey Max, in the attachment you will find the invoice template you wanted".
+"I have already entered Darmstadt University of Applied Sciences as the recipient."
+"But you can also change the recipient super easy if you still need it for someone else."
+""
+"In general, you can just enter all the items and the cost for the unit price and the form calculates everything automatically."
+"At the end, just print it out and you'll be sent another PDF for reference so you know everything is correct."
+""
+"If you have any questions, feel free to contact me""
+""
+"Kind regards"
+"Andrea"
+
+msgid "uhh_hda_second_mail_subject"
+msgstr "Printed PDF"
+
+msgid "uhh_hda_second_mail_content"
+msgstr "In the attachment you will find, for filing purposes, the printed file again as PDF."
+
+msgid "uhh_hda_printer_email_name"
+msgstr "Printserver"
+
+msgid "uhh_hda_printer_email_adress"
+msgstr "printer@nimbus.de"

@@ -330,6 +330,7 @@ class DemoManager():
                          }
         else:
             send_dict = {"status": "waiting"}
+        # logging.info(f"Demo dict: {DemoManager.demos.values()=}")
         return flask.jsonify(send_dict)
 
     @staticmethod

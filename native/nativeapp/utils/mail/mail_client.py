@@ -109,7 +109,7 @@ class MailClient:
             if smtp_connection is not None:
                 smtp_connection.quit()
 
-    def send_mail(self, message: EmailMessage):
+    def send_mail(self, message: EmailMessage, target_addr: str = None):
         with self.smtp_connect() as session:
             try:
                 # use the 'to' field as the true sender.
@@ -117,8 +117,10 @@ class MailClient:
                 sender = str(message["to"])
                 logging.info("Sending mail from {} to {}"
                              .format(sender, message["to"]))
+                if target_addr is None:
+                    target_addr = message["to"]
                 session.sendmail(
-                        sender, message["to"], message.as_bytes())
+                        sender, target_addr, message.as_bytes())
             except Exception as e:
                 logging.error(e)
 
@@ -129,6 +131,51 @@ class MailClient:
             for num in data[0].split():
                 session.store(num, "+FLAGS", "\\Deleted")
             session.expunge()
+
+    # TODO: remove duplicate code
+    # (I don't want to risk breaking stuff right now)
+    def get_message(self, subject, from_name, from_mail, to_name, to_mail,
+                    content, attachment_path=None, _=None,
+                    random_date_interval=(0, 0)):
+        if _ is None:
+            def identity(x):
+                return x
+            _ = identity
+
+        attachment_path = pathlib.Path(attachment_path)
+        msg = MIMEMultipart()
+        msg['Subject'] = _(subject)
+        msg['From'] = formataddr((_(from_name), _(from_mail)))
+        msg['To'] = formataddr((_(to_name), _(to_mail)))
+        msg["Date"] = format_datetime(
+                datetime.datetime.now())
+        msg.attach(MIMEText(_(content)))
+
+        # Substract "random_date_interval" days from today
+        # we don't use random for crypto. no sec issue
+        day_offset = random.randint(random_date_interval[0],  # nosec B311
+                                    random_date_interval[1])
+        date_obj = datetime.date.today() - \
+            datetime.timedelta(days=day_offset)
+        # replace msg header with new date and remain previous time
+        date = parsedate_to_datetime(msg["Date"])
+        date_str = date_obj.strftime(
+            "%a, %d %b %Y {}".format(
+               date.strftime("%H:%M")))
+        msg.replace_header("date", date_str)
+
+        if attachment_path is not None:
+            with open(attachment_path, "rb") as attachment_file:
+                part = MIMEBase("application", "octet-stream")
+                part.set_payload(attachment_file.read())
+            encoders.encode_base64(part)
+            # Add header as key/value pair to attachment part
+            part.add_header(
+                    "Content-Disposition",
+                    f"attachment; filename={attachment_path.name}",
+                    )
+            msg.attach(part)
+        return msg
 
     def get_message_from_file(self,
                               email_file,
