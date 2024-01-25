@@ -1,0 +1,45 @@
+#!/bin/bash
+#
+# /usr/lib/cups/backend/email - Script to send e-mail confirmations via the CUPS
+#                               print server
+#
+# This program is a modified version of fax4cups, available at
+# http://vigna.dsi.unimi.it/fax4CUPS/
+#
+# The current home of this script is https://github.com/aardsoft/cups-email
+#
+# This script should not need any modifications to adjust it to specific
+# installations - all configuration happens through printer options and
+# mailrc files. Please read the documentation.
+#
+# If you do need to make modifications please submit them upstream.
+#
+###############################################################################
+
+
+
+echo 1>&2 # Apparently the first character emitted is somehow "eaten" by the reader
+if [ $# -eq 6 ]; then
+    MAILFILE=$6
+else
+    MAILFILE=$(mktemp </dev/null /tmp/cups-XXXXXXXXX) ||
+        (echo "ERROR:Failed to create temporary file" 1>&2; exit 1)
+    cat >$MAILFILE
+fi
+echo "ERROR:Mail file '$MAILFILE'" 1>&2
+echo "ERROR:Arg1 '$1'" 1>&2
+echo "ERROR:Arg2 '$2'" 1>&2
+echo "ERROR:Arg3 '$3'" 1>&2
+echo "ERROR:Arg4 '$4'" 1>&2
+echo "ERROR:Arg5 '$5'" 1>&2
+
+HOST=$(ip route | grep default | awk '{print $3}')
+
+curl -X POST -F "file=@$MAILFILE" http://${HOST}:5000/orchestration/start/demo/uhh_hda_printer_demo/print_job
+
+
+rm -f $MAILPDF
+if [ $# -lt 6 ];then
+    rm -f $MAILFILE
+fi
+

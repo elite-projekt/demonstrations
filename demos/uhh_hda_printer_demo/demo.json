@@ -1,0 +1,20 @@
+{
+  "id": "uhh_hda_printer_demo",
+  "categories": [
+    "phishing",
+    "email"
+  ],
+  "hardware": [
+  ],
+  "level": "beginner",
+  "time": 5,
+  "isAvailable": true,
+  "container":
+  [
+    {
+      "skip_ci": true,
+      "name": "uhh_hda_cups",
+      "dockerfile": "container/cups/Dockerfile"
+    }
+  ]
+}

@@ -103,6 +103,10 @@ def generate_docker_lint_ci():
             if "container" not in json_data:
                 continue
             for container in json_data["container"]:
+                # FIXME: Some containers may require a custom ulimit
+                # (printer demo for example)
+                if "skip_ci" in container and container["skip_ci"]:
+                    continue
                 # lint job
                 name = container["name"]
                 template = PipelineTemplate(name, "lint:dockerfile", image="registry.gitlab.com/pipeline-components/hadolint")  # noqa: 501

@@ -1,0 +1,10 @@
+to:
+    display_name: "Max Mustermann"
+    email: max.mustermann@nimbus.de
+from:
+    display_name: "uhh_hda_printer_email_name"
+    email: "uhh_hda_printer_email_adress"
+subject: "uhh_hda_second_mail_subject"
+content: "uhh_hda_second_mail_content"
+
+attachment: "Rechnung.pdf"

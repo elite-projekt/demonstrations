@@ -1,0 +1,10 @@
+to:
+    display_name: Max Mustermann
+    email: max.mustermann@nimbus.de
+from:
+    display_name: Andrea Berger
+    email: andrea.berger@nimbus.de
+subject: "uhh_hda_first_mail_subject"
+content: "uhh_hda_first_mail_content"
+
+attachment: "Rechnungsvorlage.pdf"

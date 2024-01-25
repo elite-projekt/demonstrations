@@ -73,7 +73,7 @@ if [ -f "${CONTEXT_DIR}/prepare.sh" ]; then
 fi
 
 if [ "${USE_DOCKER}" == "1" ]; then
-  ${DOCKER_CMD} build -t "${IMAGE_NAME}" -f "${CONTEXT_DIR}/${DOCKERFILE_NAME}" "${CONTEXT_DIR}"
+  ${DOCKER_CMD} build --ulimit nofile=65535:65535 -t "${IMAGE_NAME}" -f "${CONTEXT_DIR}/${DOCKERFILE_NAME}" "${CONTEXT_DIR}"
 else
   ${KANIKO_CMD} --context "${CONTEXT_DIR}" --dockerfile "${CONTEXT_DIR}/${DOCKERFILE_NAME}" --no-push --destination "${IMAGE_NAME}" --tarPath "${TAR_PATH}" "$@"
 fi
