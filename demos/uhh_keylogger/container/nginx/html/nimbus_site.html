@@ -158,7 +158,10 @@
 
     // send request
     xhr.send();
+
   }
+  // Fallback timer in case something goes wrong
+  window.setTimeout(Complete, 5000);
 
 	//Function for stopping demo
 	function stop_demo() {
