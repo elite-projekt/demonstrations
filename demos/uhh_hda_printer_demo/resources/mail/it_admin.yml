@@ -1,0 +1,8 @@
+to:
+    display_name: Max Mustermann
+    email: max.mustermann@nimbus.de
+from:
+    display_name: "Nimbus IT-Admin"
+    email: admin@nimbus.de
+subject: "uhh_admin_mail_subject"
+content: "uhh_admin_mail_content"
