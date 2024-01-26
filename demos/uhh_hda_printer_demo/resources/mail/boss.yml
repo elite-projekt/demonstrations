@@ -1,0 +1,8 @@
+to:
+    display_name: Max Mustermann
+    email: max.mustermann@nimbus.de
+from:
+    display_name: "Olivia Weber"
+    email: olivia.weber@nimbus.de
+subject: "uhh_boss_mail_subject"
+content: "uhh_boss_mail_content"
