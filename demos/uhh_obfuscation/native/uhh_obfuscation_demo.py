@@ -9,6 +9,7 @@ import pathlib
 from typing import List
 
 from nativeapp.utils.mail import mail_client, mail_program
+from nativeapp.utils.browser import browser_program
 from nativeapp.utils.admin import admin_app
 from nativeapp.config import config
 
@@ -31,6 +32,11 @@ class ObfuscationDemo:
                 "mpse_profile.zip") as mail_profile:
             self.email_program = mail_program.MailProgramThunderbird(
                     "MPSE", str(mail_profile))
+        with importlib.resources.path(
+                "demos.uhh_ducky_mitm.resources.edge",
+                "profile_uhh.zip") as p:
+            self.browser_program = browser_program.BrowserProgramEdge(
+                "elite.uhh_mitm", p)
 
         self.running = False
         self.admin_client = admin_app.NativeappAdminClient()
@@ -59,6 +65,11 @@ class ObfuscationDemo:
                 admin_app.create_host_payload(
                     True, "mail.nimbus.de", "127.0.0.1"))
 
+        self.admin_client.send_command(
+                admin_app.NativeappCommands.SET_REDIRECT,
+                admin_app.create_host_payload(
+                    True, "nimbus.de", "127.0.0.1"))
+
         while not self.email_client.wait_for_smtp_server(20):
             pass
 
@@ -66,6 +77,8 @@ class ObfuscationDemo:
             pass
 
         self.email_program.start()
+        self.browser_program.copy_profile()
+        self.browser_program.set_default()
         self.obfuscation_simulation.prepare()
 
     def stop(self):
@@ -89,6 +102,7 @@ class ObfuscationDemo:
             self.usb_monitor.stop()
         if self.obfuscation_simulation:
             self.obfuscation_simulation.stop()
+        self.browser_program.stop()
         logging.info("Stop done")
 
     def obfuscation(self):
